@@ -24,9 +24,12 @@ export class Project {
     }
 
     public setPercentage(): void {
-        const num = this.tasks_count.complete;
-        const den = Math.max(this.tasks_count.total, 1);
-        this.percentage = (num / den * 100);
+        if (this.tasks_count) {
+            const num = this.tasks_count.complete;
+            const den = Math.max(this.tasks_count.total, 1);
+            this.percentage = (num / den * 100);
+        }
+
     }
 
 
