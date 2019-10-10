@@ -12,12 +12,16 @@ import { AuthService } from './auth.service';
 })
 export class ProjectsService {
   private api_url = environment.api_url;
+
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
-  getProjects(): Observable<Project[]> {
+  getProjects(opts = { limit: 10, offset: 0 }): Observable<Project[]> {
+
+
     const options = this.authService.setAPIOptions();
-    const endpoint = `${this.api_url}/?route=projects`;
+    const endpoint = `${this.api_url}/?route=projects&offset=${opts.offset}&limit=${opts.limit}`;
+
     return this.http.get<Project[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
       map(res => res.map((p: Project) => new Project(p)))

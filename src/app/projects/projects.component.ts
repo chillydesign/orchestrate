@@ -9,7 +9,11 @@ import { Project } from '../models/project.model';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
-  public projects: Project[];
+  public projects: Project[] = [];
+  public offset = 0;
+  public limit = 10;
+  public load_more = false;
+  public loading = false;
   private projects_sub: Subscription;
 
   constructor(private projectsService: ProjectsService) { }
@@ -21,13 +25,26 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
 
   getProjects(): void {
-    this.projects_sub = this.projectsService.getProjects().subscribe(
-      (projects: Project[]) => {
-        if (projects) {
-          this.projects = projects;
+
+    if (this.loading === false) {
+      this.loading = true;
+      this.projects_sub = this.projectsService.getProjects({ offset: this.offset, limit: this.limit }).subscribe(
+        (projects: Project[]) => {
+          if (projects) {
+            projects.forEach(p => this.projects.push(p));
+            this.offset += this.limit;
+            this.load_more = (projects.length === this.limit);
+            this.loading = false;
+          }
         }
-      }
-    );
+      );
+    }
+
+  }
+
+  loadMore(): void {
+    this.load_more = false;
+    this.getProjects();
   }
 
 

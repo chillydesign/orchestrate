@@ -18,3 +18,9 @@
     </app-box>
 
 </ng-container>
+
+
+<app-box *ngIf="load_more">
+    <a (click)="loadMore()" class="button button_block">Load more</a>
+
+</app-box>
