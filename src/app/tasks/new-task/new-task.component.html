@@ -1,0 +1,14 @@
+<div class="task_container">
+    <div class="completed_container">
+        &nbsp;
+    </div>
+
+    <div class="content_container">
+        <form (ngSubmit)="onSubmit()" novalidate>
+            <input appAutofocus placeholder="add task here" autocomplete="off" type="text" name="content" id="content"
+                [(ngModel)]="task.content">
+
+        </form>
+    </div>
+    <div class="actions_container"> &nbsp;</div>
+</div>

@@ -1,0 +1,4 @@
+<li [ngClass]="{field_invalid: field_errors, field_highlighted: highlighted}">
+    <ng-content></ng-content>
+    <span *ngIf="field_errors" class="field_description"> {{field_errors}} </span>
+</li>

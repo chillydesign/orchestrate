@@ -1,0 +1,22 @@
+<aside id="page_sidebar" [ngClass]="{visible: sidebarVisible}">
+    <nav>
+        <a [routerLink]="['/']" class="branding">{{site_name}}</a>
+        <ul>
+            <!-- <li><a [routerLink]="['/']">Projects</a></li> -->
+            <li routerLinkActive="active"><a [routerLink]="['/projects', 'new']">New Project</a></li>
+        </ul>
+
+
+    </nav>
+</aside>
+<a (click)="toggleSidebar()" id="menu_button">
+    <svg id="menu_svg" [ngClass]="{white: sidebarVisible}" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 125" version="1.1" x="0px" y="0px">
+        <g fill="#000000">
+            <rect x="16" y="21" width="69" height="10" rx="5" />
+            <rect x="16" y="45" width="69" height="10" rx="5" />
+            <rect x="16" y="69" width="69" height="10" rx="5" />
+        </g>
+    </svg>
+    <span>Menu</span>
+</a>

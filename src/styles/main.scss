@@ -1,0 +1,151 @@
+
+body {
+    background: $background_color;
+    color: $font_color;
+    font-family: $font_stack;
+    font-weight: normal;
+    font-size: 62.5%;
+}
+
+
+
+main {
+    padding: $padding;
+    @media(min-width: $mobile_width ){
+        padding: $padding $padding $padding #{ $aside_width + $padding  };
+    }
+
+} // end of main
+
+
+
+.box {
+    background-color:white;
+    box-shadow: $box_shadow;
+    padding: $padding;
+    margin: 0 0 $double_padding;
+    border-radius: $border_radius;
+    opacity: 0.75;
+    transition: box-shadow 0.3s;
+
+    &.inactive {
+        opacity: 0.4;
+        filter: grayscale(1);
+    }
+
+    &:hover {
+       
+    }
+}
+
+.box_footer {
+    background-color:  scale-color($brand_color, $lightness: 95%);
+    margin: $padding #{$padding * -1} #{$padding * -1};
+    padding: $half_padding;
+    border-radius: 0 0  $border_radius $border_radius ;
+    text-align: right;
+    color:  scale-color($brand_color, $lightness: 33%);
+     p {
+         padding: 0;
+         font-size: 1.2em;
+     }
+}
+
+
+.task_container {
+    display:flex;
+    margin: 0 0 $padding;
+
+    &.completed {
+        .content_container {
+         opacity:0.5;
+        }
+    }
+
+    &.indentation_1 {
+        margin-left: 30px;
+    }
+  
+
+    .completed_container {
+         width: 40px;
+         max-width: 40px;
+
+
+            input {
+                transform: scale(1.4);
+                position: relative;
+                top: 8px;
+                color: $brand_color;
+                cursor: pointer;
+            }
+                
+    }
+    .content_container {
+        flex: 1 auto;
+        width: 100%;
+    }
+    .actions_container {
+        width: 80px;
+        max-width: 80px;
+        padding: 0 $half_padding;
+        .icon {
+            position: relative;
+            top: 8px;
+            opacity: 0.1;
+        }
+    }
+    input {
+        font-size: 1.1em;
+    }
+    &:hover {
+        .icon {
+            opacity: 1;
+        }
+    }
+   
+}
+
+
+.icon {
+    background: no-repeat center center ;
+    background-size: 15px;
+    text-indent: -9999px;
+    display:inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: $border_radius;
+    transition: all 0.3s;
+
+
+    &.icon_delete {
+        background-image: url("./assets/images/delete.svg");
+       
+    }
+    &.icon_indent {
+        background-image: url("./assets/images/indent.svg");
+    
+    }
+
+    &:hover {
+     
+        background-color: $medium_grey;
+    }
+}
+
+
+.progression_outer {
+   display: flex;
+    margin: #{$padding * -1} #{$padding * -1} $padding;
+    background-color: $light_grey;
+    border-radius: $border_radius  $border_radius 0 0;
+    opacity: 0.4;
+    overflow: hidden;
+    .progression_inner {
+        background:   $brand_gradient;
+        transition: all 1s;
+        height: 3px;
+      
+    }
+}
+

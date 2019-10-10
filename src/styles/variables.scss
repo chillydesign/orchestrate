@@ -1,0 +1,38 @@
+$brand_color: #3369ff;
+$red: #ca385e;
+$green: #38ca5e;
+
+
+$light_grey: #f9f9f9;
+$medium_grey: #ccc;
+$dark_grey: #282828;
+
+$font_color: $dark_grey;
+$lighter_font_color: #888;
+
+$brand_gradient:  linear-gradient(70deg, $brand_color, adjust-hue($brand_color, -17 ));
+
+
+$font_stack: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font_size: 1.5em;
+$line_height: 145%;
+
+$background_color: $light_grey;
+
+$padding: 20px;
+$double_padding: #{$padding * 2};
+$half_padding: #{$padding * 0.5};
+
+$border_radius: 6px;
+$box_shadow: 0 $half_padding $padding transparentize($dark_grey, 0.9), 0 2px 5px  transparentize($dark_grey, 0.85);
+
+
+$aside_width: 220px;
+
+
+$mobile_width: 768px;
+
+$checkbox_size: 18px;
+
+
+$header_height: 50px;

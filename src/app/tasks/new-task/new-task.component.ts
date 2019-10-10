@@ -1,0 +1,69 @@
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Project } from 'src/app/models/project.model';
+import { Subscription } from 'rxjs';
+import { Task } from 'src/app/models/task.model';
+import { TasksService } from 'src/app/services/tasks.service';
+import { } from 'events';
+
+@Component({
+  selector: 'app-new-task',
+  templateUrl: './new-task.component.html',
+  styleUrls: ['./new-task.component.scss']
+})
+export class NewTaskComponent implements OnInit, OnDestroy {
+  @Input() project: Project;
+  @Output() taskCreated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  public task: Task;
+  public add_task_sub: Subscription;
+  constructor(private tasksService: TasksService) { }
+
+  ngOnInit() {
+    this.resetNewTask();
+
+  }
+
+
+
+  resetNewTask(): void {
+    this.task = new Task();
+    this.task.project_id = this.project.id;
+  }
+
+
+  onSubmit(): void {
+
+
+
+    this.add_task_sub = this.tasksService.addTask(this.task).subscribe(
+      (task: Task) => {
+        // emit  completed task to parent
+        if (task) {
+          this.taskCreated.next(task);
+          // set this task to a new one to add a new one
+          this.resetNewTask();
+        }
+
+      },
+      (error) => {
+
+      }
+    );
+
+  }
+
+  ngOnDestroy() {
+
+    const subs: Subscription[] = [
+      this.add_task_sub,
+    ];
+
+    subs.forEach((sub) => {
+      if (sub) {
+        sub.unsubscribe();
+      }
+    });
+
+  }
+
+
+}

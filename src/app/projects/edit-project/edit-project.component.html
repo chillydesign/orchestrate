@@ -1,0 +1,32 @@
+<ng-container *ngIf="project">
+
+    <h1>Edit <a [routerLink]="['/projects', project.id]">project</a> </h1>
+
+    <app-box>
+
+
+        <form (keyup)="onFormChange()" (change)="onFormChange()" (ngSubmit)="onSubmit()" novalidate>
+            <ul>
+
+                <app-form-field [errors]="errors" [field]="'name'">
+                    <label for="name">Name * </label>
+                    <input autocomplete="off" type="text" name="name" id="name" [(ngModel)]="project.name">
+                </app-form-field>
+
+                <app-form-field [errors]="errors" [field]="'status'">
+                    <label for="name">Status </label>
+                    <select name="status" id="status" [(ngModel)]="project.status">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </app-form-field>
+
+                <app-form-field [errors]="errors">
+                    <button [disabled]="formLoading">Save</button>
+                </app-form-field>
+            </ul>
+        </form>
+
+
+    </app-box>
+</ng-container>

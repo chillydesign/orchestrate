@@ -1,0 +1,20 @@
+<h1>Projects</h1>
+
+
+
+<ng-container *ngFor="let project of projects">
+    <app-box [styleclass]="project.status">
+
+        <div class="progression_outer">
+            <div class="progression_inner" [style.width.%]="project.percentage"></div>
+        </div>
+
+
+        <h2> <a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+
+        <app-box-footer>
+            <p>{{ project.tasks_count.incomplete}} incomplete | {{ project.tasks_count.complete}} complete </p>
+        </app-box-footer>
+    </app-box>
+
+</ng-container>

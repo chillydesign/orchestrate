@@ -1,0 +1,147 @@
+
+
+
+aside {
+    width: 100%;
+    position: fixed;
+    z-index: 20;
+    top:0;
+    height: 100vh;
+    box-shadow: $box_shadow;
+    background: $dark_grey;
+    transform: translate( -110% );
+    transition: all 0.3s;
+    
+    
+    
+    
+    &.visible {
+        transform: translate( 0 );
+    }
+    
+    @media(min-width: $mobile_width ){
+        transform: translate( 0 );
+        width: $aside_width;
+        // overflow-x: scroll;
+    }
+    
+    
+    a {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        padding: 15px $half_padding;
+        position: relative;
+        background:none;
+        width:100%;
+        border-radius: 0;
+        text-align: left;
+        color: $light_grey;
+        border-bottom: 1px solid darken($dark_grey, 5);
+        border-top: 1px solid lighten($dark_grey, 5);
+        font-size: #{$font_size };
+        margin:0;
+        
+        
+        &:link, &:visited {
+            color: $light_grey;
+        }
+        
+        
+        &:after {
+            position: absolute;
+            top:0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            content: '';
+            background: $brand_color;
+            z-index: 4;
+            transition: all 0.3s;
+        }
+        &:hover {
+            
+            color: $light_grey;
+            background: darken($dark_grey, 10);
+            &:after {
+                width: 5px;
+            }
+        }
+        
+        &:active {
+            background: darken($dark_grey, 20);
+        }
+        
+        
+        &.branding {
+            
+            background: $brand_gradient;
+            color: white;
+        
+            font-weight: bold;
+            letter-spacing: 1px;
+            
+        }
+        
+    } // end of a
+    
+    
+    
+    
+    
+    nav {
+        
+        background: $dark_grey;
+        
+        ul {
+            padding:0;
+            li {
+                display: block;
+                font-size: 1em;
+                padding: 0;
+                margin: 0;
+                
+                
+                &.active {
+                    a {
+                        background:darken($dark_grey, 10);
+                    }
+                } // end of li.active
+
+                
+            } // end of li
+            
+            
+        } // end of ul
+    } // end of nav
+} // end of aside
+
+
+
+
+
+
+$menu_size: 35px;
+#menu_button {
+    position: absolute;
+    top: 7px;
+    right:  10px;
+    height: $menu_size;
+    width: $menu_size;
+    display: inline-block;
+    z-index: 30;
+    cursor: pointer;
+    span {
+        display: block;
+        text-indent: -9999px;
+    }
+    
+    @media(min-width: $mobile_width ){
+        display: none;
+    }
+    
+}
+
+#menu_svg.white  rect {
+    fill: white !important
+}
