@@ -6,7 +6,7 @@
 
     <div class="content_container">
         <form (ngSubmit)="onSubmit()" novalidate>
-            <input type="text" name="name" id="name" autocomplete="off" [(ngModel)]="task.content">
+            <input (blur)="onSubmit()" type="text" name="name" id="name" autocomplete="off" [(ngModel)]="task.content">
         </form>
     </div>
     <div class="actions_container">
