@@ -36,6 +36,11 @@ main {
     &:hover {
        
     }
+
+    p:last-child {
+        padding:0;
+        margin:0;
+    }
 }
 
 .box_footer {
