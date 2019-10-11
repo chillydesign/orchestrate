@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DragulaModule } from 'ng2-dragula';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { TaskComponent } from './tasks/task/task.component';
 import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { BoxFooterComponent } from './shared/box-footer/box-footer.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { UploadsComponent } from './uploads/uploads.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     TaskComponent,
     NewTaskComponent,
     BoxFooterComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    UploadsComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     HttpClientModule,
     FormsModule,
     DragulaModule.forRoot(),
+    NgxDropzoneModule,
     AppRoutingModule
   ],
   providers: [],
