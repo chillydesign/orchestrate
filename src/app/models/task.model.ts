@@ -12,6 +12,13 @@ export class Task {
     public indentation = 0;
     public indentation_class: string;
 
+    is_url(): boolean {
+
+        const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        return regexp.test(this.content);
+
+    }
+
     constructor(obj?: any) {
 
         if (obj) {

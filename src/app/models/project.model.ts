@@ -9,6 +9,7 @@ export class Project {
     public created_at: string;
     public updated_at: string;
     public tasks: Task[];
+    public random_tasks: Task[];
     public tasks_count: { complete: number, incomplete: number, total: number };
     public percentage = 0;
 
@@ -39,6 +40,10 @@ export class Project {
 
         if (obj) {
             Object.assign(this, obj);
+
+            if (obj.random_tasks) {
+                this.random_tasks = obj.random_tasks.map((task: Task) => new Task(task));
+            }
 
             if (obj.tasks) {
                 this.tasks = obj.tasks.map((task: Task) => new Task(task));

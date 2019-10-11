@@ -10,6 +10,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
+  @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   private update_task_sub: Subscription;

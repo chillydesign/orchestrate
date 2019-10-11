@@ -9,7 +9,7 @@
             <input (blur)="onSubmit()" type="text" name="name" id="name" autocomplete="off" [(ngModel)]="task.content">
         </form>
     </div>
-    <div class="actions_container">
+    <div class="actions_container" *ngIf="canDelete">
         <a (click)="toggleIndentation()" class="icon icon_indent">Indent</a>
         <a (click)="deleteTask()" class="icon icon_delete">Delete</a>
 

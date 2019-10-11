@@ -7,6 +7,7 @@ import { Task } from 'src/app/models/task.model';
 import { Title } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
 import { TasksService } from 'src/app/services/tasks.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-project',
@@ -19,8 +20,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
   private drag_sub: Subscription;
+  private update_project_sub: Subscription;
   private update_task_sub: Subscription;
-
+  public title = environment.site_name;
 
   constructor(
     private titleService: Title,
@@ -49,7 +51,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       (project: Project) => {
         if (project) {
           this.project = project;
-          this.titleService.setTitle(this.project.name);
+          this.titleService.setTitle(`${this.project.name} | ${this.title} `);
           this.setupDragSubscription();
         }
       }
@@ -70,8 +72,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   }
 
+
+
   archiveProject(): void {
-    alert('doseoasdk l');
+    if (this.project.status !== 'inactive') {
+      this.project.status = 'inactive';
+      this.update_project_sub = this.projectsService.updateProject(this.project).subscribe(
+        () => alert('This project has been archived'),
+        (error) => console.log(error)
+      );
+    }
   }
 
   taskUpdated(newtask: Task): void {
@@ -124,6 +134,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project_sub,
       this.delete_project_sub,
       this.drag_sub,
+      this.update_project_sub,
       this.update_task_sub,
 
     ];

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: ProjectsComponent },
 
   { path: 'projects/new', component: NewProjectComponent, data: { title: 'New Project' } },
-  { path: 'projects/:id', component: ProjectComponent, data: { title: 'Project' } },
+  { path: 'projects/:id', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
 
 
