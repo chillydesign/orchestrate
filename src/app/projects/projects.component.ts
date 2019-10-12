@@ -9,7 +9,7 @@ import { Project } from '../models/project.model';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
-  public projects: Project[] = [];
+  public projects: Project[];
   public offset = 0;
   public limit = 10;
   public load_more = false;
@@ -19,9 +19,17 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   constructor(private projectsService: ProjectsService) { }
 
   ngOnInit() {
+    this.refreshProjects();
+  }
 
+
+  refreshProjects(): void {
+    this.projects = [];
+    this.load_more = false;
+    this.offset = 0;
     this.getProjects();
   }
+
 
 
   getProjects(): void {
@@ -46,6 +54,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.load_more = false;
     this.getProjects();
   }
+
 
 
   ngOnDestroy() {
