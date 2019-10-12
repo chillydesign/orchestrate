@@ -57,6 +57,22 @@ main {
 }
 
 
+
+
+.alert {
+    background: $brand_color;
+    color: white;
+    padding: $padding;
+    border-radius: $border_radius;
+    margin: 0 0 $padding;
+    box-shadow: $box_shadow;
+    font-size: $font_size;
+    &.alert_danger {
+        background-color: $red;
+    }
+}
+
+
 .task_container {
     display:flex;
     margin: 0 0 $padding;
@@ -100,8 +116,10 @@ main {
             opacity: 0.1;
         }
     }
-    input {
-        font-size: 1.1em;
+    input, textarea {
+        font-size: 1em;
+        height: 40px;
+        line-height: 40px;
     }
     &:hover {
         .icon {

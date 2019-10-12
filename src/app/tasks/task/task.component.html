@@ -1,7 +1,6 @@
 <div class="task_container {{task.indentation_class}}" [ngClass]="{completed: task.completed  }">
     <div class="completed_container">
         <input (click)="toggleCompleted()" type="checkbox" name="completed" id="completed" [(ngModel)]="task.completed">
-
     </div>
 
     <div class="content_container">
