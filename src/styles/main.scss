@@ -87,6 +87,22 @@ main {
         margin-left: 30px;
     }
   
+    &.priority_1 {
+        // input {
+        //     border-color: $font_color;
+        // }
+       .actions_container {
+           .icon {
+               &.icon_priority {
+                    opacity: 1;
+                   background-color: $red;
+                   background-image: url("assets/images/priority_white.svg")
+               }
+           }
+       }
+    }
+  
+
 
     .completed_container {
          width: 40px;
@@ -107,19 +123,18 @@ main {
         width: 100%;
     }
     .actions_container {
-        width: 80px;
-        max-width: 80px;
+        width: 120px;
+        max-width: 120px;
         padding: 0 $half_padding;
         .icon {
             position: relative;
-            top: 8px;
+            top: 6px;
             opacity: 0.1;
         }
     }
     input, textarea {
         font-size: 1em;
-        height: 40px;
-        line-height: 40px;
+      
     }
     &:hover {
         .icon {
@@ -139,26 +154,39 @@ main {
     height: 25px;
     border-radius: $border_radius;
     transition: all 0.3s;
+    margin: 0 1px 0 0;
 
 
     &.icon_delete {
-        background-image: url("./assets/images/delete.svg");
-       
+        background-image: url("assets/images/delete.svg");
     }
     &.icon_indent {
-        background-image: url("./assets/images/indent.svg");
-    
+        background-image: url("assets/images/indent.svg");
+    }
+    &.icon_priority {
+        background-image: url("assets/images/priority.svg");
+    }
+    &.icon_refresh {
+        background-image: url("assets/images/refresh.svg");
+        background-color: $font_color;
+        background-size: 18px;
+        background-position: center bottom;
     }
 
     &:hover {
-     
         background-color: $medium_grey;
     }
 }
 
 
+h1 {
+   a.icon {
+    position: relative; 
+    top: 10px;
+    }
+}
+
 .progression_outer {
-   display: flex;
     margin: #{$padding * -1} #{$padding * -1} $padding;
     background-color: $light_grey;
     border-radius: $border_radius  $border_radius 0 0;

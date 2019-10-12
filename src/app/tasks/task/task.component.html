@@ -1,14 +1,17 @@
-<div class="task_container {{task.indentation_class}}" [ngClass]="{completed: task.completed  }">
+<div class="task_container {{task.priority_class}} {{task.indentation_class}}"
+    [ngClass]="{completed: task.completed  }">
     <div class="completed_container">
-        <input (click)="toggleCompleted()" type="checkbox" name="completed" id="completed" [(ngModel)]="task.completed">
+        <input [disabled]="updating" (click)="toggleCompleted()" type="checkbox" name="completed"
+            [(ngModel)]="task.completed">
     </div>
 
     <div class="content_container">
         <form (ngSubmit)="onSubmit()" novalidate>
-            <input (blur)="onSubmit()" type="text" name="name" id="name" autocomplete="off" [(ngModel)]="task.content">
+            <input (blur)="onSubmit()" type="text" name="content" autocomplete="off" [(ngModel)]="task.content">
         </form>
     </div>
     <div class="actions_container" *ngIf="canDelete">
+        <a (click)="togglePriority()" class="icon icon_priority">Priority</a>
         <a (click)="toggleIndentation()" class="icon icon_indent">Indent</a>
         <a (click)="deleteTask()" class="icon icon_delete">Delete</a>
 

@@ -9,8 +9,10 @@ export class Task {
     public updated_at: string;
     public completed: boolean;
     public ordering: number;
+    public priority = 0;
     public indentation = 0;
     public indentation_class: string;
+    public priority_class: string;
 
     is_url(): boolean {
 
@@ -24,6 +26,7 @@ export class Task {
         if (obj) {
             Object.assign(this, obj);
             this.indentation_class = `indentation_${this.indentation}`;
+            this.priority_class = `priority_${this.priority}`;
         }
 
     }

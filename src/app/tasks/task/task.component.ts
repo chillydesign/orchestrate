@@ -13,6 +13,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  public updating = false;
   private update_task_sub: Subscription;
   private delete_task_sub: Subscription;
 
@@ -25,17 +26,20 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   onSubmit(): void {
+    // dont do an update til the last update has finished
+    if (this.updating === false) {
+      this.updating = true;
+      this.update_task_sub = this.tasksService.updateTask(this.task).subscribe(
+        (task: Task) => {
+          this.task = task;
+          this.taskUpdated.next(this.task);
+          this.updating = false;
+        },
+        (error) => {
 
-    this.update_task_sub = this.tasksService.updateTask(this.task).subscribe(
-      (task: Task) => {
-        this.task = task;
-        this.taskUpdated.next(this.task);
-      },
-      (error) => {
-
-      }
-    );
-
+        }
+      );
+    }
   }
 
   toggleCompleted(): void {
@@ -48,22 +52,30 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   toggleIndentation(): void {
-    // 1 0
-    // 0 1
+    // 1 0    // 0 1
     this.task.indentation = (this.task.indentation + 1) % 2;
     this.onSubmit();
   }
 
+  togglePriority(): void {
+    // 1 0    // 0 1
+    console.log(this.task.priority);
+    this.task.priority = (this.task.priority + 1) % 2;
+    console.log(this.task.priority);
+    this.onSubmit();
+  }
+
   deleteTask(): void {
-    this.delete_task_sub = this.tasksService.deleteTask(this.task).subscribe(
-      () => {
-        this.taskDeleted.next(this.task);
-      },
-      (error) => {
+    if (confirm('Are you sure?')) {
+      this.delete_task_sub = this.tasksService.deleteTask(this.task).subscribe(
+        () => {
+          this.taskDeleted.next(this.task);
+        },
+        (error) => {
 
-      }
-    );
-
+        }
+      );
+    }
   }
 
   ngOnDestroy() {
