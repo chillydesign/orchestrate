@@ -1,4 +1,5 @@
 $brand_color: #3369ff;
+$brand_color_adjust: adjust-hue($brand_color, -17 );
 $red: #ca385e;
 $green: #38ca5e;
 
@@ -10,7 +11,7 @@ $dark_grey: #282828;
 $font_color: $dark_grey;
 $lighter_font_color: #888;
 
-$brand_gradient:  linear-gradient(70deg, $brand_color, adjust-hue($brand_color, -17 ));
+$brand_gradient:  linear-gradient(70deg, $brand_color,  $brand_color_adjust);
 
 
 $font_stack: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

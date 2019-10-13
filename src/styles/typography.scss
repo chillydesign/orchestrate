@@ -58,17 +58,21 @@ a {
     }
 
 
-        &.button {
-            display:inline-block;
-            padding: $half_padding $double_padding;
-            background: $brand_gradient;
-            color: white;
-            border-radius: $border_radius;
-            opacity: 0.8;
-            &:hover {
-                opacity : 1;
-            }
+        &:hover {
+            color: $brand_color_adjust;
         }
+
+    &.button {
+        display:inline-block;
+        padding: $half_padding $double_padding;
+        background: $brand_gradient;
+        color: white;
+        border-radius: $border_radius;
+        opacity: 0.8;
+        &:hover {
+            opacity : 1;
+        }
+    }
 
  
 }
