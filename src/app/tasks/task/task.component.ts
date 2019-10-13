@@ -50,6 +50,21 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
 
+  updateContent(event) {
+    this.task.content = event.target.textContent;
+    this.onSubmit();
+  }
+
+  saveTask(event) {
+
+    if (event.key === 'Enter') {
+
+      this.onSubmit();
+      return false;
+    }
+  }
+
+
 
   toggleIndentation(): void {
     // 1 0    // 0 1

@@ -101,7 +101,7 @@ form {
             position: relative;
 
             &.field_highlighted {
-                input, select {
+                .task_input, input, select {
                     border-color: $brand_color;
                 }
                 .field_description  {
@@ -111,7 +111,7 @@ form {
 
 
             &.field_valid {
-                input, select {
+                .task_input, input, select {
                     border-color: $green;
                 }
                 .field_description  {
@@ -119,7 +119,7 @@ form {
                 }
             }
             &.field_invalid {
-                input, select {
+                .task_input, input, select {
                     border-color: $red;
                 }
                 .field_description  {
@@ -170,7 +170,7 @@ form {
 
 
 
-input, select, textarea, button {
+.task_input, input, select, textarea, button {
     width: 100%;
     padding: $half_padding;
     font-size: $font_size;
@@ -182,6 +182,10 @@ input, select, textarea, button {
         border-color: $brand_color;
     }
 
+}
+
+.task_input {
+    line-height: 140%;
 }
 
 button , input[type="button"] {
