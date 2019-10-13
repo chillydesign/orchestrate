@@ -79,18 +79,15 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
     const subs: Subscription[] = [
       this.update_task_sub,
       this.delete_task_sub,
     ];
-
     subs.forEach((sub) => {
       if (sub) {
         sub.unsubscribe();
       }
     });
-
   }
 
 

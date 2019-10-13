@@ -1,0 +1,7 @@
+<div class="upload_container row_container">
+    <div class="file_name"> <a target="_blank" href="{{upload.full_url}}"> {{upload.filename}}</a></div>
+    <div class="file_date">{{upload.nice_created_at}}</div>
+    <div class="actions_container">
+        <a (click)="deleteUpload()" class="icon icon_delete">Delete</a>
+    </div>
+</div>

@@ -15,6 +15,19 @@ export class UploadsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
+  getUploads(project_id: number): Observable<Upload[]> {
+
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=uploads&project_id=${project_id}`;
+    return this.http.get<Upload[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => res.map((u: Upload) => new Upload(u)))
+    );
+
+  }
+
+
+
   addUpload(upload: Upload): Observable<Upload> {
     const options = this.authService.setAPIOptions();
     const data = {
@@ -32,6 +45,16 @@ export class UploadsService {
     );
   }
 
+
+  deleteUpload(upload: Upload): Observable<Upload> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=uploads&id=${upload.id}`;
+    return this.http.delete<Upload>(endpoint, options).pipe(
+      catchError(this.authService.handleError)
+      // ,
+      // tap(() => console.log('deleted upload'))
+    );
+  }
 
 
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Upload } from '../models/upload.model';
 import { UploadsService } from '../services/uploads.service';
 import { Subscription } from 'rxjs';
+import { Project } from '../models/project.model';
 
 @Component({
   selector: 'app-uploads',
@@ -10,14 +11,39 @@ import { Subscription } from 'rxjs';
 })
 export class UploadsComponent implements OnInit, OnDestroy {
   public uploads: Upload[] = [];
+  @Input() project: Project;
   public files: File[] = [];
   public failedUploads: File[] = [];
-  public maxFileSize: number = 1024 * 1024 * 100; // 100 mb
+  public uploadingFiles: File[] = [];
+  public maxFileSize: number = 1024 * 1024 * 30; // 30 mb
   private new_upl_sub: Subscription;
+  private uploads_sub: Subscription;
   constructor(private uploadsService: UploadsService) { }
 
   ngOnInit() {
+    if (this.project) {
+      this.getUploads();
+    }
+
   }
+
+
+  getUploads(): void {
+    this.uploads_sub = this.uploadsService.getUploads(this.project.id).subscribe(
+      (uploads: Upload[]) => {
+        if (uploads) {
+          uploads.forEach(u => this.uploads.push(u));
+        }
+      }
+    );
+  }
+
+
+  removeOldUpload(upload: Upload): void {
+    this.uploads = this.uploads.filter(u => u.id !== upload.id);
+
+  }
+
 
 
   onSelect(event) {
@@ -32,21 +58,28 @@ export class UploadsComponent implements OnInit, OnDestroy {
     newfiles.forEach((file: File) => {
       this.readFile(file).then(fileContents => {
 
-        // TODO SEND FILE TO API
-        const new_upload = new Upload();
-        new_upload.file_contents = fileContents.toString();
-        new_upload.filename = file.name;
+        this.uploadingFiles.push(file);
+
+        // SEND FILE TO API
+        const new_upload = new Upload({
+          file_contents: fileContents.toString(),
+          filename: file.name,
+          project_id: this.project.id
+        });
+
         this.new_upl_sub = this.uploadsService.addUpload(new_upload).subscribe(
           (upload: Upload) => {
             this.uploads.push(upload);
+            // remove it from the ist of currently uplaoding files.
+            this.removeFileFromList(file);
           }, (error) => {
             // remove it from the ist of currently uplaoding files.
             this.removeFileFromList(file);
+            this.showFailedUploadsPopup([file]);
 
           }
         );
 
-        // http://webeasystep.com/blog/view_article/How_to_upload_base64_file_in_PHP
 
       }).catch((err) => {
         console.log(err);
@@ -55,6 +88,12 @@ export class UploadsComponent implements OnInit, OnDestroy {
 
 
   }
+
+  fileIsUploading(file: File): boolean {
+    const uploadingNow = true;
+    return uploadingNow;
+  }
+
 
 
   removeFileFromList(file: File): void {
@@ -105,7 +144,8 @@ export class UploadsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     const subs: Subscription[] = [
-      this.new_upl_sub
+      this.new_upl_sub,
+      this.uploads_sub
     ];
     subs.forEach((sub) => {
       if (sub) {

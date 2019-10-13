@@ -1,4 +1,4 @@
-<div class="task_container {{task.priority_class}} {{task.indentation_class}}"
+<div class="row_container task_container {{task.priority_class}} {{task.indentation_class}}"
     [ngClass]="{completed: task.completed  }">
     <div class="completed_container">
         <input [disabled]="updating" (click)="toggleCompleted()" type="checkbox" name="completed"
@@ -14,6 +14,5 @@
         <a (click)="togglePriority()" class="icon icon_priority">Priority</a>
         <a (click)="toggleIndentation()" class="icon icon_indent">Indent</a>
         <a (click)="deleteTask()" class="icon icon_delete">Delete</a>
-
     </div>
 </div>

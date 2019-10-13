@@ -21,6 +21,7 @@ import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { BoxFooterComponent } from './shared/box-footer/box-footer.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { UploadsComponent } from './uploads/uploads.component';
+import { UploadComponent } from './uploads/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UploadsComponent } from './uploads/uploads.component';
     NewTaskComponent,
     BoxFooterComponent,
     AutofocusDirective,
-    UploadsComponent
+    UploadsComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

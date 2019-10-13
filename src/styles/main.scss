@@ -73,10 +73,28 @@ main {
 }
 
 
-.task_container {
+.row_container {
     display:flex;
-    margin: 0 0 $padding;
+    margin:0;
+    padding: 0;
+    .actions_container {
+        padding: 0  0 0 $half_padding;
+    }
+    .icon {
+  
+        opacity: 0.1;
+    }
 
+    &:hover {
+        .icon {
+            opacity: 1;
+        }
+    }
+}
+
+
+.task_container {
+    margin: 0 0 $padding;
     &.completed {
         .content_container {
          opacity:0.5;
@@ -94,7 +112,7 @@ main {
        .actions_container {
            .icon {
                &.icon_priority {
-                    opacity: 1;
+                opacity: 1;
                    background-color: $red;
                    background-image: url("assets/images/priority_white.svg")
                }
@@ -103,12 +121,9 @@ main {
     }
   
 
-
     .completed_container {
          width: 40px;
          max-width: 40px;
-
-
             input {
                 transform: scale(1.4);
                 position: relative;
@@ -123,26 +138,43 @@ main {
         width: 100%;
     }
     .actions_container {
-        width: 120px;
-        max-width: 120px;
-        padding: 0 $half_padding;
-        .icon {
-            position: relative;
-            top: 6px;
-            opacity: 0.1;
-        }
+        width: 105px;
+        max-width: 105px;
     }
     input, textarea {
         font-size: 1em;
-      
     }
-    &:hover {
-        .icon {
-            opacity: 1;
-        }
+    .icon {
+        position: relative;
+        top: 6px;
     }
+
    
+} /// .task_container
+
+
+.uploads_container {
+    margin: 0 0 $padding 0;
+    padding: 0;
+
 }
+.upload_container {
+    border-bottom: 1px dotted $medium_grey;
+    padding: $half_padding;
+    
+    .file_name {
+        width: 100%;
+    }
+    .file_date {
+        width: 100px;
+        color: $medium_grey;
+        font-style: italic;
+    }
+    .actions_container {
+        padding: 0  0 0 $half_padding;
+    }
+}
+
 
 
 .icon {

@@ -1,20 +1,25 @@
 <app-box>
+    <h3>Uploads</h3>
+
+    <ul class="uploads_container">
+        <li *ngFor="let upload of uploads">
+            <app-upload [upload]="upload" (uploadDeleted)="removeOldUpload($event)"></app-upload>
+        </li>
+    </ul>
+
 
     <ngx-dropzone [maxFileSize]="maxFileSize" (change)="onSelect($event)">
         <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }}) <br> Loading ... </ngx-dropzone-label>
+
         </ngx-dropzone-preview>
     </ngx-dropzone>
 
 
-    <ul class="uploads_container">
-        <li class="upload_container" *ngFor="let upload of uploads">{{upload.filename}}</li>
-    </ul>
 
 </app-box>
 
 <div class="alert alert_danger" *ngFor="let failedUpload of failedUploads">
-    {{failedUpload.name
-    }} did not upload because of its {{failedUpload.reason}}.
+    {{failedUpload.name }} did not upload because of its {{failedUpload.reason}}.
 </div>
