@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    site_name: `Orchestrate`,
+    site_name: `CPMDT`,
     api_url: 'https://webfactor.ch/cpmdtdev_api',
     front_url: 'https://webfactor.ch/cpmdtdev/',
     cookie_domain: 'webfactor.ch',

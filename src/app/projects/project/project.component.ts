@@ -151,6 +151,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.dragulaService.destroy('TASKS');
+
   }
 
 
