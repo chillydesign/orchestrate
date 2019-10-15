@@ -6,12 +6,11 @@
     </div>
 
     <div class="content_container">
-        <form (ngSubmit)="onSubmit()" novalidate>
-            <div class="task_input" contenteditable="true" (keypress)="saveTask($event)" (blur)="updateContent($event)"
-                [textContent]="task.content">
-            </div>
-            <!-- <input (blur)="onSubmit()" type="text" name="content" autocomplete="off" [(ngModel)]="task.content"> -->
-        </form>
+
+        <div class="task_input" contenteditable="true" (keypress)="saveTask($event)" (blur)="updateContent($event)"
+            [textContent]="task.content">
+        </div>
+
     </div>
     <div class="actions_container" *ngIf="canDelete">
         <a (click)="togglePriority()" class="icon icon_priority">Priority</a>

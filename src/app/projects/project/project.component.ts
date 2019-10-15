@@ -32,6 +32,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private dragulaService: DragulaService,
     private router: Router) {
 
+    // add a handle to the dragdrop
+    this.dragulaService.createGroup('TASKS', {
+      moves(el, container, handle) {
+        return handle.className === 'handle';
+      }
+    });
 
   }
 

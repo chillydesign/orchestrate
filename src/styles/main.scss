@@ -33,9 +33,7 @@ main {
         filter: grayscale(1);
     }
 
-    &:hover {
-       
-    }
+
 
     p:last-child {
         padding:0;
@@ -92,6 +90,26 @@ main {
     }
 }
 
+.orderable {
+
+    position: relative;
+    .handle {
+
+        position: absolute;
+        right: -5px;
+        top: 12px;
+        text-indent: -9999px;
+        background: no-repeat center top url("assets/images/drag.svg");
+        background-size: 15px;
+        opacity: 0.3;
+        cursor: pointer;
+        width: 20px;
+        height: 30px;
+        display:inline-block;
+
+    }
+}
+
 
 .task_container {
     margin: 0 0 $padding;
@@ -138,7 +156,7 @@ main {
         width: 100%;
     }
     .actions_container {
-        width: 105px;
+        min-width: 105px;
         max-width: 105px;
     }
     .task_input, input, textarea {
@@ -188,7 +206,7 @@ main {
     transition: all 0.3s;
     margin: 0 1px 0 0;
 
-
+ 
     &.icon_delete {
         background-image: url("assets/images/delete.svg");
     }

@@ -10,9 +10,10 @@
 
 
         <ul dragula="TASKS" [(dragulaModel)]="project.tasks" (dragulaModelChange)="project.tasks = $event">
-            <li *ngFor="let task of project.tasks">
+            <li class="orderable" *ngFor="let task of project.tasks">
                 <app-task [task]="task" (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)">
                 </app-task>
+                <div class="handle">Handle</div>
             </li>
         </ul>
 
