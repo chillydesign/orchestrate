@@ -2,6 +2,7 @@
 
 # compiled output
 /_prod
+/_cpmdtdev
 /dist
 /tmp
 /out-tsc
