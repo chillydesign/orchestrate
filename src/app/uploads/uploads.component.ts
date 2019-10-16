@@ -47,7 +47,7 @@ export class UploadsComponent implements OnInit, OnDestroy {
 
 
   onSelect(event) {
-    console.log(event);
+
     const newfiles = event.addedFiles;
     this.files.push(...newfiles);
 
@@ -101,7 +101,7 @@ export class UploadsComponent implements OnInit, OnDestroy {
   }
 
   onRemove(event: File) {
-    console.log(event);
+
     this.removeFileFromList(event);
     // TODO DELETE FILE FROM API HERE
   }

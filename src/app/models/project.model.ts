@@ -13,6 +13,17 @@ export class Project {
     public tasks_count: { complete: number, incomplete: number, total: number };
     public percentage = 0;
 
+
+
+    public getNextTaskOrdering(): number {
+        if (this.tasks) {
+            const orderings: number[] = this.tasks.map(t => t.ordering);
+            return Math.max(...orderings) + 1;
+        } else {
+            return 9999;
+        }
+    }
+
     public setTasksCount(): void {
         if (this.tasks) {
             this.tasks_count = {

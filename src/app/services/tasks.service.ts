@@ -19,8 +19,8 @@ export class TasksService {
       attributes: {
         content: task.content,
         project_id: task.project_id,
+        ordering: task.ordering
       }
-
     };
     const endpoint = `${this.api_url}/?route=tasks`;
     return this.http.post<Task>(endpoint, data, options).pipe(

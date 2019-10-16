@@ -74,9 +74,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   togglePriority(): void {
     // 1 0    // 0 1
-    console.log(this.task.priority);
     this.task.priority = (this.task.priority + 1) % 2;
-    console.log(this.task.priority);
     this.onSubmit();
   }
 

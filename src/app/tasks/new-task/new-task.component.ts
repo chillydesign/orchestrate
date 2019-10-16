@@ -31,12 +31,13 @@ export class NewTaskComponent implements OnInit, OnDestroy {
 
 
   onSubmit(): void {
-
-
+    // set the order of this task as one more than the previous highest task
+    // so we dont have to do lots of calculations if we order later on
+    this.task.ordering = this.project.getNextTaskOrdering();
 
     this.add_task_sub = this.tasksService.addTask(this.task).subscribe(
       (task: Task) => {
-        // emit  completed task to parent
+        // emit completed task to parent
         if (task) {
           this.taskCreated.next(task);
           // set this task to a new one to add a new one
