@@ -41,7 +41,7 @@ aside {
         border-top: 1px solid lighten($dark_grey, 5);
         font-size: #{$font_size };
         margin:0;
-        
+      
         
         &:link, &:visited {
             color: $light_grey;
@@ -77,10 +77,14 @@ aside {
             
             background: $brand_gradient;
             color: white;
-        
             font-weight: bold;
             letter-spacing: 1px;
-            
+            min-height: $header_height;
+            height: $header_height;
+            border:0;
+            line-height: $header_height;
+            padding-top: 0;
+            padding-bottom: 0;     
         }
         
     } // end of a

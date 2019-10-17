@@ -1,8 +1,17 @@
+<div class="search_form">
+    <form (keyup)="onSearch()" (ngSubmit)="onSearch()">
+        <div class="search_field">
+            <input type="text" [(ngModel)]="search_term" name="search_term" id="search_term" placeholder="Search ..." />
+        </div>
+    </form>
+</div>
+
+
 <h1>Projects <a (click)="refreshProjects()" class="icon icon_refresh">Refresh</a> </h1>
 
 
 
-<ng-container *ngFor="let project of projects">
+<ng-container *ngFor="let project of visible_projects">
     <app-box [styleclass]="project.status">
 
         <div class="progression_outer">

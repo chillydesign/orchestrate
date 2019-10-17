@@ -10,10 +10,12 @@ import { Project } from '../models/project.model';
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
   public projects: Project[];
+  public visible_projects: Project[];
   public offset = 0;
   public limit = 10;
   public load_more = false;
   public loading = false;
+  public search_term: string;
   private projects_sub: Subscription;
 
   constructor(private projectsService: ProjectsService) { }
@@ -25,6 +27,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   refreshProjects(): void {
     this.projects = [];
+    this.visible_projects = [];
     this.load_more = false;
     this.offset = 0;
     this.getProjects();
@@ -43,9 +46,21 @@ export class ProjectsComponent implements OnInit, OnDestroy {
             this.offset += this.limit;
             this.load_more = (projects.length === this.limit);
             this.loading = false;
+            this.onSearch();
           }
         }
       );
+    }
+  }
+
+  onSearch(): void {
+    if (this.search_term) {
+      const s = this.search_term.toLowerCase();
+      this.visible_projects = this.projects.filter((p) => {
+        return p.name.toLowerCase().includes(s);
+      });
+    } else {
+      this.visible_projects = this.projects;
     }
 
   }
