@@ -16,11 +16,11 @@ export class ProjectsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
-  getProjects(opts = { limit: 10, offset: 0 }): Observable<Project[]> {
+  getProjects(opts = { limit: 10, offset: 0, status: 'active' }): Observable<Project[]> {
 
 
     const options = this.authService.setAPIOptions();
-    const endpoint = `${this.api_url}/?route=projects&offset=${opts.offset}&limit=${opts.limit}`;
+    const endpoint = `${this.api_url}/?route=projects&offset=${opts.offset}&limit=${opts.limit}&status=${opts.status}`;
 
     return this.http.get<Project[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),

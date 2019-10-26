@@ -17,11 +17,14 @@ export class Project {
 
     public getNextTaskOrdering(): number {
         if (this.tasks) {
-            const orderings: number[] = this.tasks.map(t => t.ordering);
-            return Math.max(...orderings) + 1;
-        } else {
-            return 9999;
+            if (this.tasks.length > 0) {
+                const orderings: number[] = this.tasks.map(t => t.ordering);
+                return Math.min(9999, Math.max(...orderings) + 1);
+            }
+            return 1;
         }
+        return 1;
+
     }
 
     public setTasksCount(): void {

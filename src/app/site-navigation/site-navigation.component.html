@@ -2,7 +2,8 @@
     <nav>
         <a [routerLink]="['/']" class="branding">{{site_name}}</a>
         <ul>
-            <!-- <li><a [routerLink]="['/']">Projects</a></li> -->
+            <li><a [routerLink]="['/']">Projects</a></li>
+            <li><a [routerLink]="['/projects', 'status', 'inactive']">Archive</a></li>
             <li routerLinkActive="active"><a [routerLink]="['/projects', 'new']">New Project</a></li>
         </ul>
 
