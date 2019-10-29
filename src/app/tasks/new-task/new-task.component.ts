@@ -3,7 +3,7 @@ import { Project } from 'src/app/models/project.model';
 import { Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
-import { } from 'events';
+
 
 @Component({
   selector: 'app-new-task',

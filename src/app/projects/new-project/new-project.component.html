@@ -1,4 +1,4 @@
-<h1>New project</h1>
+<h1> {{'New Project' | translate}} </h1>
 
 <app-box>
 
@@ -7,13 +7,13 @@
         <ul>
 
             <app-form-field [errors]="errors" [field]="'name'">
-                <label for="name">Name * </label>
+                <label for="name">{{'Name' | translate}} * </label>
                 <input appAutofocus autocomplete="off" type="text" name="name" id="name" [(ngModel)]="project.name">
             </app-form-field>
 
 
             <app-form-field [errors]="errors">
-                <button [disabled]="formLoading">Save</button>
+                <button [disabled]="formLoading">{{'Save' | translate}}</button>
             </app-form-field>
         </ul>
     </form>

@@ -2,6 +2,10 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { LANG_FR_TRANS } from '../app/translate/lang-fr';
+import { LANG_EN_TRANS } from '../app/translate/lang-en';
+
+
 export const environment = {
   production: false,
   site_name: `Orchestrate`,
@@ -10,7 +14,7 @@ export const environment = {
   cookie_domain: 'localhost',
   cookie_length_hours: 50,
   cache_duration: 60000, // time to hold resources from API in cache in milliseconds
-
+  translations: LANG_FR_TRANS
 };
 
 /*

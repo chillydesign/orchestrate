@@ -22,6 +22,7 @@ import { BoxFooterComponent } from './shared/box-footer/box-footer.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { UploadsComponent } from './uploads/uploads.component';
 import { UploadComponent } from './uploads/upload/upload.component';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UploadComponent } from './uploads/upload/upload.component';
     BoxFooterComponent,
     AutofocusDirective,
     UploadsComponent,
-    UploadComponent
+    UploadComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule,

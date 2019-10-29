@@ -1,13 +1,15 @@
 <div class="search_form">
     <form (keyup)="onSearch()" (ngSubmit)="onSearch()">
         <div class="search_field">
-            <input type="text" [(ngModel)]="search_term" name="search_term" id="search_term" placeholder="Search ..." />
+            <input type="text" [(ngModel)]="search_term" name="search_term" id="search_term"
+                [placeholder]="'Search' | translate" />
         </div>
     </form>
 </div>
 
 
-<h1>Projects <a (click)="refreshProjects()" class="icon icon_refresh">Refresh</a> </h1>
+<h1>{{'Projects' | translate}} <a (click)="refreshProjects()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
+</h1>
 
 
 
@@ -29,7 +31,8 @@
         </ul>
 
         <app-box-footer>
-            <p>{{ project.tasks_count.incomplete}} incomplete | {{ project.tasks_count.complete}} complete </p>
+            <p>{{ project.tasks_count.incomplete}} {{'incomplete' | translate}} | {{ project.tasks_count.complete}}
+                {{'complete' | translate}} </p>
         </app-box-footer>
     </app-box>
 
@@ -38,6 +41,6 @@
 
 <app-box *ngIf="load_more">
     <p>
-        <a (click)="loadMore()" class="button button_block">Load more</a>
+        <a (click)="loadMore()" class="button button_block">{{'Load more' | translate}}</a>
     </p>
 </app-box>

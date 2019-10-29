@@ -1,5 +1,5 @@
 <app-box>
-    <h3>Uploads</h3>
+    <h3>{{'Uploads' | translate}}</h3>
 
     <ul class="uploads_container">
         <li *ngFor="let upload of uploads">
@@ -9,7 +9,7 @@
 
 
     <ngx-dropzone [maxFileSize]="maxFileSize" (change)="onSelect($event)">
-        <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+        <ngx-dropzone-label>{{'Drop it, baby!' | translate}}</ngx-dropzone-label>
         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
             <ngx-dropzone-label>{{ f.name }} ({{ f.type }}) <br> Loading ... </ngx-dropzone-label>
 

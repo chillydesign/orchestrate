@@ -28,11 +28,11 @@
 
         <app-box-footer>
             <p>
-                <a *ngIf="project.status !== 'inactive' " (click)="archiveProject()">Archive</a>
+                <a *ngIf="project.status !== 'inactive' " (click)="archiveProject()">{{'Archive' | translate}}</a>
                 &nbsp;
-                <a [routerLink]="['/projects', project.id,  'edit']">Edit</a>
+                <a [routerLink]="['/projects', project.id,  'edit']">{{'Edit' | translate}}</a>
                 &nbsp;
-                <a (click)="deleteProject()">Delete</a>
+                <a (click)="deleteProject()">{{'Delete' | translate}}</a>
             </p>
 
         </app-box-footer>
