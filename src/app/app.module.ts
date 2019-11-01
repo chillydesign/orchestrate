@@ -23,6 +23,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { UploadsComponent } from './uploads/uploads.component';
 import { UploadComponent } from './uploads/upload/upload.component';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TranslatePipe } from './pipes/translate.pipe';
     AutofocusDirective,
     UploadsComponent,
     UploadComponent,
-    TranslatePipe
+    TranslatePipe,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

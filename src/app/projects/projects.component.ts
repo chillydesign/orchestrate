@@ -13,7 +13,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public projects: Project[];
   public visible_projects: Project[];
   public offset = 0;
-  public limit = 10;
+  public limit = 5;
   public status = 'inactive';
   public load_more = false;
   public loading = false;
@@ -45,7 +45,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   refreshProjects(): void {
     this.projects = [];
-    this.visible_projects = [];
+    this.visible_projects = null;
     this.load_more = false;
     this.offset = 0;
     this.getProjects();
