@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlSegment } from '@angular/router';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Project } from 'src/app/models/project.model';
 import { Task } from 'src/app/models/task.model';
@@ -21,8 +21,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private project_sub: Subscription;
   private drag_sub: Subscription;
   private update_project_sub: Subscription;
+  private url_sub: Subscription;
   private update_task_sub: Subscription;
   public title = environment.site_name;
+  public canTranslate = false;
 
   constructor(
     private titleService: Title,
@@ -48,6 +50,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
         this.getProject(params.id);
       }
     ); // end of route_params_subscription
+
+
+    // if url string contains translate or translation, allow tasks to be translated 
+    this.url_sub = this.route.url.subscribe(
+      (segments: UrlSegment[]) => {
+        const sgs = segments.map(s => s.path);
+        this.canTranslate = (sgs.includes('translate') || sgs.includes('translation'));
+      }
+    );
 
 
   }
@@ -139,6 +150,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.drag_sub,
       this.update_project_sub,
       this.update_task_sub,
+      this.url_sub,
 
     ];
 

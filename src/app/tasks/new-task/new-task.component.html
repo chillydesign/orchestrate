@@ -5,8 +5,14 @@
 
     <div class="content_container">
         <form (ngSubmit)="onSubmit()" novalidate>
-            <input appAutofocus [placeholder]="'add task here' | translate" autocomplete="off" type="text"
-                name="content" id="content" [(ngModel)]="task.content">
+
+            <div class="inputs_container">
+                <input appAutofocus [placeholder]="'add task here' | translate" autocomplete="off" type="text"
+                    name="content" id="content" [(ngModel)]="task.content">
+                <input *ngIf="canTranslate" [placeholder]="'add translation here' | translate" autocomplete="off"
+                    type="translation" name="translation" id="translation" [(ngModel)]="task.translation">
+            </div>
+
 
         </form>
     </div>

@@ -5,6 +5,7 @@ export class Task {
     public id: number;
     public project_id: number;
     public content: string;
+    public translation: string;
     public created_at: string;
     public updated_at: string;
     public completed: boolean;

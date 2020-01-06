@@ -185,6 +185,21 @@ main {
     }
 
 
+    .inputs_container {
+        display: flex;
+        flex-wrap: wrap;
+
+        input,
+        .task_input {
+            flex: 1;
+        }
+
+        input:nth-child(2n),
+        .task_input:nth-child(2n) {
+            margin-left: 5px;
+        }
+    }
+
 }
 
 /// .task_container
@@ -272,9 +287,11 @@ h1 {
         background: $brand_gradient;
         transition: all 1s;
         height: 3px;
-
     }
+
+
 }
+
 
 
 

@@ -10,6 +10,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
+  @Input() canTranslate = false;
   @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -55,7 +56,12 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.onSubmit();
   }
 
-  saveTask(event) {
+  updateTranslation(event) {
+    this.task.translation = event.target.textContent;
+    this.onSubmit();
+  }
+
+  saveTaskOnEnter(event) {
 
     if (event.key === 'Enter') {
 

@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'projects/status/:status', component: ProjectsComponent, data: { title: 'Projects' } },
   { path: 'projects/new', component: NewProjectComponent, data: { title: 'New Project' } },
   { path: 'projects/:id', component: ProjectComponent },
+  { path: 'projects/:id/translate', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
 
 

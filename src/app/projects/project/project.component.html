@@ -6,13 +6,14 @@
 
 
         <div class="progression_outer">
-            <div class="progression_inner" [style.width.%]="project.percentage"></div>
+            <div class="progression_inner" [title]="project.percentage" [style.width.%]="project.percentage"></div>
         </div>
 
 
         <ul dragula="TASKS" [(dragulaModel)]="project.tasks" (dragulaModelChange)="project.tasks = $event">
             <li class="orderable" *ngFor="let task of project.tasks">
-                <app-task [task]="task" (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)">
+                <app-task [task]="task" [canTranslate]="canTranslate" (taskUpdated)="taskUpdated($event)"
+                    (taskDeleted)="removeOldTask($event)">
                 </app-task>
                 <div class="handle">Handle</div>
             </li>
@@ -20,7 +21,8 @@
 
         <ul>
             <li>
-                <app-new-task [project]="project" (taskCreated)="addNewTask($event)"></app-new-task>
+                <app-new-task [project]="project" [canTranslate]="canTranslate" (taskCreated)="addNewTask($event)">
+                </app-new-task>
             </li>
         </ul>
 

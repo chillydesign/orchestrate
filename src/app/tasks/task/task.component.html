@@ -7,9 +7,16 @@
 
     <div class="content_container">
 
-        <div class="task_input" contenteditable="true" (keypress)="saveTask($event)" (blur)="updateContent($event)"
-            [textContent]="task.content">
+
+
+
+        <div class="inputs_container">
+            <div class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
+                (blur)="updateContent($event)" [textContent]="task.content"> </div>
+            <div *ngIf="canTranslate" class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
+                (blur)="updateTranslation($event)" [textContent]="task.translation"> </div>
         </div>
+
 
     </div>
     <div class="actions_container" *ngIf="canDelete">

@@ -18,6 +18,7 @@ export class TasksService {
     const data = {
       attributes: {
         content: task.content,
+        translation: task.translation,
         project_id: task.project_id,
         ordering: task.ordering
       }
@@ -38,6 +39,7 @@ export class TasksService {
       attributes: {
         content: task.content,
         completed: task.completed,
+        translation: task.translation,
         ordering: task.ordering,
         indentation: task.indentation,
         priority: task.priority,
