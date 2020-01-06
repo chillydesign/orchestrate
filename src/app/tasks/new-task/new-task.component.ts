@@ -12,7 +12,6 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class NewTaskComponent implements OnInit, OnDestroy {
   @Input() project: Project;
-  @Input() canTranslate = false;
   @Output() taskCreated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public task: Task;
   private add_task_sub: Subscription;
@@ -47,9 +46,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
         }
 
       },
-      (error) => {
-
-      }
+      (error) => console.log(error)
     );
 
   }
