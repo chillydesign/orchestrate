@@ -24,7 +24,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private url_sub: Subscription;
   private update_task_sub: Subscription;
   public title = environment.site_name;
-  public canTranslate = false;
+  public canAdministrate = false;
 
   constructor(
     private titleService: Title,
@@ -52,11 +52,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
     ); // end of route_params_subscription
 
 
-    // if url string contains translate or translation, allow tasks to be translated 
+    // if url string contains translate or translation, allow tasks to be translated
     this.url_sub = this.route.url.subscribe(
       (segments: UrlSegment[]) => {
         const sgs = segments.map(s => s.path);
-        this.canTranslate = (sgs.includes('translate') || sgs.includes('translation'));
+        this.canAdministrate = (sgs.includes('translate') || sgs.includes('translation') || sgs.includes('admin'));
       }
     );
 

@@ -14,6 +14,7 @@ export class Task {
     public indentation = 0;
     public indentation_class: string;
     public priority_class: string;
+    public created_at_date: Date;
 
     is_url(): boolean {
 
@@ -26,6 +27,7 @@ export class Task {
 
         if (obj) {
             Object.assign(this, obj);
+            this.created_at_date = new Date(this.created_at);
             this.indentation_class = `indentation_${this.indentation}`;
             this.priority_class = `priority_${this.priority}`;
         }

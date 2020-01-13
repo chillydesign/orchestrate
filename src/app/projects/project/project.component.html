@@ -12,7 +12,7 @@
 
         <ul dragula="TASKS" [(dragulaModel)]="project.tasks" (dragulaModelChange)="project.tasks = $event">
             <li class="orderable" *ngFor="let task of project.tasks">
-                <app-task [task]="task" [canTranslate]="canTranslate" (taskUpdated)="taskUpdated($event)"
+                <app-task [task]="task" [canAdministrate]="canAdministrate" (taskUpdated)="taskUpdated($event)"
                     (taskDeleted)="removeOldTask($event)">
                 </app-task>
                 <div class="handle">Handle</div>

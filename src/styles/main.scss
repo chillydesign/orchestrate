@@ -168,6 +168,13 @@ main {
         width: 100%;
     }
 
+    p.task_added {
+        font-size: 1em;
+        font-style: italic;
+        padding: 4px 4px 0 0;
+        color: #888;
+    }
+
     .actions_container {
         min-width: 105px;
         max-width: 105px;

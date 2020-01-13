@@ -7,16 +7,13 @@
 
     <div class="content_container">
 
-
-
-
         <div class="inputs_container">
             <div class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
                 (blur)="updateContent($event)" [textContent]="task.content"> </div>
-            <div *ngIf="canTranslate" class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
+            <div *ngIf="canAdministrate" class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
                 (blur)="updateTranslation($event)" [textContent]="task.translation"> </div>
         </div>
-
+        <p *ngIf="canAdministrate" class="task_added">Added: {{task.created_at_date | date }}</p>
 
     </div>
     <div class="actions_container" *ngIf="canDelete">
