@@ -163,9 +163,35 @@ main {
 
     }
 
+    .task_uploads_container {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 100;
+        opacity: 0;
+
+        a {
+            display: inline-block;
+            padding: 2px 5px;
+            font-size: 8px;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 3px 5px;
+        }
+    }
+
+
+
     .content_container {
         flex: 1 auto;
         width: 100%;
+        position: relative;
+
+        &:hover {
+            .task_uploads_container {
+                opacity: 0.8;
+            }
+        }
     }
 
     p.task_added {
@@ -226,6 +252,18 @@ main {
         width: 100%;
     }
 
+    select {
+        font-size: 0.7em;
+        padding: 4px;
+        margin: 0 5px;
+        width: auto;
+        max-width: 120px;
+
+        opacity: 0;
+    }
+
+
+
     .file_date {
         width: 100px;
         color: $medium_grey;
@@ -235,7 +273,14 @@ main {
     .actions_container {
         padding: 0 0 0 $half_padding;
     }
+
+    &:hover {
+        select {
+            opacity: 1;
+        }
+    }
 }
+
 
 
 

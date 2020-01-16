@@ -1,4 +1,5 @@
 import { Task } from './task.model';
+import { Upload } from './upload.model';
 
 export class Project {
 
@@ -10,6 +11,7 @@ export class Project {
     public updated_at: string;
     public tasks: Task[];
     public random_tasks: Task[];
+    public uploads: Upload[];
     public tasks_count: { complete: number, incomplete: number, total: number };
     public percentage = 0;
 
@@ -62,6 +64,10 @@ export class Project {
             if (obj.tasks) {
                 this.tasks = obj.tasks.map((task: Task) => new Task(task));
                 this.setTasksCount();
+            }
+            if (obj.uploads) {
+                this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
+
             }
 
             this.setPercentage();

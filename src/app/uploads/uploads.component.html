@@ -3,7 +3,7 @@
 
     <ul class="uploads_container">
         <li *ngFor="let upload of uploads">
-            <app-upload [upload]="upload" (uploadDeleted)="removeOldUpload($event)"></app-upload>
+            <app-upload [upload]="upload" [tasks]="tasks" (uploadDeleted)="removeOldUpload($event)"></app-upload>
         </li>
     </ul>
 

@@ -46,6 +46,23 @@ export class UploadsService {
   }
 
 
+
+  updateUpload(upload: Upload): Observable<Upload> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=uploads&id=${upload.id}`;
+    const data = {
+      attributes: {
+        task_id: upload.task_id,
+      }
+
+    };
+    return this.http.patch<Upload>(endpoint, data, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Upload(res))
+    );
+  }
+
+
   deleteUpload(upload: Upload): Observable<Upload> {
     const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=uploads&id=${upload.id}`;

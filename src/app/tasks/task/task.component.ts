@@ -30,9 +30,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     // dont do an update til the last update has finished
     if (this.updating === false) {
       this.updating = true;
+      const upl = this.task.uploads;
       this.update_task_sub = this.tasksService.updateTask(this.task).subscribe(
         (task: Task) => {
           this.task = task;
+          this.task.uploads = upl;
           this.taskUpdated.next(this.task);
           this.updating = false;
         },

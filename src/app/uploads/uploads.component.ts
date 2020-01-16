@@ -3,6 +3,7 @@ import { Upload } from '../models/upload.model';
 import { UploadsService } from '../services/uploads.service';
 import { Subscription } from 'rxjs';
 import { Project } from '../models/project.model';
+import { Task } from '../models/task.model';
 
 @Component({
   selector: 'app-uploads',
@@ -12,6 +13,7 @@ import { Project } from '../models/project.model';
 export class UploadsComponent implements OnInit, OnDestroy {
   public uploads: Upload[] = [];
   @Input() project: Project;
+  public tasks: Task[];
   public files: File[] = [];
   public failedUploads: File[] = [];
   public uploadingFiles: File[] = [];
@@ -22,7 +24,9 @@ export class UploadsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.project) {
-      this.getUploads();
+      this.uploads = this.project.uploads;
+      // this.getUploads();
+      this.tasks = this.project.tasks;
     }
 
   }

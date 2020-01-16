@@ -4,6 +4,7 @@ export class Upload {
 
     public id: number;
     public project_id: number;
+    public task_id: number;
     public created_at: string;
     public updated_at: string;
     public filename: string;

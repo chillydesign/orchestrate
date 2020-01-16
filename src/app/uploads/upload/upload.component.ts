@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angu
 import { Upload } from 'src/app/models/upload.model';
 import { Subscription } from 'rxjs';
 import { UploadsService } from 'src/app/services/uploads.service';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-upload',
@@ -10,7 +11,10 @@ import { UploadsService } from 'src/app/services/uploads.service';
 })
 export class UploadComponent implements OnInit, OnDestroy {
   @Input() upload: Upload;
+  @Input() tasks: Task[];
+  public updating = false;
   @Output() uploadDeleted: EventEmitter<Upload | null | undefined> = new EventEmitter(undefined);
+  private update_upload_sub: Subscription;
   private delete_upload_sub: Subscription;
   constructor(private uploadsService: UploadsService) { }
 
@@ -32,11 +36,32 @@ export class UploadComponent implements OnInit, OnDestroy {
     }
   }
 
+  taskChanged(): void {
+    this.onSubmit();
+  }
+
+  onSubmit(): void {
+    // dont do an update til the last update has finished
+    if (this.updating === false) {
+      this.updating = true;
+      this.update_upload_sub = this.uploadsService.updateUpload(this.upload).subscribe(
+        (upload: Upload) => {
+          this.upload = upload;
+          this.updating = false;
+        },
+        (error) => {
+
+        }
+      );
+    }
+  }
+
 
 
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.delete_upload_sub,
+      this.update_upload_sub,
     ];
     subs.forEach((sub) => {
       if (sub) {

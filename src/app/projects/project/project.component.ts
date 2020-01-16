@@ -70,6 +70,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
           this.project = project;
           this.titleService.setTitle(`${this.project.name} | ${this.title} `);
           this.setupDragSubscription();
+          this.processTasks();
         }
       }
     );
@@ -121,6 +122,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   setPercentage(): void {
     this.project.setTasksCount();
+  }
+
+
+  processTasks(): void {
+    const ups = this.project.uploads;
+    this.project.tasks.forEach(task => {
+      task.uploads = ups.filter(u => u.task_id === task.id);
+    });
+
   }
 
   setupDragSubscription(): void {

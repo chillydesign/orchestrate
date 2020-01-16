@@ -1,3 +1,4 @@
+import { Upload } from './upload.model';
 
 export class Task {
 
@@ -16,12 +17,17 @@ export class Task {
     public priority_class: string;
     public created_at_date: Date;
 
+    public uploads: Upload[];
+
     is_url(): boolean {
 
         const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
         return regexp.test(this.content);
 
     }
+
+
+
 
     constructor(obj?: any) {
 
