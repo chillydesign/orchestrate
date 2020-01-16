@@ -24,6 +24,7 @@ import { UploadsComponent } from './uploads/uploads.component';
 import { UploadComponent } from './uploads/upload/upload.component';
 import { TranslatePipe } from './pipes/translate.pipe';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { NewUploadComponent } from './uploads/new-upload/new-upload.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
     UploadsComponent,
     UploadComponent,
     TranslatePipe,
-    SpinnerComponent
+    SpinnerComponent,
+    NewUploadComponent
   ],
   imports: [
     BrowserModule,

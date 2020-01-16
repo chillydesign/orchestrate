@@ -13,6 +13,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   @Input() upload: Upload;
   @Input() tasks: Task[];
   public updating = false;
+  public showSelect = false;
   @Output() uploadDeleted: EventEmitter<Upload | null | undefined> = new EventEmitter(undefined);
   private update_upload_sub: Subscription;
   private delete_upload_sub: Subscription;
@@ -56,6 +57,10 @@ export class UploadComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  toggleShowSelect(): void {
+    this.showSelect = !this.showSelect;
+  }
 
 
   ngOnDestroy() {

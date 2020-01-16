@@ -35,6 +35,7 @@ export class UploadsService {
         file_contents: upload.file_contents,
         filename: upload.filename,
         project_id: upload.project_id,
+        task_id: upload.task_id,
       }
 
     };

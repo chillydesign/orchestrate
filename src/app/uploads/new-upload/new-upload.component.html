@@ -1,0 +1,12 @@
+<ngx-dropzone [maxFileSize]="maxFileSize" (change)="onSelect($event)">
+    <ngx-dropzone-label>{{'Drop it, baby!' | translate}}</ngx-dropzone-label>
+    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }}) <br> Loading ... </ngx-dropzone-label>
+
+    </ngx-dropzone-preview>
+</ngx-dropzone>
+
+
+<div class="alert alert_danger" *ngFor="let failedUpload of failedUploads">
+    {{failedUpload.name }} did not upload because of its {{failedUpload.reason}}.
+</div>

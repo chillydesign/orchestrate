@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { Task } from '../../models/task.model';
 import { Subscription } from 'rxjs';
 import { TasksService } from 'src/app/services/tasks.service';
+import { Project } from 'src/app/models/project.model';
+import { Upload } from 'src/app/models/upload.model';
 
 @Component({
   selector: 'app-task',
@@ -10,10 +12,12 @@ import { TasksService } from 'src/app/services/tasks.service';
 })
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
+  @Input() project: Project;
   @Input() canAdministrate = false;
   @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  public showUpload = false;
   public updating = false;
   private update_task_sub: Subscription;
   private delete_task_sub: Subscription;
@@ -98,6 +102,18 @@ export class TaskComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+
+  toggleUpload(): void {
+    this.showUpload = !this.showUpload;
+  }
+
+
+  createdUpload(newupload: Upload): void {
+    this.task.uploads.push(newupload);
+    this.showUpload = false;
+  }
+
 
   ngOnDestroy() {
     const subs: Subscription[] = [

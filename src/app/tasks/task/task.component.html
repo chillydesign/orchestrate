@@ -19,10 +19,16 @@
         </p>
     </div>
     <div class="actions_container" *ngIf="canDelete">
-        <a (click)="togglePriority()" class="icon icon_priority">Priority</a>
-        <a (click)="toggleIndentation()" class="icon icon_indent">Indent</a>
-        <a (click)="deleteTask()" class="icon icon_delete">Delete</a>
+
+        <a (click)="toggleUpload()" title="Upload" class="icon icon_upload">Upload</a>
+        <a (click)="togglePriority()" title="Priority" class="icon icon_priority">Priority</a>
+        <a (click)="toggleIndentation()" title="Make subtask" class="icon icon_indent">Indent</a>
+        <a (click)="deleteTask()" title="Delete" class="icon icon_delete">Delete</a>
     </div>
 
 
+
+</div>
+<div class="task_upload" *ngIf="showUpload">
+    <app-new-upload [project]="project" [task]="task" (uploadCreated)="createdUpload($event)"></app-new-upload>
 </div>
