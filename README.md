@@ -1,10 +1,15 @@
 # Orchestrate
 
-To build use
+## To build for orchestrate use
 
-`ng build --prod --base-href=/orchestrate/`
+ng build --prod --base-href=/orchestrate/
 
 
-To build for cpmdtdev use
+## To build for cpmdtdev use
 
-`ng build --prod --base-href=/cpmdtdev/ --configuration cpmdt`
+ng build --prod --base-href=/cpmdtdev/ --configuration cpmdt
+
+
+## To build for saviodev use
+
+ng build --prod --base-href=/saviodev/ --configuration savio

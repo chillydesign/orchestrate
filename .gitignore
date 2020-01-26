@@ -3,6 +3,7 @@
 # compiled output
 /_prod
 /_cpmdtdev
+/_saviodev
 /dist
 /tmp
 /out-tsc
