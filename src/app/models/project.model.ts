@@ -67,8 +67,6 @@ export class Project {
             }
             if (obj.uploads) {
                 this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
-            } else {
-                this.uploads = [];
             }
 
             this.setPercentage();
