@@ -21,7 +21,7 @@
         </div>
 
 
-        <h2> <a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+        <h2> <a [routerLink]="project.url">{{project.name}}</a></h2>
 
 
         <ul>
@@ -45,3 +45,5 @@
     </p>
 </app-box>
 <app-spinner [show]="loading"></app-spinner>
+
+<p style="position:relative"><a [ngClass]="{active: isAdmin}" class="load_translate" (click)="setAsAdmin()">T</a> </p>

@@ -426,3 +426,26 @@ h1 {
     }
 
 }
+
+
+
+a.load_translate {
+    opacity: 0.3;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: $dark_grey;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    text-align: center;
+
+    &.active {
+        background-color: $green;
+        color: white;
+
+    }
+}

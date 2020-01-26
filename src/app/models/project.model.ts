@@ -14,6 +14,7 @@ export class Project {
     public uploads: Upload[];
     public tasks_count: { complete: number, incomplete: number, total: number };
     public percentage = 0;
+    public url: string[];
 
 
 
@@ -47,8 +48,18 @@ export class Project {
             this.percentage = (num / den * 100);
         }
 
+
     }
 
+
+    public setUrl(options: { isAdmin: boolean }): void {
+        const u = [`projects`, this.id.toString()];
+
+        if (options.isAdmin) {
+            u.push('translate');
+        }
+        this.url = u;
+    }
 
 
 
@@ -70,6 +81,9 @@ export class Project {
             }
 
             this.setPercentage();
+
+
+            this.setUrl({ isAdmin: false });
 
 
         }

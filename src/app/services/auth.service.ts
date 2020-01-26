@@ -10,6 +10,7 @@ import { throwError } from 'rxjs';
 })
 export class AuthService {
   private api_url = environment.api_url;
+  public is_admin = false;
   constructor(private http: HttpClient, private router: Router) { }
 
 
@@ -24,7 +25,9 @@ export class AuthService {
     return httpOptions;
   }
 
-
+  public setAsAdmin(): void {
+    this.is_admin = true;
+  }
 
 
   public handleError(error: HttpErrorResponse) {
@@ -42,6 +45,7 @@ export class AuthService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
 
 
 

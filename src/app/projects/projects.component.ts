@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ProjectsService } from '../services/projects.service';
 import { Project } from '../models/project.model';
 import { Params, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-projects',
@@ -13,6 +14,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public projects: Project[];
   public visible_projects: Project[];
   public offset = 0;
+  public isAdmin = false;
   public limit = 5;
   public status = 'inactive';
   public load_more = false;
@@ -21,7 +23,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   private projects_sub: Subscription;
   private route_params_subscription: Subscription;
 
-  constructor(private projectsService: ProjectsService, private route: ActivatedRoute) { }
+  constructor(
+    private projectsService: ProjectsService,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.setStatus();
@@ -66,8 +72,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
             this.load_more = (projects.length === this.limit);
             this.loading = false;
             this.onSearch();
-
-            console.log(this.projects);
+            this.setProjectUrls();
           }
         }
       );
@@ -91,6 +96,19 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.getProjects();
   }
 
+
+  setProjectUrls(): void {
+    this.isAdmin = this.authService.is_admin;
+    this.projects.forEach(p => p.setUrl({ isAdmin: this.isAdmin }));
+  }
+
+
+
+  setAsAdmin(): void {
+    this.authService.setAsAdmin();
+
+    this.setProjectUrls();
+  }
 
 
   ngOnDestroy() {
