@@ -53,7 +53,7 @@ export class Project {
 
 
     public setUrl(options: { isAdmin: boolean }): void {
-        const u = [`projects`, this.id.toString()];
+        const u = [`/projects`, this.id.toString()];
 
         if (options.isAdmin) {
             u.push('translate');

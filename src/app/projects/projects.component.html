@@ -32,7 +32,8 @@
         </ul>
 
         <app-box-footer>
-            <p>Last updated: {{ project.updated_at | date}} </p>
+            <p>Last updated: {{ project.updated_at | date}} |
+                <a (click)="archiveProject(project)">{{'Archive' | translate}}</a> </p>
         </app-box-footer>
     </app-box>
 

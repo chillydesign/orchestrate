@@ -22,7 +22,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public search_term: string;
   private projects_sub: Subscription;
   private route_params_subscription: Subscription;
-
+  private update_project_sub: Subscription;
   constructor(
     private projectsService: ProjectsService,
     private authService: AuthService,
@@ -106,16 +106,28 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   setAsAdmin(): void {
     this.authService.setAsAdmin();
-
     this.setProjectUrls();
   }
 
+
+
+
+  archiveProject(project: Project): void {
+    if (project.status !== 'inactive') {
+      project.status = 'inactive';
+      this.update_project_sub = this.projectsService.updateProject(project).subscribe(
+        () => this.refreshProjects(),
+        (error) => console.log(error)
+      );
+    }
+  }
 
   ngOnDestroy() {
 
     const subs: Subscription[] = [
       this.projects_sub,
       this.route_params_subscription,
+      this.update_project_sub,
     ];
 
     subs.forEach((sub) => {
