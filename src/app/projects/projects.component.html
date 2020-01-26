@@ -24,16 +24,16 @@
         <h2> <a [routerLink]="project.url">{{project.name}}</a></h2>
 
 
-        <ul>
-            <li> <strong> {{ project.percentage}} %</strong> {{'complete' | translate}} </li>
-            <li> <strong> {{ project.tasks_count.incomplete}} </strong>{{'tasks to be done' | translate}}</li>
-            <li> <strong> {{ project.tasks_count.complete}}</strong> {{'tasks completed' | translate}} </li>
 
-        </ul>
+        <p class="no_padding"> <strong> {{ project.percentage}} %</strong> {{'complete' | translate}} |
+            <strong> {{ project.tasks_count.incomplete}} </strong>{{'tasks to be done' | translate}} |
+            <strong> {{ project.tasks_count.complete}}</strong> {{'tasks completed' | translate}} </p>
+
 
         <app-box-footer>
             <p>Last updated: {{ project.updated_at | date}} |
-                <a (click)="archiveProject(project)">{{'Archive' | translate}}</a> </p>
+                <a (click)="archiveProject(project)">{{'Archive' | translate}}</a>
+            </p>
         </app-box-footer>
     </app-box>
 
