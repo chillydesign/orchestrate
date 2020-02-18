@@ -25,8 +25,22 @@ export class AuthService {
     return httpOptions;
   }
 
-  public setAsAdmin(): void {
-    this.is_admin = true;
+  public toggleAsAdmin(): void {
+    this.is_admin = !this.is_admin;
+    if (this.is_admin) {
+      localStorage.setItem('orch_is_admin', '1');
+    } else {
+      localStorage.removeItem('orch_is_admin');
+    }
+  }
+
+  public checkIsAdmin(): void {
+    const oia = localStorage.getItem('orch_is_admin');
+    if (oia === '1') {
+      this.is_admin = true;
+    } else {
+      this.is_admin = false;
+    }
   }
 
 

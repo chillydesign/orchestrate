@@ -30,6 +30,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.authService.checkIsAdmin();
     this.setStatus();
   }
 
@@ -105,7 +106,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
 
   setAsAdmin(): void {
-    this.authService.setAsAdmin();
+    this.authService.toggleAsAdmin();
     this.setProjectUrls();
   }
 
