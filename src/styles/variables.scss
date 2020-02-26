@@ -1,5 +1,5 @@
 $brand_color: #3369ff;
-$brand_color_adjust: adjust-hue($brand_color, -17 );
+$brand_color_adjust: adjust-hue($brand_color, -17);
 $red: #ca385e;
 $green: #38ca5e;
 
@@ -11,10 +11,20 @@ $dark_grey: #282828;
 $font_color: $dark_grey;
 $lighter_font_color: #888;
 
-$brand_gradient:  linear-gradient(70deg, $brand_color,  $brand_color_adjust);
+$brand_gradient: linear-gradient(70deg, $brand_color, $brand_color_adjust);
 
 
-$font_stack: 'Work Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font_stack: 'Work Sans',
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Roboto,
+Helvetica,
+Arial,
+sans-serif,
+"Apple Color Emoji",
+"Segoe UI Emoji",
+"Segoe UI Symbol";
 $font_size: 1.5em;
 $line_height: 145%;
 
@@ -25,7 +35,8 @@ $double_padding: #{$padding * 2};
 $half_padding: #{$padding * 0.5};
 
 $border_radius: 6px;
-$box_shadow: 0 $half_padding $padding transparentize($dark_grey, 0.9), 0 2px 5px  transparentize($dark_grey, 0.85);
+$box_shadow: 0 $half_padding $padding transparentize($dark_grey, 0.9),
+0 2px 5px transparentize($dark_grey, 0.85);
 
 
 $aside_width: 220px;
@@ -37,3 +48,24 @@ $checkbox_size: 18px;
 
 
 $header_height: 50px;
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}

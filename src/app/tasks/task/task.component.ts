@@ -18,6 +18,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public showUpload = false;
+  public showTick = false;
   public updating = false;
   private update_task_sub: Subscription;
   private delete_task_sub: Subscription;
@@ -31,6 +32,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   onSubmit(): void {
+    this.showTick = false;
     // dont do an update til the last update has finished
     if (this.updating === false) {
       this.updating = true;
@@ -41,12 +43,21 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.task.uploads = upl;
           this.taskUpdated.next(this.task);
           this.updating = false;
+          this.showTickIcon();
         },
         (error) => {
 
         }
       );
     }
+  }
+
+
+  showTickIcon(): void {
+    this.showTick = true;
+    setTimeout(() => {
+      this.showTick = false;
+    }, 2000);
   }
 
   toggleCompleted(): void {

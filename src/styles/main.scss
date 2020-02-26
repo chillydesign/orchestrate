@@ -201,6 +201,17 @@ main {
                 opacity: 0.8;
             }
         }
+
+        .icon_tick {
+            position: absolute;
+            float: right;
+            right: 10px;
+            top: 11px;
+            opacity: 1;
+            animation: fadeOut 2s forwards;
+            animation-delay: 1s;
+        }
+
     }
 
     p.task_added {
@@ -241,6 +252,8 @@ main {
             margin-left: 5px;
         }
     }
+
+
 
 }
 
@@ -331,6 +344,14 @@ main {
         background-color: $font_color;
         background-size: 18px;
         background-position: center bottom;
+    }
+
+    &.icon_tick {
+        background-image: url("assets/images/tick.svg");
+        background-color: $green;
+        background-size: 9px;
+        width: 15px;
+        height: 15px;
     }
 
     &:hover {
