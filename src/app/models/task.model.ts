@@ -16,6 +16,8 @@ export class Task {
     public indentation_class: string;
     public priority_class: string;
     public created_at_date: Date;
+    public completed_at: string;
+    public completed_at_date: Date;
 
     public uploads: Upload[];
 
@@ -34,6 +36,11 @@ export class Task {
         if (obj) {
             Object.assign(this, obj);
             this.created_at_date = new Date(this.created_at);
+
+            if (this.completed_at) {
+                this.completed_at_date = new Date(this.completed_at);
+            }
+
             this.indentation_class = `indentation_${this.indentation}`;
             this.priority_class = `priority_${this.priority}`;
         }

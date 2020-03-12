@@ -14,7 +14,11 @@
                 (blur)="updateTranslation($event)" [textContent]="task.translation"> </div>
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
-        <p *ngIf="canAdministrate" class="task_added">Added: {{task.created_at_date | date }}</p>
+        <p *ngIf="canAdministrate" class="task_added">
+            Added: {{task.created_at_date | date }}
+            <span *ngIf="task.completed_at_date"> | Completed: {{task.completed_at_date | date}}</span>
+
+        </p>
         <p class="task_uploads_container" *ngIf="task.uploads">
             <a *ngFor="let upload of task.uploads" target="_blank" href="{{upload.full_url}}"> {{upload.filename}}</a>
         </p>

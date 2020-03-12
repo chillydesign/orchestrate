@@ -43,6 +43,7 @@ export class TasksService {
         ordering: task.ordering,
         indentation: task.indentation,
         priority: task.priority,
+        completed_at: task.completed_at
       }
 
     };
