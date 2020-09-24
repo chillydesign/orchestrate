@@ -16,6 +16,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ProjectComponent implements OnInit, OnDestroy {
   public project: Project;
+  public taskForComments: Task;
   private route_params_subscription: Subscription;
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
@@ -118,6 +119,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
   removeOldTask(task: Task): void {
     this.project.tasks = this.project.tasks.filter(t => t.id !== task.id);
     this.setPercentage();
+  }
+
+
+  showComments(task: Task): void {
+    if (task) {
+      this.taskForComments = task;
+    }
+  }
+
+  hideComments(hide: boolean): void {
+
+    this.taskForComments = null;
   }
 
   setPercentage(): void {

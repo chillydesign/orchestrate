@@ -13,7 +13,8 @@
         <ul dragula="TASKS" [(dragulaModel)]="project.tasks" (dragulaModelChange)="project.tasks = $event">
             <li class="orderable" *ngFor="let task of project.tasks">
                 <app-task [task]="task" [project]="project" [canAdministrate]="canAdministrate"
-                    (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)">
+                    (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)"
+                    (showTaskComments)="showComments(task)">
                 </app-task>
                 <div class="handle">Handle</div>
             </li>
@@ -48,6 +49,10 @@
 
 
     <app-uploads [project]="project"></app-uploads>
+
+
+    <app-comments *ngIf="taskForComments" [task]="taskForComments" (hideTaskComments)="hideComments($event)">
+    </app-comments>
 
 
 </ng-container>

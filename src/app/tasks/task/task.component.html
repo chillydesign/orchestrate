@@ -26,6 +26,7 @@
     </div>
     <div class="actions_container" *ngIf="canDelete">
 
+        <a (click)="showComments()" title="Comment" class="icon icon_comment">Comment</a>
         <a (click)="toggleUpload()" title="Upload" class="icon icon_upload">Upload</a>
         <a (click)="togglePriority()" title="Priority" class="icon icon_priority">Priority</a>
         <a (click)="toggleIndentation()" title="Make subtask" class="icon icon_indent">Indent</a>

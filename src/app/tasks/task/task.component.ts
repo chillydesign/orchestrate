@@ -17,6 +17,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public showUpload = false;
   public showTick = false;
   public updating = false;
@@ -65,6 +66,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.onSubmit();
 
   }
+
+
 
 
 
@@ -119,6 +122,9 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.showUpload = !this.showUpload;
   }
 
+  showComments(): void {
+    this.showTaskComments.next(this.task);
+  }
 
   createdUpload(newupload: Upload): void {
     this.task.uploads.push(newupload);

@@ -222,8 +222,8 @@ main {
     }
 
     .actions_container {
-        min-width: 125px;
-        max-width: 125px;
+        min-width: 155px;
+        max-width: 155px;
     }
 
     .task_input,
@@ -322,6 +322,10 @@ main {
     transition: all 0.3s;
     margin: 0 1px 0 0;
 
+
+    &.icon_comment {
+        background-image: url("../assets/images/comment.svg");
+    }
 
     &.icon_delete {
         background-image: url("../assets/images/delete.svg");
@@ -468,5 +472,76 @@ a.load_translate {
         background-color: $green;
         color: white;
 
+    }
+}
+
+
+.close_lightbox {
+    text-indent: -9999px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: $red;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+
+    &:after {
+        content: 'x';
+        color: white;
+        text-align: center;
+        line-height: 20px;
+        font-weight: bold;
+        text-indent: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+.lightbox_outer {
+    box-shadow: 0 0 0 10000px transparentize(black, 0.5);
+    position: relative;
+    z-index: 1000;
+
+}
+
+.lightbox_inner {
+    position: relative;
+    background: white;
+    padding: $padding;
+    border-radius: $border_radius;
+    box-shadow: $box_shadow;
+    position: absolute;
+    top: 30px;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    position: fixed;
+    z-index: 100;
+}
+
+.comments_container {
+    .comment_container {
+        margin: 0 0 40px;
+
+        position: relative;
+
+
+        blockquote {
+            font-size: $font_size;
+            padding: 0 0 6px;
+        }
+
+        .date {
+            color: $medium_grey;
+            font-size: #{$font_size * 0.8};
+
+        }
+    }
+
+    .task_container {
+        font-size: $font_size;
     }
 }
