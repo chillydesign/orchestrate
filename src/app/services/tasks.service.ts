@@ -20,7 +20,8 @@ export class TasksService {
         content: task.content,
         translation: task.translation,
         project_id: task.project_id,
-        ordering: task.ordering
+        ordering: task.ordering,
+        time_taken: task.time_taken,
       }
     };
     const endpoint = `${this.api_url}/?route=tasks`;
@@ -43,7 +44,8 @@ export class TasksService {
         ordering: task.ordering,
         indentation: task.indentation,
         priority: task.priority,
-        completed_at: task.completed_at
+        completed_at: task.completed_at,
+        time_taken: task.time_taken,
       }
 
     };
@@ -63,6 +65,37 @@ export class TasksService {
       // ,
       // tap(() => console.log('deleted task'))
     );
+  }
+
+
+  timeOptions(): { amount: number, translation: string }[] {
+
+    const options = [{ amount: 0, translation: `-` }];
+
+    let amount = 15;
+    while (amount <= 720) {
+
+      const mins: number = amount % 60;
+      const hours: number = (amount - mins) / 60;
+      const translationArray = [];
+      if (hours > 0) {
+        translationArray.push(`${hours}hr`);
+      }
+      if (mins > 0) {
+        translationArray.push(`${mins}m`);
+      };
+      const translation = translationArray.join(' ');
+      options.push({ amount, translation });
+
+      if (hours < 3) {
+        amount += 15;
+      } else {
+        amount += 60;
+      }
+    }
+
+    return options;
+
   }
 
 

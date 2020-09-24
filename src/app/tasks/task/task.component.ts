@@ -23,8 +23,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   public updating = false;
   private update_task_sub: Subscription;
   private delete_task_sub: Subscription;
-
-
+  public time_options: { amount: number, translation: string }[] = this.tasksService.timeOptions();
   constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
@@ -73,6 +72,10 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   updateContent(event) {
     this.task.content = event.target.textContent;
+    this.onSubmit();
+  }
+  updateTimeTaken(event) {
+    this.task.time_taken = event.target.textContent;
     this.onSubmit();
   }
 
