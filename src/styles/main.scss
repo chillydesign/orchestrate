@@ -324,7 +324,46 @@ main {
 
 
     &.icon_comment {
-        background-image: url("../assets/images/comment.svg");
+        // background-image: url("../assets/images/comment.svg");
+        background-color: $dark_grey;
+        border-radius: 5px;
+        position: relative;
+        height: 17px;
+        width: 19px;
+        top: 4px;
+        color: white;
+        text-indent: 0;
+        font-weight: bold;
+        text-align: center;
+        font-size: 12px;
+        line-height: 17px;
+
+        &:hover {
+            background-color: $dark_grey;
+        }
+
+        &.has_comments {
+            background-color: $brand_color;
+
+            &:after {
+                border-color: $brand_color;
+                border-bottom-color: transparent;
+                border-right-color: transparent;
+            }
+        }
+
+
+        &:after {
+            content: '';
+            border: 5px solid $dark_grey;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+            position: absolute;
+            top: 14px;
+            left: 5px;
+            z-index: -1;
+
+        }
     }
 
     &.icon_delete {
