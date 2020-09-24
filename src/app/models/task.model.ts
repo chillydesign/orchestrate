@@ -18,6 +18,7 @@ export class Task {
     public created_at_date: Date;
     public completed_at: string;
     public completed_at_date: Date;
+    public comments_count: number;
 
     public uploads: Upload[];
 
