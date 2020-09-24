@@ -18,18 +18,18 @@
        id="g10"
        transform="matrix(0.26458333,0,0,0.26458333,-261.45936,-212.63853)">
       <path
-         style="fill:#CA385E"
+         style="fill:#222222"
          id="path2"
          d="M 65.1,17.8 V 6.5 H 35.8 V 17.8 H 11.4 v 6.1 h 7.3 l 5.2,67.7 h 53.3 l 5.2,-67.7 h 8.3 v -6.1 z m -6,-5.3 v 5.2 H 41.9 V 12.5 Z M 29.4,85.4 24.7,23.8 h 51.5 l -4.8,61.6 z" />
       <rect
-         style="fill:#CA385E"
+         style="fill:#222222"
          id="rect4"
          height="44.299999"
          width="6.0999999"
          y="32.599998"
          x="47.400002" />
       <rect
-         style="fill:#CA385E"
+         style="fill:#222222"
          id="rect6"
          height="44.400002"
          width="6.0999999"
@@ -37,7 +37,7 @@
          y="32.5"
          x="59.799999" />
       <rect
-         style="fill:#CA385E"
+         style="fill:#222222"
          id="rect8"
          height="6.0999999"
          width="44.400002"
