@@ -70,7 +70,11 @@ export class TasksService {
 
   timeOptions(): { amount: number, translation: string }[] {
 
-    const options = [{ amount: 0, translation: `-` }];
+    const options = [
+      { amount: 0, translation: `-` },
+      { amount: 5, translation: `5m` },
+      { amount: 10, translation: `10m` },
+    ];
 
     let amount = 15;
     while (amount <= 720) {
