@@ -1,6 +1,6 @@
 <app-spinner [show]="!project"></app-spinner>
 <ng-container *ngIf="project">
-    <h1>{{project.name}}</h1>
+    <h1>{{project.name}} <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a></h1>
     <app-box>
 
 

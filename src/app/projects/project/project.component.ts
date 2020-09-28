@@ -15,6 +15,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit, OnDestroy {
+  public project_id: number;
   public project: Project;
   public taskForComments: Task;
   private route_params_subscription: Subscription;
@@ -48,7 +49,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
     this.route_params_subscription = this.route.params.subscribe(
       (params: Params) => {
-        this.getProject(params.id);
+        if (params.id) {
+          this.project_id = params.id;
+          this.getProject();
+        }
+
       }
     ); // end of route_params_subscription
 
@@ -64,8 +69,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   }
 
-  getProject(project_id: number): void {
-    this.project_sub = this.projectsService.getProject(project_id).subscribe(
+  getProject(): void {
+    this.project_sub = this.projectsService.getProject(this.project_id).subscribe(
       (project: Project) => {
         if (project) {
           this.project = project;
@@ -163,6 +168,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+
+  refreshProject(): void {
+    this.project = null;
+    this.getProject();
+  }
+
+
 
   ngOnDestroy() {
 
