@@ -23,7 +23,7 @@
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
         <p *ngIf="canAdministrate" class="task_added">
-            Added: {{task.created_at_date | date }}
+            {{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}
             <span *ngIf="task.completed_at_date"> | Completed: {{task.completed_at_date | date}}</span>
 
         </p>

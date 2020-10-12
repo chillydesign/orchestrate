@@ -20,9 +20,10 @@ export const LANG_FR_TRANS = {
     Active: `Actif`,
     Inactive: `Inactif`,
     project: `projet`,
-    Uploads: `Uploads`,
+    Uploads: `Téléchargements`,
     'add task here': `Ajouter une tâche`,
     'Drop it, baby!': `Tirer un fichier ici`,
     'Load more': `Charger plus`,
+    Added: 'Ajouté le',
 
 };
