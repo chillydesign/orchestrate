@@ -20,6 +20,14 @@ main {
 // end of main
 
 
+.hide_on_mobile {
+
+    @media(max-width: $mobile_width) {
+        display: none !important;
+    }
+}
+
+
 
 .box {
     background-color: white;
@@ -80,9 +88,6 @@ main {
     margin: 0;
     padding: 0;
 
-    .actions_container {
-        padding: 0 0 0 $half_padding;
-    }
 
     .icon {
 
@@ -121,6 +126,8 @@ main {
 .task_container {
     margin: 0 0 $padding;
 
+
+
     &.completed {
         .content_container {
             opacity: 0.5;
@@ -144,6 +151,14 @@ main {
                     background-image: url("../assets/images/priority_white.svg")
                 }
             }
+        }
+    }
+
+    form {
+        margin-left: -5px;
+
+        @media(min-width: $mobile_width) {
+            margin-left: 0;
         }
     }
 
@@ -222,8 +237,19 @@ main {
     }
 
     .actions_container {
-        min-width: 155px;
-        max-width: 155px;
+
+
+        padding: 0 0 0 $half_padding;
+        min-width: 50px;
+        max-width: 50px;
+
+        @media(min-width: $mobile_width) {
+            min-width: 155px;
+            max-width: 155px;
+
+        }
+
+
     }
 
     .task_input,
@@ -235,6 +261,12 @@ main {
     .icon {
         position: relative;
         top: 6px;
+
+        margin: 5px 0 0 2px;
+
+        @media(min-width: $mobile_width) {
+            margin: 0;
+        }
     }
 
 
@@ -260,8 +292,16 @@ main {
 
 
         .task_input_time {
-            max-width: 100px;
-            width: 100px;
+            display: none;
+
+
+            @media(min-width: $mobile_width) {
+                max-width: 100px;
+                width: 100px;
+                display: block;
+            }
+
+
         }
     }
 
@@ -342,13 +382,17 @@ main {
         position: relative;
         height: 17px;
         width: 19px;
-        top: 4px;
+
         color: white;
         text-indent: 0;
         font-weight: bold;
         text-align: center;
         font-size: 12px;
         line-height: 17px;
+
+        @media(min-width: $mobile_width) {
+            top: 4px;
+        }
 
         &:hover {
             background-color: $dark_grey;

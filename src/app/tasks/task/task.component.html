@@ -36,9 +36,9 @@
 
         <a (click)="showComments()" title="Comments" class="icon icon_comment"
             [ngClass]="{has_comments: task.comments_count > 0}">{{task.comments_count}}</a>
-        <a (click)="toggleUpload()" title="Upload" class="icon icon_upload">Upload</a>
-        <a (click)="togglePriority()" title="Priority" class="icon icon_priority">Priority</a>
-        <a (click)="toggleIndentation()" title="Make subtask" class="icon icon_indent">Indent</a>
+        <a (click)="toggleUpload()" title="Upload" class="hide_on_mobile icon icon_upload">Upload</a>
+        <a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">Priority</a>
+        <a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">Indent</a>
         <a (click)="deleteTask()" title="Delete" class="icon icon_delete">Delete</a>
     </div>
 
