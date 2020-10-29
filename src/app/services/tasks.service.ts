@@ -71,12 +71,10 @@ export class TasksService {
   timeOptions(): { amount: number, translation: string }[] {
 
     const options = [
-      { amount: 0, translation: `-` },
-      { amount: 5, translation: `5m` },
-      { amount: 10, translation: `10m` },
+      { amount: 0, translation: `-` }
     ];
 
-    let amount = 15;
+    let amount = 5;
     while (amount <= 720) {
 
       const mins: number = amount % 60;
@@ -90,8 +88,9 @@ export class TasksService {
       };
       const translation = translationArray.join(' ');
       options.push({ amount, translation });
-
-      if (hours < 3) {
+      if (hours < 1) {
+        amount += 5;
+      } else if (hours < 3) {
         amount += 15;
       } else {
         amount += 60;
