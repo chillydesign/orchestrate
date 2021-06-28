@@ -13,8 +13,8 @@
             <div *ngIf="canAdministrate" class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
                 (blur)="updateTranslation($event)" [textContent]="task.translation"> </div>
 
-            <select [(ngModel)]="task.time_taken" name="time_taken" class="task_input task_input_time"
-                (change)="onSubmit()">
+            <select *ngIf="canAdministrate" [(ngModel)]="task.time_taken" name="time_taken"
+                class="task_input task_input_time" (change)="onSubmit()">
                 <option *ngFor="let time_option of time_options" [ngValue]="time_option.amount">
                     {{time_option.translation}}</option>
             </select>

@@ -8,6 +8,7 @@ import { Title } from '@angular/platform-browser';
 import { DragulaService } from 'ng2-dragula';
 import { TasksService } from 'src/app/services/tasks.service';
 import { environment } from '../../../environments/environment';
+import { CsvService } from 'src/app/services/csv.service';
 
 @Component({
   selector: 'app-project',
@@ -34,6 +35,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private tasksService: TasksService,
     private projectsService: ProjectsService,
     private dragulaService: DragulaService,
+    private csvService: CsvService,
     private router: Router) {
 
     // add a handle to the dragdrop
@@ -96,6 +98,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   }
 
+
+  exportProject(): void {
+    this.projectsService.getProjectCSV(this.project.id).subscribe(
+      (csv_file: string) => {
+        this.csvService.downloadCSVFromString(csv_file, `project_${this.project.id}`);
+      }
+    );
+  }
 
 
   archiveProject(): void {

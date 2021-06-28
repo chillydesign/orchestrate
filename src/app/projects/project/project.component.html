@@ -37,6 +37,8 @@
                 <a [routerLink]="['/projects', project.id,  'edit']">{{'Edit' | translate}}</a>
                 &nbsp;
                 <a (click)="deleteProject()">{{'Delete' | translate}}</a>
+                &nbsp;
+                <a *ngIf="canAdministrate" (click)="exportProject()">{{'Export' | translate}}</a>
             </p>
 
         </app-box-footer>

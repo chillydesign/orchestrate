@@ -38,6 +38,16 @@ export class ProjectsService {
     );
   }
 
+
+  getProjectCSV(project_id: number) {
+    const data = null;
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=projects&id=${project_id}&format=csv`;
+    return this.http.post(endpoint, data, options).pipe(
+      map((res: { csv: string }) => res.csv)
+    );
+  }
+
   addProject(project: Project): Observable<Project> {
     const options = this.authService.setAPIOptions();
     const data = {
