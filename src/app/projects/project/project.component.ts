@@ -9,6 +9,8 @@ import { DragulaService } from 'ng2-dragula';
 import { TasksService } from 'src/app/services/tasks.service';
 import { environment } from '../../../environments/environment';
 import { CsvService } from 'src/app/services/csv.service';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-project',
@@ -16,6 +18,7 @@ import { CsvService } from 'src/app/services/csv.service';
   styleUrls: ['./project.component.scss']
 })
 export class ProjectComponent implements OnInit, OnDestroy {
+  public current_user: User;
   public project_id: number;
   public project: Project;
   public taskForComments: Task;
@@ -24,16 +27,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private project_sub: Subscription;
   private drag_sub: Subscription;
   private update_project_sub: Subscription;
+  private current_user_subscription: Subscription;
   private url_sub: Subscription;
   private update_task_sub: Subscription;
   public title = environment.site_name;
-  public canAdministrate = false;
+
 
   constructor(
     private titleService: Title,
     private route: ActivatedRoute,
     private tasksService: TasksService,
     private projectsService: ProjectsService,
+    private authService: AuthService,
     private dragulaService: DragulaService,
     private csvService: CsvService,
     private router: Router) {
@@ -49,6 +54,20 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.getCurrentUser();
+  }
+
+
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
+        this.subscribeToRoute();
+      }
+    );
+  }
+
+  subscribeToRoute(): void {
     this.route_params_subscription = this.route.params.subscribe(
       (params: Params) => {
         if (params.id) {
@@ -59,17 +78,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
       }
     ); // end of route_params_subscription
 
-
-    // if url string contains translate or translation, allow tasks to be translated
-    this.url_sub = this.route.url.subscribe(
-      (segments: UrlSegment[]) => {
-        const sgs = segments.map(s => s.path);
-        this.canAdministrate = (sgs.includes('translate') || sgs.includes('translation') || sgs.includes('admin'));
-      }
-    );
-
-
   }
+
+
+
 
   getProject(): void {
     this.project_sub = this.projectsService.getProject(this.project_id).subscribe(
@@ -195,6 +207,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.delete_project_sub,
       this.drag_sub,
       this.update_project_sub,
+      this.current_user_subscription,
       this.update_task_sub,
       this.url_sub,
 

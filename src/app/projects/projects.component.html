@@ -21,18 +21,19 @@
         </div>
 
 
-        <h2> <a [routerLink]="project.url">{{project.name}}</a></h2>
+        <h2><a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
 
 
 
         <p class="no_padding"> <strong> {{ project.percentage}} %</strong> {{'complete' | translate}} |
             <strong> {{ project.tasks_count.incomplete}} </strong>{{'tasks to be done' | translate}} |
-            <strong> {{ project.tasks_count.complete}}</strong> {{'tasks completed' | translate}} </p>
+            <strong> {{ project.tasks_count.complete}}</strong> {{'tasks completed' | translate}}
+        </p>
 
 
         <app-box-footer>
-            <p>Last updated: {{ project.updated_at | date}} |
-                <a (click)="archiveProject(project)">{{'Archive' | translate}}</a>
+            <p>Last updated: {{ project.updated_at | date}}
+                <a *ngIf="current_user" (click)="archiveProject(project)">| {{'Archive' | translate}}</a>
             </p>
         </app-box-footer>
     </app-box>
@@ -46,5 +47,3 @@
     </p>
 </app-box>
 <app-spinner [show]="loading"></app-spinner>
-
-<p style="position:relative"><a [ngClass]="{active: isAdmin}" class="load_translate" (click)="setAsAdmin()">T</a> </p>

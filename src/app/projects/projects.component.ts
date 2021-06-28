@@ -4,6 +4,7 @@ import { ProjectsService } from '../services/projects.service';
 import { Project } from '../models/project.model';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-projects',
@@ -11,10 +12,10 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
+  public current_user: User;
   public projects: Project[];
   public visible_projects: Project[];
   public offset = 0;
-  public isAdmin = false;
   public limit = 20;
   public status = 'inactive';
   public load_more = false;
@@ -22,6 +23,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public search_term: string;
   private projects_sub: Subscription;
   private route_params_subscription: Subscription;
+  private current_user_subscription: Subscription;
   private update_project_sub: Subscription;
   constructor(
     private projectsService: ProjectsService,
@@ -30,10 +32,18 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.authService.checkIsAdmin();
-    this.setStatus();
+    this.getCurrentUser();
+
   }
 
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
+        this.setStatus();
+      }
+    );
+  }
 
   setStatus(): void {
     // allow user to get projects of a particular status, based on the url
@@ -73,7 +83,6 @@ export class ProjectsComponent implements OnInit, OnDestroy {
             this.load_more = (projects.length === this.limit);
             this.loading = false;
             this.onSearch();
-            this.setProjectUrls();
           }
         }
       );
@@ -98,17 +107,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
 
-  setProjectUrls(): void {
-    this.isAdmin = this.authService.is_admin;
-    this.projects.forEach(p => p.setUrl({ isAdmin: this.isAdmin }));
-  }
 
 
 
-  setAsAdmin(): void {
-    this.authService.toggleAsAdmin();
-    this.setProjectUrls();
-  }
+
 
 
 
@@ -127,6 +129,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
     const subs: Subscription[] = [
       this.projects_sub,
+      this.current_user_subscription,
       this.route_params_subscription,
       this.update_project_sub,
     ];
