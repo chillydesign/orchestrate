@@ -36,6 +36,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "dragula"
+            ],
             "outputPath": "dist/orchestrate",
             "index": "src/index.html",
             "main": "src/main.ts",
