@@ -28,19 +28,19 @@ export class AuthService {
     const options = this.setAPIOptionsNoLogin();
     const data = { email, password };
     const endpoint = `${this.api_url}/?route=user_token`;
-    return this.http.post<User>(endpoint, data, options).pipe(
-      map(
-        (response: User) => {
-          const token: string = response.user_token;
-          if (token) {
-            this.saveTokenAsCookie(token);
-            this.setCurrentUser();
-            this.logged_in = true;
-            return true;
-          } else {
-            return false;
-          }
+    return this.http.post<{ jwt: string }>(endpoint, data, options).pipe(
+      catchError(this.handleError),
+      map((response: { jwt: string }) => {
+        const token: string = response && response.jwt;
+        if (token) {
+          this.saveTokenAsCookie(token);
+          this.setCurrentUser();
+          this.logged_in = true;
+          return true;
+        } else {
+          return false;
         }
+      }
       )
     );
   }
