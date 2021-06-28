@@ -162,11 +162,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   setupDragSubscription(): void {
-    console.log(this.dragulaService);
     this.drag_sub = this.dragulaService.dropModel('TASKS').subscribe(({ sourceModel, targetModel, item }) => {
       const new_docsecs = targetModel;
       new_docsecs.forEach((new_task, i) => {
-        console.log(new_task, i);
         setTimeout(() => {
           const new_ordering = i + 1;
           const current_task = this.project.tasks.find((task) => task.id === new_task.id);

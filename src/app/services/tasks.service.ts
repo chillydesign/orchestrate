@@ -14,7 +14,7 @@ export class TasksService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   addTask(task: Task): Observable<Task> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const data = {
       attributes: {
         content: task.content,
@@ -34,7 +34,7 @@ export class TasksService {
 
 
   updateTask(task: Task): Observable<Task> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=tasks&id=${task.id}`;
     const data = {
       attributes: {
@@ -58,7 +58,7 @@ export class TasksService {
 
 
   deleteTask(task: Task): Observable<Task> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=tasks&id=${task.id}`;
     return this.http.delete<Task>(endpoint, options).pipe(
       catchError(this.authService.handleError)

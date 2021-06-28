@@ -59,16 +59,12 @@ export class NewProjectComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     const subs: Subscription[] = [
-
       this.add_project_sub,
-
     ];
-
     subs.forEach((sub) => {
       if (sub) {
         sub.unsubscribe();
       }
     });
-
   }
 }

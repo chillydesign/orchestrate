@@ -19,7 +19,7 @@ export class ProjectsService {
   getProjects(opts = { limit: 10, offset: 0, status: 'active' }): Observable<Project[]> {
 
 
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=projects&offset=${opts.offset}&limit=${opts.limit}&status=${opts.status}`;
 
     return this.http.get<Project[]>(endpoint, options).pipe(
@@ -30,7 +30,7 @@ export class ProjectsService {
   }
 
   getProject(project_id: number): Observable<Project> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=projects&id=${project_id}`;
     return this.http.get<Project>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -41,7 +41,7 @@ export class ProjectsService {
 
   getProjectCSV(project_id: number) {
     const data = null;
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=projects&id=${project_id}&format=csv`;
     return this.http.get<{ csv: string }>(endpoint, options).pipe(
       map((res: { csv: string }) => res.csv)
@@ -49,7 +49,7 @@ export class ProjectsService {
   }
 
   addProject(project: Project): Observable<Project> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const data = {
       attributes: {
         name: project.name
@@ -65,7 +65,7 @@ export class ProjectsService {
 
 
   updateProject(project: Project): Observable<Project> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=projects&id=${project.id}`;
     const data = {
       attributes: {
@@ -82,7 +82,7 @@ export class ProjectsService {
 
 
   deleteProject(project: Project): Observable<Project> {
-    const options = this.authService.setAPIOptions();
+    const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=projects&id=${project.id}`;
     return this.http.delete<Project>(endpoint, options).pipe(
       catchError(this.authService.handleError)

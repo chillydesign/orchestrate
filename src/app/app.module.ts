@@ -26,6 +26,7 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { NewUploadComponent } from './uploads/new-upload/new-upload.component';
 import { CommentsComponent } from './comments/comments.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CommentsComponent } from './comments/comments.component';
     TranslatePipe,
     SpinnerComponent,
     NewUploadComponent,
-    CommentsComponent
+    CommentsComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

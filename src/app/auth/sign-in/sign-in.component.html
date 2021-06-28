@@ -1,0 +1,23 @@
+<app-box>
+    <form (ngSubmit)="onSubmit()" novalidate>
+        <ul>
+            <app-form-field>
+                <label for="email">Email</label>
+                <input autocomplete="email" type="email" id="email" name="email" placeholder="email@address.com"
+                    [(ngModel)]="email" />
+            </app-form-field>
+            <app-form-field>
+                <label for="password">Mot de passe</label>
+                <input autocomplete="current-password" type="password" id="password" name="password"
+                    [(ngModel)]="password" />
+            </app-form-field>
+            <app-form-field [errors]="errors" [field]="'signin'">
+                <button>Connexion</button>
+            </app-form-field>
+        </ul>
+
+    </form>
+
+
+
+</app-box>

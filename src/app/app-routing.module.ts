@@ -5,6 +5,7 @@ import { NotFoundComponent } from './status-codes/not-found/not-found.component'
 import { ProjectComponent } from './projects/project/project.component';
 import { NewProjectComponent } from './projects/new-project/new-project.component';
 import { EditProjectComponent } from './projects/edit-project/edit-project.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'projects/:id/translation', component: ProjectComponent },
   { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
+  { path: 'sign_in', component: SignInComponent, data: { title: 'Sign in' } },
 
 
   { path: '401', component: NotFoundComponent, data: { title: 'Page not found' } },

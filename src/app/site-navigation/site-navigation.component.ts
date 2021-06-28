@@ -3,6 +3,8 @@ import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-site-navigation',
@@ -10,13 +12,29 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./site-navigation.component.scss']
 })
 export class SiteNavigationComponent implements OnInit, OnDestroy {
+  public current_user: User;
   public site_name = environment.site_name;
   public sidebarVisible = false;
   private router_events_subscription: Subscription;
-  constructor(private router: Router) { }
+  private current_user_subscription: Subscription;
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.hideSidebarOnPageChange();
+    this.getCurrentUser();
+
+  }
+
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
+      }
+    );
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
 
@@ -36,7 +54,8 @@ export class SiteNavigationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
     const subs: Subscription[] = [
-      this.router_events_subscription
+      this.current_user_subscription,
+      this.router_events_subscription,
     ];
 
     subs.forEach((sub) => {

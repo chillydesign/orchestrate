@@ -11,7 +11,9 @@ export const environment = {
   site_name: `Orchestrate`,
   api_url: 'http://localhost/orchestrate_api',
   front_url: 'http://localhost:1234/',
-  cookie_domain: 'localhost',
+  secure_cookie: false,
+  cookie_name: 'token_local_orch',
+  cookie_domains: ['localhost'],
   cookie_length_hours: 50,
   cache_duration: 60000, // time to hold resources from API in cache in milliseconds
   translations: LANG_FR_TRANS
