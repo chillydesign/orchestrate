@@ -43,7 +43,7 @@ export class ProjectsService {
     const data = null;
     const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=projects&id=${project_id}&format=csv`;
-    return this.http.post(endpoint, data, options).pipe(
+    return this.http.get<{ csv: string }>(endpoint, options).pipe(
       map((res: { csv: string }) => res.csv)
     );
   }
