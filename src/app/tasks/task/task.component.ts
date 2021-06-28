@@ -97,7 +97,19 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   toggleIndentation(): void {
     // 1 0    // 0 1
-    this.task.indentation = (this.task.indentation + 1) % 2;
+    // this.task.indentation = (this.task.indentation + 1) % 2;
+
+    if (this.task.is_title) {
+      this.task.is_title = false;
+      this.task.indentation = 0;
+    } else if (this.task.indentation === 0) {
+      this.task.indentation = 1;
+      this.task.is_title = false;
+    } else if (this.task.indentation === 1) {
+      this.task.is_title = true;
+      this.task.indentation = 0;
+    }
+
     this.onSubmit();
   }
 

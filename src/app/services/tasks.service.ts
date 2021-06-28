@@ -46,6 +46,8 @@ export class TasksService {
         priority: task.priority,
         completed_at: task.completed_at,
         time_taken: task.time_taken,
+        is_title: task.is_title,
+        is_current: task.is_current,
       }
 
     };

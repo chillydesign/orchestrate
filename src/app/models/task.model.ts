@@ -13,13 +13,13 @@ export class Task {
     public ordering: number;
     public priority = 0;
     public indentation = 0;
-    public indentation_class: string;
-    public priority_class: string;
     public created_at_date: Date;
     public completed_at: string;
     public completed_at_date: Date;
     public comments_count: number;
     public time_taken: number;
+    public is_title: boolean;
+    public is_current: boolean;
 
     public uploads: Upload[];
 
@@ -43,8 +43,6 @@ export class Task {
                 this.completed_at_date = new Date(this.completed_at);
             }
 
-            this.indentation_class = `indentation_${this.indentation}`;
-            this.priority_class = `priority_${this.priority}`;
         }
 
     }

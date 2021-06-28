@@ -1,5 +1,5 @@
-<div class="row_container task_container {{task.priority_class}} {{task.indentation_class}}"
-    [ngClass]="{completed: task.completed  }">
+<div class="row_container task_container priority_{{task.priority}} indentation_{{task.indentation}}"
+    [ngClass]="{completed: task.completed, is_title: task.is_title  }">
     <div class="completed_container">
         <input [disabled]="updating" (click)="toggleCompleted()" type="checkbox" name="completed"
             [(ngModel)]="task.completed">

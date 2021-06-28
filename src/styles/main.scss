@@ -134,6 +134,23 @@ main {
         }
     }
 
+    &.is_title {
+
+        margin: 0;
+
+        .completed_container,
+        .inputs_container .task_input_time,
+        .task_added {
+            display: none;
+        }
+
+        .task_input {
+            border: 0;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+    }
+
     &.indentation_1 {
         margin-left: 30px;
     }
