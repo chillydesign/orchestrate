@@ -30,6 +30,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ClientsComponent } from './clients/clients.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { ClientComponent } from './clients/client/client.component';
+import { ProjectSummaryComponent } from './projects/project-summary/project-summary.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ClientComponent } from './clients/client/client.component';
     SignInComponent,
     ClientsComponent,
     StartPageComponent,
-    ClientComponent
+    ClientComponent,
+    ProjectSummaryComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,13 @@ import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 
 
+export interface ProjectsOptions {
+  limit?: number;
+  offset?: number;
+  status?: string;
+  client_id?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,11 +23,27 @@ export class ProjectsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
-  getProjects(opts = { limit: 10, offset: 0, status: 'active' }): Observable<Project[]> {
+  getProjects(opts?: ProjectsOptions): Observable<Project[]> {
 
 
     const options = this.authService.setAPIOptionsNoLogin();
-    const endpoint = `${this.api_url}/?route=projects&offset=${opts.offset}&limit=${opts.limit}&status=${opts.status}`;
+    let endpoint = `${this.api_url}/?route=projects`;
+
+    if (opts) {
+      if (opts.limit) {
+        endpoint = endpoint.concat(`&limit=${opts.limit}`);
+      }
+      if (opts.offset) {
+        endpoint = endpoint.concat(`&offset=${opts.offset}`);
+      }
+      if (opts.status) {
+        endpoint = endpoint.concat(`&status=${opts.status}`);
+      }
+      if (opts.client_id) {
+        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+    }
+
 
     return this.http.get<Project[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),

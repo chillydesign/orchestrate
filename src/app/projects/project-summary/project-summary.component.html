@@ -1,0 +1,22 @@
+<app-box [styleclass]="project.status">
+
+    <div class="progression_outer">
+        <div class="progression_inner" [style.width.%]="project.percentage"></div>
+    </div>
+
+
+    <h2><a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+
+
+
+    <p class="no_padding">
+        <strong> {{ project.percentage}} %</strong> {{'complete' | translate}} |
+        <strong> {{ project.tasks_count.incomplete}} </strong>{{'tasks to be done' | translate}} |
+        <strong> {{ project.tasks_count.complete}}</strong> {{'tasks completed' | translate}}
+    </p>
+
+    <app-box-footer>
+        <p>Last updated: {{ project.updated_at | date}} </p>
+        <p *ngIf="project.client"> <a [routerLink]="['/clients', project.client_id]">{{project.client.name}}</a></p>
+    </app-box-footer>
+</app-box>

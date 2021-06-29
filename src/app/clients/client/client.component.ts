@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
+import { Project } from 'src/app/models/project.model';
 import { ClientsService } from 'src/app/services/clients.service';
+import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.service';
 
 @Component({
   selector: 'app-client',
@@ -12,9 +14,14 @@ import { ClientsService } from 'src/app/services/clients.service';
 export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
   public client_id: number;
+  public projects: Project[];
   private client_sub: Subscription;
+  private projects_sub: Subscription;
   private route_params_subscription: Subscription;
-  constructor(private clientsService: ClientsService, private route: ActivatedRoute) { }
+  constructor(
+    private clientsService: ClientsService,
+    private projectsService: ProjectsService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -41,7 +48,19 @@ export class ClientComponent implements OnInit, OnDestroy {
       (client: Client) => {
         if (client) {
           this.client = client;
+          this.getProjects();
 
+        }
+      }
+    );
+  }
+
+  getProjects(): void {
+    const options: ProjectsOptions = { client_id: this.client.id };
+    this.projects_sub = this.projectsService.getProjects(options).subscribe(
+      (projects: Project[]) => {
+        if (projects) {
+          this.projects = projects;
         }
       }
     );
@@ -51,6 +70,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.client_sub,
+      this.projects_sub,
       this.route_params_subscription,
 
     ];

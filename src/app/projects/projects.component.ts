@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ProjectsService } from '../services/projects.service';
+import { ProjectsOptions, ProjectsService } from '../services/projects.service';
 import { Project } from '../models/project.model';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -16,7 +16,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public projects: Project[];
   public visible_projects: Project[];
   public offset = 0;
-  public limit = 20;
+  public limit = 2;
   public status = 'inactive';
   public load_more = false;
   public loading = false;
@@ -24,7 +24,6 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   private projects_sub: Subscription;
   private route_params_subscription: Subscription;
   private current_user_subscription: Subscription;
-  private update_project_sub: Subscription;
   constructor(
     private projectsService: ProjectsService,
     private authService: AuthService,
@@ -74,7 +73,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
     if (this.loading === false) {
       this.loading = true;
-      const options = { offset: this.offset, limit: this.limit, status: this.status };
+      const options: ProjectsOptions = { offset: this.offset, limit: this.limit, status: this.status };
       this.projects_sub = this.projectsService.getProjects(options).subscribe(
         (projects: Project[]) => {
           if (projects) {
@@ -109,29 +108,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
 
 
-
-
-
-
-
-
-  archiveProject(project: Project): void {
-    if (project.status !== 'inactive') {
-      project.status = 'inactive';
-      this.update_project_sub = this.projectsService.updateProject(project).subscribe(
-        () => this.refreshProjects(),
-        (error) => console.log(error)
-      );
-    }
-  }
-
   ngOnDestroy() {
 
     const subs: Subscription[] = [
       this.projects_sub,
       this.current_user_subscription,
       this.route_params_subscription,
-      this.update_project_sub,
     ];
 
     subs.forEach((sub) => {

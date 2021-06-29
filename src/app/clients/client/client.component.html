@@ -1,15 +1,15 @@
 <app-spinner [show]="!client"></app-spinner>
 <ng-container *ngIf="client">
     <h1>{{client.name}}</h1>
-    <app-box *ngFor="let project of client.projects">
 
 
-        <h2><a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+    <app-project-summary *ngFor="let project of projects" [project]="project"></app-project-summary>
 
 
-
+    <app-box>
+        <p> <a class="button button_primary" [routerLink]="['/projects', 'new', 'clients', client.id]">{{'New Project' |
+                translate}}</a></p>
     </app-box>
-
 
 
 </ng-container>
