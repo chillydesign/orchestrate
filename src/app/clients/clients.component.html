@@ -1,0 +1,14 @@
+<h1>{{'Clients' | translate}}</h1>
+
+
+
+<ng-container *ngFor="let client of clients">
+    <app-box>
+
+
+        <h2><a [routerLink]="['/clients', client.id]">{{client.name}}</a></h2>
+
+
+    </app-box>
+
+</ng-container>

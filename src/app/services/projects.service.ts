@@ -52,7 +52,8 @@ export class ProjectsService {
     const options = this.authService.setAPIOptionsNoLogin();
     const data = {
       attributes: {
-        name: project.name
+        name: project.name,
+        client_id: project.client_id,
       }
 
     };
@@ -71,6 +72,7 @@ export class ProjectsService {
       attributes: {
         name: project.name,
         status: project.status,
+        client_id: project.client_id,
       }
 
     };

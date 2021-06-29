@@ -27,6 +27,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { NewUploadComponent } from './uploads/new-upload/new-upload.component';
 import { CommentsComponent } from './comments/comments.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { ClientsComponent } from './clients/clients.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
     SpinnerComponent,
     NewUploadComponent,
     CommentsComponent,
-    SignInComponent
+    SignInComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,

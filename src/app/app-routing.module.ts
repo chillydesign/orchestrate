@@ -6,6 +6,7 @@ import { ProjectComponent } from './projects/project/project.component';
 import { NewProjectComponent } from './projects/new-project/new-project.component';
 import { EditProjectComponent } from './projects/edit-project/edit-project.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { ClientsComponent } from './clients/clients.component';
 
 
 
@@ -20,6 +21,10 @@ const routes: Routes = [
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
   { path: 'sign_in', component: SignInComponent, data: { title: 'Sign in' } },
 
+
+  { path: 'clients/new', component: ClientsComponent, data: { title: 'New Client' } },
+  { path: 'clients/:id', component: ClientsComponent, data: { title: 'Client' } },
+  { path: 'clients', component: ClientsComponent, data: { title: 'Clients' } },
 
   { path: '401', component: NotFoundComponent, data: { title: 'Page not found' } },
   { path: '404', component: NotFoundComponent, data: { title: 'Page not found' } },

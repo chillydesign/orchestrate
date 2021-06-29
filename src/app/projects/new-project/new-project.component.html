@@ -10,7 +10,13 @@
                 <label for="name">{{'Name' | translate}} * </label>
                 <input appAutofocus autocomplete="off" type="text" name="name" id="name" [(ngModel)]="project.name">
             </app-form-field>
-
+            <app-form-field *ngIf="clients" [errors]="errors" [field]="'client_id'">
+                <label for="name">{{'Client' | translate}} </label>
+                <select name="status" id="status" [(ngModel)]="project.client_id">
+                    <option [ngValue]="null"> - </option>
+                    <option *ngFor="let client of clients" [ngValue]="client.id">{{ client.name}}</option>
+                </select>
+            </app-form-field>
 
             <app-form-field [errors]="errors">
                 <button [disabled]="formLoading">{{'Save' | translate}}</button>

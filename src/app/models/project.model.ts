@@ -1,3 +1,4 @@
+import { Client } from './client.model';
 import { Task } from './task.model';
 import { Upload } from './upload.model';
 
@@ -14,7 +15,8 @@ export class Project {
     public uploads: Upload[];
     public tasks_count: { complete: number, incomplete: number, total: number };
     public percentage = 0;
-
+    public client_id: number;
+    public client: Client;
 
 
     public getNextTaskOrdering(): number {
@@ -47,10 +49,7 @@ export class Project {
             this.percentage = Math.round(num / den * 100);
         }
 
-
     }
-
-
 
 
 
@@ -70,6 +69,11 @@ export class Project {
             }
             if (obj.uploads) {
                 this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
+            }
+
+
+            if (obj.client) {
+                this.client = new Client(obj.client);
             }
 
             this.setPercentage();

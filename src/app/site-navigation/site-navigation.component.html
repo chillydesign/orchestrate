@@ -7,6 +7,8 @@
             <li routerLinkActive="active"><a [routerLink]="['/projects', 'new']">{{'New Project' | translate}}</a></li>
             <li *ngIf="!current_user" routerLinkActive="active"><a [routerLink]="['/sign_in']">{{'Sign in' |
                     translate}}</a></li>
+            <li *ngIf="current_user" routerLinkActive="active"><a [routerLink]="['/clients']">{{'Clients' |
+                    translate}}</a></li>
 
             <li *ngIf="current_user"><a (click)="logout()">{{'Sign out' | translate}}</a></li>
         </ul>
