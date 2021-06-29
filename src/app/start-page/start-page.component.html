@@ -1,0 +1,7 @@
+<ng-container *ngIf="current_user">
+    <app-projects></app-projects>
+</ng-container>
+
+<ng-container *ngIf="!current_user">
+    <app-sign-in></app-sign-in>
+</ng-container>

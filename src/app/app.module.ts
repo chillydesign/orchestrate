@@ -28,6 +28,7 @@ import { NewUploadComponent } from './uploads/new-upload/new-upload.component';
 import { CommentsComponent } from './comments/comments.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ClientsComponent } from './clients/clients.component';
+import { StartPageComponent } from './start-page/start-page.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ClientsComponent } from './clients/clients.component';
     NewUploadComponent,
     CommentsComponent,
     SignInComponent,
-    ClientsComponent
+    ClientsComponent,
+    StartPageComponent
   ],
   imports: [
     BrowserModule,

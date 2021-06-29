@@ -7,11 +7,15 @@ import { NewProjectComponent } from './projects/new-project/new-project.componen
 import { EditProjectComponent } from './projects/edit-project/edit-project.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ClientsComponent } from './clients/clients.component';
+import { StartPageComponent } from './start-page/start-page.component';
 
 
 
 const routes: Routes = [
-  { path: '', component: ProjectsComponent },
+  { path: '', component: StartPageComponent },
+  { path: 'sign_in', component: SignInComponent, data: { title: 'Sign in' } },
+
+
   { path: 'projects/status/:status', component: ProjectsComponent, data: { title: 'Projects' } },
   { path: 'projects/new', component: NewProjectComponent, data: { title: 'New Project' } },
   { path: 'projects/:id', component: ProjectComponent },
@@ -19,8 +23,6 @@ const routes: Routes = [
   { path: 'projects/:id/translation', component: ProjectComponent },
   { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
-  { path: 'sign_in', component: SignInComponent, data: { title: 'Sign in' } },
-
 
   { path: 'clients/new', component: ClientsComponent, data: { title: 'New Client' } },
   { path: 'clients/:id', component: ClientsComponent, data: { title: 'Client' } },

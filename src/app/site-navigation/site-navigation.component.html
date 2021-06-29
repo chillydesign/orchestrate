@@ -1,16 +1,18 @@
 <aside id="page_sidebar" [ngClass]="{visible: sidebarVisible}">
     <nav>
         <a [routerLink]="['/']" class="branding">{{site_name}}</a>
-        <ul>
+        <ul *ngIf="current_user">
             <li><a [routerLink]="['/']">{{'Projects' | translate}}</a></li>
             <li><a [routerLink]="['/projects', 'status', 'inactive']">{{'Archive' | translate}}</a></li>
             <li routerLinkActive="active"><a [routerLink]="['/projects', 'new']">{{'New Project' | translate}}</a></li>
-            <li *ngIf="!current_user" routerLinkActive="active"><a [routerLink]="['/sign_in']">{{'Sign in' |
-                    translate}}</a></li>
-            <li *ngIf="current_user" routerLinkActive="active"><a [routerLink]="['/clients']">{{'Clients' |
-                    translate}}</a></li>
 
+            <li *ngIf="current_user.is_admin" routerLinkActive="active"><a [routerLink]="['/clients']">{{'Clients' |
+                    translate}}</a></li>
             <li *ngIf="current_user"><a (click)="logout()">{{'Sign out' | translate}}</a></li>
+        </ul>
+        <ul *ngIf="!current_user">
+            <li routerLinkActive="active"><a [routerLink]="['/sign_in']">{{'Sign in' |
+                    translate}}</a></li>
         </ul>
 
 
