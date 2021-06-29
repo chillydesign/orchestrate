@@ -125,11 +125,6 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
 
-  //  <ul *ngIf="project.random_tasks">
-  //   <li *ngFor="let task of project.random_tasks">
-  //       <app-task [task]="task" [project]="project" [canDelete]="false">
-  //       </app-task>
-  //   </li>
-  // </ul>
+
 
 }

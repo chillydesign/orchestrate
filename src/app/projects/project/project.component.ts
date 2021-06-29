@@ -21,7 +21,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
   public current_user: User;
   public project_id: number;
   public project: Project;
-  public taskForComments: Task;
   private route_params_subscription: Subscription;
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
@@ -141,6 +140,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.setPercentage();
   }
 
+  addTaskBelow(task: Task): void {
+    // console.log(task.ordering);
+    // console.log(task.ordering);
+    // const new_task = new Task();
+    // new_task.ordering = task.ordering += 0.5;
+    // new_task.project_id = task.project_id;
+    // this.addNewTask(new_task);
+  }
+
   addNewTask(task: Task): void {
     this.project.tasks.push(task);
     this.setPercentage();
@@ -152,19 +160,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
 
-  showComments(task: Task): void {
-    if (task) {
-      this.taskForComments = task;
-    }
-  }
 
-  hideComments(hide: boolean): void {
 
-    this.taskForComments = null;
-  }
 
   setPercentage(): void {
     this.project.setTasksCount();
+    this.project.setTotalMinutes();
   }
 
 

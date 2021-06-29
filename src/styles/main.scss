@@ -35,7 +35,7 @@ main {
     padding: $padding;
     margin: 0 0 $double_padding;
     border-radius: $border_radius;
-    opacity: 0.75;
+    // opacity: 0.75;
     transition: box-shadow 0.3s;
 
     &.inactive {
@@ -448,6 +448,10 @@ main {
 
     &.icon_delete {
         background-image: url("../assets/images/delete.svg");
+    }
+
+    &.icon_add {
+        background-color: red;
     }
 
     &.icon_indent {

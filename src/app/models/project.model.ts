@@ -14,6 +14,7 @@ export class Project {
     public random_tasks: Task[];
     public uploads: Upload[];
     public tasks_count: { complete: number, incomplete: number, total: number };
+    public total_minutes; number;
     public percentage = 0;
     public client_id: number;
     public client: any;
@@ -51,6 +52,16 @@ export class Project {
 
     }
 
+    setTotalMinutes(): void {
+        let tm = 0;
+        this.tasks.forEach(task => {
+            if (task.time_taken !== undefined) {
+                tm += task.time_taken;
+            }
+        });
+        this.total_minutes = tm;
+    }
+
 
 
 
@@ -66,6 +77,7 @@ export class Project {
             if (obj.tasks) {
                 this.tasks = obj.tasks.map((task: Task) => new Task(task));
                 this.setTasksCount();
+                this.setTotalMinutes();
             }
             if (obj.uploads) {
                 this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));

@@ -14,7 +14,7 @@
             <li class="orderable" *ngFor="let task of project.tasks">
                 <app-task [task]="task" [project]="project" [canAdministrate]="!!current_user"
                     (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)"
-                    (showTaskComments)="showComments(task)">
+                    (showTaskComments)="showComments(task)" (addTaskBelowme)="addTaskBelow($event)">
                 </app-task>
                 <div class="hide_on_mobile handle">Handle</div>
             </li>
@@ -41,7 +41,8 @@
                 &nbsp;
                 <a *ngIf="current_user" (click)="exportProject()">{{'Export' | translate}}</a>
             </p>
-            <p *ngIf="project.client"> <a [routerLink]="['/clients', project.client.slug]">{{project.client.name}}</a>
+            <p>{{project.total_minutes}} mins
+                <a *ngIf="project.client" [routerLink]="['/clients', project.client.slug]">| {{project.client.name}}</a>
             </p>
         </app-box-footer>
 
@@ -55,8 +56,7 @@
     <app-uploads [project]="project"></app-uploads>
 
 
-    <app-comments *ngIf="taskForComments" [task]="taskForComments" (hideTaskComments)="hideComments($event)">
-    </app-comments>
+
 
 
 </ng-container>

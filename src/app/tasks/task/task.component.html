@@ -36,12 +36,13 @@
     </div>
     <div class="actions_container" *ngIf="canDelete">
 
-        <a (click)="showComments()" title="Comments" class="icon icon_comment"
+        <a (click)="showCommentPopup()" title="Comments" class="icon icon_comment"
             [ngClass]="{has_comments: task.comments_count > 0}">{{task.comments_count}}</a>
         <a *ngIf="project" (click)="toggleUpload()" title="Upload" class="hide_on_mobile icon icon_upload">Upload</a>
         <a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">Priority</a>
         <a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">Indent</a>
         <a (click)="deleteTask()" title="Delete" class="icon icon_delete">Delete</a>
+        <!-- <a (click)="addTaskBelow()" title="Add task below" class="icon icon_add">Add task below</a> -->
     </div>
 
 
@@ -50,3 +51,7 @@
 <div class="task_upload" *ngIf="showUpload">
     <app-new-upload [project]="project" [task]="task" (uploadCreated)="createdUpload($event)"></app-new-upload>
 </div>
+
+
+<app-comments *ngIf="showComments" [task]="task" (hideTaskComments)="hideComments($event)">
+</app-comments>
