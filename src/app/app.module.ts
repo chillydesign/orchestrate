@@ -31,6 +31,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { ClientComponent } from './clients/client/client.component';
 import { ProjectSummaryComponent } from './projects/project-summary/project-summary.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ProjectSummaryComponent } from './projects/project-summary/project-summ
     ClientsComponent,
     StartPageComponent,
     ClientComponent,
-    ProjectSummaryComponent
+    ProjectSummaryComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

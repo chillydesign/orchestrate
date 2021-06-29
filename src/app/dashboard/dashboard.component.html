@@ -1,0 +1,16 @@
+<h1>Dashboard</h1>
+
+
+<app-box>
+    <ul>
+
+        <li *ngFor="let task of tasks">
+            <app-task [task]="task" [canAdministrate]="!!current_user" [showProject]="true"
+                (taskDeleted)="removeOldTask($event)">
+            </app-task>
+
+
+
+        </li>
+    </ul>
+</app-box>

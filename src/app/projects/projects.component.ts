@@ -16,8 +16,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public projects: Project[];
   public visible_projects: Project[];
   public offset = 0;
-  public limit = 2;
-  public status = 'inactive';
+  public limit = 20;
+  public status = 'active';
   public load_more = false;
   public loading = false;
   public search_term: string;

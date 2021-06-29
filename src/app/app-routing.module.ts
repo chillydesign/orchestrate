@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { ProjectsComponent } from './projects/projects.component';
 import { NotFoundComponent } from './status-codes/not-found/not-found.component';
 import { ProjectComponent } from './projects/project/project.component';
@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'projects/:id/translation', component: ProjectComponent },
   { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
+  { path: 'projects', component: ProjectsComponent, data: { title: ' Project' } },
 
   { path: 'clients/new', component: ClientsComponent, data: { title: 'New Client' } },
   { path: 'clients/:id', component: ClientComponent, data: { title: 'Client' } },
@@ -36,8 +37,14 @@ const routes: Routes = [
 
 ];
 
+// always scroll to top of page on route change
+const routingOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled'
+};
+
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, routingOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -70,6 +70,17 @@ export class TasksService {
   }
 
 
+  getCurrentTasks(): Observable<Task[]> {
+    const options = this.authService.setAPIOptionsNoLogin();
+    const endpoint = `${this.api_url}/?route=tasks&is_current=true`;
+    return this.http.get<Task[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => res.map((p: Task) => new Task(p)))
+    );
+  }
+
+
+
   timeOptions(): { amount: number, translation: string }[] {
 
     const options = [
