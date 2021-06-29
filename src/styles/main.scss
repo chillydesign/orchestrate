@@ -58,11 +58,17 @@ main {
     border-radius: 0 0 $border_radius $border_radius;
     text-align: right;
     color: scale-color($brand_color, $lightness: 33%);
+    display: flex;
+    justify-content: space-between;
+
 
     p {
+        flex-wrap: nowrap;
         padding: 0;
         font-size: 1.2em;
     }
+
+
 }
 
 

@@ -30,11 +30,11 @@
             <strong> {{ project.tasks_count.complete}}</strong> {{'tasks completed' | translate}}
         </p>
 
-
         <app-box-footer>
             <p>Last updated: {{ project.updated_at | date}}
                 <a *ngIf="current_user" (click)="archiveProject(project)">| {{'Archive' | translate}}</a>
             </p>
+            <p *ngIf="project.client"> <a [routerLink]="['/clients', project.client_id]">{{project.client.name}}</a></p>
         </app-box-footer>
     </app-box>
 
