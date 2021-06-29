@@ -41,7 +41,7 @@
                 &nbsp;
                 <a *ngIf="current_user" (click)="exportProject()">{{'Export' | translate}}</a>
             </p>
-
+            <p *ngIf="project.client"> <a [routerLink]="['/clients', project.client_id]">{{project.client.name}}</a></p>
         </app-box-footer>
 
 
