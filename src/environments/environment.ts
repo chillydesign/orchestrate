@@ -16,7 +16,7 @@ export const environment = {
   cookie_domains: ['localhost'],
   cookie_length_hours: 50,
   cache_duration: 60000, // time to hold resources from API in cache in milliseconds
-  translations: LANG_FR_TRANS
+  translations: LANG_EN_TRANS
 };
 
 /*

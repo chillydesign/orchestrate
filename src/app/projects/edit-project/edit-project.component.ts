@@ -14,6 +14,7 @@ import { Client } from 'src/app/models/client.model';
 export class EditProjectComponent implements OnInit, OnDestroy {
 
   public project: Project;
+  public projects: Project[];
   public clients: Client[];
   public formLoading = false;
   public formSuccess = false;
@@ -23,6 +24,7 @@ export class EditProjectComponent implements OnInit, OnDestroy {
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
   private update_project_sub: Subscription;
+  private projects_sub: Subscription;
   private clients_sub: Subscription;
   constructor(
     private route: ActivatedRoute,
@@ -61,14 +63,28 @@ export class EditProjectComponent implements OnInit, OnDestroy {
       (clients: Client[]) => {
         if (clients) {
           this.clients = clients;
+          this.getProjects();
         }
       }
     );
   }
 
+
+  getProjects(): void {
+    const options = { offset: 0, limit: 999999, status: 'active' };
+    this.projects_sub = this.projectsService.getProjects(options).subscribe(
+      (projects: Project[]) => {
+        if (projects) {
+          this.projects = projects;
+        }
+      }
+    );
+  }
+
+
   onFormChange(): void {
     // let server figure out if object is valid
-    this.canSubmitForm = true;
+    // this.canSubmitForm = true;
 
   }
 
@@ -76,24 +92,28 @@ export class EditProjectComponent implements OnInit, OnDestroy {
 
     this.onFormChange();
 
-    if (this.canSubmitForm) {
 
-      this.formLoading = true;
+    this.formLoading = true;
 
-      this.update_project_sub = this.projectsService.updateProject(this.project).subscribe(
-        (project: Project) => {
-          this.formLoading = false;
-          this.formSuccess = true;
-          this.errors.next(null);
+    this.update_project_sub = this.projectsService.updateProject(this.project).subscribe(
+      (project: Project) => {
+        this.formLoading = false;
+        this.formSuccess = true;
+        this.errors.next(null);
+        if (this.project.move_incomplete_to_project_id) {
+          this.router.navigate(['/projects', this.project.move_incomplete_to_project_id]);
+        } else {
           this.router.navigate(['/projects', project.id]);
-        },
-        (error) => {
-          this.errors.next(error.error);
-          this.formLoading = false;
-          this.formSuccess = false;
         }
-      );
-    }
+
+      },
+      (error) => {
+        this.errors.next(error.error);
+        this.formLoading = false;
+        this.formSuccess = false;
+      }
+    );
+
   }
 
 
@@ -103,6 +123,7 @@ export class EditProjectComponent implements OnInit, OnDestroy {
       this.project_sub,
       this.delete_project_sub,
       this.update_project_sub,
+      this.projects_sub,
       this.clients_sub,
 
     ];

@@ -1,4 +1,4 @@
-import { Client } from './client.model';
+
 import { Task } from './task.model';
 import { Upload } from './upload.model';
 
@@ -16,8 +16,8 @@ export class Project {
     public tasks_count: { complete: number, incomplete: number, total: number };
     public percentage = 0;
     public client_id: number;
-    public client: Client;
-
+    public client: any;
+    public move_incomplete_to_project_id: number;
 
     public getNextTaskOrdering(): number {
         if (this.tasks) {
@@ -72,9 +72,7 @@ export class Project {
             }
 
 
-            if (obj.client) {
-                this.client = new Client(obj.client);
-            }
+
 
             this.setPercentage();
 

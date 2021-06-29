@@ -29,6 +29,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ClientsComponent } from './clients/clients.component';
 import { StartPageComponent } from './start-page/start-page.component';
+import { ClientComponent } from './clients/client/client.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { StartPageComponent } from './start-page/start-page.component';
     CommentsComponent,
     SignInComponent,
     ClientsComponent,
-    StartPageComponent
+    StartPageComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

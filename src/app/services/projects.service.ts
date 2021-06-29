@@ -73,6 +73,7 @@ export class ProjectsService {
         name: project.name,
         status: project.status,
         client_id: project.client_id,
+        move_incomplete_to_project_id: project.move_incomplete_to_project_id,
       }
 
     };

@@ -1,0 +1,15 @@
+<app-spinner [show]="!client"></app-spinner>
+<ng-container *ngIf="client">
+    <h1>{{client.name}}</h1>
+    <app-box *ngFor="let project of client.projects">
+
+
+        <h2><a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+
+
+
+    </app-box>
+
+
+
+</ng-container>
