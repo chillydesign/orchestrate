@@ -28,7 +28,8 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent, data: { title: ' Project' } },
 
   { path: 'clients/new', component: ClientsComponent, data: { title: 'New Client' } },
-  { path: 'clients/:id', component: ClientComponent, data: { title: 'Client' } },
+  { path: 'clients/id/:id', component: ClientComponent, data: { title: 'Client' } },
+  { path: 'clients/:slug', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients', component: ClientsComponent, data: { title: 'Clients' } },
 
   { path: '401', component: NotFoundComponent, data: { title: 'Page not found' } },

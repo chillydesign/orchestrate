@@ -6,6 +6,7 @@ export class Client {
 
     public id: number;
     public name: string;
+    public slug: string;
     public projects: Project[];
 
     constructor(obj?: any) {

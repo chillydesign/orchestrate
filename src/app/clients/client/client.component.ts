@@ -14,6 +14,7 @@ import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.serv
 export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
   public client_id: number;
+  public client_slug: string;
   public projects: Project[];
   private client_sub: Subscription;
   private projects_sub: Subscription;
@@ -37,7 +38,13 @@ export class ClientComponent implements OnInit, OnDestroy {
         if (params.id) {
           this.client_id = params.id;
           this.getClient();
+        } else if (params.slug) {
+          this.client_slug = params.slug;
+          this.getClientFromSlug();
         }
+
+
+
       }
     ); // end of route_params_subscription
 
@@ -54,6 +61,17 @@ export class ClientComponent implements OnInit, OnDestroy {
       }
     );
   }
+  getClientFromSlug(): void {
+    this.client_sub = this.clientsService.getClientFromSlug(this.client_slug).subscribe(
+      (client: Client) => {
+        if (client) {
+          this.client = client;
+          this.getProjects();
+
+        }
+      }
+    );
+  }
 
   getProjects(): void {
     const options: ProjectsOptions = { client_id: this.client.id };
@@ -61,6 +79,7 @@ export class ClientComponent implements OnInit, OnDestroy {
       (projects: Project[]) => {
         if (projects) {
           this.projects = projects;
+          this.projects.map(p => p.client = this.client);
         }
       }
     );

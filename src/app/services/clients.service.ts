@@ -32,12 +32,24 @@ export class ClientsService {
     );
   }
 
+  getClientFromSlug(slug: string): Observable<Client> {
+    const options = this.authService.setAPIOptionsNoLogin();
+    const endpoint = `${this.api_url}/?route=clients&slug=${slug}`;
+    return this.http.get<Client>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Client(res))
+    );
+  }
+
+
+
 
   addClient(client: Client): Observable<Client> {
     const options = this.authService.setAPIOptionsNoLogin();
     const data = {
       attributes: {
         name: client.name,
+        slug: client.slug,
       }
     };
     const endpoint = `${this.api_url}/?route=clients`;
@@ -55,6 +67,7 @@ export class ClientsService {
     const data = {
       attributes: {
         name: client.name,
+        slug: client.slug,
       }
 
     };
