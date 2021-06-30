@@ -14,7 +14,7 @@
             <li class="orderable" *ngFor="let task of project.tasks">
                 <app-task [task]="task" [project]="project" [canAdministrate]="!!current_user"
                     (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)"
-                    (showTaskComments)="showComments(task)" (addTaskBelowme)="addTaskBelow($event)">
+                    (addTaskBelowme)="addTaskBelow($event)">
                 </app-task>
                 <div class="hide_on_mobile handle">Handle</div>
             </li>

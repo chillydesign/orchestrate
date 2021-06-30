@@ -115,15 +115,16 @@ main {
 
         position: absolute;
         right: -5px;
-        top: 12px;
+        top: 15px;
         text-indent: -9999px;
         background: no-repeat center top url("../assets/images/drag.svg");
-        background-size: 15px;
-        opacity: 0.3;
+        background-size: 13px;
+        opacity: 0.1;
         cursor: pointer;
         width: 20px;
         height: 30px;
         display: inline-block;
+        cursor: move;
 
     }
 }
@@ -171,6 +172,7 @@ main {
                 &.icon_priority {
                     opacity: 1;
                     background-color: $red;
+                    color: white;
                     background-image: url("../assets/images/priority_white.svg")
                 }
             }
@@ -262,13 +264,67 @@ main {
     .actions_container {
 
 
-        padding: 0 0 0 $half_padding;
-        min-width: 50px;
-        max-width: 50px;
+        padding: 0 $half_padding 0 0;
+        // min-width: 50px;
+        // max-width: 50px;
+        position: relative;
+
+        .actions_opener {
+            background: url("../assets/images/menu.svg") no-repeat center center;
+            text-indent: -9999px;
+            display: inline-block;
+            background-size: 25px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            opacity: 0.5;
+
+        }
+
+        ul {
+            display: none;
+            position: absolute;
+            top: 5px;
+            right: 25px;
+            z-index: 1000;
+            width: 155px;
+            background-color: $light_grey;
+            border-radius: 5px;
+            box-shadow: $box_shadow;
+            padding: 5px;
+
+
+            li {
+                display: block;
+                padding: 0;
+                margin: 0;
+                font-size: 1em;
+                overflow: hidden;
+
+                a {
+                    text-indent: 25px;
+                    display: block;
+                    width: 100%;
+                    background-position: 2px 2px;
+                    border-radius: 0;
+                    padding: 4px;
+                    top: 0;
+
+                }
+            }
+        }
+
+        &:hover {
+            ul {
+                display: block;
+
+
+            }
+        }
 
         @media(min-width: $mobile_width) {
-            min-width: 155px;
-            max-width: 155px;
+            // min-width: 155px;
+            // max-width: 155px;
 
         }
 
@@ -397,54 +453,58 @@ main {
     transition: all 0.3s;
     margin: 0 1px 0 0;
 
-
     &.icon_comment {
-        // background-image: url("../assets/images/comment.svg");
-        background-color: $dark_grey;
-        border-radius: 5px;
-        position: relative;
-        height: 17px;
-        width: 19px;
-
-        color: white;
-        text-indent: 0;
-        font-weight: bold;
-        text-align: center;
-        font-size: 12px;
-        line-height: 17px;
-
-        @media(min-width: $mobile_width) {
-            top: 4px;
-        }
-
-        &:hover {
-            background-color: $dark_grey;
-        }
-
-        &.has_comments {
-            background-color: $brand_color;
-            opacity: 0.9;
-
-            &:after {
-                border-color: $brand_color;
-                border-bottom-color: transparent;
-                border-right-color: transparent;
-            }
-        }
-
-
-        &:after {
-            content: '';
-            border: 5px solid $dark_grey;
-            border-bottom-color: transparent;
-            border-right-color: transparent;
-            position: absolute;
-            top: 14px;
-            left: 5px;
-            z-index: -1;
-
-        }
+        background-image: url("../assets/images/comment.svg");
     }
+
+
+    // &.icon_comment {
+    //   
+    //     background-color: $dark_grey;
+    //     border-radius: 5px;
+    //     position: relative;
+    //     height: 17px;
+    //     width: 19px;
+
+    //     color: white;
+    //     text-indent: 0;
+    //     font-weight: bold;
+    //     text-align: center;
+    //     font-size: 12px;
+    //     line-height: 17px;
+
+    //     @media(min-width: $mobile_width) {
+    //         top: 4px;
+    //     }
+
+    //     &:hover {
+    //         background-color: $dark_grey;
+    //     }
+
+    //     &.has_comments {
+    //         background-color: $brand_color;
+    //         opacity: 0.9;
+
+    //         &:after {
+    //             border-color: $brand_color;
+    //             border-bottom-color: transparent;
+    //             border-right-color: transparent;
+    //         }
+    //     }
+
+
+    //     &:after {
+    //         content: '';
+    //         border: 5px solid $dark_grey;
+    //         border-bottom-color: transparent;
+    //         border-right-color: transparent;
+    //         position: absolute;
+    //         top: 14px;
+    //         left: 5px;
+    //         z-index: -1;
+
+    //     }
+    // }
 
     &.icon_delete {
         background-image: url("../assets/images/delete.svg");

@@ -19,7 +19,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
-  @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public showUpload = false;
   public showTick = false;
   public showComments = false;

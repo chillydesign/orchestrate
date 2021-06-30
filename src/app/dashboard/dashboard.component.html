@@ -2,15 +2,13 @@
 
 
 <app-box>
-    <ul>
+    <ul *ngIf="tasks">
 
         <li *ngFor="let task of tasks">
             <app-task [task]="task" [canAdministrate]="!!current_user" [showProject]="true"
                 (taskDeleted)="removeOldTask($event)">
             </app-task>
-
-
-
         </li>
+        <li *ngIf="tasks.length === 0">No tasks set</li>
     </ul>
 </app-box>
