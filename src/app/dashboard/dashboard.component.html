@@ -1,14 +1,17 @@
 <h1>Dashboard</h1>
 
 
-<app-box>
-    <ul *ngIf="tasks">
-
-        <li *ngFor="let task of tasks">
-            <app-task [task]="task" [canAdministrate]="!!current_user" [showProject]="true"
+<app-box *ngFor="let project of projects">
+    <h2> <a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+    <ul *ngIf="project.tasks">
+        <li *ngFor="let task of project.tasks">
+            <app-task [task]="task" [project]="project" [canAdministrate]="!!current_user"
                 (taskDeleted)="removeOldTask($event)">
             </app-task>
         </li>
-        <li *ngIf="tasks.length === 0">No tasks set</li>
+        <li *ngIf="project.tasks.length === 0">No tasks set</li>
     </ul>
+
+
+
 </app-box>

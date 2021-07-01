@@ -179,6 +179,17 @@ main {
         }
     }
 
+    &.is_current {
+        .actions_container {
+            .icon {
+                &.icon_current {
+                    background-color: $brand_color;
+                    color: white;
+                }
+            }
+        }
+    }
+
     form {
         margin-left: -5px;
 
@@ -259,6 +270,23 @@ main {
         font-style: italic;
         padding: 4px 4px 0 0;
         color: #888;
+
+        .icon_priority {
+            opacity: 1;
+            background-color: $red;
+            color: white;
+            background-image: url("../assets/images/priority_white.svg");
+            top: -2px;
+            transform: scale(0.7);
+        }
+    }
+
+    a.comments_link {
+        color: adjust-color($brand_color, $saturation: -70%);
+
+        &.has_comments {
+            color: $brand_color;
+        }
     }
 
     .actions_container {
@@ -305,7 +333,7 @@ main {
                     text-indent: 25px;
                     display: block;
                     width: 100%;
-                    background-position: 2px 2px;
+                    background-position: 4px 5px;
                     border-radius: 0;
                     padding: 4px;
                     top: 0;

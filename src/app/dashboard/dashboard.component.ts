@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Project } from '../models/project.model';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
+import { ProjectsService } from '../services/projects.service';
 import { TasksService } from '../services/tasks.service';
 
 @Component({
@@ -12,11 +14,14 @@ import { TasksService } from '../services/tasks.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   public tasks: Task[];
+  public projects: Project[];
   public current_user: User;
   private current_user_subscription: Subscription;
   private tasks_sub: Subscription;
+  private projects_sub: Subscription;
   constructor(
     private authService: AuthService,
+    private projectsService: ProjectsService,
     private tasksService: TasksService,
   ) { }
 
@@ -40,17 +45,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getTasks(): void {
 
 
-    this.tasks_sub = this.tasksService.getCurrentTasks().subscribe(
-      (tasks: Task[]) => {
-        if (tasks) {
-          this.tasks = tasks;
+    this.projects_sub = this.projectsService.getProjects({ current: true }).subscribe(
+      (projects: Project[]) => {
+        if (projects) {
+          this.projects = projects;
         }
       }
     );
   }
-  removeOldTask(task: Task): void {
-    this.tasks = this.tasks.filter(t => t.id !== task.id);
 
+  oldTask(task: Task): void {
+    const project = this.projects.find(pr => pr.id === task.project_id);
+    project.tasks = project.tasks.filter(t => t.id !== task.id);
   }
 
 
@@ -59,6 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.current_user_subscription,
+      this.projects_sub,
       this.tasks_sub,
     ];
     subs.forEach((sub) => {

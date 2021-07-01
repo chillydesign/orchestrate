@@ -12,6 +12,7 @@ export interface ProjectsOptions {
   offset?: number;
   status?: string;
   client_id?: number;
+  current?: boolean;
 }
 
 @Injectable({
@@ -41,6 +42,9 @@ export class ProjectsService {
       }
       if (opts.client_id) {
         endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+      if (opts.current) {
+        endpoint = endpoint.concat(`&current=true`);
       }
     }
 

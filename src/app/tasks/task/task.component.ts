@@ -13,7 +13,6 @@ import { Upload } from 'src/app/models/upload.model';
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
   @Input() project: Project;
-  @Input() showProject = false;
   @Input() canAdministrate = false;
   @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -67,6 +66,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.task.completed = !this.task.completed;
     this.onSubmit();
 
+  }
+
+  toggleCurrent(): void {
+    this.task.is_current = !this.task.is_current;
+    this.onSubmit();
   }
 
 

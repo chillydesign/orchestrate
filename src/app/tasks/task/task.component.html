@@ -1,5 +1,5 @@
-<div class="row_container task_container priority_{{task.priority}} indentation_{{task.indentation}}"
-    [ngClass]="{completed: task.completed, is_title: task.is_title  }">
+<div class="row_container task_container    priority_{{task.priority}} indentation_{{task.indentation}}"
+    [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
     <div class="completed_container">
         <input [disabled]="updating" (click)="toggleCompleted()" type="checkbox" name="completed"
             [(ngModel)]="task.completed">
@@ -23,10 +23,11 @@
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
         <p *ngIf="canAdministrate" class="task_added">
+            <a *ngIf="task.priority === 1" title="Priority" class="icon icon_priority">Priority</a>
             {{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}
             <span *ngIf="task.completed_at_date"> | Completed: {{task.completed_at_date | date}}</span>
-            <span *ngIf="showProject"> | <a [routerLink]="['/projects', task.project_id]">Go to project</a>
-            </span>
+            | <a (click)="showCommentPopup()" title="Comments" class="comments_link"
+                [ngClass]="{has_comments: task.comments_count > 0}">{{task.comments_count}} comments</a>
 
         </p>
         <p class="task_uploads_container" *ngIf="task.uploads">
@@ -38,11 +39,10 @@
 
         <a href="#" class="actions_opener">Actions</a>
         <ul>
-            <li><a (click)="showCommentPopup()" title="Comments" class="icon icon_comment"
-                    [ngClass]="{has_comments: task.comments_count > 0}">{{task.comments_count}} comments</a></li>
             <li><a *ngIf="project" (click)="toggleUpload()" title="Upload"
                     class="hide_on_mobile icon icon_upload">Upload</a></li>
             <li><a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">Priority</a>
+            <li><a (click)="toggleCurrent()" title="Working on" class="hide_on_mobile icon icon_current">Working on</a>
             </li>
             <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">Indent</a>
             </li>
