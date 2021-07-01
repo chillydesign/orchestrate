@@ -185,6 +185,8 @@ main {
                 &.icon_current {
                     background-color: $brand_color;
                     color: white;
+                    background-image: url("../assets/images/cog_white.svg");
+
                 }
             }
         }
@@ -552,6 +554,10 @@ main {
 
     &.icon_priority {
         background-image: url("../assets/images/priority.svg");
+    }
+
+    &.icon_current {
+        background-image: url("../assets/images/cog.svg");
     }
 
     &.icon_refresh {
