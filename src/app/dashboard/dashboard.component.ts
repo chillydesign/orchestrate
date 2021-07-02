@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     );
   }
 
-  oldTask(task: Task): void {
+  removeOldTask(task: Task): void {
     const project = this.projects.find(pr => pr.id === task.project_id);
     project.tasks = project.tasks.filter(t => t.id !== task.id);
   }
