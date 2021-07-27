@@ -38,7 +38,7 @@
                     <select name="move_incomplete_to_project_id" id="move_incomplete_to_project_id"
                         [(ngModel)]="project.move_incomplete_to_project_id">
                         <option [ngValue]="null"> - </option>
-                        <option *ngFor="let project of projects" [ngValue]="project.id">{{ project.name}}</option>
+                        <option *ngFor="let project of projects" [ngValue]="project.id">{{ project.nice_name}}</option>
                     </select>
                 </app-form-field>
 

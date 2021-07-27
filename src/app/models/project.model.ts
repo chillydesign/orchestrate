@@ -21,6 +21,7 @@ export class Project {
     public move_incomplete_to_project_id: number;
     public month: string;
     public nice_month: string;
+    public nice_name: string;
 
     public getNextTaskOrdering(): number {
         if (this.tasks) {
@@ -65,7 +66,8 @@ export class Project {
     }
 
 
-    setMonth(): void {
+    setMonthAndNiceName(): void {
+        this.nice_name = this.name;
         if (this.month) {
             const name = this.name;
             const month = new Date(this.month);
@@ -76,7 +78,7 @@ export class Project {
                 const moo = new Intl.DateTimeFormat('fr', { month: 'long' }).format(month);
                 const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(month);
                 this.month = `${ye}-${mo}-${da}`;
-                this.name = `${moo} ${ye} | ${name}`;
+                this.nice_name = `${moo} ${ye} | ${name}`;
             }
         }
 
@@ -102,7 +104,7 @@ export class Project {
                 this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
             }
 
-            this.setMonth();
+            this.setMonthAndNiceName();
             this.setPercentage();
 
 

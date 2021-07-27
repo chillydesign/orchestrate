@@ -80,7 +80,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       (project: Project) => {
         if (project) {
           this.project = project;
-          this.titleService.setTitle(`${this.project.name} | ${this.title} `);
+          this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
           this.setupDragSubscription();
           this.processTasks();
 

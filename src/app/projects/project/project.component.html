@@ -4,7 +4,7 @@
         <span *ngIf="project.client">
             <a [routerLink]="['/clients', project.client.slug]">{{project.client.name}}</a> |
         </span>
-        {{project.name}}
+        {{project.nice_name}}
         &nbsp;
         <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
     </h1>
