@@ -1,0 +1,27 @@
+<h1> {{'New Client' | translate}} </h1>
+
+<app-box>
+
+
+    <form (keyup)="onFormChange()" (change)="onFormChange()" (ngSubmit)="onSubmit()" novalidate>
+        <ul>
+
+            <app-form-field [errors]="errors" [field]="'name'">
+                <label for="name">{{'Name' | translate}} * </label>
+                <input appAutofocus autocomplete="off" type="text" name="name" id="name" [(ngModel)]="client.name">
+            </app-form-field>
+
+            <app-form-field [errors]="errors" [field]="'slug'">
+                <label for="slug">{{'Slug' | translate}} * </label>
+                <input autocomplete="off" type="text" name="slug" id="slug" [(ngModel)]="client.slug">
+            </app-form-field>
+
+
+            <app-form-field [errors]="errors">
+                <button [disabled]="formLoading">{{'Save' | translate}}</button>
+            </app-form-field>
+        </ul>
+    </form>
+
+
+</app-box>

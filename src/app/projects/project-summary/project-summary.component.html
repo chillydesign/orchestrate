@@ -5,7 +5,12 @@
     </div>
 
 
-    <h2><a [routerLink]="['/projects', project.id]">{{project.name}}</a></h2>
+    <h2>
+        <a [routerLink]="['/projects', project.id]">
+            <span *ngIf="project.client"> {{project.client.name}} | </span>
+            {{project.name}}
+        </a>
+    </h2>
 
 
 

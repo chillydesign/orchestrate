@@ -19,6 +19,8 @@ export class Project {
     public client_id: number;
     public client: any;
     public move_incomplete_to_project_id: number;
+    public month: string;
+    public nice_month: string;
 
     public getNextTaskOrdering(): number {
         if (this.tasks) {
@@ -63,6 +65,22 @@ export class Project {
     }
 
 
+    setMonth(): void {
+        if (this.month) {
+            const month = new Date(this.month);
+            // if date valid
+            if (!isNaN(month.getTime())) {
+                const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(month);
+                const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(month);
+                const moo = new Intl.DateTimeFormat('fr', { month: 'long' }).format(month);
+                const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(month);
+                this.month = `${ye}-${mo}-${da}`;
+                this.name = `${moo} ${ye}`;
+            }
+        }
+
+    }
+
 
 
     constructor(obj?: any) {
@@ -83,9 +101,7 @@ export class Project {
                 this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
             }
 
-
-
-
+            this.setMonth();
             this.setPercentage();
 
 

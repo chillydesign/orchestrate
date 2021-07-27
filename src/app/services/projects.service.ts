@@ -81,6 +81,7 @@ export class ProjectsService {
       attributes: {
         name: project.name,
         client_id: project.client_id,
+        month: project.month,
       }
 
     };
@@ -101,6 +102,7 @@ export class ProjectsService {
         status: project.status,
         client_id: project.client_id,
         move_incomplete_to_project_id: project.move_incomplete_to_project_id,
+        month: project.month,
       }
 
     };

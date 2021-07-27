@@ -1,6 +1,13 @@
 <app-spinner [show]="!project"></app-spinner>
 <ng-container *ngIf="project">
-    <h1>{{project.name}} <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a></h1>
+    <h1>
+        <span *ngIf="project.client">
+            <a [routerLink]="['/clients', project.client.slug]">{{project.client.name}}</a> |
+        </span>
+        {{project.name}}
+        &nbsp;
+        <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
+    </h1>
     <app-box>
 
 
@@ -41,9 +48,7 @@
                 &nbsp;
                 <a *ngIf="current_user" (click)="exportProject()">{{'Export' | translate}}</a>
             </p>
-            <p>{{project.total_minutes}} mins
-                <a *ngIf="project.client" [routerLink]="['/clients', project.client.slug]">| {{project.client.name}}</a>
-            </p>
+            <p>{{project.total_minutes}} mins</p>
         </app-box-footer>
 
 

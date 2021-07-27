@@ -10,6 +10,12 @@
                 <label for="name">{{'Name' | translate}} * </label>
                 <input appAutofocus autocomplete="off" type="text" name="name" id="name" [(ngModel)]="project.name">
             </app-form-field>
+            <app-form-field [errors]="errors" [field]="'month'">
+                <label for="month">{{'Month' | translate}} * </label>
+                <input autocomplete="off" type="date" name="month" id="month" [(ngModel)]="project.month">
+            </app-form-field>
+
+
             <app-form-field *ngIf="clients" [errors]="errors" [field]="'client_id'">
                 <label for="name">{{'Client' | translate}} </label>
                 <select name="status" id="status" [(ngModel)]="project.client_id">
@@ -17,6 +23,7 @@
                     <option *ngFor="let client of clients" [ngValue]="client.id">{{ client.name}}</option>
                 </select>
             </app-form-field>
+
 
             <app-form-field [errors]="errors">
                 <button [disabled]="formLoading">{{'Save' | translate}}</button>

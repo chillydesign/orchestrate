@@ -9,6 +9,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ClientsComponent } from './clients/clients.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { ClientComponent } from './clients/client/client.component';
+import { NewClientComponent } from './clients/new-client/new-client.component';
 
 
 
@@ -27,7 +28,7 @@ const routes: Routes = [
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
   { path: 'projects', component: ProjectsComponent, data: { title: ' Project' } },
 
-  { path: 'clients/new', component: ClientsComponent, data: { title: 'New Client' } },
+  { path: 'clients/new', component: NewClientComponent, data: { title: 'New Client' } },
   { path: 'clients/id/:id', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients/:slug', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients', component: ClientsComponent, data: { title: 'Clients' } },

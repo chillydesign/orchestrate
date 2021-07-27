@@ -26,6 +26,10 @@
                         <option value="inactive">{{'Inactive' | translate}}</option>
                     </select>
                 </app-form-field>
+                <app-form-field [errors]="errors" [field]="'month'">
+                    <label for="month">{{'Month' | translate}} * </label>
+                    <input autocomplete="off" type="date" name="month" id="month" [(ngModel)]="project.month">
+                </app-form-field>
 
                 <hr>
                 <app-form-field *ngIf="projects" [errors]="errors" [field]="'move_incomplete_to_project_id'">

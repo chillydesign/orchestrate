@@ -32,6 +32,7 @@ import { StartPageComponent } from './start-page/start-page.component';
 import { ClientComponent } from './clients/client/client.component';
 import { ProjectSummaryComponent } from './projects/project-summary/project-summary.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NewClientComponent } from './clients/new-client/new-client.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     StartPageComponent,
     ClientComponent,
     ProjectSummaryComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewClientComponent
   ],
   imports: [
     BrowserModule,
