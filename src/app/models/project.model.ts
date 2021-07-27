@@ -67,6 +67,7 @@ export class Project {
 
     setMonth(): void {
         if (this.month) {
+            const name = this.name;
             const month = new Date(this.month);
             // if date valid
             if (!isNaN(month.getTime())) {
@@ -75,7 +76,7 @@ export class Project {
                 const moo = new Intl.DateTimeFormat('fr', { month: 'long' }).format(month);
                 const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(month);
                 this.month = `${ye}-${mo}-${da}`;
-                this.name = `${moo} ${ye}`;
+                this.name = `${moo} ${ye} | ${name}`;
             }
         }
 
