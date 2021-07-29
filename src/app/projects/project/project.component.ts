@@ -197,9 +197,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.project.tasks.forEach(task => {
       task.uploads = ups.filter(u => u.task_id === task.id);
 
-      if (this.users) {
-        task.assignee = this.users.find(u => u.id === task.assignee_id);
-      }
+      // if (this.users) {
+      //   task.assignee = this.users.find(u => u.id === task.assignee_id);
+      // }
 
     });
 

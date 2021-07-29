@@ -45,7 +45,9 @@ export class Task {
             if (this.completed_at) {
                 this.completed_at_date = new Date(this.completed_at);
             }
-
+            if (obj.assignee) {
+                this.assignee = new User(obj.assignee);
+            }
         }
 
     }
