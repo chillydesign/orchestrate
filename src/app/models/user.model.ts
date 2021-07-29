@@ -11,7 +11,7 @@ export class User {
     public role: string;
     public is_admin: boolean;
 
-
+    public name: string;
 
 
     constructor(obj?: any) {
