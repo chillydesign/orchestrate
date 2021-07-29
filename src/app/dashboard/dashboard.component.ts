@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private projectsService: ProjectsService,
-    private tasksService: TasksService,
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +33,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getCurrentUser(): void {
     this.current_user_subscription = this.authService.current_user.subscribe(
       (user: User) => {
-        this.current_user = user;
-        this.getTasks();
+        if (user) {
+          this.current_user = user;
+          this.getTasks();
+        }
+
       }
     );
   }
@@ -45,7 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getTasks(): void {
 
 
-    this.projects_sub = this.projectsService.getProjects({ current: true }).subscribe(
+    this.projects_sub = this.projectsService.getProjects({ assignee: this.current_user, current: true }).subscribe(
       (projects: Project[]) => {
         if (projects) {
           this.projects = projects;

@@ -6,6 +6,7 @@ import { Project } from '../models/project.model';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Client } from '../models/client.model';
+import { User } from '../models/user.model';
 
 
 export interface ProjectsOptions {
@@ -14,6 +15,7 @@ export interface ProjectsOptions {
   status?: string;
   client_id?: number;
   current?: boolean;
+  assignee?: User;
 }
 
 @Injectable({
@@ -48,6 +50,9 @@ export class ProjectsService {
       }
       if (opts.current) {
         endpoint = endpoint.concat(`&current=true`);
+      }
+      if (opts.assignee) {
+        endpoint = endpoint.concat(`&assignee_id=${opts.assignee.id}`);
       }
     }
 
