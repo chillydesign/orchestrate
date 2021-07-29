@@ -31,12 +31,13 @@ export class SiteNavigationComponent implements OnInit, OnDestroy {
 
     this.projectsService.current_project_client.subscribe(
       (client) => {
+        this.site_name = environment.site_name;
+        this.home_page_url = ['/'];
         if (client) {
-          this.site_name = client.name;
-          this.home_page_url = ['/clients', client.slug];
-        } else {
-          this.site_name = environment.site_name;
-          this.home_page_url = ['/'];
+          if (!this.current_user) {
+            this.site_name = client.name;
+            this.home_page_url = ['/clients', client.slug];
+          }
         }
       });
   }
