@@ -55,17 +55,21 @@ export class ClientComponent implements OnInit, OnDestroy {
       (client: Client) => {
         if (client) {
           this.client = client;
+          this.projectsService.current_project_client.next(client);
           this.getProjects();
 
         }
       }
     );
   }
+
+
   getClientFromSlug(): void {
     this.client_sub = this.clientsService.getClientFromSlug(this.client_slug).subscribe(
       (client: Client) => {
         if (client) {
           this.client = client;
+          this.projectsService.current_project_client.next(client);
           this.getProjects();
 
         }

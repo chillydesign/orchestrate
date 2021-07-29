@@ -11,6 +11,8 @@ import { environment } from '../../../environments/environment';
 import { CsvService } from 'src/app/services/csv.service';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { Client } from 'src/app/models/client.model';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-project',
@@ -20,6 +22,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ProjectComponent implements OnInit, OnDestroy {
   public current_user: User;
   public project_id: number;
+  public client: Client;
   public project: Project;
   private route_params_subscription: Subscription;
   private delete_project_sub: Subscription;
@@ -38,6 +41,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private tasksService: TasksService,
     private projectsService: ProjectsService,
     private authService: AuthService,
+    private clientsService: ClientsService,
     private dragulaService: DragulaService,
     private csvService: CsvService,
     private router: Router) {
@@ -52,11 +56,19 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getCurrentUser();
 
-    this.subscribeToRoute();
   }
 
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
 
+        this.subscribeToRoute();
+      }
+    );
+  }
 
 
   subscribeToRoute(): void {
@@ -80,23 +92,21 @@ export class ProjectComponent implements OnInit, OnDestroy {
       (project: Project) => {
         if (project) {
           this.project = project;
+          this.client = this.project.client;
+          this.projectsService.current_project_client.next(this.client);
+
           this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
           this.setupDragSubscription();
           this.processTasks();
 
-          this.getCurrentUser();
+
+
         }
       }
     );
   }
 
-  getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe(
-      (user: User) => {
-        this.current_user = user;
-      }
-    );
-  }
+
 
   deleteProject(): void {
     if (confirm(`Are you sure you want to delete this project?`)) {

@@ -1,4 +1,4 @@
-import * as LANG_EN_TRANS from '../app/translate/lang-en';
+import * as LANG_FR_TRANS from '../app/translate/lang-fr';
 
 export const environment = {
   production: true,
@@ -10,5 +10,5 @@ export const environment = {
   cookie_domains: ['webfactor.ch'],
   cookie_length_hours: 50,
   cache_duration: 60000, // time to hold resources from API in cache in milliseconds
-  translations: LANG_EN_TRANS
+  translations: LANG_FR_TRANS
 };

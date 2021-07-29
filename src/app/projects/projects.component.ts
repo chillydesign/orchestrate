@@ -32,6 +32,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getCurrentUser();
+    this.projectsService.current_project_client.next(null);
 
   }
 

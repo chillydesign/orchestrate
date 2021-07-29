@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap, catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Project } from '../models/project.model';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+import { Client } from '../models/client.model';
 
 
 export interface ProjectsOptions {
@@ -20,8 +21,10 @@ export interface ProjectsOptions {
 })
 export class ProjectsService {
   private api_url = environment.api_url;
-
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  public current_project_client: Subject<Client> = new Subject();
+  constructor(private http: HttpClient, private authService: AuthService) {
+    this.current_project_client.next(null);
+  }
 
 
   getProjects(opts?: ProjectsOptions): Observable<Project[]> {

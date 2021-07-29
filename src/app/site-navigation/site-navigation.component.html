@@ -1,6 +1,6 @@
 <aside id="page_sidebar" [ngClass]="{visible: sidebarVisible}">
     <nav>
-        <a [routerLink]="['/']" class="branding">{{site_name}}</a>
+        <a [routerLink]="home_page_url" class="branding">{{site_name}}</a>
         <ul *ngIf="current_user">
 
             <ng-container *ngIf="current_user.is_admin">

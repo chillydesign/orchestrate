@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-site-navigation',
@@ -14,15 +15,30 @@ import { AuthService } from '../services/auth.service';
 export class SiteNavigationComponent implements OnInit, OnDestroy {
   public current_user: User;
   public site_name = environment.site_name;
+  public home_page_url: string[] = ['/'];
   public sidebarVisible = false;
   private router_events_subscription: Subscription;
   private current_user_subscription: Subscription;
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private projectsService: ProjectsService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.hideSidebarOnPageChange();
     this.getCurrentUser();
 
+    this.projectsService.current_project_client.subscribe(
+      (client) => {
+        if (client) {
+          this.site_name = client.name;
+          this.home_page_url = ['/clients', client.slug];
+        } else {
+          this.site_name = environment.site_name;
+          this.home_page_url = ['/'];
+        }
+      });
   }
 
   getCurrentUser(): void {
