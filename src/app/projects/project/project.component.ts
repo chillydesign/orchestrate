@@ -13,6 +13,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-project',
@@ -21,6 +22,7 @@ import { ClientsService } from 'src/app/services/clients.service';
 })
 export class ProjectComponent implements OnInit, OnDestroy {
   public current_user: User;
+  public users: User[];
   public project_id: number;
   public client: Client;
   public project: Project;
@@ -30,6 +32,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private drag_sub: Subscription;
   private update_project_sub: Subscription;
   private current_user_subscription: Subscription;
+  private users_sub: Subscription;
   private url_sub: Subscription;
   private update_task_sub: Subscription;
   public title = environment.site_name;
@@ -41,7 +44,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private tasksService: TasksService,
     private projectsService: ProjectsService,
     private authService: AuthService,
-    private clientsService: ClientsService,
+    private usersService: UsersService,
     private dragulaService: DragulaService,
     private csvService: CsvService,
     private router: Router) {
@@ -97,8 +100,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
           this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
           this.setupDragSubscription();
-          this.processTasks();
 
+          this.getUsers();
 
 
         }
@@ -107,6 +110,16 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
 
+  getUsers(): void {
+    this.users_sub = this.usersService.getUsers().subscribe(
+      (users: User[]) => {
+        if (users) {
+          this.users = users;
+        }
+        this.processTasks();
+      }
+    );
+  }
 
   deleteProject(): void {
     if (confirm(`Are you sure you want to delete this project?`)) {
@@ -183,6 +196,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
     const ups = this.project.uploads;
     this.project.tasks.forEach(task => {
       task.uploads = ups.filter(u => u.task_id === task.id);
+
+      if (this.users) {
+        task.assignee = this.users.find(u => u.id === task.assignee_id);
+      }
+
     });
 
   }
@@ -220,6 +238,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.project_sub,
       this.delete_project_sub,
       this.drag_sub,
+      this.users_sub,
       this.update_project_sub,
       this.current_user_subscription,
       this.update_task_sub,

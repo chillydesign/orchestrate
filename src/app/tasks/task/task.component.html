@@ -26,6 +26,8 @@
             <a *ngIf="task.priority === 1" title="Priority" class="icon icon_priority">Priority</a>
             {{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}
             <span *ngIf="task.completed_at_date"> | Completed: {{task.completed_at_date | date}}</span>
+
+            <span *ngIf="task.assignee">| Assigned to: {{task.assignee.name}}</span>
             | <a (click)="showCommentPopup()" title="Comments" class="comments_link"
                 [ngClass]="{has_comments: task.comments_count > 0}">{{task.comments_count}} comments</a>
 
@@ -44,6 +46,12 @@
             <li><a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">Priority</a>
             <li><a (click)="toggleCurrent()" title="Working on" class="hide_on_mobile icon icon_current">Working on</a>
             </li>
+
+            <li *ngFor="let user of users">
+                <a [ngClass]="{assigned:  task.assignee_id === user.id }" title="Assign to {{user.name}}"
+                    (click)="assignTo(user)">Assign to {{user.name}}</a>
+            </li>
+
             <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">Indent</a>
             </li>
             <li><a (click)="deleteTask()" title="Delete" class="icon icon_delete">Delete</a></li>

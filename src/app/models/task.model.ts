@@ -1,4 +1,5 @@
 import { Upload } from './upload.model';
+import { User } from './user.model';
 
 export class Task {
 
@@ -20,6 +21,8 @@ export class Task {
     public time_taken: number;
     public is_title: boolean;
     public is_current: boolean;
+    public assignee_id: number;
+    public assignee: User;
 
     public uploads: Upload[];
 

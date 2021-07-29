@@ -48,6 +48,7 @@ export class TasksService {
         time_taken: task.time_taken,
         is_title: task.is_title,
         is_current: task.is_current,
+        assignee_id: task.assignee_id,
       }
 
     };

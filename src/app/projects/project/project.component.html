@@ -19,7 +19,7 @@
 
         <ul dragula="TASKS" [(dragulaModel)]="project.tasks" (dragulaModelChange)="project.tasks = $event">
             <li class="orderable" *ngFor="let task of project.tasks">
-                <app-task [task]="task" [project]="project" [canAdministrate]="!!current_user"
+                <app-task [task]="task" [project]="project" [users]="users" [canAdministrate]="!!current_user"
                     (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)"
                     (addTaskBelowme)="addTaskBelow($event)">
                 </app-task>

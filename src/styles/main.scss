@@ -192,6 +192,11 @@ main {
         }
     }
 
+    a.assigned {
+        background-color: $brand_color;
+        color: white;
+    }
+
     form {
         margin-left: -5px;
 
@@ -317,7 +322,7 @@ main {
             top: 5px;
             right: 25px;
             z-index: 1000;
-            width: 155px;
+            width: 205px;
             background-color: $light_grey;
             border-radius: 5px;
             box-shadow: $box_shadow;

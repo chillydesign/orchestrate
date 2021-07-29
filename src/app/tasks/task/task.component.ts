@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { TasksService } from 'src/app/services/tasks.service';
 import { Project } from 'src/app/models/project.model';
 import { Upload } from 'src/app/models/upload.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-task',
@@ -13,6 +14,7 @@ import { Upload } from 'src/app/models/upload.model';
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
   @Input() project: Project;
+  @Input() users: User[];
   @Input() canAdministrate = false;
   @Input() canDelete = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -29,7 +31,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
-
   }
 
 
@@ -122,6 +123,15 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.task.indentation = 0;
     }
 
+    this.onSubmit();
+  }
+
+  assignTo(user: User): void {
+    if (this.task.assignee_id !== user.id) {
+      this.task.assignee_id = user.id;
+    } else {
+      this.task.assignee_id = null;
+    }
     this.onSubmit();
   }
 
