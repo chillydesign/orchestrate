@@ -18,7 +18,7 @@ export class Task {
     public completed_at: string;
     public completed_at_date: Date;
     public comments_count: number;
-    public time_taken: number;
+    public time_taken: number = 0;
     public is_title: boolean;
     public is_current: boolean;
     public assignee_id: number;

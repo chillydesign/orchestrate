@@ -161,6 +161,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     const task = this.project.tasks.find(t => t.id === newtask.id);
     if (task) {
       task.completed = newtask.completed;
+      task.time_taken = newtask.time_taken;
     }
     this.setPercentage();
   }
