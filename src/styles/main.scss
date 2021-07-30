@@ -74,6 +74,71 @@ main {
 
 
 
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0 0 $padding;
+
+    @media(min-width: $mobile_width) {
+        margin-bottom: 0;
+        flex-wrap: nowrap;
+
+        &.columns_wrap {
+            flex-wrap: wrap;
+        }
+    }
+
+
+
+
+
+}
+
+// end of columns
+
+.column {
+    flex: 1 auto;
+    margin: 0 $half_padding;
+    width: 100%;
+
+
+    &.column_half {
+        width: auto;
+        max-width: 50%;
+        max-width: calc(50% - #{$padding});
+    }
+
+
+
+    &.column_small {
+        @media(min-width: $mobile_width) {
+            width: #{100% * 1 / 3};
+        }
+
+    }
+
+
+
+    &.column_large {
+        @media(min-width: $mobile_width) {
+            width: #{100% * 2 /3 };
+        }
+    }
+
+    &.column_right {
+        @media(min-width: $mobile_width) {
+            text-align: right;
+        }
+    }
+}
+
+// end of column
+
+
+
+
 .alert {
     background: $brand_color;
     color: white;

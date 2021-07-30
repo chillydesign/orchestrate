@@ -13,15 +13,18 @@ import { TasksService } from '../services/tasks.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  public tasks_completed_today: Task[];
   public tasks: Task[];
   public projects: Project[];
   public current_user: User;
   private current_user_subscription: Subscription;
   private tasks_sub: Subscription;
+  private comple_today_sub: Subscription;
   private projects_sub: Subscription;
   constructor(
     private authService: AuthService,
     private projectsService: ProjectsService,
+    private tasksService: TasksService,
   ) { }
 
   ngOnInit(): void {
@@ -52,9 +55,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (projects) {
           this.projects = projects;
         }
+
+        this.getTasksCompletedToday();
       }
     );
   }
+
+
+
+  getTasksCompletedToday(): void {
+    this.comple_today_sub = this.tasksService.getTasksCompletedToday().subscribe(
+      (tasks: Task[]) => {
+        this.tasks_completed_today = tasks;
+      }
+    );
+  }
+
 
   removeOldTask(task: Task): void {
     const project = this.projects.find(pr => pr.id === task.project_id);
@@ -69,6 +85,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.current_user_subscription,
       this.projects_sub,
       this.tasks_sub,
+      this.comple_today_sub,
     ];
     subs.forEach((sub) => {
       if (sub) {

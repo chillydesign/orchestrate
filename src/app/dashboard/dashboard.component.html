@@ -1,17 +1,32 @@
 <h1>Dashboard</h1>
 
 
-<app-box *ngFor="let project of projects">
-    <h2> <a [routerLink]="['/projects', project.id]">{{project.nice_name}}</a></h2>
-    <ul *ngIf="project.tasks">
-        <li *ngFor="let task of project.tasks">
-            <app-task [task]="task" [project]="project" [canAdministrate]="!!current_user"
-                (taskDeleted)="removeOldTask($event)">
-            </app-task>
-        </li>
-        <li *ngIf="project.tasks.length === 0">No tasks set</li>
-    </ul>
+<div class="columns">
+    <div class="column column_large">
+        <app-box *ngFor="let project of projects">
+            <h2> <a [routerLink]="['/projects', project.id]">{{project.nice_name}}</a></h2>
+            <ul *ngIf="project.tasks">
+                <li *ngFor="let task of project.tasks">
+                    <app-task [task]="task" [project]="project" [canAdministrate]="false"
+                        (taskDeleted)="removeOldTask($event)">
+                    </app-task>
+                </li>
+                <li *ngIf="project.tasks.length === 0">No tasks set</li>
+            </ul>
 
 
 
-</app-box>
+        </app-box>
+    </div>
+    <div class="column column_small">
+        <app-box>
+            <div *ngIf="tasks_completed_today">
+                <h3>Tasks completed today</h3>
+                <ul>
+                    <li class="line_through" *ngFor="let task of tasks_completed_today">{{task.content}}</li>
+                </ul>
+
+            </div>
+        </app-box>
+    </div>
+</div>
