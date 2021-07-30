@@ -46,7 +46,16 @@
                 &nbsp;
                 <a (click)="deleteProject()">{{'Delete' | translate}}</a>
                 &nbsp;
-                <a *ngIf="current_user" (click)="exportProject()">{{'Export' | translate}}</a>
+
+                <span *ngIf="current_user">
+                    <a (click)="exportProject()">{{'Export' | translate}}</a>
+                    &nbsp;
+                    <ng-container *ngFor="let user of users">
+                        &nbsp;
+                        <a (click)="assignUnassignedTo(user)">AAUTT {{user.name}}</a>
+                    </ng-container>
+                </span>
+
             </p>
             <p *ngIf="current_user">{{project.total_minutes}} mins</p>
         </app-box-footer>

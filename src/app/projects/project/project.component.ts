@@ -121,6 +121,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     );
   }
 
+
+
   deleteProject(): void {
     if (confirm(`Are you sure you want to delete this project?`)) {
       this.delete_project_sub = this.projectsService.deleteProject(this.project).subscribe(
@@ -220,6 +222,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
           }
         }, i * 500);
       });
+    });
+  }
+
+  assignUnassignedTo(user: User): void {
+    console.log(this.project.tasks.map(t => t.assignee_id));
+    const unassigned = this.project.tasks.filter(t => t.assignee_id === null || t.assignee_id === 0);
+    unassigned.forEach((task, i) => {
+      setTimeout(() => {
+        task.assignee_id = user.id;
+        task.assignee = user;
+        this.update_task_sub = this.tasksService.updateTask(task).subscribe();
+      }, i * 500);
     });
   }
 
