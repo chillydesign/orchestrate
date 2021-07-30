@@ -226,9 +226,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   assignUnassignedTo(user: User): void {
-    console.log(this.project.tasks.map(t => t.assignee_id));
+
     const unassigned = this.project.tasks.filter(t => t.assignee_id === null || t.assignee_id === 0);
-    unassigned.forEach((task, i) => {
+    const undone = unassigned.filter(t => t.completed === false);
+    undone.forEach((task, i) => {
       setTimeout(() => {
         task.assignee_id = user.id;
         task.assignee = user;
