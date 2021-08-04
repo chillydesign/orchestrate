@@ -93,7 +93,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     if (this.search_term) {
       const s = this.search_term.toLowerCase();
       this.visible_projects = this.projects.filter((p) => {
-        return p.name.toLowerCase().includes(s);
+        return p.search_string.includes(s);
       });
     } else {
       this.visible_projects = this.projects;

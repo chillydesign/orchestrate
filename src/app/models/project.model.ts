@@ -1,4 +1,5 @@
 
+import { Client } from './client.model';
 import { Task } from './task.model';
 import { Upload } from './upload.model';
 
@@ -23,6 +24,9 @@ export class Project {
     public month: string;
     public nice_month: string;
     public nice_name: string;
+    public nice_name_with_client: string;
+    public search_string: string;
+
 
 
     public getNextTaskOrdering(): number {
@@ -95,6 +99,14 @@ export class Project {
             }
         }
 
+        if (this.client) {
+            this.nice_name_with_client = `${this.client.name} | ${this.nice_name}`;
+        } else {
+            this.nice_name_with_client = this.nice_name;
+        }
+
+        this.search_string = this.nice_name_with_client.toLowerCase();
+
     }
 
 
@@ -115,6 +127,9 @@ export class Project {
             }
             if (obj.uploads) {
                 this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
+            }
+            if (obj.client) {
+                this.client = new Client(obj.client);
             }
 
             this.setMonthAndNiceName();

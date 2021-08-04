@@ -4,7 +4,7 @@
 <div class="columns">
     <div class="column column_large">
         <app-box *ngFor="let project of projects">
-            <h2> <a [routerLink]="['/projects', project.id]">{{project.nice_name}}</a></h2>
+            <h2> <a [routerLink]="['/projects', project.id]">{{project.nice_name_with_client}}</a></h2>
             <ul *ngIf="project.tasks">
                 <li *ngFor="let task of project.tasks">
                     <app-task [task]="task" [project]="project" [canAdministrate]="false"

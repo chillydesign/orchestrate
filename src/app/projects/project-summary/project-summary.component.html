@@ -7,8 +7,8 @@
 
     <h2>
         <a [routerLink]="['/projects', project.id]">
-            <span *ngIf="project.client"> {{project.client.name}} | </span>
-            {{project.nice_name}}
+
+            {{project.nice_name_with_client}}
         </a>
     </h2>
 
