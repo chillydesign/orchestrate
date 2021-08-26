@@ -14,7 +14,9 @@ export class Project {
     public tasks: Task[];
     public random_tasks: Task[];
     public uploads: Upload[];
-    public tasks_count: { complete: number, incomplete: number, total: number };
+    public tasks_count_obj: { complete: number, incomplete: number, total: number };
+    public tasks_count: number;
+    public incomplete_tasks_count: number;
     public total_minutes: number;
     public total_hours: string;
     public percentage = 0;
@@ -42,20 +44,25 @@ export class Project {
     }
 
     public setTasksCount(): void {
-        if (this.tasks) {
-            this.tasks_count = {
-                complete: this.tasks.filter(t => t.completed).length,
-                incomplete: this.tasks.filter(t => t.completed === false).length,
-                total: this.tasks.length,
-            };
-        }
+        // if (this.tasks) {
+        //     this.tasks_count_obj = {
+        //         complete: this.tasks.filter(t => t.completed).length,
+        //         incomplete: this.tasks.filter(t => t.completed === false).length,
+        //         total: this.tasks.length,
+        //     };
+        // }
         this.setPercentage();
     }
 
     public setPercentage(): void {
-        if (this.tasks_count) {
-            const num = this.tasks_count.complete;
-            const den = Math.max(this.tasks_count.total, 1);
+        // if (this.tasks_count_obj) {
+        //     const num = this.tasks_count_obj.complete;
+        //     const den = Math.max(this.tasks_count_obj.total, 1);
+        //     this.percentage = Math.round(num / den * 100);
+        // }
+        if (this.incomplete_tasks_count && this.tasks_count) {
+            const num = this.tasks_count - this.incomplete_tasks_count;
+            const den = Math.max(this.tasks_count, 1);
             this.percentage = Math.round(num / den * 100);
         }
 

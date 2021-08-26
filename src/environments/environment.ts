@@ -10,6 +10,7 @@ export const environment = {
   production: false,
   site_name: `Orchestrate`,
   api_url: 'http://localhost/orchestrate_api',
+  // api_url: 'https://webfactor.ch/orchestrate_api',
   front_url: 'http://localhost:1234/',
   secure_cookie: false,
   cookie_name: 'token_local_orch',
