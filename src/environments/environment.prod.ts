@@ -5,7 +5,7 @@ export const environment = {
   site_name: `Orchestrate`,
   api_url: 'https://webfactor.ch/orchestrate_api',
   front_url: 'https://webfactor.ch/orchestrate/',
-  secure_cookie: false,
+  secure_cookie: true,
   cookie_name: 'token_prod_orch',
   cookie_domains: ['webfactor.ch'],
   cookie_length_hours: 48,

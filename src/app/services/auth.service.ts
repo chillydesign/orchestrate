@@ -111,7 +111,7 @@ export class AuthService {
 
     let sec_cookie = '';
     if (environment.secure_cookie) {
-      sec_cookie = `Secure;SameSite=Lax`;
+      sec_cookie = `Secure;SameSite=Strict`;
     }
 
     environment.cookie_domains.forEach(cookie_domain => {
