@@ -21,7 +21,7 @@
     </p>
 
     <app-box-footer>
-        <p>Last updated: {{ project.updated_at | date}} </p>
+        <p>{{'Last updated' | translate}} : {{ project.updated_at | date}} </p>
         <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a>
         </p>
     </app-box-footer>

@@ -3,13 +3,13 @@ export const LANG_FR_TRANS = {
 
     Projects: `Projets`,
     Refresh: `rafraichir`,
-    Archive: `Archive`,
+    Archive: `Archiver`,
     'New Project': `Nouveau projet`,
     incomplete: `incomplet`,
     complete: `complet`,
     tasks: `tâches`,
-    'tasks completed': `tâches completes`,
-    'tasks to be done': `tâches incompletes`,
+    'tasks completed': `tâches terminées`,
+    'tasks to be done': `tâches à effectuer`,
     Edit: `Modifier`,
     edit: `modifier`,
     Delete: `Supprimer`,
@@ -25,5 +25,11 @@ export const LANG_FR_TRANS = {
     'Drop it, baby!': `Tirer un fichier ici`,
     'Load more': `Charger plus`,
     Added: 'Ajouté le',
+    Upload: `Ajouter un fichier`,
+    Priority: `Urgent`,
+    Indent: `Indenter`,
+    "Sign in": `Connexion`,
+    "Last updated": `Dernière modification le`,
+
 
 };

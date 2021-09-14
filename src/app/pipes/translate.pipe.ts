@@ -7,7 +7,13 @@ export class TranslatePipe implements PipeTransform {
 
   private t = environment.translations;
 
+
+
   transform(value: any): any {
+
+    console.log(environment.translations);
+
+
     if (this.t[value]) {
       return this.t[value];
     } else {
