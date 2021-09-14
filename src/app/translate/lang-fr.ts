@@ -27,6 +27,7 @@ export const LANG_FR_TRANS = {
     Added: 'Ajouté le',
     Upload: `Ajouter un fichier`,
     Priority: `Urgent`,
+    "Assign to": `En cours`,
     Indent: `Indenter`,
     "Sign in": `Connexion`,
     "Last updated": `Dernière modification le`,

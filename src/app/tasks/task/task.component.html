@@ -41,22 +41,27 @@
 
         <a href="#" class="actions_opener">Actions</a>
         <ul>
-            <li><a *ngIf="project" (click)="toggleUpload()" title="Upload"
-                    class="hide_on_mobile icon icon_upload">Upload</a></li>
-            <li><a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">Priority</a>
+            <li><a *ngIf="project" (click)="toggleUpload()" title="Upload" class="hide_on_mobile icon icon_upload">{{
+                    "Upload" | translate}}</a></li>
+            <li><a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">
+                    {{ "Priority" | translate}}</a>
 
                 <ng-container *ngIf="canAdministrate">
-            <li><a (click)="toggleCurrent()" title="Working on" class="hide_on_mobile icon icon_current">Working on</a>
+            <li><a (click)="toggleCurrent()" title="Working on" class="hide_on_mobile icon icon_current">
+                    {{ "Working on" | translate}}</a>
             </li>
 
             <li *ngFor="let user of users">
                 <a [ngClass]="{assigned:  task.assignee_id === user.id }" title="Assign to {{user.name}}"
-                    (click)="assignTo(user)">Assign to {{user.name}}</a>
+                    (click)="assignTo(user)">
+                    {{ "Assign to" | translate}} {{user.name}}</a>
             </li>
             </ng-container>
-            <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">Indent</a>
+            <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">
+                    {{ "Indent" | translate}}</a>
             </li>
-            <li><a (click)="deleteTask()" title="Delete" class="icon icon_delete">Delete</a></li>
+            <li><a (click)="deleteTask()" title="Delete" class="icon icon_delete">
+                    {{ "Delete" | translate}}</a></li>
             <!-- <a (click)="addTaskBelow()" title="Add task below" class="icon icon_add">Add task below</a> -->
         </ul>
 
