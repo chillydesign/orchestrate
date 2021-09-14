@@ -1,4 +1,4 @@
-import * as LANG_FR_TRANS from '../app/translate/lang-fr';
+import { LANG_FR_TRANS } from '../app/translate/lang-fr';
 
 export const environment = {
   production: true,
