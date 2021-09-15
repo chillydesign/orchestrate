@@ -8,13 +8,18 @@ import { AuthService } from './auth.service';
 import { Client } from '../models/client.model';
 import { User } from '../models/user.model';
 
-
+/**
+ * Options for Project api
+ */
 export interface ProjectsOptions {
   limit?: number;
   offset?: number;
   status?: string;
   client_id?: number;
+  /** projects a user is currently working on */
   current?: boolean;
+  /** include tasks in fetch of projects */
+  include_tasks?: boolean;
   assignee?: User;
 }
 
@@ -50,6 +55,9 @@ export class ProjectsService {
       }
       if (opts.current) {
         endpoint = endpoint.concat(`&current=true`);
+      }
+      if (opts.include_tasks) {
+        endpoint = endpoint.concat(`&include_tasks=true`);
       }
       if (opts.assignee) {
         endpoint = endpoint.concat(`&assignee_id=${opts.assignee.id}`);

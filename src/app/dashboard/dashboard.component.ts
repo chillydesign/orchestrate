@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { ProjectsService } from '../services/projects.service';
 import { TasksService } from '../services/tasks.service';
+import { ProjectsOptions } from '../services/projects.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,8 +50,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getTasks(): void {
 
-
-    this.projects_sub = this.projectsService.getProjects({ assignee: this.current_user, current: true }).subscribe(
+    const opts: ProjectsOptions = { assignee: this.current_user, current: true };
+    this.projects_sub = this.projectsService.getProjects(opts).subscribe(
       (projects: Project[]) => {
         if (projects) {
           this.projects = projects;

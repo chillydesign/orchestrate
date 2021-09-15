@@ -8,6 +8,7 @@ import { Project } from 'src/app/models/project.model';
 })
 export class ProjectSummaryComponent implements OnInit {
   @Input() project: Project;
+  @Input() show_tasks: boolean;
   constructor() { }
 
   ngOnInit(): void {

@@ -11,9 +11,6 @@ export class TranslatePipe implements PipeTransform {
 
   transform(value: any): any {
 
-    console.log(environment.translations);
-
-
     if (this.t[value]) {
       return this.t[value];
     } else {

@@ -10,6 +10,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { ClientComponent } from './clients/client/client.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 
 
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
   { path: 'projects', component: ProjectsComponent, data: { title: ' Project' } },
+
+  { path: 'tasks', component: TasksComponent, data: { title: 'Tasks' } },
 
   { path: 'clients/new', component: NewClientComponent, data: { title: 'New Client' } },
   { path: 'clients/id/:id', component: ClientComponent, data: { title: 'Client' } },

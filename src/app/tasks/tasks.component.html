@@ -1,0 +1,6 @@
+<h1>{{'Tasks' | translate}}
+</h1>
+
+<ng-container *ngFor="let project of projects">
+    <app-project-summary [project]="project" [show_tasks]="true"></app-project-summary>
+</ng-container>

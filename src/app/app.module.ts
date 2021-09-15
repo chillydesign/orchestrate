@@ -33,6 +33,7 @@ import { ClientComponent } from './clients/client/client.component';
 import { ProjectSummaryComponent } from './projects/project-summary/project-summary.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { NewClientComponent } from './clients/new-client/new-client.component';
     ClientComponent,
     ProjectSummaryComponent,
     DashboardComponent,
-    NewClientComponent
+    NewClientComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,

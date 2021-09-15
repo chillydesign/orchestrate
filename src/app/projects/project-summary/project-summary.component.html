@@ -20,6 +20,19 @@
         <strong> {{ project.tasks_count}}</strong> {{'tasks completed' | translate}}
     </p>
 
+
+    <ng-container *ngIf="show_tasks">
+
+        <ul style="margin-top: 20px;">
+            <li *ngFor="let task of project.tasks">
+                <app-task [task]="task" [project]="project">
+                </app-task>
+            </li>
+        </ul>
+    </ng-container>
+
+
+
     <app-box-footer>
         <p>{{'Last updated' | translate}} : {{ project.updated_at | date}} </p>
         <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a>
