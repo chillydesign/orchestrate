@@ -23,11 +23,13 @@
             <div *ngIf="tasks_completed_today">
                 <h3>Tasks completed today</h3>
                 <ul>
-                    <li class="line_through" *ngFor="let task of tasks_completed_today">{{task.content}}</li>
+                    <li *ngFor="let task of tasks_completed_today">{{task.content}}
+                        {{task.time_taken}} mins</li>
                 </ul>
-                <p style="padding:0">Total Hours: {{total_hours}}</p>
-                <p style="padding:0">Total Earned: {{total_earned}}</p>
-
+                <div class="earnings">
+                    <p> Hours: {{total_hours}}</p>
+                    <p> Earned: {{total_earned}}</p>
+                </div>
             </div>
         </app-box>
     </div>

@@ -1,260 +1,229 @@
 h1 {
-    font-size: #{ $font_size * 2.5};
-    margin: 0 0 $padding;
-    font-weight: bold;
-    line-height: 120%;
+  font-size: #{$font_size * 2.5};
+  margin: 0 0 $padding;
+  font-weight: bold;
+  line-height: 120%;
 }
 
 h2 {
-    font-size: #{ $font_size * 1.8};
-    margin: 0 0 $padding;
-    font-weight: bold;
+  font-size: #{$font_size * 1.8};
+  margin: 0 0 $padding;
+  font-weight: bold;
 }
 
 h3 {
-    font-size: #{ $font_size * 1.4};
-    margin: 0 0 $padding;
-    font-weight: bold;
+  font-size: #{$font_size * 1.4};
+  margin: 0 0 $padding;
+  font-weight: bold;
 }
 
 h4 {
-    font-size: #{ $font_size * 1.2};
-    margin: 0 0 5px;
-    font-weight: bold;
+  font-size: #{$font_size * 1.2};
+  margin: 0 0 5px;
+  font-weight: bold;
 }
 
-
 p {
-    font-size: $font_size;
-    line-height: $line_height;
-    padding: 0 0 $padding;
+  font-size: $font_size;
+  line-height: $line_height;
+  padding: 0 0 $padding;
 
-    &.no_padding {
-        padding: 0;
-    }
+  &.no_padding {
+    padding: 0;
+  }
 }
 
 li {
-    font-size: $font_size;
-    line-height: $line_height;
-    padding: 0 0 5px;
-
-
+  font-size: $font_size;
+  line-height: $line_height;
+  padding: 0 0 5px;
 }
-
 
 a {
-    text-decoration: none;
+  text-decoration: none;
+  color: $brand_color;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:visited {
     color: $brand_color;
-    transition: all 0.3s;
-    cursor: pointer;
+  }
 
-    &:visited {
-        color: $brand_color;
-    }
+  &:active {
+    transform: translateY(1px);
+  }
 
-    &:active {
-        transform: translateY(1px);
-    }
+  &:hover {
+    color: $brand_color_adjust;
+  }
 
+  &.button {
+    display: inline-block;
+    padding: $half_padding $double_padding;
+    background: $brand_gradient;
+    color: white;
+    border-radius: $border_radius;
+    opacity: 0.8;
 
     &:hover {
-        color: $brand_color_adjust;
+      opacity: 1;
     }
-
-    &.button {
-        display: inline-block;
-        padding: $half_padding $double_padding;
-        background: $brand_gradient;
-        color: white;
-        border-radius: $border_radius;
-        opacity: 0.8;
-
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-
+  }
 }
 
-
 .line_through {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 em,
 i,
 .font_italic {
-    font-style: italic;
+  font-style: italic;
 }
 
 strong,
 b,
 .font_bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-
-
-
-
 form {
-    margin: 0;
+  margin: 0;
 
-    ul {
-        margin: 0 0 #{$padding * -1};
-        padding: 0;
+  ul {
+    margin: 0 0 #{$padding * -1};
+    padding: 0;
 
-        &.no_margin {
-            margin: 0;
-        }
-
-        li {
-            padding: 0 0 $padding;
-            margin: 0;
-            font-size: $font_size;
-            position: relative;
-
-            &.field_highlighted {
-
-                .task_input,
-                input,
-                select {
-                    border-color: $brand_color;
-                }
-
-                .field_description {
-                    color: $brand_color;
-                }
-            }
-
-
-            &.field_valid {
-
-                .task_input,
-                input,
-                select {
-                    border-color: $green;
-                }
-
-                .field_description {
-                    color: $green;
-                }
-            }
-
-            &.field_invalid {
-
-                .task_input,
-                input,
-                select {
-                    border-color: $red;
-                }
-
-                .field_description {
-                    color: $red;
-                }
-            }
-
-            a {
-                cursor: pointer;
-            }
-
-        }
+    &.no_margin {
+      margin: 0;
     }
 
-    .input_overlay {
-        position: absolute;
-        top: 33px;
-        right: 10px;
-        font-size: $font_size;
-        color: $medium_grey;
-        text-transform: uppercase;
+    li {
+      padding: 0 0 $padding;
+      margin: 0;
+      font-size: $font_size;
+      position: relative;
 
-    }
-
-    .field_description {
-        font-size: #{$font_size * 0.8};
-        display: block;
-        margin: 5px 0 0 5px;
-    }
-
-
-    table {
-        margin: $padding 0;
-
-
-        input {
-            font-size: 1em;
+      &.field_highlighted {
+        .task_input,
+        input,
+        select {
+          border-color: $brand_color;
         }
 
         .field_description {
-            font-size: 0.8em;
+          color: $brand_color;
+        }
+      }
+
+      &.field_valid {
+        .task_input,
+        input,
+        select {
+          border-color: $green;
         }
 
+        .field_description {
+          color: $green;
+        }
+      }
+
+      &.field_invalid {
+        .task_input,
+        input,
+        select {
+          border-color: $red;
+        }
+
+        .field_description {
+          color: $red;
+        }
+      }
+
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .input_overlay {
+    position: absolute;
+    top: 33px;
+    right: 10px;
+    font-size: $font_size;
+    color: $medium_grey;
+    text-transform: uppercase;
+  }
+
+  .field_description {
+    font-size: #{$font_size * 0.8};
+    display: block;
+    margin: 5px 0 0 5px;
+  }
+
+  table {
+    margin: $padding 0;
+
+    input {
+      font-size: 1em;
     }
 
-    // table
+    .field_description {
+      font-size: 0.8em;
+    }
+  }
 
-
-
+  // table
 }
 
 // end of forms
-
-
 
 .task_input,
 input,
 select,
 textarea,
 button {
-    width: 100%;
-    padding: $half_padding;
-    font-size: $font_size;
-    border: 1px solid $medium_grey;
-    font-family: $font_stack;
-    border-radius: $border_radius;
-    line-height: 1;
+  width: 100%;
+  padding: $half_padding;
+  font-size: $font_size;
+  border: 1px solid $medium_grey;
+  font-family: $font_stack;
+  border-radius: $border_radius;
+  line-height: 1;
 
-    &:focus {
-        border-color: $brand_color;
-        outline: 0;
-    }
-
+  &:focus {
+    border-color: $brand_color;
+    outline: 0;
+  }
 }
 
 .task_input {
-    line-height: 140%;
+  line-height: 140%;
 }
 
 button,
 input[type="button"] {
-    background-color: $brand_color;
-    color: white;
-    padding-left: $double_padding;
-    padding-right: $double_padding;
+  background-color: $brand_color;
+  color: white;
+  padding-left: $double_padding;
+  padding-right: $double_padding;
 }
 
-input[type=checkbox],
-input[type=radio],
+input[type="checkbox"],
+input[type="radio"],
 input[type="button"],
 button {
-    width: auto;
+  width: auto;
 }
-
-
 
 label {
-    font-size: #{$font_size* 0.9};
-    font-weight: bold;
-    display: block;
-    padding: 0 0 5px;
+  font-size: #{$font_size * 0.9};
+  font-weight: bold;
+  display: block;
+  padding: 0 0 5px;
 }
 
-
 hr {
-    margin: $double_padding 0;
-    border: 1px solid $medium_grey;
-
+  margin: $double_padding 0;
+  border: 1px solid $medium_grey;
 }
