@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public tasks: Task[];
   public projects: Project[];
   public current_user: User;
+  public total_hours: string;
+  public total_earned: string;
   private current_user_subscription: Subscription;
   private tasks_sub: Subscription;
   private comple_today_sub: Subscription;
@@ -57,7 +59,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.projects = projects;
         }
 
-        this.getTasksCompletedToday();
+        if (this.current_user) {
+          this.getTasksCompletedToday();
+
+        }
+
       }
     );
   }
@@ -68,6 +74,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.comple_today_sub = this.tasksService.getTasksCompletedToday().subscribe(
       (tasks: Task[]) => {
         this.tasks_completed_today = tasks;
+
+        const total_minutes: number = this.tasks_completed_today.map(t => t.time_taken).reduce((a, b) => b + a, 0);
+        const hours = Math.floor(total_minutes / 60);
+        const minutes = total_minutes - (hours * 60);
+        this.total_hours = `${hours} hr ${minutes} mins`;
+
+        const formatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
+        const pounds = total_minutes * 55 / 60;
+        this.total_earned = formatter.format(pounds).concat(` @ £55/hr`);
       }
     );
   }
