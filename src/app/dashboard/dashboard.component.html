@@ -23,8 +23,10 @@
             <div *ngIf="tasks_completed_today">
                 <h3>Tasks completed today</h3>
                 <ul>
-                    <li *ngFor="let task of tasks_completed_today">{{task.content}}
-                        {{task.time_taken}} mins</li>
+                    <li *ngFor="let task of tasks_completed_today">
+                        {{task.content}}
+                        <a [routerLink]="['/projects', task.project_id]">{{task.time_taken}} mins</a>
+                    </li>
                 </ul>
                 <div class="earnings">
                     <p> Hours: {{total_hours}}</p>

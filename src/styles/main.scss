@@ -740,7 +740,7 @@ a.load_translate {
   padding: $half_padding $padding;
   border-bottom-right-radius: $border_radius;
   border-bottom-left-radius: $border_radius;
-  margin: 0 $negative_padding $negative_padding;
+  margin: $padding $negative_padding $negative_padding;
   p {
     padding: 0;
   }
