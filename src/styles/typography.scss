@@ -87,6 +87,31 @@ b,
   font-weight: bold;
 }
 
+table {
+  width: 100%;
+  thead {
+  }
+  tbody {
+  }
+  tr {
+    &:nth-child(2n) {
+      td {
+        background-color: $light_grey;
+      }
+    }
+  }
+  th,
+  td {
+    font-size: $font_size;
+    padding: $half_padding;
+    text-align: left;
+  }
+
+  th {
+    font-weight: bold;
+  }
+}
+
 form {
   margin: 0;
 

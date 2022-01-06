@@ -126,7 +126,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
     const points: number[] = this.monthly_stats.map(s => Math.round(s.hours * 55 / 60));
-    const labels = this.monthly_stats.map(s => new Date(s.date));
+    const labels = this.monthly_stats.map(s => s.date);
 
 
 
@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         labels: labels,
         datasets: [
           {
-            label: 'hours',
+            label: '£',
             data: points,
             borderWidth: 1,
             backgroundColor: '#2a75d0aa',

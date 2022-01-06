@@ -2,11 +2,25 @@
 
 
 
-<ng-container *ngFor="let client of clients">
+<ng-container>
     <app-box>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients">
+                    <td><a [routerLink]="['/clients', client.slug]">{{client.name}}</a></td>
+                    <td>{{client.updated_at | date}}</td>
+                </tr>
+            </tbody>
+        </table>
 
-        <h2><a [routerLink]="['/clients', client.slug]">{{client.name}}</a></h2>
+
 
 
     </app-box>
