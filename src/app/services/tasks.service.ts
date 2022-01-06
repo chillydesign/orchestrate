@@ -71,6 +71,14 @@ export class TasksService {
   }
 
 
+  getMonthlyStats(): Observable<Task[]> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=monthly_stats`;
+    return this.http.get<Task[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+
+    );
+  }
   getCurrentTasks(): Observable<Task[]> {
     const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=tasks&is_current=true`;
