@@ -6,6 +6,11 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
+export interface TasksOptions {
+  client_id?: number;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -79,6 +84,24 @@ export class TasksService {
 
     );
   }
+
+
+
+  getTasks(opts: TasksOptions): Observable<Task[]> {
+    const options = this.authService.setAPIOptionsNoLogin();
+    let endpoint = `${this.api_url}/?route=tasks`;
+
+    if (opts) {
+      if (opts.client_id) {
+        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+    }
+    return this.http.get<Task[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => res.map((p: Task) => new Task(p)))
+    );
+  }
+
   getCurrentTasks(): Observable<Task[]> {
     const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=tasks&is_current=true`;

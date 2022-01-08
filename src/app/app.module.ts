@@ -34,6 +34,7 @@ import { ProjectSummaryComponent } from './projects/project-summary/project-summ
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { ClientTasksComponent } from './client-tasks/client-tasks.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { TasksComponent } from './tasks/tasks.component';
     ProjectSummaryComponent,
     DashboardComponent,
     NewClientComponent,
-    TasksComponent
+    TasksComponent,
+    ClientTasksComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,19 @@
+<app-spinner [show]="!client"></app-spinner>
+<ng-container *ngIf="client">
+    <h1>
+        <a [routerLink]="['/clients', client.slug]">{{client.name}}</a> | All tasks
+    </h1>
+    <app-box>
+
+        <ul>
+            <li *ngFor="let task of tasks">
+                <app-task [task]="task" [project]="task.project" [users]="users" [canAdministrate]="!!current_user">
+                </app-task>
+            </li>
+        </ul>
+
+    </app-box>
+
+
+
+</ng-container>
