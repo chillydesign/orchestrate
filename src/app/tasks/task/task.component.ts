@@ -15,8 +15,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
   @Input() project: Project;
   @Input() users: User[];
-  @Input() canAdministrate = false;
-  @Input() canDelete = true;
+  @Input() canAdministrate = true;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -142,15 +141,17 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   deleteTask(): void {
-    if (confirm('Are you sure?')) {
-      this.delete_task_sub = this.tasksService.deleteTask(this.task).subscribe(
-        () => {
-          this.taskDeleted.next(this.task);
-        },
-        (error) => {
+    if (this.canAdministrate) {
+      if (confirm('Are you sure?')) {
+        this.delete_task_sub = this.tasksService.deleteTask(this.task).subscribe(
+          () => {
+            this.taskDeleted.next(this.task);
+          },
+          (error) => {
 
-        }
-      );
+          }
+        );
+      }
     }
   }
 

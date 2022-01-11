@@ -37,7 +37,7 @@
         </p>
 
     </div>
-    <div class="actions_container" *ngIf="canDelete">
+    <div class="actions_container">
 
         <a href="#" class="actions_opener">Actions</a>
         <ul>
@@ -56,12 +56,15 @@
                     (click)="assignTo(user)">
                     {{ "Assign to" | translate}} {{user.name}}</a>
             </li>
+            <li>
+                <a (click)="deleteTask()" title="Delete" class="icon icon_delete">
+                    {{ "Delete" | translate}}</a>
+            </li>
             </ng-container>
             <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">
                     {{ "Indent" | translate}}</a>
             </li>
-            <li><a (click)="deleteTask()" title="Delete" class="icon icon_delete">
-                    {{ "Delete" | translate}}</a></li>
+
             <!-- <a (click)="addTaskBelow()" title="Add task below" class="icon icon_add">Add task below</a> -->
         </ul>
 

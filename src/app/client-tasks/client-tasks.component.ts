@@ -12,6 +12,7 @@ import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { TasksOptions, TasksService } from '../services/tasks.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-client-tasks',
@@ -21,6 +22,7 @@ import { TasksOptions, TasksService } from '../services/tasks.service';
 export class ClientTasksComponent implements OnInit, OnDestroy {
   public client: Client;
   public current_user: User;
+  public users: User[];
   public tasks: Task[];
   public client_id: number;
   public client_slug: string;
@@ -28,10 +30,12 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
   private client_sub: Subscription;
   private tasks_sub: Subscription;
   private route_params_subscription: Subscription;
+  private users_sub: Subscription;
   private current_user_subscription: Subscription;
   constructor(
     private clientsService: ClientsService,
     private authService: AuthService,
+    private usersService: UsersService,
     private projectsService: ProjectsService,
     private tasksService: TasksService,
     private route: ActivatedRoute) { }
@@ -77,12 +81,25 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
         if (client) {
           this.client = client;
           this.projectsService.current_project_client.next(client);
-          this.getTasks();
+          this.getUsers();
 
         }
       }
     );
   }
+
+
+  getUsers(): void {
+    this.users_sub = this.usersService.getUsers().subscribe(
+      (users: User[]) => {
+        if (users) {
+          this.users = users;
+        }
+        this.getTasks();
+      }
+    );
+  }
+
 
 
   getClientFromSlug(): void {
@@ -122,6 +139,7 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
       this.client_sub,
       this.tasks_sub,
       this.route_params_subscription,
+      this.users_sub,
 
     ];
     subs.forEach((sub) => {
