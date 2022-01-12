@@ -131,7 +131,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const days = 7;
     const rolling_average = [];
     for (let p = 0; p < points.length; p++) {
-      const subset = points.slice(p - 5, p);
+      const start = Math.max(0, p - Math.floor((days / 2)));
+      const end = Math.min(points.length, p + Math.floor(days / 2));
+      const subset = points.slice(start, end);
       const sum = subset.reduce((a, b) => a + b, 0);
       const av = Math.round(sum / days);
       rolling_average.push(av);
