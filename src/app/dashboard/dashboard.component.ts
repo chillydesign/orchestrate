@@ -128,18 +128,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const points: number[] = this.monthly_stats.map(s => Math.round(s.hours * 55 / 60));
     const labels = this.monthly_stats.map(s => s.date);
 
+    const days = 7;
+    const rolling_average = [];
+    for (let p = 0; p < points.length; p++) {
+      const subset = points.slice(p - 5, p);
+      const sum = subset.reduce((a, b) => a + b, 0);
+      const av = Math.round(sum / days);
+      rolling_average.push(av);
+
+    }
 
 
     return {
-      type: 'bar',
+
       data: {
         labels: labels,
         datasets: [
           {
+            type: 'bar',
             label: '£',
             data: points,
             borderWidth: 1,
             backgroundColor: '#2a75d0aa',
+          },
+          {
+            type: 'line',
+            label: 'Av.',
+            data: rolling_average,
+            borderWidth: 1,
+            pointRadius: 0,
           }
         ]
       },
