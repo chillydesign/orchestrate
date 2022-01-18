@@ -24,6 +24,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public total_hours: string;
   public total_earned: string;
   public chart: Chart;
+  public hourly_rate: number = 55;
+  public daily_target = 123;
   @ViewChild('chartContainer', { static: true }) public chartContainer: ElementRef;
 
   private current_user_subscription: Subscription;
@@ -88,7 +90,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.total_hours = `${hours} hr ${minutes} mins`;
 
         const formatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
-        const pounds = total_minutes * 55 / 60;
+        const pounds = total_minutes * this.hourly_rate / 60;
         this.total_earned = formatter.format(pounds).concat(` @ £55/hr`);
       }
     );
@@ -129,6 +131,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const labels = this.monthly_stats.map(s => s.date);
 
     const days = 7;
+    const target = [];
     const rolling_average = [];
     for (let p = 0; p < points.length; p++) {
       const start = Math.max(0, p - Math.floor((days / 2)));
@@ -137,7 +140,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       const sum = subset.reduce((a, b) => a + b, 0);
       const av = Math.round(sum / days);
       rolling_average.push(av);
-
+      target.push(this.daily_target);
     }
 
 
@@ -159,6 +162,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data: rolling_average,
             borderWidth: 1,
             pointRadius: 0,
+          },
+          {
+            type: 'line',
+            label: 'Target',
+            data: target,
+            borderWidth: 1,
+            pointRadius: 0,
+            borderColor: '#aaaaaa',
+            fill: false,
+
+
           }
         ]
       },
