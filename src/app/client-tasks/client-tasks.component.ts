@@ -24,6 +24,9 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
   public current_user: User;
   public users: User[];
   public tasks: Task[];
+  public visible_tasks: Task[];
+  public current_col: string;
+  public direction = 1;
   public client_id: number;
   public client_slug: string;
   public projects: Project[];
@@ -123,12 +126,40 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
       (tasks: Task[]) => {
         if (tasks) {
           this.tasks = tasks;
+          this.visible_tasks = tasks;
         }
-
-
       }
     );
   }
+
+
+
+  sortColumn(column: string): void {
+
+    if (column === this.current_col) {
+      this.direction = this.direction * -1; // change from asc to desc
+    } else {
+      this.current_col = column;
+    }
+
+    this.visible_tasks = this.sortByProperty(column);
+
+  }
+
+  sortByProperty(column: string): Task[] {
+    const sorted = this.tasks.sort(
+      (a, b) => {
+        if (a[column] > b[column]) {
+          return this.direction;
+        } else {
+          return (this.direction * -1);
+        }
+      }
+    );
+    return sorted;
+  }
+
+
 
 
 

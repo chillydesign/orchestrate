@@ -10,12 +10,14 @@
                 <tr>
                     <th>Client</th>
                     <th>Updated</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let client of clients">
                     <td><a [routerLink]="['/clients', client.slug]">{{client.name}}</a></td>
                     <td>{{client.updated_at | date}}</td>
+                    <td><a [routerLink]="['/clients', client.slug, 'tasks']">All tasks</a></td>
                 </tr>
             </tbody>
         </table>
