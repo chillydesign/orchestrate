@@ -35,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ClientTasksComponent } from './client-tasks/client-tasks.component';
+import { ProjectWholeComponent } from './projects/project-whole/project-whole.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ClientTasksComponent } from './client-tasks/client-tasks.component';
     DashboardComponent,
     NewClientComponent,
     TasksComponent,
-    ClientTasksComponent
+    ClientTasksComponent,
+    ProjectWholeComponent
   ],
   imports: [
     BrowserModule,

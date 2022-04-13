@@ -5,6 +5,7 @@ import { TasksService } from 'src/app/services/tasks.service';
 import { Project } from 'src/app/models/project.model';
 import { Upload } from 'src/app/models/upload.model';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-task',
@@ -24,12 +25,30 @@ export class TaskComponent implements OnInit, OnDestroy {
   public showTick = false;
   public showComments = false;
   public updating = false;
+  public menu_open = false;
+  public current_user: User;
+
   private update_task_sub: Subscription;
+  private upload_sub: Subscription;
+  private current_user_subscription: Subscription;
   private delete_task_sub: Subscription;
   public time_options: { amount: number, translation: string }[] = this.tasksService.timeOptions();
-  constructor(private tasksService: TasksService) { }
+  constructor(
+    private tasksService: TasksService,
+    private authService: AuthService,
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getCurrentUser();
+  }
+
+
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
+      }
+    );
   }
 
 
@@ -70,6 +89,10 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   toggleCurrent(): void {
     this.task.is_current = !this.task.is_current;
+    this.onSubmit();
+  }
+  togglePublic(): void {
+    this.task.is_public = !this.task.is_public;
     this.onSubmit();
   }
 
@@ -156,6 +179,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
+  toggleOpener(): void {
+    this.menu_open = !this.menu_open;
+  }
+
+
   toggleUpload(): void {
     this.showUpload = !this.showUpload;
   }
@@ -176,11 +204,21 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.showUpload = false;
   }
 
+  getUploads(): void {
+    this.upload_sub = this.tasksService.getUploads(this.task.id).subscribe(
+      (uploads: Upload[]) => {
+        this.task.uploads = uploads;
+      }
+    )
+  }
+
 
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.update_task_sub,
       this.delete_task_sub,
+      this.upload_sub,
+      this.current_user_subscription,
     ];
     subs.forEach((sub) => {
       if (sub) {

@@ -1,8 +1,11 @@
 <div class="row_container task_container    priority_{{task.priority}} indentation_{{task.indentation}}"
     [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
     <div class="completed_container">
-        <input [disabled]="updating" (click)="toggleCompleted()" type="checkbox" name="completed"
-            [(ngModel)]="task.completed">
+        <input class="is_public_checkbox" *ngIf="current_user" [disabled]="updating || !current_user"
+            (click)="togglePublic()" type="checkbox" name="is_public" [(ngModel)]="task.is_public">
+        <input [disabled]="updating || !current_user" (click)="toggleCompleted()" type="checkbox" name="completed"
+            [(ngModel)]="task.completed" [ngClass]="{cant_change:!current_user}">
+
     </div>
 
     <div class="content_container">
@@ -18,31 +21,56 @@
                 <option *ngFor="let time_option of time_options" [ngValue]="time_option.amount">
                     {{time_option.translation}}</option>
             </select> -->
-            <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken"
-                class="task_input task_input_time" (change)="onSubmit()" placeholder="minutes taken" />
+            <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken" min="0"
+                step="1" class="task_input task_input_time" (change)="onSubmit()" placeholder="minutes taken" />
 
 
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
-        <p *ngIf="canAdministrate" class="task_added">
-            <a *ngIf="task.priority === 1" title="Priority" class="icon icon_priority">Priority</a>
-            {{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}
-            <span *ngIf="task.completed_at_date"> | Completed: {{task.completed_at_date | date}}</span>
+        <div class="task_added">
+            <div *ngIf="canAdministrate && task.priority === 1">
+                <a title="Priority" class="icon icon_priority">Priority</a>
+            </div>
 
-            <span *ngIf="task.assignee">| Assigned to: {{task.assignee.name}}</span>
-            | <a (click)="showCommentPopup()" title="Comments" class="comments_link"
-                [ngClass]="{has_comments: task.comments_count > 0}">{{task.comments_count}} comments</a>
+            <div *ngIf="canAdministrate">{{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}</div>
 
-        </p>
-        <p class="task_uploads_container" *ngIf="task.uploads">
+
+            <div *ngIf="canAdministrate && task.completed_at_date">Completed: {{task.completed_at_date | date}}</div>
+
+            <div *ngIf="canAdministrate && task.assignee">Assigned to: {{task.assignee.name}}</div>
+
+            <div *ngIf="task.comments_count > 0">
+                <a (click)="showCommentPopup()" title="Comments"
+                    class="comments_link has_comments">{{task.comments_count}} comments</a>
+            </div>
+            <div *ngIf="task.uploads_count > 0">
+                <a (click)="getUploads()" title="Uploads" class="comments_link has_comments">{{task.uploads_count}}
+                    uploads</a>
+                <span *ngIf="task.uploads">
+                    <a class="upload_box" *ngFor="let upload of task.uploads" target="_blank"
+                        href="{{upload.full_url}}">
+                        {{upload.filename}}</a>
+                </span>
+            </div>
+
+
+        </div>
+
+
+
+
+        <!-- <p class="task_uploads_container" *ngIf="task.uploads">
             <a *ngFor="let upload of task.uploads" target="_blank" href="{{upload.full_url}}"> {{upload.filename}}</a>
-        </p>
+        </p> -->
 
     </div>
-    <div class="actions_container">
+    <div class="actions_container" [ngClass]="{menu_open: menu_open}">
 
-        <a href="#" class="actions_opener">Actions</a>
+        <a (click)="toggleOpener()" class="actions_opener">Actions</a>
         <ul>
+            <li><a *ngIf="project" (click)="showCommentPopup()" title="Comment"
+                    class="hide_on_mobile icon icon_comment">{{
+                    "Comment" | translate}}</a></li>
             <li><a *ngIf="project" (click)="toggleUpload()" title="Upload" class="hide_on_mobile icon icon_upload">{{
                     "Upload" | translate}}</a></li>
             <li><a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">

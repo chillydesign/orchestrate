@@ -21,8 +21,11 @@ export class Task {
     public time_taken: number = 0;
     public is_title: boolean;
     public is_current: boolean;
+    public is_approved: boolean;
+    public is_public: boolean;
     public assignee_id: number;
     public assignee: User;
+    public uploads_count: number;
 
     public uploads: Upload[];
 

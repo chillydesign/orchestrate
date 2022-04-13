@@ -51,6 +51,9 @@ export class Project {
         //         total: this.tasks.length,
         //     };
         // }
+
+        this.incomplete_tasks_count = this.tasks.filter(f => f.completed === false).length;
+        this.tasks_count = this.tasks.length;
         this.setPercentage();
     }
 
@@ -60,9 +63,16 @@ export class Project {
         //     const den = Math.max(this.tasks_count_obj.total, 1);
         //     this.percentage = Math.round(num / den * 100);
         // }
-        if (this.incomplete_tasks_count && this.tasks_count) {
+
+
+        if (this.tasks_count == 0 && this.incomplete_tasks_count === 0) {
+            this.percentage = 0;
+        } else if (this.incomplete_tasks_count === 0) {
+            this.percentage = 100;
+
+        } else {
             const num = this.tasks_count - this.incomplete_tasks_count;
-            const den = Math.max(this.tasks_count, 1);
+            const den = this.tasks_count;
             this.percentage = Math.round(num / den * 100);
         }
 
@@ -102,7 +112,8 @@ export class Project {
                 const moo = new Intl.DateTimeFormat('fr', { month: 'long' }).format(month);
                 const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(month);
                 this.month = `${ye}-${mo}-${da}`;
-                this.nice_name = `${moo} ${ye} | ${name}`;
+                this.nice_month = `${moo} ${ye}`;
+                this.nice_name = `${this.nice_month} | ${name}`;
             }
         }
 

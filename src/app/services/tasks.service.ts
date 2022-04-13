@@ -5,6 +5,7 @@ import { Task } from '../models/task.model';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Upload } from '../models/upload.model';
 
 export interface TasksOptions {
   client_id?: number;
@@ -27,6 +28,7 @@ export class TasksService {
         project_id: task.project_id,
         ordering: task.ordering,
         time_taken: task.time_taken,
+        is_public: task.is_public,
       }
     };
     const endpoint = `${this.api_url}/?route=tasks`;
@@ -53,6 +55,8 @@ export class TasksService {
         time_taken: task.time_taken,
         is_title: task.is_title,
         is_current: task.is_current,
+        is_public: task.is_public,
+        is_approved: task.is_approved,
         assignee_id: task.assignee_id,
       }
 
@@ -118,6 +122,18 @@ export class TasksService {
       catchError(this.authService.handleError),
       map(res => res.map((p: Task) => new Task(p)))
     );
+  }
+
+
+  getUploads(task_id: number): Observable<Upload[]> {
+
+    const options = this.authService.setAPIOptionsNoLogin();
+    const endpoint = `${this.api_url}/?route=uploads&task_id=${task_id}`;
+    return this.http.get<Upload[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => res.map((u: Upload) => new Upload(u)))
+    );
+
   }
 
 

@@ -49,12 +49,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private csvService: CsvService,
     private router: Router) {
 
-    // add a handle to the dragdrop
-    this.dragulaService.createGroup('TASKS', {
-      moves(el, container, handle) {
-        return handle.classList.contains('handle');
-      }
-    });
+    // // add a handle to the dragdrop
+    // this.dragulaService.createGroup('TASKS', {
+    //   moves(el, container, handle) {
+    //     return handle.classList.contains('handle');
+    //   }
+    // });
 
   }
 
@@ -99,7 +99,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
           this.projectsService.current_project_client.next(this.client);
 
           this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
-          this.setupDragSubscription();
+          // this.setupDragSubscription();
 
           this.getUsers();
 
@@ -116,7 +116,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
         if (users) {
           this.users = users;
         }
-        this.processTasks();
+        // this.processTasks();
       }
     );
   }
@@ -234,6 +234,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         task.assignee_id = user.id;
         task.assignee = user;
+
         this.update_task_sub = this.tasksService.updateTask(task).subscribe();
       }, i * 500);
     });
@@ -268,7 +269,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.dragulaService.destroy('TASKS');
+    // this.dragulaService.destroy('TASKS');
 
   }
 

@@ -6,8 +6,10 @@
 
 
     <h2>
-        <a [routerLink]="['/projects', project.id]">
-
+        <a *ngIf="project.client_id" [routerLink]="['/clients', 'id', project.client_id]">
+            {{project.nice_name_with_client}}
+        </a>
+        <a *ngIf="!project.client_id" [routerLink]="['/projects', project.id]">
             {{project.nice_name_with_client}}
         </a>
     </h2>
@@ -35,7 +37,6 @@
 
     <app-box-footer>
         <p>{{'Last updated' | translate}} : {{ project.updated_at | date}} </p>
-        <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a>
-        </p>
+        <!-- <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a></p> -->
     </app-box-footer>
 </app-box>

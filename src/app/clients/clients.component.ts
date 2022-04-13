@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Client } from '../models/client.model';
+import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 import { ClientsService } from '../services/clients.service';
 
 @Component({
@@ -10,15 +12,30 @@ import { ClientsService } from '../services/clients.service';
 })
 export class ClientsComponent implements OnInit, OnDestroy {
   public clients: Client[];
+  public current_user: User;
+  private current_user_subscription: Subscription;
   private clients_sub: Subscription;
   constructor(
+    private authService: AuthService,
     private clientsService: ClientsService
   ) { }
 
-  ngOnInit(): void {
-    this.getClients();
+
+  ngOnInit() {
+    this.getCurrentUser();
+
   }
 
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
+        if (user) {
+          this.getClients();
+        }
+      }
+    );
+  }
 
 
   getClients(): void {
@@ -36,6 +53,7 @@ export class ClientsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.clients_sub,
+      this.current_user_subscription,
     ];
     subs.forEach((sub) => {
       if (sub) {

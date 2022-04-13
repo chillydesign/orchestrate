@@ -40,7 +40,10 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.current_user_subscription = this.authService.current_user.subscribe(
       (user: User) => {
         this.current_user = user;
-        this.setStatus();
+        if (user) {
+          this.setStatus();
+
+        }
       }
     );
   }

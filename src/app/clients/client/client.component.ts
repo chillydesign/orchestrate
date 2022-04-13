@@ -3,8 +3,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { Project } from 'src/app/models/project.model';
+import { User } from 'src/app/models/user.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-client',
@@ -13,15 +15,18 @@ import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.serv
 })
 export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
+  public users: User[];
   public client_id: number;
   public client_slug: string;
   public projects: Project[];
   private client_sub: Subscription;
   private projects_sub: Subscription;
+  private users_sub: Subscription;
   private route_params_subscription: Subscription;
   constructor(
     private clientsService: ClientsService,
     private projectsService: ProjectsService,
+    private usersService: UsersService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -78,15 +83,35 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   getProjects(): void {
-    const options: ProjectsOptions = { client_id: this.client.id };
+    const options: ProjectsOptions = { status: 'active', client_id: this.client.id, include_tasks: true };
     this.projects_sub = this.projectsService.getProjects(options).subscribe(
       (projects: Project[]) => {
         if (projects) {
           this.projects = projects;
           this.projects.map(p => p.client = this.client);
+
+          this.getUsers();
         }
       }
     );
+  }
+
+
+  getUsers(): void {
+    this.users_sub = this.usersService.getUsers().subscribe(
+      (users: User[]) => {
+        if (users) {
+          this.users = users;
+        }
+        // this.processTasks();
+      }
+    );
+  }
+
+
+  refreshProjects(): void {
+    this.projects = [];
+    this.getProjects();
   }
 
 
@@ -94,6 +119,7 @@ export class ClientComponent implements OnInit, OnDestroy {
     const subs: Subscription[] = [
       this.client_sub,
       this.projects_sub,
+      this.users_sub,
       this.route_params_subscription,
 
     ];

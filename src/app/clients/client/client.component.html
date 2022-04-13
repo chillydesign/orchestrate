@@ -1,10 +1,13 @@
 <app-spinner [show]="!client"></app-spinner>
 <ng-container *ngIf="client">
-    <h1>{{client.name}}</h1>
+    <h1>{{client.name}} <a (click)="refreshProjects()" class="icon icon_refresh">{{'Refresh' | translate}}</a></h1>
 
+    <app-box>
+        <div class="project_whole" *ngFor="let project of projects">
+            <app-project-whole [project]="project" [users]="users"></app-project-whole>
 
-    <app-project-summary *ngFor="let project of projects" [project]="project"></app-project-summary>
-
+        </div>
+    </app-box>
 
     <app-box>
         <p> <a class="button button_primary" [routerLink]="['/projects', 'new', 'clients', client.id]">{{'New Project' |

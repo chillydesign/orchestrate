@@ -7,10 +7,10 @@
         <form (ngSubmit)="onSubmit()" novalidate>
 
 
-            <input appAutofocus [placeholder]="'add task here' | translate" autocomplete="off" type="text"
-                name="content" id="content" [(ngModel)]="task.content">
+            <input [placeholder]="'add task here' | translate" autocomplete="off" type="text" name="content"
+                id="content" [(ngModel)]="task.content">
 
-
+            <!-- appAutofocus -->
 
         </form>
     </div>

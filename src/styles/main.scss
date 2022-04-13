@@ -129,15 +129,15 @@ main {
   margin: 0;
   padding: 0;
 
-  .icon {
-    opacity: 0.1;
-  }
+  // .icon {
+  //   opacity: 0.1;
+  // }
 
-  &:hover {
-    .icon {
-      opacity: 1;
-    }
-  }
+  // &:hover {
+  //   .icon {
+  //     opacity: 1;
+  //   }
+  // }
 }
 
 .orderable {
@@ -160,7 +160,7 @@ main {
 }
 
 .task_container {
-  margin: 0 0 $padding;
+  margin: 0 0 $half_padding;
 
   &.completed {
     .content_container {
@@ -229,17 +229,66 @@ main {
     }
   }
 
+  $checkbox_size: 25px;
+
   .completed_container {
-    width: 40px;
-    max-width: 40px;
+    // width: 40px;
+    // max-width: 40px;
+    padding: 0 10px 0 0;
 
     // big checkbox
     input {
-      transform: scale(1.4);
+      // transform: scale(1.4);
       position: relative;
-      top: 8px;
-      color: $brand_color;
+      top: 5px;
+      // color: $brand_color;
+      // cursor: pointer;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 10px;
+      width: $checkbox_size;
+      height: $checkbox_size;
+      appearance: none;
+      transform: scale(1);
+      padding: 0;
+      background-color: white;
+      border: 1px solid $medium_grey;
       cursor: pointer;
+      transition: all 0.3s;
+      background-image: url("../assets/images/tick.svg");
+
+      &:hover {
+        background-color: lighten($green, 30);
+        background-size: 14px;
+      }
+
+      &:checked {
+        background-color: $green;
+      }
+
+      &.is_public_checkbox {
+        background-image: url("../assets/images/eye.svg");
+        background-size: 24px;
+        background-position: 0px 1px;
+
+        &:hover {
+          background-color: lighten($brand_color, 30);
+        }
+
+        &:checked {
+          background-color: $brand_color;
+          background-image: url("../assets/images/eye_white.svg");
+        }
+      }
+
+      &.cant_change {
+        cursor: default;
+        background-color: white !important;
+
+        &:checked {
+          background-color: $green !important;
+        }
+      }
     }
   }
 
@@ -268,7 +317,7 @@ main {
 
   .content_container {
     flex: 1 auto;
-    width: 100%;
+    // width: 100%;
     position: relative;
 
     &:hover {
@@ -288,11 +337,17 @@ main {
     }
   }
 
-  p.task_added {
-    font-size: 1em;
+  .task_added {
+    font-size: 0.8em;
     font-style: italic;
-    padding: 4px 4px 0 0;
-    color: #888;
+    padding: 3px 0 0 0;
+    text-indent: 4px;
+    color: #777;
+
+    div {
+      padding-right: 10px;
+      display: inline-block;
+    }
 
     .icon_priority {
       opacity: 1;
@@ -313,20 +368,25 @@ main {
   }
 
   .actions_container {
-    padding: 0 $half_padding 0 0;
+    // padding: 0 $half_padding 0 0;
+    margin: 0 0 0 $half_padding;
     // min-width: 50px;
     // max-width: 50px;
     position: relative;
 
     .actions_opener {
       background: url("../assets/images/menu.svg") no-repeat center center;
-      text-indent: -9999px;
+      border-radius: $border_radius;
+      font-size: 0;
       display: inline-block;
       background-size: 25px;
-      width: 50px;
-      height: 50px;
+      width: $checkbox_size;
+      height: $checkbox_size;
       cursor: pointer;
       opacity: 0.5;
+      border: 1px solid white;
+      position: relative;
+      top: 9px;
     }
 
     ul {
@@ -360,7 +420,11 @@ main {
       }
     }
 
-    &:hover {
+    &:hover,
+    &.menu_open {
+      .actions_opener {
+        background-color: darken($light_grey, 10);
+      }
       ul {
         display: block;
       }
@@ -423,7 +487,7 @@ main {
 /// .task_container
 
 .task_upload {
-  margin: -10px 0 45px;
+  margin: 0px 0 45px;
 }
 
 .uploads_container {
@@ -576,6 +640,31 @@ h1 {
   a.icon {
     position: relative;
     top: 10px;
+  }
+}
+
+.project_whole {
+  padding: 0 0 $padding;
+  position: relative;
+  // border-top: 3px solid $light_grey;
+
+  .progression_outer {
+    background-color: $medium_grey;
+    // background-color: red;
+    // top: $negative_padding;
+    // position: relative;
+  }
+
+  .box_footer {
+    position: relative;
+    top: -20px;
+    opacity: 0.3;
+  }
+
+  &:hover {
+    .box_footer {
+      opacity: 1;
+    }
   }
 }
 
@@ -743,5 +832,16 @@ a.load_translate {
   margin: $padding $negative_padding $negative_padding;
   p {
     padding: 0;
+  }
+}
+
+.upload_box {
+  display: inline-block;
+  padding: 0px 5px;
+  background: darken($light_grey, 3);
+  border-radius: 5px;
+  margin-left: 3px;
+  &:hover {
+    background-color: darken($light_grey, 5);
   }
 }
