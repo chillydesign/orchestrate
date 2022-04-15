@@ -8,7 +8,7 @@ export const environment = {
   secure_cookie: true,
   cookie_name: 'token_prod_orch',
   cookie_domains: ['webfactor.ch'],
-  cookie_length_hours: 48,
+  cookie_length_hours: 96,
   cache_duration: 60000, // time to hold resources from API in cache in milliseconds
   translations: LANG_FR_TRANS
 };

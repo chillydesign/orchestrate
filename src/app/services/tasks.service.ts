@@ -80,9 +80,9 @@ export class TasksService {
   }
 
 
-  getMonthlyStats(): Observable<Task[]> {
+  getMonthlyStats(start_date: string): Observable<Task[]> {
     const options = this.authService.setAPIOptions();
-    const endpoint = `${this.api_url}/?route=monthly_stats`;
+    const endpoint = `${this.api_url}/?route=monthly_stats&start_date=${start_date}`;
     return this.http.get<Task[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
 

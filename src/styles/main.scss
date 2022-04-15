@@ -235,6 +235,7 @@ main {
     // width: 40px;
     // max-width: 40px;
     padding: 0 10px 0 0;
+    flex-shrink: 0;
 
     // big checkbox
     input {
@@ -843,5 +844,18 @@ a.load_translate {
   margin-left: 3px;
   &:hover {
     background-color: darken($light_grey, 5);
+  }
+}
+
+.chart_container {
+  .button_group {
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button {
+      text-align: center;
+      flex-grow: 0;
+    }
   }
 }

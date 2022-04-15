@@ -7,7 +7,7 @@
             <h2> <a [routerLink]="['/projects', project.id]">{{project.nice_name_with_client}}</a></h2>
             <ul *ngIf="project.tasks">
                 <li *ngFor="let task of project.tasks">
-                    <app-task [task]="task" [project]="project" [canAdministrate]="false"
+                    <app-task [task]="task" [project]="project" [canAdministrate]="true"
                         (taskDeleted)="removeOldTask($event)">
                     </app-task>
                 </li>
@@ -39,7 +39,12 @@
         <app-box>
             <div class="chart_container">
                 <canvas #chartContainer></canvas>
+                <div class="button_group">
+                    <a (click)="goBackwards()" class="button button_white">&larr;</a><a (click)="goForwards()"
+                        class="button button_white">&rarr;</a>
+                </div>
             </div>
+
         </app-box>
 
     </div>

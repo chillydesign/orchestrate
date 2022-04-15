@@ -9,6 +9,7 @@ import { TasksService } from '../services/tasks.service';
 import { ProjectsOptions } from '../services/projects.service';
 import { ChartConfiguration } from 'chart.js';
 import * as Chart from 'chart.js';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public monthly_stats: { date: string, hours: number }[];
   public projects: Project[];
   public current_user: User;
+  public start_date = moment();
   public total_hours: string;
   public total_earned: string;
   public chart: Chart;
@@ -50,6 +52,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (user: User) => {
         if (user) {
           this.current_user = user;
+          this.initialiseChart();
+
           this.getTasks();
         }
 
@@ -99,11 +103,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   getStats(): void {
-    this.stats_sub = this.tasksService.getMonthlyStats().subscribe(
+    const start_date_string = this.start_date.format('YYYY-MM-DD');
+    this.stats_sub = this.tasksService.getMonthlyStats(start_date_string).subscribe(
       (stats: any) => {
         if (stats) {
           this.monthly_stats = (stats);
-          this.initialiseChart();
+
+          this.loadChartData();
+
         }
 
       }
@@ -113,11 +120,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   initialiseChart(): void {
     if (this.chartContainer) {
-      setTimeout(() => {
-        const canvas = this.chartContainer.nativeElement;
-        const config = this.chart_config();
-        this.chart = new Chart(canvas, config);
-      }, 450);
+
+      // setTimeout(() => { }, 450);
+      const canvas = this.chartContainer.nativeElement;
+      const config = this.chart_config();
+      this.chart = new Chart(canvas, config);
     }
   }
 
@@ -126,23 +133,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   chart_config(): ChartConfiguration {
 
 
-
-    const points: number[] = this.monthly_stats.map(s => Math.round(s.hours * 55 / 60));
-    const labels = this.monthly_stats.map(s => s.date);
-
-    const days = 7;
-    const target = [];
-    const rolling_average = [];
-    for (let p = 0; p < points.length; p++) {
-      const start = Math.max(0, p - Math.floor((days / 2)));
-      const end = Math.min(points.length, p + Math.ceil(days / 2));
-      const subset = points.slice(start, end);
-      const sum = subset.reduce((a, b) => a + b, 0);
-      const av = Math.round(sum / (subset.length));
-      rolling_average.push(av);
-      target.push(this.daily_target);
-    }
-
+    let labels = [];
+    let points = [];
+    let rolling_average = [];
+    let target = [];
 
     return {
 
@@ -209,6 +203,47 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
     };
+  }
+
+  loadChartData(): void {
+
+    const points: number[] = this.monthly_stats.map(s => Math.round(s.hours * 55 / 60));
+    const labels = this.monthly_stats.map(s => s.date);
+
+    const days = 7;
+    const target = [];
+    const rolling_average = [];
+    for (let p = 0; p < points.length; p++) {
+      const start = Math.max(0, p - Math.floor((days / 2)));
+      const end = Math.min(points.length, p + Math.ceil(days / 2));
+      const subset = points.slice(start, end);
+      const sum = subset.reduce((a, b) => a + b, 0);
+      const av = Math.round(sum / (subset.length));
+      rolling_average.push(av);
+      target.push(this.daily_target);
+    }
+
+
+    setTimeout(() => {
+      this.chart.data.datasets[0].data = points;
+      this.chart.data.datasets[1].data = rolling_average;
+      this.chart.data.datasets[2].data = target;
+      this.chart.data.labels = labels;
+      this.chart.update();
+    }, 360);
+
+  }
+
+
+  goBackwards(): void {
+    this.start_date.subtract(1, 'week');
+    this.getStats();
+
+  }
+  goForwards(): void {
+    this.start_date.add(1, 'week');
+    this.getStats();
+
   }
 
 

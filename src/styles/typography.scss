@@ -62,8 +62,16 @@ a {
     padding: $half_padding $double_padding;
     background: $brand_gradient;
     color: white;
+    border: 1px solid transparent;
     border-radius: $border_radius;
     opacity: 0.8;
+
+    &.button_white {
+      background: none;
+      background-color: transparent;
+      border: 1px solid $medium_grey;
+      color: $brand_color;
+    }
 
     &:hover {
       opacity: 1;
