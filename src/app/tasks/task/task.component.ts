@@ -95,6 +95,10 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.task.is_public = !this.task.is_public;
     this.onSubmit();
   }
+  toggleApproved(): void {
+    this.task.is_approved = !this.task.is_approved;
+    this.onSubmit();
+  }
 
 
   addTaskBelow(): void {

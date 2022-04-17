@@ -259,12 +259,30 @@ main {
       background-image: url("../assets/images/tick.svg");
 
       &:hover {
-        background-color: lighten($green, 30);
-        background-size: 14px;
+        background-color: lighten($brand_color, 30);
       }
 
       &:checked {
-        background-color: $green;
+        background-color: $brand_color;
+      }
+
+      &.is_completed_checkbox {
+        &:hover {
+          background-color: lighten($green, 30);
+          background-size: 14px;
+        }
+
+        &:checked {
+          background-color: $green;
+        }
+      }
+
+      &.is_approved_checkbox {
+        background-image: url("../assets/images/thumb.svg");
+        background-size: 15px;
+        &:checked {
+          background-image: url("../assets/images/thumb_white.svg");
+        }
       }
 
       &.is_public_checkbox {
@@ -272,12 +290,7 @@ main {
         background-size: 24px;
         background-position: 0px 1px;
 
-        &:hover {
-          background-color: lighten($brand_color, 30);
-        }
-
         &:checked {
-          background-color: $brand_color;
           background-image: url("../assets/images/eye_white.svg");
         }
       }
@@ -626,7 +639,7 @@ main {
 
   &.icon_tick {
     background-image: url("../assets/images/tick.svg");
-    background-color: $green;
+    background-color: $brand_color;
     background-size: 9px;
     width: 15px;
     height: 15px;

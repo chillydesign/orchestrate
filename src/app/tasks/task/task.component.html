@@ -1,10 +1,15 @@
 <div class="row_container task_container    priority_{{task.priority}} indentation_{{task.indentation}}"
     [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
     <div class="completed_container">
-        <input class="is_public_checkbox" *ngIf="current_user" [disabled]="updating || !current_user"
-            (click)="togglePublic()" type="checkbox" name="is_public" [(ngModel)]="task.is_public">
-        <input [disabled]="updating || !current_user" (click)="toggleCompleted()" type="checkbox" name="completed"
-            [(ngModel)]="task.completed" [ngClass]="{cant_change:!current_user}">
+        <input title="publically viewable" class="is_public_checkbox" *ngIf="current_user"
+            [disabled]="updating || !current_user" (click)="togglePublic()" type="checkbox" name="is_public"
+            [(ngModel)]="task.is_public">
+        <input title="approved by client" class="is_approved_checkbox" *ngIf="current_user"
+            [disabled]="updating || !current_user" (click)="toggleApproved()" type="checkbox" name="is_approved"
+            [(ngModel)]="task.is_approved">
+        <input title="completed" class="is_completed_checkbox" [disabled]="updating || !current_user"
+            (click)="toggleCompleted()" type="checkbox" name="completed" [(ngModel)]="task.completed"
+            [ngClass]="{cant_change:!current_user}">
 
     </div>
 
@@ -15,15 +20,8 @@
                 (blur)="updateContent($event)" [textContent]="task.content"> </div>
             <div *ngIf="canAdministrate" class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
                 (blur)="updateTranslation($event)" [textContent]="task.translation"> </div>
-
-            <!-- <select *ngIf="canAdministrate" [(ngModel)]="task.time_taken" name="time_taken"
-                class="task_input task_input_time" (change)="onSubmit()">
-                <option *ngFor="let time_option of time_options" [ngValue]="time_option.amount">
-                    {{time_option.translation}}</option>
-            </select> -->
             <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken" min="0"
                 step="1" class="task_input task_input_time" (change)="onSubmit()" placeholder="minutes taken" />
-
 
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
