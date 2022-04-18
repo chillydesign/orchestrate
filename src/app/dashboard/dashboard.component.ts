@@ -133,34 +133,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
   chart_config(): ChartConfiguration {
 
 
-    let labels = [];
-    let points = [];
-    let rolling_average = [];
-    let target = [];
+
 
     return {
 
       data: {
-        labels: labels,
+        labels: [],
         datasets: [
           {
             type: 'bar',
             label: '£',
-            data: points,
+            data: [],
             borderWidth: 1,
             backgroundColor: '#2a75d0aa',
           },
           {
             type: 'line',
             label: 'Av.',
-            data: rolling_average,
+            data: [],
             borderWidth: 1,
             pointRadius: 0,
           },
           {
             type: 'line',
             label: 'Target',
-            data: target,
+            data: [],
             borderWidth: 1,
             pointRadius: 0,
             borderColor: '#aaaaaa',
@@ -171,6 +168,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ]
       },
       options: {
+        animation: {
+          duration: 500,
+        },
         legend: {
           display: false
         },
@@ -180,9 +180,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         scales: {
           yAxes: [{
             ticks: {
-              min: 0
+              min: 0,
+              suggestedMax: 300,
             }
           }],
+
           xAxes: [{
             offset: true,
             type: 'time',
