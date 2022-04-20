@@ -149,6 +149,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           },
           {
             type: 'line',
+            steppedLine: true,
             label: 'Av.',
             data: [],
             borderWidth: 1,
@@ -221,6 +222,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       const subset = points.slice(start, end);
       const sum = subset.reduce((a, b) => a + b, 0);
       const av = Math.round(sum / (subset.length));
+
+      console.log(p, start, end, subset, sum, av);
       rolling_average.push(av);
       target.push(this.daily_target);
     }
