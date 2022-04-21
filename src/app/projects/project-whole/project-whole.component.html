@@ -7,7 +7,7 @@
             {{project.percentage}}</div>
     </div>
 
-    <h2> {{project.name}} </h2>
+    <h2><span class="grey" *ngIf="project.nice_month">{{project.nice_month}} &nbsp;</span> {{project.name}} </h2>
 
 
     <!-- <a [routerLink]="['/projects', project.id]">  </a> -->
@@ -53,7 +53,6 @@
 
         </p>
         <p *ngIf="current_user">
-            <span *ngIf="project.nice_month">{{project.nice_month}} | </span>
             {{project.total_hours}}
         </p>
     </app-box-footer>

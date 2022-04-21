@@ -80,8 +80,8 @@
             </li>
 
             <li *ngFor="let user of users">
-                <a [ngClass]="{assigned:  task.assignee_id === user.id }" title="Assign to {{user.name}}"
-                    (click)="assignTo(user)">
+                <a class="icon icon_person" [ngClass]="{assigned:  task.assignee_id === user.id }"
+                    title="Assign to {{user.name}}" (click)="assignTo(user)">
                     {{ "Assign to" | translate}} {{user.name}}</a>
             </li>
             <li>
