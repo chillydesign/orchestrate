@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -15,6 +16,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
+  public current_user: User;
   public users: User[];
   public client_id: number;
   public client_slug: string;
@@ -22,18 +24,28 @@ export class ClientComponent implements OnInit, OnDestroy {
   private client_sub: Subscription;
   private projects_sub: Subscription;
   private users_sub: Subscription;
+  private current_user_subscription: Subscription;
   private route_params_subscription: Subscription;
   constructor(
     private clientsService: ClientsService,
+    private authService: AuthService,
     private projectsService: ProjectsService,
     private usersService: UsersService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-    this.subscribeToRoute();
+    this.getCurrentUser();
   }
 
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe(
+      (user: User) => {
+        this.current_user = user;
+        this.subscribeToRoute();
+
+      }
+    );
+  }
 
 
 
@@ -115,10 +127,28 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
+  showOnly(type: 'incomplete' | 'unapproved' | 'all'): void {
+    if (type == 'incomplete') {
+      this.projects.forEach(project => {
+        project.visible_tasks = project.tasks.filter(t => t.completed === false)
+      });
+    } else if (type == 'unapproved') {
+      this.projects.forEach(project => {
+        project.visible_tasks = project.tasks.filter(t => t.is_approved === false)
+      });
+    } else {
+      this.projects.forEach(project => {
+        project.visible_tasks = project.tasks;
+      });
+    }
+  }
+
+
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.client_sub,
       this.projects_sub,
+      this.current_user_subscription,
       this.users_sub,
       this.route_params_subscription,
 

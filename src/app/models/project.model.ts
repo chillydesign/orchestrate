@@ -12,6 +12,7 @@ export class Project {
     public created_at: string;
     public updated_at: string;
     public tasks: Task[];
+    public visible_tasks: Task[];
     public random_tasks: Task[];
     public uploads: Upload[];
     public tasks_count_obj: { complete: number, incomplete: number, total: number };
@@ -140,6 +141,7 @@ export class Project {
 
             if (obj.tasks) {
                 this.tasks = obj.tasks.map((task: Task) => new Task(task));
+                this.visible_tasks = this.tasks;
                 this.setTasksCount();
                 this.setTotalMinutes();
             }

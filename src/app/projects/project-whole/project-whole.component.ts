@@ -126,7 +126,7 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
   }
 
   removeOldTask(task: Task): void {
-    this.project.tasks = this.project.tasks.filter(t => t.id !== task.id);
+    this.project.visible_tasks = this.project.visible_tasks.filter(t => t.id !== task.id);
     this.setPercentage();
   }
 

@@ -1,6 +1,24 @@
 <app-spinner [show]="!client"></app-spinner>
 <ng-container *ngIf="client">
-    <h1>{{client.name}} <a (click)="refreshProjects()" class="icon icon_refresh">{{'Refresh' | translate}}</a></h1>
+
+
+    <div class="columns">
+        <div class="column">
+            <h1>{{client.name}} <a (click)="refreshProjects()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
+            </h1>
+
+
+        </div>
+        <div class="column column_right" *ngIf="current_user">
+            <div class="button_group">
+                <a (click)="showOnly('incomplete')" class="button button_white">Show incomplete</a>
+                <a (click)="showOnly('unapproved')" class="button button_white">Show unapproved</a>
+                <a (click)="showOnly('all')" class="button button_white">Show all</a>
+            </div>
+        </div>
+    </div>
+
+
 
     <app-box>
         <div class="project_whole" *ngFor="let project of projects">
