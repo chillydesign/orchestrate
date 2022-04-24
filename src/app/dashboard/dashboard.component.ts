@@ -223,7 +223,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       const sum = subset.reduce((a, b) => a + b, 0);
       const av = Math.round(sum / (subset.length));
 
-      console.log(p, start, end, subset, sum, av);
       rolling_average.push(av);
       target.push(this.daily_target);
     }
