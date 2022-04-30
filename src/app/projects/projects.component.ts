@@ -21,6 +21,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   public load_more = false;
   public loading = false;
   public search_term: string;
+  public search_timeout: any;
   private projects_sub: Subscription;
   private route_params_subscription: Subscription;
   private current_user_subscription: Subscription;
@@ -77,15 +78,19 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
     if (this.loading === false) {
       this.loading = true;
-      const options: ProjectsOptions = { offset: this.offset, limit: this.limit, status: this.status };
+      const options: ProjectsOptions = { offset: this.offset, limit: this.limit, status: this.status, search_term: this.search_term };
       this.projects_sub = this.projectsService.getProjects(options).subscribe(
         (projects: Project[]) => {
+          this.projects = projects;
+          this.visible_projects = projects;
+          this.loading = false;
+
           if (projects) {
-            projects.forEach(p => this.projects.push(p));
-            this.offset += this.limit;
-            this.load_more = (projects.length === this.limit);
-            this.loading = false;
-            this.onSearch();
+            //   projects.forEach(p => this.projects.push(p));
+            //   this.offset += this.limit;
+            //   this.load_more = (projects.length === this.limit);
+            // this.loading = false;
+            //   this.onSearch();
           }
         }
       );
@@ -93,14 +98,21 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   onSearch(): void {
-    if (this.search_term) {
-      const s = this.search_term.toLowerCase();
-      this.visible_projects = this.projects.filter((p) => {
-        return p.search_string.includes(s);
-      });
-    } else {
-      this.visible_projects = this.projects;
-    }
+    // debounce
+    clearTimeout(this.search_timeout);
+    this.search_timeout = setTimeout(() => {
+      this.getProjects();
+    }, 500);
+
+    // this.getProjects();
+    // if (this.search_term) {
+    //   const s = this.search_term.toLowerCase();
+    //   this.visible_projects = this.projects.filter((p) => {
+    //     return p.search_string.includes(s);
+    //   });
+    // } else {
+    //   this.visible_projects = this.projects;
+    // }
 
   }
 

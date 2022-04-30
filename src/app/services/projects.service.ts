@@ -21,6 +21,7 @@ export interface ProjectsOptions {
   /** include tasks in fetch of projects */
   include_tasks?: boolean;
   assignee?: User;
+  search_term?: string;
 }
 
 @Injectable({
@@ -61,6 +62,9 @@ export class ProjectsService {
       }
       if (opts.assignee) {
         endpoint = endpoint.concat(`&assignee_id=${opts.assignee.id}`);
+      }
+      if (opts.search_term && opts.search_term != '') {
+        endpoint = endpoint.concat(`&search_term=${opts.search_term}`);
       }
     }
 
