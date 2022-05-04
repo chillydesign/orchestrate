@@ -16,12 +16,14 @@
     <div class="content_container">
 
         <div class="inputs_container">
-            <div class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
-                (blur)="updateContent($event)" [textContent]="task.content"> </div>
-            <div *ngIf="canAdministrate" class="task_input" contenteditable="true" (keypress)="saveTaskOnEnter($event)"
-                (blur)="updateTranslation($event)" [textContent]="task.translation"> </div>
+            <div class="task_input" contenteditable="true" (keypress)="updateFieldFromEvent($event, 'content')"
+                (blur)="updateFieldFromEvent($event, 'content')" [textContent]="task.content"> </div>
+            <div *ngIf="canAdministrate" class="task_input" contenteditable="true"
+                (keypress)="updateFieldFromEvent($event, 'translation')"
+                (blur)="updateFieldFromEvent($event, 'translation')" [textContent]="task.translation"> </div>
             <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken" min="0"
-                step="1" class="task_input task_input_time" (change)="onSubmit()" placeholder="minutes taken" />
+                step="1" class="task_input task_input_time" (change)="updateField('time_taken')"
+                placeholder="minutes taken" />
 
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>

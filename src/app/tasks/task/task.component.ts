@@ -74,6 +74,27 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
+  updateField(field: string): void {
+    if (this.updating === false) {
+      this.updating = true;
+      const upl = this.task.uploads;
+
+      this.update_task_sub = this.tasksService.updateTaskField(this.task, field).subscribe(
+        (task: Task) => {
+          this.task = task;
+          this.task.uploads = upl;
+          this.taskUpdated.next(this.task);
+          this.updating = false;
+          this.showTickIcon();
+        },
+        (error) => {
+
+        }
+      );
+    }
+  }
+
+
   showTickIcon(): void {
     this.showTick = true;
     setTimeout(() => {
@@ -83,21 +104,26 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   toggleCompleted(): void {
     this.task.completed = !this.task.completed;
-    this.onSubmit();
+    this.updateField('completed');
+
+    // this.onSubmit();
 
   }
 
   toggleCurrent(): void {
     this.task.is_current = !this.task.is_current;
-    this.onSubmit();
+    this.updateField('is_current');
+    // this.onSubmit();
   }
   togglePublic(): void {
     this.task.is_public = !this.task.is_public;
-    this.onSubmit();
+    this.updateField('is_public');
+    // this.onSubmit();
   }
   toggleApproved(): void {
     this.task.is_approved = !this.task.is_approved;
-    this.onSubmit();
+    this.updateField('is_approved');
+    // this.onSubmit();
   }
 
 
@@ -109,27 +135,45 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
 
-  updateContent(event) {
-    this.task.content = event.target.textContent;
-    this.onSubmit();
-  }
-  updateTimeTaken(event) {
-    this.task.time_taken = event.target.textContent;
-    this.onSubmit();
-  }
+  // updateContent(event) {
+  //   this.task.content = event.target.textContent;
+  //   this.onSubmit();
+  // }
+  // updateTimeTaken(event) {
+  //   this.task.time_taken = event.target.textContent;
+  //   this.onSubmit();
+  // }
 
-  updateTranslation(event) {
-    this.task.translation = event.target.textContent;
-    this.onSubmit();
-  }
+  // updateTranslation(event) {
+  //   this.task.translation = event.target.textContent;
+  //   this.onSubmit();
+  // }
 
-  saveTaskOnEnter(event) {
+  // saveTaskOnEnter(event, field: ('content' | 'translation')) {
 
-    if (event.key === 'Enter') {
+  //   if (event.key === 'Enter') {
 
-      this.onSubmit();
+  //     this.onSubmit();
+  //     return false;
+  //   }
+  // }
+
+
+
+  updateFieldFromEvent(event, field: ('content' | 'translation')) {
+
+
+    if (event.type === 'keypress' && event.key === 'Enter') {
+      this.task[field] = event.target.textContent;
+      this.updateField(field);
       return false;
+    } else if (event.type == 'blur') {
+      this.task[field] = event.target.textContent;
+      this.updateField(field);
     }
+
+
+
   }
 
 
@@ -148,8 +192,8 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.task.is_title = true;
       this.task.indentation = 0;
     }
-
-    this.onSubmit();
+    this.updateField('indentation');
+    // this.onSubmit();
   }
 
   assignTo(user: User): void {
@@ -158,13 +202,15 @@ export class TaskComponent implements OnInit, OnDestroy {
     } else {
       this.task.assignee_id = null;
     }
-    this.onSubmit();
+    this.updateField('assignee_id');
+    // this.onSubmit();
   }
 
   togglePriority(): void {
     // 1 0    // 0 1
     this.task.priority = (this.task.priority + 1) % 2;
-    this.onSubmit();
+    this.updateField('priority');
+    // this.onSubmit();
   }
 
   deleteTask(): void {

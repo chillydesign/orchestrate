@@ -68,6 +68,41 @@ export class TasksService {
   }
 
 
+  updateTaskField(task: Task, field: string): Observable<Task> {
+    const options = this.authService.setAPIOptionsNoLogin();
+    const endpoint = `${this.api_url}/?route=tasks&id=${task.id}&single_field=true`;
+
+    const data = { attributes: { field: field, data: task[field] } };
+
+    // const data = {
+    //   attributes: {
+    //     content: task.content,
+    //     completed: task.completed,
+    //     translation: task.translation,
+    //     ordering: task.ordering,
+    //     indentation: task.indentation,
+    //     priority: task.priority,
+    //     completed_at: task.completed_at,
+    //     time_taken: task.time_taken,
+    //     is_title: task.is_title,
+    //     is_current: task.is_current,
+    //     is_public: task.is_public,
+    //     is_approved: task.is_approved,
+    //     assignee_id: task.assignee_id,
+    //   }
+
+    // };
+    return this.http.patch<Task>(endpoint, data, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Task(res))
+    );
+  }
+
+
+
+
+
+
 
   deleteTask(task: Task): Observable<Task> {
     const options = this.authService.setAPIOptionsNoLogin();

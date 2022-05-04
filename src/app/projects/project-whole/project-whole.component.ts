@@ -155,8 +155,10 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
     //   });
     // }
 
+
     if (!this.current_user) {
       this.project.tasks = this.project.tasks.filter(t => t.is_public === true)
+      this.project.visible_tasks = this.project.tasks.filter(t => t.is_public === true)
     }
 
 
