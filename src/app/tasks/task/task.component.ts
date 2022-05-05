@@ -67,7 +67,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.showTickIcon();
         },
         (error) => {
-
+          this.showOtherEditedError(error);
         }
       );
     }
@@ -75,6 +75,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   updateField(field: string): void {
+    this.showTick = false;
     if (this.updating === false) {
       this.updating = true;
       const upl = this.task.uploads;
@@ -88,9 +89,18 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.showTickIcon();
         },
         (error) => {
+          this.showOtherEditedError(error);
 
         }
       );
+    }
+  }
+
+  showOtherEditedError(error): void {
+    console.log(error);
+
+    if (error === `Error - task updated by someone else`) {
+      alert(`The task was updated by someone else while you were viewing it. Your change was not saved. Please refresh the page and make the edit again.`)
     }
   }
 

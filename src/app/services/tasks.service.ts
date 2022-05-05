@@ -58,6 +58,7 @@ export class TasksService {
         is_public: task.is_public,
         is_approved: task.is_approved,
         assignee_id: task.assignee_id,
+        updated_at: task.updated_at
       }
 
     };
@@ -72,7 +73,7 @@ export class TasksService {
     const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=tasks&id=${task.id}&single_field=true`;
 
-    const data = { attributes: { field: field, data: task[field] } };
+    const data = { attributes: { updated_at: task.updated_at, field: field, data: task[field] } };
 
     // const data = {
     //   attributes: {
