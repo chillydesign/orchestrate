@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getTasks(): void {
 
-    const opts: ProjectsOptions = { current: true, limit: 5 };
+    const opts: ProjectsOptions = { limit: 5 };
     this.projects_sub = this.projectsService.getProjects(opts).subscribe(
       (projects: Project[]) => {
         if (projects) {
