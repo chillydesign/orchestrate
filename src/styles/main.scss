@@ -670,6 +670,12 @@ h1 {
 
 .project_outer {
 
+
+  h2 {
+    cursor: pointer;
+    display: inline-block;
+  }
+
   .toggle_collapse {
     padding: 5px;
     cursor: pointer;

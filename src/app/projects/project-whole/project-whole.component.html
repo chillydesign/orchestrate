@@ -7,8 +7,7 @@
                 {{project.percentage}}</div>
         </div>
 
-        <h2 style="cursor: pointer" (click)="collapseProject()"><span class="grey"
-                *ngIf="project.nice_month">{{project.nice_month}}
+        <h2 (click)="collapseProject()"><span class="grey" *ngIf="project.nice_month">{{project.nice_month}}
                 &nbsp;</span> {{project.name}} <div class="toggle_collapse"></div>
         </h2>
 
