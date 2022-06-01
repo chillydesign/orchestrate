@@ -1,0 +1,22 @@
+<div class="search_form">
+    <form (keyup)="onSearch()" (ngSubmit)="onSearch()">
+        <div class="search_field">
+            <input type="text" [(ngModel)]="search_term" name="search_term" id="search_term"
+                [placeholder]="'Search' | translate" />
+        </div>
+    </form>
+</div>
+
+<h1>{{'Search' | translate}}</h1>
+
+
+<app-box *ngIf="tasks?.length > 0">
+
+    <ul>
+        <li *ngFor="let task of tasks">
+            <app-task [task]="task" [users]="users" [showProjectLink]="true" [canAdministrate]="!!current_user">
+            </app-task>
+        </li>
+    </ul>
+
+</app-box>

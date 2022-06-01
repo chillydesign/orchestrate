@@ -9,6 +9,7 @@ import { Upload } from '../models/upload.model';
 
 export interface TasksOptions {
   client_id?: number;
+  search_term?: string;
 }
 
 
@@ -134,6 +135,9 @@ export class TasksService {
     if (opts) {
       if (opts.client_id) {
         endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+      if (opts.search_term) {
+        endpoint = endpoint.concat(`&search_term=${opts.search_term}`);
       }
     }
     return this.http.get<Task[]>(endpoint, options).pipe(

@@ -17,6 +17,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() project: Project;
   @Input() users: User[];
   @Input() canAdministrate = true;
+  @Input() showProjectLink = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);

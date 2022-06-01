@@ -12,6 +12,7 @@ import { ClientComponent } from './clients/client/client.component';
 import { NewClientComponent } from './clients/new-client/new-client.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ClientTasksComponent } from './client-tasks/client-tasks.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'projects/:id/translation', component: ProjectComponent },
   { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
-  { path: 'projects', component: ProjectsComponent, data: { title: ' Project' } },
+  { path: 'projects', component: ProjectsComponent, data: { title: 'Project' } },
+  { path: 'search', component: SearchComponent, data: { title: 'Search' } },
 
   { path: 'tasks', component: TasksComponent, data: { title: 'Tasks' } },
 

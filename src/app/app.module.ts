@@ -36,6 +36,7 @@ import { NewClientComponent } from './clients/new-client/new-client.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ClientTasksComponent } from './client-tasks/client-tasks.component';
 import { ProjectWholeComponent } from './projects/project-whole/project-whole.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ProjectWholeComponent } from './projects/project-whole/project-whole.co
     NewClientComponent,
     TasksComponent,
     ClientTasksComponent,
-    ProjectWholeComponent
+    ProjectWholeComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

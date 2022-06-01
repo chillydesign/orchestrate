@@ -52,6 +52,7 @@
                         {{upload.filename}}</a>
                 </span>
             </div>
+            <div *ngIf="showProjectLink"><a [routerLink]="['/projects', task.project_id ]">Go to project</a> </div>
 
 
         </div>
