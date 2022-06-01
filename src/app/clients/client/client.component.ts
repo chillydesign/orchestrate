@@ -144,6 +144,8 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
+
+
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.client_sub,

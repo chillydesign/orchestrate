@@ -30,6 +30,7 @@ export class Project {
     public nice_name_with_client: string;
     public search_string: string;
 
+    public collapsed: boolean = false;
 
 
     public getNextTaskOrdering(): number {

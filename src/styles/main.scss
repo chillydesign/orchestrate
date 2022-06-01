@@ -189,6 +189,7 @@ main {
   }
 
   &.priority_1 {
+
     // input {
     //     border-color: $font_color;
     // }
@@ -282,6 +283,7 @@ main {
       &.is_approved_checkbox {
         background-image: url("../assets/images/thumb.svg");
         background-size: 15px;
+
         &:checked {
           background-image: url("../assets/images/thumb_white.svg");
         }
@@ -302,7 +304,7 @@ main {
         background-color: white !important;
 
         &:checked {
-          background-color: $green !important;
+          background-color: $green  !important;
         }
       }
     }
@@ -442,6 +444,7 @@ main {
       .actions_opener {
         background-color: darken($light_grey, 10);
       }
+
       ul {
         display: block;
       }
@@ -624,6 +627,7 @@ main {
   &.icon_upload {
     background-image: url("../assets/images/upload.svg");
   }
+
   &.icon_person {
     background-image: url("../assets/images/cog.svg");
   }
@@ -663,10 +667,57 @@ h1 {
   }
 }
 
+
+.project_outer {
+
+  .toggle_collapse {
+    padding: 5px;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    transform: rotate(225deg);
+    transition: transform 0.3s;
+
+    &:after {
+      content: '';
+      width: 1px;
+      height: 1px;
+      display: inline-block;
+      border: 5px solid $medium_grey;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+
+
+    }
+
+  }
+
+
+  &.collapsed {
+
+    .toggle_collapse {
+
+      transform: rotate(45deg) translateX(5px) translateY(5px);
+    }
+
+
+    ul,
+    .box_footer {
+      display: none;
+    }
+  }
+
+}
+
+
+
+
 .project_whole {
   padding: 0 0 $padding;
   position: relative;
   // border-top: 3px solid $light_grey;
+
 
   .progression_outer {
     background-color: $medium_grey;
@@ -735,8 +786,7 @@ h1 {
     width: 100%;
     height: $header_height;
     line-height: $header_height;
-    background: url("../assets/images/search.svg") no-repeat $padding 50%
-      transparent;
+    background: url("../assets/images/search.svg") no-repeat $padding 50% transparent;
     background-size: 13px;
   }
 
@@ -850,6 +900,7 @@ a.load_translate {
   border-bottom-right-radius: $border_radius;
   border-bottom-left-radius: $border_radius;
   margin: $padding $negative_padding $negative_padding;
+
   p {
     padding: 0;
   }
@@ -861,6 +912,7 @@ a.load_translate {
   background: darken($light_grey, 3);
   border-radius: 5px;
   margin-left: 3px;
+
   &:hover {
     background-color: darken($light_grey, 5);
   }
@@ -872,6 +924,7 @@ a.load_translate {
     display: flex;
     justify-content: center;
     align-items: center;
+
     .button {
       text-align: center;
       flex-grow: 0;

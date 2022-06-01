@@ -1,64 +1,67 @@
 <ng-container *ngIf="project">
 
+    <div class="project_outer" [ngClass]="{collapsed: project.collapsed}">
+
+        <div class="progression_outer">
+            <div class="progression_inner" [title]="project.percentage" [style.width.%]="project.percentage">
+                {{project.percentage}}</div>
+        </div>
+
+        <h2 style="cursor: pointer" (click)="collapseProject()"><span class="grey"
+                *ngIf="project.nice_month">{{project.nice_month}}
+                &nbsp;</span> {{project.name}} <div class="toggle_collapse"></div>
+        </h2>
 
 
-    <div class="progression_outer">
-        <div class="progression_inner" [title]="project.percentage" [style.width.%]="project.percentage">
-            {{project.percentage}}</div>
-    </div>
-
-    <h2><span class="grey" *ngIf="project.nice_month">{{project.nice_month}} &nbsp;</span> {{project.name}} </h2>
+        <!-- <a [routerLink]="['/projects', project.id]">  </a> -->
 
 
-    <!-- <a [routerLink]="['/projects', project.id]">  </a> -->
+        <ul>
+            <li *ngFor="let task of project.visible_tasks">
+                <app-task [task]="task" [project]="project" [users]="users" [canAdministrate]="!!current_user"
+                    (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)"
+                    (addTaskBelowme)="addTaskBelow($event)">
+                </app-task>
+            </li>
+        </ul>
 
-
-    <ul>
-        <li *ngFor="let task of project.visible_tasks">
-            <app-task [task]="task" [project]="project" [users]="users" [canAdministrate]="!!current_user"
-                (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)"
-                (addTaskBelowme)="addTaskBelow($event)">
-            </app-task>
-        </li>
-    </ul>
-
-    <ul>
-        <li>
-            <app-new-task [project]="project" (taskCreated)="addNewTask($event)">
-            </app-new-task>
-        </li>
-    </ul>
+        <ul>
+            <li>
+                <app-new-task [project]="project" (taskCreated)="addNewTask($event)">
+                </app-new-task>
+            </li>
+        </ul>
 
 
 
 
-    <app-box-footer *ngIf="current_user">
+        <app-box-footer *ngIf="current_user">
 
-        <p>
-            <a *ngIf="project.status !== 'inactive' " (click)="archiveProject()">{{'Archive' | translate}}</a>
-            &nbsp;
-            <a [routerLink]="['/projects', project.id,  'edit']">{{'Edit' | translate}}</a>
-            &nbsp;
-            <a (click)="deleteProject()">{{'Delete' | translate}}</a>
-            &nbsp;
-
-            <span>
-                <a (click)="exportProject()">{{'Export' | translate}}</a>
+            <p>
+                <a *ngIf="project.status !== 'inactive' " (click)="archiveProject()">{{'Archive' | translate}}</a>
                 &nbsp;
-                <ng-container *ngFor="let user of users">
+                <a [routerLink]="['/projects', project.id,  'edit']">{{'Edit' | translate}}</a>
+                &nbsp;
+                <a (click)="deleteProject()">{{'Delete' | translate}}</a>
+                &nbsp;
+
+                <span>
+                    <a (click)="exportProject()">{{'Export' | translate}}</a>
                     &nbsp;
-                    <a (click)="assignUnassignedTo(user)">AAUTT {{user.name}}</a>
-                </ng-container>
-            </span>
+                    <ng-container *ngFor="let user of users">
+                        &nbsp;
+                        <a (click)="assignUnassignedTo(user)">AAUTT {{user.name}}</a>
+                    </ng-container>
+                </span>
 
-        </p>
-        <p *ngIf="current_user">
-            {{project.total_hours}}
-        </p>
-    </app-box-footer>
+            </p>
+            <p *ngIf="current_user">
+                {{project.total_hours}}
+            </p>
+        </app-box-footer>
 
 
-
+    </div>
 
 
 

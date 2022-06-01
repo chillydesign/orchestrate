@@ -165,7 +165,9 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
   }
 
 
-
+  collapseProject(): void {
+    this.project.collapsed = !this.project.collapsed;
+  }
 
   ngOnDestroy() {
     const subs: Subscription[] = [
