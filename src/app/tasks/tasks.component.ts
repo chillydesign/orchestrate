@@ -11,7 +11,9 @@ import { ProjectsOptions, ProjectsService } from '../services/projects.service';
 export class TasksComponent implements OnInit, OnDestroy {
   public projects: Project[];
   private projects_sub: Subscription;
-  constructor(private projectsService: ProjectsService,) { }
+  constructor(
+    private projectsService: ProjectsService
+  ) { }
 
   ngOnInit(): void {
     this.getProjects();

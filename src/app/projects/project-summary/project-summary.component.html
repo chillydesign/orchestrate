@@ -6,7 +6,7 @@
 
 
     <h2>
-        <a *ngIf="project.client_id" [routerLink]="['/clients', 'id', project.client_id]">
+        <a *ngIf="project.client_id" [routerLink]="['/clients', project.client_slug]">
             {{project.nice_name_with_client}}
         </a>
         <a *ngIf="!project.client_id" [routerLink]="['/projects', project.id]">

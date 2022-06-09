@@ -29,6 +29,7 @@ export class Project {
     public nice_name: string;
     public nice_name_with_client: string;
     public search_string: string;
+    public client_slug: string;
 
     public collapsed: boolean = false;
 
