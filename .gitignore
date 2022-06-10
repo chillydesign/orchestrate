@@ -5,6 +5,8 @@ pushtoprod
 pushtoprod_savio
 pushtoprod_cpmdt
 
+.angular
+
 # compiled output
 /_prod
 /_cpmdtdev
