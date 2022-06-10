@@ -9,21 +9,21 @@ $spinner_height: 35px;
     font-size: 10px;
     position: relative;
     text-indent: -9999em;
-    border: #{$spinner_height / 10} solid transparentize($brand_color, 0.5);
-    border-left: #{$spinner_height / 10} solid $brand_color;
+    border: #{$spinner_height * 0.1} solid transparentize($brand_color, 0.5);
+    border-left: #{$spinner_height * 0.1} solid $brand_color;
     transform: translateZ(0);
     animation: load8 1.1s infinite linear;
 }
 
 
 @keyframes load8 {
-    0% {
+    from {
         transform: rotate(0deg);
 
     }
 
 
-    100% {
+    to {
         transform: rotate(360deg);
 
     }
