@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { DragulaModule } from 'ng2-dragula';
+// import { DragulaModule } from 'ng2-dragula';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -76,7 +76,7 @@ import { SearchComponent } from './search/search.component';
     CommonModule,
     HttpClientModule,
     FormsModule,
-    DragulaModule.forRoot(),
+    // DragulaModule.forRoot(),
     NgxDropzoneModule,
     AppRoutingModule
   ],

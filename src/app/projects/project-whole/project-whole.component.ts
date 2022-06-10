@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DragulaService } from 'ng2-dragula';
+// import { DragulaService } from 'ng2-dragula';
 import { Subscription } from 'rxjs';
 import { Project } from 'src/app/models/project.model';
 import { Task } from 'src/app/models/task.model';
@@ -32,7 +32,7 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
     private projectsService: ProjectsService,
     private authService: AuthService,
     private usersService: UsersService,
-    private dragulaService: DragulaService,
+    // private dragulaService: DragulaService,
     private csvService: CsvService,
     private router: Router
   ) { }

@@ -5,7 +5,7 @@ import { ProjectsService } from 'src/app/services/projects.service';
 import { Project } from 'src/app/models/project.model';
 import { Task } from 'src/app/models/task.model';
 import { Title } from '@angular/platform-browser';
-import { DragulaService } from 'ng2-dragula';
+// import { DragulaService } from 'ng2-dragula';
 import { TasksService } from 'src/app/services/tasks.service';
 import { environment } from '../../../environments/environment';
 import { CsvService } from 'src/app/services/csv.service';
@@ -45,7 +45,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private projectsService: ProjectsService,
     private authService: AuthService,
     private usersService: UsersService,
-    private dragulaService: DragulaService,
+    // private dragulaService: DragulaService,
     private csvService: CsvService,
     private router: Router) {
 
@@ -57,6 +57,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
     // });
 
   }
+
+  // add this to angular.json if you want to put dragula bacl
+  // "architect": {
+  //   "build": {
+  //     "options": {
+  //       "allowedCommonJsDependencies": [
+  //         "dragula"
+  //       ],
 
   ngOnInit() {
     this.getCurrentUser();
@@ -208,23 +216,23 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   }
 
-  setupDragSubscription(): void {
-    this.drag_sub = this.dragulaService.dropModel('TASKS').subscribe(({ sourceModel, targetModel, item }) => {
-      const new_docsecs = targetModel;
-      new_docsecs.forEach((new_task, i) => {
-        setTimeout(() => {
-          const new_ordering = i + 1;
-          const current_task = this.project.tasks.find((task) => task.id === new_task.id);
-          if (current_task) {
-            if (current_task.ordering !== new_ordering) {
-              current_task.ordering = new_ordering;
-              this.update_task_sub = this.tasksService.updateTask(current_task).subscribe();
-            }
-          }
-        }, i * 500);
-      });
-    });
-  }
+  // setupDragSubscription(): void {
+  //   this.drag_sub = this.dragulaService.dropModel('TASKS').subscribe(({ sourceModel, targetModel, item }) => {
+  //     const new_docsecs = targetModel;
+  //     new_docsecs.forEach((new_task, i) => {
+  //       setTimeout(() => {
+  //         const new_ordering = i + 1;
+  //         const current_task = this.project.tasks.find((task) => task.id === new_task.id);
+  //         if (current_task) {
+  //           if (current_task.ordering !== new_ordering) {
+  //             current_task.ordering = new_ordering;
+  //             this.update_task_sub = this.tasksService.updateTask(current_task).subscribe();
+  //           }
+  //         }
+  //       }, i * 500);
+  //     });
+  //   });
+  // }
 
   assignUnassignedTo(user: User): void {
 
