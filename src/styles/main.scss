@@ -42,9 +42,11 @@ main {
   }
 }
 
+.box_content {}
+
 .box_footer {
   background-color: scale-color($brand_color, $lightness: 95%);
-  margin: $padding #{$padding * -1} #{$padding * -1};
+  margin: $padding $negative_padding 0;
   padding: $half_padding;
   border-radius: 0 0 $border_radius $border_radius;
   text-align: right;
@@ -720,7 +722,7 @@ h1 {
 
 
 .project_whole {
-  padding: 0 0 $padding;
+  // padding: 0 0 $padding;
   position: relative;
   // border-top: 3px solid $light_grey;
 
@@ -733,8 +735,8 @@ h1 {
   }
 
   .box_footer {
-    position: relative;
-    top: -20px;
+    // position: relative;
+    // top: -20px;
     opacity: 0.3;
   }
 
@@ -743,10 +745,20 @@ h1 {
       opacity: 1;
     }
   }
+
+  &:first-child {
+    margin-top: $negative_padding;
+  }
+
+  &:last-child {
+    margin-bottom: $negative_padding;
+  }
+
 }
 
 .progression_outer {
-  margin: #{$padding * -1} #{$padding * -1} $padding;
+  // margin: #{$padding * -1} #{$padding * -1} $padding;
+  margin: 0 $negative_padding $padding;
   background-color: $light_grey;
   border-radius: $border_radius $border_radius 0 0;
   opacity: 0.4;

@@ -1,42 +1,43 @@
 <app-box [styleclass]="project.status">
+    <div class="project_whole">
+        <div class="progression_outer">
+            <div class="progression_inner" [style.width.%]="project.percentage"></div>
+        </div>
 
-    <div class="progression_outer">
-        <div class="progression_inner" [style.width.%]="project.percentage"></div>
+
+        <h2>
+            <a *ngIf="project.client_id" [routerLink]="['/clients', project.client_slug]">
+                {{project.nice_name_with_client}}
+            </a>
+            <a *ngIf="!project.client_id" [routerLink]="['/projects', project.id]">
+                {{project.nice_name_with_client}}
+            </a>
+        </h2>
+
+
+
+        <p class="no_padding">
+            <strong> {{ project.percentage}} %</strong> {{'complete' | translate}} |
+            <strong> {{ project.incomplete_tasks_count}} </strong>{{'tasks to be done' | translate}} |
+            <strong> {{ project.tasks_count}}</strong> {{'tasks completed' | translate}}
+        </p>
+
+
+        <ng-container *ngIf="show_tasks">
+
+            <ul style="margin-top: 20px;">
+                <li *ngFor="let task of project.tasks">
+                    <app-task [task]="task" [project]="project">
+                    </app-task>
+                </li>
+            </ul>
+        </ng-container>
+
+
+
+        <app-box-footer>
+            <p>{{'Last updated' | translate}} : {{ project.updated_at | date}} </p>
+            <!-- <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a></p> -->
+        </app-box-footer>
     </div>
-
-
-    <h2>
-        <a *ngIf="project.client_id" [routerLink]="['/clients', project.client_slug]">
-            {{project.nice_name_with_client}}
-        </a>
-        <a *ngIf="!project.client_id" [routerLink]="['/projects', project.id]">
-            {{project.nice_name_with_client}}
-        </a>
-    </h2>
-
-
-
-    <p class="no_padding">
-        <strong> {{ project.percentage}} %</strong> {{'complete' | translate}} |
-        <strong> {{ project.incomplete_tasks_count}} </strong>{{'tasks to be done' | translate}} |
-        <strong> {{ project.tasks_count}}</strong> {{'tasks completed' | translate}}
-    </p>
-
-
-    <ng-container *ngIf="show_tasks">
-
-        <ul style="margin-top: 20px;">
-            <li *ngFor="let task of project.tasks">
-                <app-task [task]="task" [project]="project">
-                </app-task>
-            </li>
-        </ul>
-    </ng-container>
-
-
-
-    <app-box-footer>
-        <p>{{'Last updated' | translate}} : {{ project.updated_at | date}} </p>
-        <!-- <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a></p> -->
-    </app-box-footer>
 </app-box>
