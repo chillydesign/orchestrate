@@ -24,7 +24,7 @@ export class AuthService {
 
 
   // from an email and password get a token to use with the server
-  login(email: string, password: string): Observable<boolean> {
+  login(email: string, password: string, remember_me?: boolean): Observable<boolean> {
     const options = this.setAPIOptionsNoLogin();
     const data = { email, password };
     const endpoint = `${this.api_url}/?route=user_token`;
@@ -33,7 +33,7 @@ export class AuthService {
       map((response: { jwt: string }) => {
         const token: string = response && response.jwt;
         if (token) {
-          this.saveTokenAsCookie(token);
+          this.saveTokenAsCookie(token, remember_me);
           this.setCurrentUser();
           this.logged_in = true;
           return true;
@@ -89,9 +89,14 @@ export class AuthService {
 
 
 
-  saveTokenAsCookie(token: string): void {
+  saveTokenAsCookie(token: string, remember_me?: boolean): void {
     this.token = token;
-    this.setCookie(environment.cookie_name, token, environment.cookie_length_hours);
+
+    let cookie_length = environment.cookie_length_hours;
+    if (remember_me) {
+      cookie_length = environment.longer_cookie_length_hours;
+    }
+    this.setCookie(environment.cookie_name, token, cookie_length);
   }
 
 

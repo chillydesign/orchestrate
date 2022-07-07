@@ -11,6 +11,12 @@
                 <input autocomplete="current-password" type="password" id="password" name="password"
                     [(ngModel)]="password" />
             </app-form-field>
+
+            <app-form-field>
+                <label for="remember_me">Remember me?</label>
+                <input autocomplete="current-password" type="checkbox" id="remember_me" name="remember_me"
+                    [(ngModel)]="remember_me" />
+            </app-form-field>
             <app-form-field [errors]="errors" [field]="'signin'">
                 <button>Connexion</button>
             </app-form-field>

@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignInComponent implements OnInit, OnDestroy {
   public email: string;
   public password: string;
+  public remember_me = false;
   public errors: Subject<object> = new Subject();
   private current_user_subscription: Subscription;
   private login_sub: Subscription;
@@ -23,7 +24,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   onSubmit() {
 
     if (this.email && this.password) {
-      this.login_sub = this.authService.login(this.email, this.password).subscribe(
+      this.login_sub = this.authService.login(this.email, this.password, this.remember_me).subscribe(
         () => {
           this.errors.next(null);
           this.router.navigate(['/']);
