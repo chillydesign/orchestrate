@@ -10,7 +10,7 @@
                 <select name="client_id" id="client_id" (change)="onClientChange($event)"
                     [(ngModel)]="search_properties.client_id">
                     <option [ngValue]="null"> - </option>
-                    <option *ngFor="let client of clients" [ngValue]="client.id">{{ client.name}} {{client.id}}
+                    <option *ngFor="let client of clients" [ngValue]="client.id">{{ client.name}}
                     </option>
                 </select>
             </app-form-field>
