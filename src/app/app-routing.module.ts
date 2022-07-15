@@ -13,6 +13,7 @@ import { NewClientComponent } from './clients/new-client/new-client.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { ClientTasksComponent } from './client-tasks/client-tasks.component';
 import { SearchComponent } from './search/search.component';
+import { ExportComponent } from './export/export.component';
 
 
 
@@ -33,6 +34,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent, data: { title: 'Search' } },
 
   { path: 'tasks', component: TasksComponent, data: { title: 'Tasks' } },
+
+  { path: 'export', component: ExportComponent, data: { title: 'Export' } },
 
   { path: 'clients/new', component: NewClientComponent, data: { title: 'New Client' } },
   { path: 'clients/id/:id', component: ClientComponent, data: { title: 'Client' } },

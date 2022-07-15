@@ -53,6 +53,12 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "buildOptimizer": false,
+              "serviceWorker": false
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -144,6 +150,9 @@
           "configurations": {
             "production": {
               "browserTarget": "orchestrate:build:production"
+            },
+            "development": {
+              "browserTarget": "orchestrate:build:development"
             }
           }
         },

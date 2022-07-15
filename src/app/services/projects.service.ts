@@ -24,6 +24,16 @@ export interface ProjectsOptions {
   search_term?: string;
 }
 
+export interface ExportOptions {
+  client_id: number;
+  project_id: number;
+  is_approved: string;
+  completed: string;
+  start_date: string;
+  end_date: string;
+
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -87,9 +97,36 @@ export class ProjectsService {
 
 
   getProjectCSV(project_id: number) {
-    const data = null;
     const options = this.authService.setAPIOptionsNoLogin();
     const endpoint = `${this.api_url}/?route=projects&id=${project_id}&format=csv`;
+    return this.http.get<{ csv: string }>(endpoint, options).pipe(
+      map((res: { csv: string }) => res.csv)
+    );
+  }
+
+  getProjectsCSV(opts?: ExportOptions) {
+    const options = this.authService.setAPIOptionsNoLogin();
+    let endpoint = `${this.api_url}/?route=projects&format=csv`;
+    if (opts) {
+      if (opts.client_id) {
+        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+      if (opts.project_id) {
+        endpoint = endpoint.concat(`&project_id=${opts.project_id}`);
+      }
+      if (opts.end_date) {
+        endpoint = endpoint.concat(`&start_date=${opts.start_date}`);
+      }
+      if (opts.end_date) {
+        endpoint = endpoint.concat(`&start_date=${opts.end_date}`);
+      }
+      if (opts.is_approved) {
+        endpoint = endpoint.concat(`&is_approved=${opts.is_approved}`);
+      }
+      if (opts.completed) {
+        endpoint = endpoint.concat(`&completed=${opts.completed}`);
+      }
+    }
     return this.http.get<{ csv: string }>(endpoint, options).pipe(
       map((res: { csv: string }) => res.csv)
     );

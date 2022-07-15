@@ -1,0 +1,80 @@
+<h1>{{'Export' | translate}}</h1>
+
+
+<app-box *ngIf="current_user">
+
+    <form (ngSubmit)="onSubmit()" novalidate>
+        <ul>
+            <app-form-field *ngIf="clients">
+                <label for="client_id">{{'Client' | translate}} </label>
+                <select name="client_id" id="client_id" (change)="onClientChange($event)"
+                    [(ngModel)]="search_properties.client_id">
+                    <option [ngValue]="null"> - </option>
+                    <option *ngFor="let client of clients" [ngValue]="client.id">{{ client.name}} {{client.id}}
+                    </option>
+                </select>
+            </app-form-field>
+            <app-form-field *ngIf="projects">
+                <label for="project_id">{{'Project' | translate}} </label>
+                <select name="project_id" id="project_id" [(ngModel)]="search_properties.project_id">
+                    <option [ngValue]="null"> - </option>
+                    <option *ngFor="let project of projects" [ngValue]="project.id">{{ project.name}}
+                    </option>
+                </select>
+            </app-form-field>
+
+            <!-- <app-form-field>
+
+                <label>
+                    <input type="radio" id="is_approved" name="is_approved" value="yes"
+                        [(ngModel)]="search_properties.is_approved" />Approved
+                </label>
+                <label>
+                    <input type="radio" id="is_approved" name="is_approved" value="no"
+                        [(ngModel)]="search_properties.is_approved" />Unapproved
+                </label>
+                <label>
+                    <input type="radio" id="is_approved" name="is_approved" value="all"
+                        [(ngModel)]="search_properties.is_approved" />Approved and unapproved
+                </label>
+            </app-form-field>
+            <app-form-field>
+
+                <label>
+                    <input type="radio" id="completed" name="completed" value="yes"
+                        [(ngModel)]="search_properties.completed" />Complete
+                </label>
+                <label>
+                    <input type="radio" id="completed" name="completed" value="no"
+                        [(ngModel)]="search_properties.completed" />Incomplete
+                </label>
+                <label>
+                    <input type="radio" id="completed" name="completed" value="all"
+                        [(ngModel)]="search_properties.completed" />Completed and incomplete
+                </label>
+            </app-form-field>
+
+
+            <app-form-field>
+                <label for="start_date">{{'Start date' | translate}} </label>
+                <input autocomplete="off" type="date" name="start_date" id="start_date"
+                    [(ngModel)]="search_properties.start_date">
+            </app-form-field>
+            <app-form-field>
+                <label for="start_date">{{'End date' | translate}} </label>
+                <input autocomplete="off" type="date" name="end_date" id="end_date"
+                    [(ngModel)]="search_properties.end_date">
+            </app-form-field> -->
+
+
+
+
+            <app-form-field [errors]="errors">
+                <button>Export</button>
+            </app-form-field>
+        </ul>
+
+    </form>
+
+
+</app-box>
