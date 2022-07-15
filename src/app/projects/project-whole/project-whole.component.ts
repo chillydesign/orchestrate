@@ -8,7 +8,7 @@ import { Task } from 'src/app/models/task.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CsvService } from 'src/app/services/csv.service';
-import { ProjectsService } from 'src/app/services/projects.service';
+import { ExportOptions, ProjectsService } from 'src/app/services/projects.service';
 import { TasksService } from 'src/app/services/tasks.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -83,7 +83,8 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
 
 
   exportProject(): void {
-    this.projectsService.getProjectCSV(this.project.id).subscribe(
+    const opts: ExportOptions = { project_id: this.project.id };
+    this.projectsService.getProjectsCSV(opts).subscribe(
       (csv_file: string) => {
         this.csvService.downloadCSVFromString(csv_file, `project_${this.project.id}`);
       }

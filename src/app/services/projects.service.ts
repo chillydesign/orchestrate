@@ -25,12 +25,12 @@ export interface ProjectsOptions {
 }
 
 export interface ExportOptions {
-  client_id: number;
-  project_id: number;
-  is_approved: string;
-  completed: string;
-  start_date: string;
-  end_date: string;
+  client_id?: number;
+  project_id?: number;
+  is_approved?: string;
+  completed?: string;
+  start_date?: string;
+  end_date?: string;
 
 }
 
@@ -92,15 +92,6 @@ export class ProjectsService {
     return this.http.get<Project>(endpoint, options).pipe(
       catchError(this.authService.handleError),
       map(res => new Project(res))
-    );
-  }
-
-
-  getProjectCSV(project_id: number) {
-    const options = this.authService.setAPIOptionsNoLogin();
-    const endpoint = `${this.api_url}/?route=projects&id=${project_id}&format=csv`;
-    return this.http.get<{ csv: string }>(endpoint, options).pipe(
-      map((res: { csv: string }) => res.csv)
     );
   }
 

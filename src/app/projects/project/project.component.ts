@@ -147,7 +147,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
 
   exportProject(): void {
-    this.projectsService.getProjectCSV(this.project.id).subscribe(
+    const opts = { project_id: this.project.id }
+    this.projectsService.getProjectsCSV(opts).subscribe(
       (csv_file: string) => {
         this.csvService.downloadCSVFromString(csv_file, `project_${this.project.id}`);
       }
