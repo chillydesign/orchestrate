@@ -18,6 +18,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
   public current_user: User;
   public users: User[];
+  public project_id: number;
   public client_id: number;
   public client_slug: string;
   public projects: Project[];
@@ -52,6 +53,12 @@ export class ClientComponent implements OnInit, OnDestroy {
   subscribeToRoute(): void {
     this.route_params_subscription = this.route.params.subscribe(
       (params: Params) => {
+
+        if (params.project_id) {
+          this.project_id = params.project_id;
+        }
+
+
         if (params.id) {
           this.client_id = params.id;
           this.getClient();
@@ -102,10 +109,26 @@ export class ClientComponent implements OnInit, OnDestroy {
           this.projects = projects;
           this.projects.map(p => p.client = this.client);
 
+          this.scrollToProject();
+
           this.getUsers();
         }
       }
     );
+  }
+
+  scrollToProject(): void {
+    if (this.project_id) {
+
+      setTimeout(() => {
+        const p = document.getElementById(`project_${this.project_id}`);
+        if (p) {
+          p.scrollIntoView();
+        }
+      }, 250);
+
+
+    }
   }
 
 
