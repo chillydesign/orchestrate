@@ -31,15 +31,17 @@ main {
   // opacity: 0.75;
   transition: box-shadow 0.3s;
 
-  &.inactive {
-    opacity: 0.4;
-    filter: grayscale(1);
-  }
 
   p:last-child {
     padding: 0;
     margin: 0;
   }
+}
+
+
+.inactive {
+  opacity: 0.55;
+  filter: grayscale(0.9);
 }
 
 .box_content {}
@@ -441,7 +443,7 @@ main {
       }
     }
 
-    &:hover,
+    // &:hover,
     &.menu_open {
       .actions_opener {
         background-color: darken($light_grey, 10);

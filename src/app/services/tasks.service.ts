@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Task } from '../models/task.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Upload } from '../models/upload.model';
+import { TaskComponent } from '../tasks/task/task.component';
 
 export interface TasksOptions {
   client_id?: number;
@@ -18,10 +19,11 @@ export interface TasksOptions {
 })
 export class TasksService {
   private api_url = environment.api_url;
+  public close_task_menu: BehaviorSubject<number | null> = new BehaviorSubject(null);
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   addTask(task: Task): Observable<Task> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
         content: task.content,
@@ -42,7 +44,7 @@ export class TasksService {
 
 
   updateTask(task: Task): Observable<Task> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions()
     const endpoint = `${this.api_url}/?route=tasks&id=${task.id}`;
     const data = {
       attributes: {
@@ -71,7 +73,7 @@ export class TasksService {
 
 
   updateTaskField(task: Task, field: string): Observable<Task> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=tasks&id=${task.id}&single_field=true`;
 
     const data = { attributes: { updated_at: task.updated_at, field: field, data: task[field] } };
@@ -107,7 +109,7 @@ export class TasksService {
 
 
   deleteTask(task: Task): Observable<Task> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=tasks&id=${task.id}`;
     return this.http.delete<Task>(endpoint, options).pipe(
       catchError(this.authService.handleError)
@@ -129,7 +131,7 @@ export class TasksService {
 
 
   getTasks(opts: TasksOptions): Observable<Task[]> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     let endpoint = `${this.api_url}/?route=tasks`;
 
     if (opts) {
@@ -147,7 +149,7 @@ export class TasksService {
   }
 
   getCurrentTasks(): Observable<Task[]> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=tasks&is_current=true`;
     return this.http.get<Task[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -156,7 +158,7 @@ export class TasksService {
   }
 
   getTasksCompletedToday(): Observable<Task[]> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=tasks&completed_today=true`;
     return this.http.get<Task[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -167,7 +169,7 @@ export class TasksService {
 
   getUploads(task_id: number): Observable<Upload[]> {
 
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=uploads&task_id=${task_id}`;
     return this.http.get<Upload[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),

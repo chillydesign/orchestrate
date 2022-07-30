@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, HostListener } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { Subscription } from 'rxjs';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -28,6 +28,8 @@ export class TaskComponent implements OnInit, OnDestroy {
   public updating = false;
   public menu_open = false;
   public current_user: User;
+  public disabled = false;
+
 
   private update_task_sub: Subscription;
   private upload_sub: Subscription;
@@ -41,6 +43,15 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCurrentUser();
+
+    this.subscribeToTaskOpener();
+  }
+
+  setDisabled(): void {
+    console.log(this.task.completed, this.current_user)
+    if (this.task?.completed === false && this.current_user === null) {
+      this.disabled = true;
+    }
   }
 
 
@@ -48,6 +59,20 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.current_user_subscription = this.authService.current_user.subscribe(
       (user: User) => {
         this.current_user = user;
+
+        this.setDisabled();
+
+      }
+    );
+  }
+
+
+  subscribeToTaskOpener(): void {
+    this.current_user_subscription = this.tasksService.close_task_menu.subscribe(
+      (task_id: number) => {
+        if (task_id !== this.task.id) {
+          this.closeMenu();
+        }
       }
     );
   }
@@ -83,6 +108,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
       this.update_task_sub = this.tasksService.updateTaskField(this.task, field).subscribe(
         (task: Task) => {
+          console.log(task);
           this.task = task;
           this.task.uploads = upl;
           this.taskUpdated.next(this.task);
@@ -102,6 +128,8 @@ export class TaskComponent implements OnInit, OnDestroy {
 
     if (error === `Error - task updated by someone else`) {
       alert(`The task was updated by someone else while you were viewing it. Your change was not saved. Please refresh the page and make the edit again.`)
+    } else if (error === `Error - must be logged in to update`) {
+      alert(`You must be logged in to update a completed task`);
     }
   }
 
@@ -240,8 +268,13 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
-  toggleOpener(): void {
+  toggleMenu(): void {
     this.menu_open = !this.menu_open;
+    this.tasksService.close_task_menu.next(this.task.id);
+  }
+
+  closeMenu() {
+    this.menu_open = false;
   }
 
 
@@ -288,5 +321,12 @@ export class TaskComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  // on press enter, call checkQuestion or moveToNextQuestionOrSummary
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.closeMenu();
+    }
+  }
 
 }

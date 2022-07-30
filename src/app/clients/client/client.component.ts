@@ -19,7 +19,9 @@ export class ClientComponent implements OnInit, OnDestroy {
   public current_user: User;
   public users: User[];
   public project_id: number;
+  public show_mode: ('incomplete' | 'unapproved' | 'all') = 'all';
   public client_id: number;
+  public status = 'active';
   public client_slug: string;
   public projects: Project[];
   private client_sub: Subscription;
@@ -58,6 +60,11 @@ export class ClientComponent implements OnInit, OnDestroy {
           this.project_id = params.project_id;
         }
 
+        if (params.status) {
+          this.status = params.status;
+        } else {
+          this.status = 'active';
+        }
 
         if (params.id) {
           this.client_id = params.id;
@@ -102,7 +109,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   getProjects(): void {
-    const options: ProjectsOptions = { status: 'active', client_id: this.client.id, include_tasks: true };
+    const options: ProjectsOptions = { status: this.status, client_id: this.client.id, include_tasks: true };
     this.projects_sub = this.projectsService.getProjects(options).subscribe(
       (projects: Project[]) => {
         if (projects) {
@@ -150,12 +157,18 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
-  showOnly(type: 'incomplete' | 'unapproved' | 'all'): void {
-    if (type == 'incomplete') {
+  changeShowMode(mode: 'incomplete' | 'unapproved' | 'all') {
+    this.show_mode = mode;
+    this.changeVisibleTasks();
+  }
+
+  changeVisibleTasks(): void {
+
+    if (this.show_mode == 'incomplete') {
       this.projects.forEach(project => {
         project.visible_tasks = project.tasks.filter(t => t.completed === false)
       });
-    } else if (type == 'unapproved') {
+    } else if (this.show_mode == 'unapproved') {
       this.projects.forEach(project => {
         project.visible_tasks = project.tasks.filter(t => t.is_approved === false)
       });

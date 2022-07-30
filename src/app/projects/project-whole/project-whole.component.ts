@@ -123,6 +123,7 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
 
   addNewTask(task: Task): void {
     this.project.tasks.push(task);
+    this.project.visible_tasks.push(task);
     this.setPercentage();
   }
 

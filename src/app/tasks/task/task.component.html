@@ -2,12 +2,12 @@
     [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
     <div class="completed_container">
         <input title="publically viewable" class="is_public_checkbox" *ngIf="current_user"
-            [disabled]="updating || !current_user" (click)="togglePublic()" type="checkbox" name="is_public"
+            [disabled]="disabled || updating || !current_user" (click)="togglePublic()" type="checkbox" name="is_public"
             [(ngModel)]="task.is_public">
         <input title="approved by client" class="is_approved_checkbox" *ngIf="current_user"
-            [disabled]="updating || !current_user" (click)="toggleApproved()" type="checkbox" name="is_approved"
-            [(ngModel)]="task.is_approved">
-        <input title="completed" class="is_completed_checkbox" [disabled]="updating || !current_user"
+            [disabled]="disabled || updating || !current_user" (click)="toggleApproved()" type="checkbox"
+            name="is_approved" [(ngModel)]="task.is_approved">
+        <input title="completed" class="is_completed_checkbox" [disabled]="disabled || updating || !current_user"
             (click)="toggleCompleted()" type="checkbox" name="completed" [(ngModel)]="task.completed"
             [ngClass]="{cant_change:!current_user}">
 
@@ -67,7 +67,7 @@
     </div>
     <div class="actions_container" [ngClass]="{menu_open: menu_open}">
 
-        <a (click)="toggleOpener()" class="actions_opener">Actions</a>
+        <a (click)="toggleMenu()" class="actions_opener">Actions</a>
         <ul>
             <li><a *ngIf="project" (click)="showCommentPopup()" title="Comment"
                     class="hide_on_mobile icon icon_comment">{{
