@@ -29,7 +29,7 @@
     <app-box>
         <div class="project_whole" [ngClass]="{inactive: project.status === 'inactive'}"
             *ngFor="let project of projects" id="project_{{project.id}}">
-            <app-project-whole (tasks_changed)="reshowTasks($event)" [project]="project" [users]="users">
+            <app-project-whole (task_added)="reshowTasks($event)" [project]="project" [users]="users">
             </app-project-whole>
 
         </div>
