@@ -51,6 +51,12 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
+  reshowTasks(e: boolean): void {
+    if (e === true) {
+      this.changeVisibleTasks();
+    }
+  }
+
 
   subscribeToRoute(): void {
     this.route_params_subscription = this.route.params.subscribe(

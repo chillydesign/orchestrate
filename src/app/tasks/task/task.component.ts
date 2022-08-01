@@ -48,7 +48,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   setDisabled(): void {
-    console.log(this.task.completed, this.current_user)
     if (this.task?.completed === false && this.current_user === null) {
       this.disabled = true;
     }

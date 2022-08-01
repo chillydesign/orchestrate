@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { DragulaService } from 'ng2-dragula';
@@ -20,6 +20,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class ProjectWholeComponent implements OnInit, OnDestroy {
   @Input() project: Project;
   @Input() users: User[];
+  @Output() tasks_changed: EventEmitter<boolean> = new EventEmitter(false);
   public current_user: User;
   private update_project_sub: Subscription;
   private delete_project_sub: Subscription;
@@ -123,13 +124,16 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
 
   addNewTask(task: Task): void {
     this.project.tasks.push(task);
-    this.project.visible_tasks.push(task);
     this.setPercentage();
+    this.tasks_changed.next(true);
+
   }
 
   removeOldTask(task: Task): void {
     this.project.visible_tasks = this.project.visible_tasks.filter(t => t.id !== task.id);
     this.setPercentage();
+    this.tasks_changed.next(true);
+
   }
 
 
@@ -158,10 +162,10 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
     // }
 
 
-    if (!this.current_user) {
-      this.project.tasks = this.project.tasks.filter(t => t.is_public === true)
-      this.project.visible_tasks = this.project.tasks.filter(t => t.is_public === true)
-    }
+    // if (!this.current_user) {
+    //   this.project.tasks = this.project.tasks.filter(t => t.is_public === true)
+    //   this.project.visible_tasks = this.project.tasks.filter(t => t.is_public === true)
+    // }
 
 
   }
