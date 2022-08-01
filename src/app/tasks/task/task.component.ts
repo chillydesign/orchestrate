@@ -293,7 +293,11 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   createdUpload(newupload: Upload): void {
+    if (this.task.uploads === undefined) {
+      this.task.uploads = [];
+    }
     this.task.uploads.push(newupload);
+    this.task.uploads_count++;
     this.showUpload = false;
   }
 

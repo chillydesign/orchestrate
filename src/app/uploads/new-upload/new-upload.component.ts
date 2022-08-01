@@ -58,7 +58,6 @@ export class NewUploadComponent implements OnInit, OnDestroy {
 
         this.new_upl_sub = this.uploadsService.addUpload(new_upload).subscribe(
           (upload: Upload) => {
-            this.project.uploads.push(upload);
             this.uploadCreated.next(upload);
             // remove it from the ist of currently uplaoding files.
             this.removeFileFromList(file);
