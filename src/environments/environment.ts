@@ -15,8 +15,7 @@ export const environment = {
   secure_cookie: false,
   cookie_name: 'token_local_orch',
   cookie_domains: ['localhost'],
-  cookie_length_hours: 2200,
-  longer_cookie_length_hours: 22000,
+  cookie_length_hours: 8760,
   cache_duration: 60000, // time to hold resources from API in cache in milliseconds
   translations: LANG_FR_TRANS
 };

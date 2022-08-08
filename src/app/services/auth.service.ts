@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
-
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +26,14 @@ export class AuthService {
   // from an email and password get a token to use with the server
   login(email: string, password: string, remember_me?: boolean): Observable<boolean> {
     const options = this.setAPIOptionsNoLogin();
-    const data = { email, password };
+    const data = { email, password, remember_me };
     const endpoint = `${this.api_url}/?route=user_token`;
     return this.http.post<{ jwt: string }>(endpoint, data, options).pipe(
       catchError(this.handleError),
       map((response: { jwt: string }) => {
         const token: string = response && response.jwt;
         if (token) {
-          this.saveTokenAsCookie(token, remember_me);
+          this.saveTokenAsCookie(token);
           this.setCurrentUser();
           this.logged_in = true;
           return true;
@@ -68,6 +68,8 @@ export class AuthService {
           if (user) {
             this.logged_in = true;
             this.current_user.next(user);
+            this.tokenTimeRemaining();
+
           }
         },
         (error) => console.log('error', (error))
@@ -89,17 +91,29 @@ export class AuthService {
 
 
 
-  saveTokenAsCookie(token: string, remember_me?: boolean): void {
+  saveTokenAsCookie(token: string): void {
     this.token = token;
-
-    let cookie_length = environment.cookie_length_hours;
-    if (remember_me) {
-      cookie_length = environment.longer_cookie_length_hours;
-    }
+    const cookie_length = environment.cookie_length_hours;
     this.setCookie(environment.cookie_name, token, cookie_length);
+
   }
 
-
+  tokenTimeRemaining(): void {
+    if (typeof jwt_decode !== 'undefined') {
+      if (this.token) {
+        const decoded: JwtPayload = jwt_decode(this.token);
+        if (decoded) {
+          const now = new Date().valueOf() / 1000;
+          // seconds left before they are logged out
+          const timeleft = Math.max(1, decoded.exp - now);
+          setTimeout(() => {
+            alert('You have been logged out now. Stuff probably wasnt saved.')
+          }, timeleft * 1000);
+          // console.log(decoded, decoded.exp, now, decoded.exp - now);
+        }
+      }
+    }
+  }
 
   setTokenFromCookie(): void {
     this.token = this.getCookie(environment.cookie_name);
