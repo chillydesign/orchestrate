@@ -18,6 +18,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
   public current_user: User;
   public users: User[];
+  public getting_client = false;
   public project_id: number;
   public show_mode: ('incomplete' | 'unapproved' | 'all') = 'all';
   public client_id: number;
@@ -58,33 +59,36 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
+
   subscribeToRoute(): void {
-    this.route_params_subscription = this.route.params.subscribe(
-      (params: Params) => {
+    if (!this.getting_client) {
+      this.getting_client = true;
+      this.route_params_subscription = this.route.params.subscribe(
+        (params: Params) => {
 
-        if (params.project_id) {
-          this.project_id = params.project_id;
+          if (params.project_id) {
+            this.project_id = params.project_id;
+          }
+
+          if (params.status) {
+            this.status = params.status;
+          } else {
+            this.status = 'active';
+          }
+
+          if (params.id) {
+            this.client_id = params.id;
+            this.getClient();
+          } else if (params.slug) {
+            this.client_slug = params.slug;
+            this.getClientFromSlug();
+          }
+
+
+
         }
-
-        if (params.status) {
-          this.status = params.status;
-        } else {
-          this.status = 'active';
-        }
-
-        if (params.id) {
-          this.client_id = params.id;
-          this.getClient();
-        } else if (params.slug) {
-          this.client_slug = params.slug;
-          this.getClientFromSlug();
-        }
-
-
-
-      }
-    ); // end of route_params_subscription
-
+      ); // end of route_params_subscription
+    }
   }
 
   getClient(): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { DragulaService } from 'ng2-dragula';
@@ -26,6 +26,7 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
   private delete_project_sub: Subscription;
   private update_task_sub: Subscription;
   private current_user_subscription: Subscription;
+  private task_menu_sub: Subscription;
   constructor(
     private titleService: Title,
     private route: ActivatedRoute,
@@ -179,6 +180,7 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
       this.current_user_subscription,
       this.update_project_sub,
       this.update_task_sub,
+      this.task_menu_sub,
       this.delete_project_sub,
 
     ];
@@ -189,5 +191,16 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
     });
   }
 
+  // closeMenu(): void {
+  //   this.tasksService.close_task_menu.next(Infinity);
+  // }
 
+
+
+  // // on press enter, call checkQuestion or moveToNextQuestionOrSummary
+  // @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+  //   if (event.key === 'Escape') {
+  //     this.closeMenu();
+  //   }
+  // }
 }

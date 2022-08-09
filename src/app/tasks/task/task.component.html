@@ -1,5 +1,6 @@
 <div class="row_container task_container    priority_{{task.priority}} indentation_{{task.indentation}}"
     [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
+
     <div class="completed_container">
         <input title="publically viewable" class="is_public_checkbox" *ngIf="current_user"
             [disabled]="disabled || updating || !current_user" (click)="togglePublic()" type="checkbox" name="is_public"
@@ -16,11 +17,20 @@
     <div class="content_container">
 
         <div class="inputs_container">
-            <div class="task_input" contenteditable="true" (keypress)="updateFieldFromEvent($event, 'content')"
-                (blur)="updateFieldFromEvent($event, 'content')" [textContent]="task.content"> </div>
+
+
+            <!-- <div class="task_input" contenteditable="true" (keyup)="updateFieldWithDebounce($event,'content')"
+                (blur)="updateFieldFromEvent( $event, 'content')" [textContent]="task.content"> </div>
             <div *ngIf="canAdministrate" class="task_input" contenteditable="true"
-                (keypress)="updateFieldFromEvent($event, 'translation')"
-                (blur)="updateFieldFromEvent($event, 'translation')" [textContent]="task.translation"> </div>
+                (keyup)="updateFieldWithDebounce( $event,  'translation')"
+                (blur)="updateFieldFromEvent($event, 'translation')" [textContent]="task.translation"> </div> -->
+
+
+            <input type="text" [(ngModel)]="task.content" name="content" class="task_input"
+                (change)="updateField('content')" (keyup)="updateFieldWithDebounce( 'content')" />
+            <input *ngIf="canAdministrate" type="text" [(ngModel)]="task.translation" name="translation"
+                class="task_input" (change)="updateField('translation')"
+                (keyup)="updateFieldWithDebounce( 'translation')" />
             <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken" min="0"
                 step="1" class="task_input task_input_time" (change)="updateField('time_taken')"
                 placeholder="minutes taken" />
@@ -60,10 +70,6 @@
 
 
 
-        <!-- <p class="task_uploads_container" *ngIf="task.uploads">
-            <a *ngFor="let upload of task.uploads" target="_blank" href="{{upload.full_url}}"> {{upload.filename}}</a>
-        </p> -->
-
     </div>
     <div class="actions_container" [ngClass]="{menu_open: menu_open}">
 
@@ -96,7 +102,6 @@
                     {{ "Indent" | translate}}</a>
             </li>
 
-            <!-- <a (click)="addTaskBelow()" title="Add task below" class="icon icon_add">Add task below</a> -->
         </ul>
 
     </div>

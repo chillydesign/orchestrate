@@ -16,11 +16,12 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
   @Input() project: Project;
   @Input() users: User[];
+
   @Input() canAdministrate = true;
   @Input() showProjectLink = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
-  @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  // @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public showUpload = false;
   public showTick = false;
@@ -29,7 +30,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   public menu_open = false;
   public current_user: User;
   public disabled = false;
-
+  public debounce_timer: any;
 
   private update_task_sub: Subscription;
   private upload_sub: Subscription;
@@ -41,30 +42,33 @@ export class TaskComponent implements OnInit, OnDestroy {
     private authService: AuthService,
   ) { }
 
+
+
   ngOnInit(): void {
     this.getCurrentUser();
 
     this.subscribeToTaskOpener();
   }
 
-  setDisabled(): void {
-    if (this.task?.completed === false && this.current_user === null) {
-      this.disabled = true;
-    }
-  }
+
 
 
   getCurrentUser(): void {
     this.current_user_subscription = this.authService.current_user.subscribe(
       (user: User) => {
         this.current_user = user;
-
         this.setDisabled();
 
       }
     );
   }
 
+
+  setDisabled(): void {
+    if (this.task?.completed === false && this.current_user === null) {
+      this.disabled = true;
+    }
+  }
 
   subscribeToTaskOpener(): void {
     this.current_user_subscription = this.tasksService.close_task_menu.subscribe(
@@ -99,6 +103,8 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
+
+
   updateField(field: string): void {
     this.showTick = false;
     if (this.updating === false) {
@@ -107,9 +113,11 @@ export class TaskComponent implements OnInit, OnDestroy {
 
       this.update_task_sub = this.tasksService.updateTaskField(this.task, field).subscribe(
         (task: Task) => {
-          console.log(task);
           this.task = task;
           this.task.uploads = upl;
+          // console.log(this.task.translation, task.translation);
+          // this.task[field] = task[field];
+          // this.task.updated_at = task.updated_at;
           this.taskUpdated.next(this.task);
           this.updating = false;
           this.showTickIcon();
@@ -123,8 +131,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   showOtherEditedError(error): void {
-    console.log(error);
-
     if (error === `Error - task updated by someone else`) {
       alert(`The task was updated by someone else while you were viewing it. Your change was not saved. Please refresh the page and make the edit again.`)
     } else if (error === `Error - must be logged in to update`) {
@@ -165,9 +171,9 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
-  addTaskBelow(): void {
-    this.addTaskBelowme.emit(this.task);
-  }
+  // addTaskBelow(): void {
+  //   this.addTaskBelowme.emit(this.task);
+  // }
 
 
 
@@ -196,10 +202,14 @@ export class TaskComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-
+  updateFieldWithDebounce(field: string): void {
+    clearTimeout(this.debounce_timer);
+    this.debounce_timer = setTimeout(() => {
+      this.updateField(field);
+    }, 500);
+  }
 
   updateFieldFromEvent(event, field: ('content' | 'translation')) {
-
 
     if (event.type === 'keypress' && event.key === 'Enter') {
       this.task[field] = event.target.textContent;
@@ -211,7 +221,6 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
 
 
-
   }
 
 
@@ -219,7 +228,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   toggleIndentation(): void {
     // 1 0    // 0 1
     // this.task.indentation = (this.task.indentation + 1) % 2;
-
     if (this.task.is_title) {
       this.task.is_title = false;
       this.task.indentation = 0;
@@ -325,11 +333,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
-  // on press enter, call checkQuestion or moveToNextQuestionOrSummary
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
-      this.closeMenu();
-    }
-  }
+
 
 }
