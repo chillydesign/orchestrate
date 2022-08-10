@@ -46,8 +46,14 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getCurrentUser();
-
     this.subscribeToTaskOpener();
+
+    setTimeout(() => {
+      this.updateTextareaHeights();
+
+    }, 500);
+
+
   }
 
 
@@ -121,6 +127,8 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.taskUpdated.next(this.task);
           this.updating = false;
           this.showTickIcon();
+          this.updateTextareaHeights();
+
         },
         (error) => {
           this.showOtherEditedError(error);
@@ -177,6 +185,14 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
 
+  updateTextareaHeights(): void {
+    const ts = document.querySelectorAll('textarea');
+    ts.forEach(t => {
+      if (t.offsetHeight < t.scrollHeight) {
+        t.style.height = (t.scrollHeight + 10) + 'px';
+      }
+    })
+  }
 
 
   // updateContent(event) {
@@ -206,6 +222,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     clearTimeout(this.debounce_timer);
     this.debounce_timer = setTimeout(() => {
       this.updateField(field);
+
     }, 500);
   }
 

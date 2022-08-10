@@ -85,10 +85,12 @@ a {
     padding-left: 8px;
     padding-right: 8px;
     border-right-width: 0;
+
     &:first-child {
       border-top-left-radius: $border_radius;
       border-bottom-left-radius: $border_radius;
     }
+
     &:last-child {
       border-top-right-radius: $border_radius;
       border-bottom-right-radius: $border_radius;
@@ -115,10 +117,11 @@ b,
 
 table {
   width: 100%;
-  thead {
-  }
-  tbody {
-  }
+
+  thead {}
+
+  tbody {}
+
   tr {
     &:nth-child(2n) {
       td {
@@ -126,6 +129,7 @@ table {
       }
     }
   }
+
   th,
   td {
     font-size: $font_size;
@@ -160,6 +164,7 @@ form {
       position: relative;
 
       &.field_highlighted {
+
         .task_input,
         input,
         select {
@@ -172,6 +177,7 @@ form {
       }
 
       &.field_valid {
+
         .task_input,
         input,
         select {
@@ -184,6 +190,7 @@ form {
       }
 
       &.field_invalid {
+
         .task_input,
         input,
         select {
@@ -254,6 +261,10 @@ button {
 
 .task_input {
   line-height: 140%;
+}
+
+textarea.task_input {
+  height: $double_padding;
 }
 
 button,

@@ -25,12 +25,13 @@
                 (keyup)="updateFieldWithDebounce( $event,  'translation')"
                 (blur)="updateFieldFromEvent($event, 'translation')" [textContent]="task.translation"> </div> -->
 
-
-            <input type="text" [(ngModel)]="task.content" name="content" class="task_input"
-                (change)="updateField('content')" (keyup)="updateFieldWithDebounce( 'content')" />
-            <input *ngIf="canAdministrate" type="text" [(ngModel)]="task.translation" name="translation"
+            <textarea type="text" [(ngModel)]="task.content" name="content" class="task_input"
+                (change)="updateField('content')" (keyup)="updateFieldWithDebounce( 'content')"></textarea>
+            <textarea *ngIf="canAdministrate" type="text" [(ngModel)]="task.translation" name="translation"
                 class="task_input" (change)="updateField('translation')"
-                (keyup)="updateFieldWithDebounce( 'translation')" />
+                (keyup)="updateFieldWithDebounce( 'translation')"></textarea>
+
+
             <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken" min="0"
                 step="1" class="task_input task_input_time" (change)="updateField('time_taken')"
                 placeholder="minutes taken" />
