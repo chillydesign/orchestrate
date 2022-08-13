@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { Subscription } from 'rxjs';
 import { TasksService } from 'src/app/services/tasks.service';
@@ -16,7 +16,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
   @Input() project: Project;
   @Input() users: User[];
-
   @Input() canAdministrate = true;
   @Input() showProjectLink = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -31,12 +30,13 @@ export class TaskComponent implements OnInit, OnDestroy {
   public current_user: User;
   public disabled = false;
   public debounce_timer: any;
+  public time_options: { amount: number, translation: string }[] = this.tasksService.timeOptions();
 
+  @ViewChild('taskContainer') taskContainer: ElementRef;
   private update_task_sub: Subscription;
   private upload_sub: Subscription;
   private current_user_subscription: Subscription;
   private delete_task_sub: Subscription;
-  public time_options: { amount: number, translation: string }[] = this.tasksService.timeOptions();
   constructor(
     private tasksService: TasksService,
     private authService: AuthService,
@@ -186,12 +186,19 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   updateTextareaHeights(): void {
-    const ts = document.querySelectorAll('textarea');
+    const ts = this.taskContainer.nativeElement.querySelectorAll('textarea');
+    let h: number = -9999;
     ts.forEach(t => {
-      if (t.offsetHeight < t.scrollHeight) {
-        t.style.height = (t.scrollHeight + 10) + 'px';
+      t.style.height = null;
+      if (t.scrollHeight > h) {
+        h = t.scrollHeight;
       }
     })
+    if (h > 0) {
+      ts.forEach(t => {
+        t.style.height = (h + 10) + 'px';
+      })
+    }
   }
 
 

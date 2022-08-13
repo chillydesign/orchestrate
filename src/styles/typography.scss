@@ -257,6 +257,11 @@ button {
     border-color: $brand_color;
     outline: 0;
   }
+
+  &.ng-invalid {
+    border-color: $red;
+    background-color: lighten($red, 40);
+  }
 }
 
 .task_input {

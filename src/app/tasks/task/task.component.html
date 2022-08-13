@@ -1,4 +1,4 @@
-<div class="row_container task_container    priority_{{task.priority}} indentation_{{task.indentation}}"
+<div #taskContainer class="row_container task_container    priority_{{task.priority}} indentation_{{task.indentation}}"
     [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
 
     <div class="completed_container">
@@ -32,9 +32,9 @@
                 (keyup)="updateFieldWithDebounce( 'translation')"></textarea>
 
 
-            <input *ngIf="canAdministrate" type="number" [(ngModel)]="task.time_taken" name="time_taken" min="0"
-                step="1" class="task_input task_input_time" (change)="updateField('time_taken')"
-                placeholder="minutes taken" />
+            <input *ngIf="canAdministrate" type="text" inputmode="numeric" pattern="[0-9]*"
+                [(ngModel)]="task.time_taken" name="time_taken" min="0" step="1" class="task_input task_input_time"
+                (change)="updateField('time_taken')" placeholder="minutes taken" />
 
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
