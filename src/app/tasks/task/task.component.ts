@@ -230,7 +230,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.debounce_timer = setTimeout(() => {
       this.updateField(field);
 
-    }, 500);
+    }, 5000);
   }
 
   updateFieldFromEvent(event, field: ('content' | 'translation')) {
