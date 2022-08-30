@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
@@ -33,6 +34,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   constructor(
     private clientsService: ClientsService,
     private authService: AuthService,
+    private titleService: Title,
     private projectsService: ProjectsService,
     private usersService: UsersService,
     private route: ActivatedRoute) { }
@@ -98,6 +100,7 @@ export class ClientComponent implements OnInit, OnDestroy {
           this.client = client;
           this.projectsService.current_project_client.next(client);
           this.getProjects();
+          this.titleService.setTitle(this.client.name);
 
         }
       }
