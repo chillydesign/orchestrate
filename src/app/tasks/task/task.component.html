@@ -102,6 +102,9 @@
             <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">
                     {{ "Indent" | translate}}</a>
             </li>
+            <li><a (click)="moveTask()" title="Move task" class=" icon icon_person">
+                    {{ "Move" | translate}}</a>
+            </li>
 
         </ul>
 
@@ -115,5 +118,9 @@
 </div>
 
 
-<app-comments *ngIf="showComments" [task]="task" (hideTaskComments)="hideComments($event)">
+<app-comments *ngIf="showComments" [task]="task" (hide_lightbox)="hideComments($event)">
 </app-comments>
+
+
+<app-move-task *ngIf="showMoveTask" [task]="task" [project]="project" (hide_lightbox)="hideMoveTask($event)">
+</app-move-task>

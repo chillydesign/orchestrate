@@ -126,6 +126,10 @@ main {
   &.alert_danger {
     background-color: $red;
   }
+
+  &.alert_success {
+    background-color: $green;
+  }
 }
 
 .row_container {

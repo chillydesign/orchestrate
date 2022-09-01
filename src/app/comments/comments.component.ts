@@ -15,7 +15,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   public comments: Comment[];
   private comments_sub: Subscription;
   private add_comment_sub: Subscription;
-  @Output() hideTaskComments: EventEmitter<boolean | null | undefined> = new EventEmitter(undefined);
+  @Output() hide_lightbox: EventEmitter<boolean | null | undefined> = new EventEmitter(undefined);
 
   constructor(private commentsService: CommentsService) { }
 
@@ -78,8 +78,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
   }
 
 
-  hideComments(): void {
-    this.hideTaskComments.next(true);
+  hideLightbox(): void {
+    this.hide_lightbox.next(true);
   }
 
 
@@ -87,7 +87,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   // on press enter, call checkQuestion or moveToNextQuestionOrSummary
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.key === 'Escape') {
-      this.hideComments();
+      this.hideLightbox();
     }
   }
 

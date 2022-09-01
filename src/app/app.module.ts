@@ -38,6 +38,7 @@ import { ClientTasksComponent } from './client-tasks/client-tasks.component';
 import { ProjectWholeComponent } from './projects/project-whole/project-whole.component';
 import { SearchComponent } from './search/search.component';
 import { ExportComponent } from './export/export.component';
+import { MoveTaskComponent } from './tasks/move-task/move-task.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ExportComponent } from './export/export.component';
     ClientTasksComponent,
     ProjectWholeComponent,
     SearchComponent,
-    ExportComponent
+    ExportComponent,
+    MoveTaskComponent
   ],
   imports: [
     BrowserModule,

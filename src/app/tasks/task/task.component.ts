@@ -29,6 +29,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   public menu_open = false;
   public current_user: User;
   public disabled = false;
+  public showMoveTask = false;
   public debounce_timer: any;
   public time_options: { amount: number, translation: string }[] = this.tasksService.timeOptions();
 
@@ -299,6 +300,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
+
   toggleMenu(): void {
     this.menu_open = !this.menu_open;
     this.tasksService.close_task_menu.next(this.task.id);
@@ -321,6 +323,23 @@ export class TaskComponent implements OnInit, OnDestroy {
   hideComments(hide: boolean): void {
 
     this.showComments = false;
+  }
+
+  hideMoveTask(hide: boolean): void {
+    this.showMoveTask = false;
+  }
+
+
+
+
+  taskChangedProject(nt: Task): void {
+    this.task.project_id = nt.project_id;
+    this.taskUpdated.next(this.task);
+  }
+
+
+  moveTask(): void {
+    this.showMoveTask = true;
   }
 
 

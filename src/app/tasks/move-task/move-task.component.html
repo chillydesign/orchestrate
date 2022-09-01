@@ -1,0 +1,31 @@
+<div class="lightbox_outer" *ngIf="task">
+    <div class="lightbox_inner ">
+
+
+        <a (click)="hideLightbox()" class="close_lightbox">Close</a>
+
+
+        <form (ngSubmit)="onSubmit()" novalidate>
+            <ul>
+                <app-form-field *ngIf="projects" [errors]="errors" [field]="'project_id'">
+                    <label for="project_id">{{'Project' | translate}} </label>
+                    <select name="project_id" id="project_id" [(ngModel)]="task.project_id">
+                        <option [ngValue]="null"> - </option>
+                        <option *ngFor="let project of projects" [ngValue]="project.id">{{ project.name}}</option>
+                    </select>
+                </app-form-field>
+                <app-form-field [errors]="errors">
+                    <button [disabled]="formLoading">{{'Save' | translate}}</button>
+                </app-form-field>
+            </ul>
+        </form>
+
+        <br>
+
+        <div class="alert alert_success" *ngIf="formSuccess">
+            Task has moved. Please refresh page to see change.
+        </div>
+
+
+    </div>
+</div>
