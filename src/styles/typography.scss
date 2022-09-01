@@ -7,7 +7,7 @@ h1 {
 
 h2 {
   font-size: #{$font_size * 1.8};
-  margin: 0 0 $padding;
+  margin: 0 0 $half_padding;
   font-weight: bold;
 }
 
@@ -36,7 +36,7 @@ p {
 li {
   font-size: $font_size;
   line-height: $line_height;
-  padding: 0 0 5px;
+  padding: 0 0 0;
 }
 
 a {
@@ -246,7 +246,7 @@ select,
 textarea,
 button {
   width: 100%;
-  padding: $half_padding;
+  padding: 7px;
   font-size: $font_size;
   border: 1px solid $medium_grey;
   font-family: $font_stack;
