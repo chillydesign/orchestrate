@@ -1,5 +1,5 @@
 <app-box [styleclass]="project.status">
-    <div class="project_whole">
+    <div class="project_whole project_summary">
         <div class="progression_outer">
             <div class="progression_inner" [style.width.%]="project.percentage"></div>
         </div>
@@ -35,9 +35,10 @@
 
 
 
-        <app-box-footer>
+        <!-- <app-box-footer>
             <p>{{'Last updated' | translate}} : {{ project.updated_at | date}} </p>
-            <!-- <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a></p> -->
-        </app-box-footer>
+        </app-box-footer> -->
+        <!-- <p *ngIf="project.client"> <a [routerLink]="['/clients',  project.client.slug]">{{project.client.name}}</a></p> -->
+
     </div>
 </app-box>

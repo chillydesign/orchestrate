@@ -47,19 +47,28 @@ main {
 .box_content {}
 
 .box_footer {
-  background-color: scale-color($brand_color, $lightness: 95%);
-  margin: $padding $negative_padding 0;
-  padding: $half_padding;
+  // background-color: scale-color($brand_color, $lightness: 95%);
+  margin: 0 $negative_padding 0;
+  padding: 6px $half_padding 0;
   border-radius: 0 0 $border_radius $border_radius;
   text-align: right;
   color: scale-color($brand_color, $lightness: 33%);
   display: flex;
   justify-content: space-between;
 
+  display: flex;
+
+  h2 {
+    font-size: 1.9em;
+  }
+
   p {
     flex-wrap: nowrap;
     padding: 0;
-    font-size: 1.2em;
+    position: relative;
+    top: 5px;
+    font-size: 1.1em;
+    text-align: right;
   }
 }
 
@@ -171,9 +180,9 @@ main {
   margin: 0 0 5px;
 
   &.completed {
-    .content_container {
-      opacity: 0.5;
-    }
+    // .content_container {
+    //   opacity: 0.5;
+    // }
   }
 
   &.is_title {
@@ -504,8 +513,8 @@ main {
       display: none;
 
       @media (min-width: $mobile_width) {
-        max-width: 100px;
-        width: 100px;
+        max-width: 60px;
+        width: 60px;
         display: block;
       }
     }
@@ -720,7 +729,7 @@ h1 {
 
 
     ul,
-    .box_footer {
+    .box_footer p {
       display: none;
     }
   }
@@ -728,6 +737,9 @@ h1 {
 }
 
 
+.project_outer {
+  padding-bottom: 7px;
+}
 
 
 .project_whole {
@@ -736,6 +748,14 @@ h1 {
   // border-top: 3px solid $light_grey;
 
 
+  &.project_summary {
+    padding: 0 0 20px 0;
+
+    h2 {
+      padding-top: 15px;
+    }
+  }
+
   .progression_outer {
     background-color: $medium_grey;
     // background-color: red;
@@ -743,14 +763,13 @@ h1 {
     // position: relative;
   }
 
-  .box_footer {
-    // position: relative;
-    // top: -20px;
+  .box_footer p {
+
     opacity: 0.3;
   }
 
   &:hover {
-    .box_footer {
+    .box_footer p {
       opacity: 1;
     }
   }
@@ -767,7 +786,7 @@ h1 {
 
 .progression_outer {
   // margin: #{$padding * -1} #{$padding * -1} $padding;
-  margin: 0 $negative_padding $padding;
+  margin: 0 $negative_padding 0;
   background-color: $light_grey;
   border-radius: $border_radius $border_radius 0 0;
   opacity: 0.4;

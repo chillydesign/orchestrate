@@ -164,6 +164,16 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
 
+  toggleCollapse(): void {
+    const co_count = this.projects.filter(p => p.collapsed === true).length;
+    const un_count = this.projects.filter(p => p.collapsed !== true).length;
+    const col = (co_count < un_count);
+
+    this.projects.forEach(p => {
+      p.collapsed = col;
+    })
+  }
+
   refreshProjects(): void {
     this.projects = [];
     this.getProjects();

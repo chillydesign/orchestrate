@@ -248,7 +248,9 @@ button {
   width: 100%;
   padding: 7px;
   font-size: $font_size;
-  border: 1px solid $medium_grey;
+  // border: 1px solid $medium_grey;
+  border: 0;
+  background-color: #f7f7f7;
   font-family: $font_stack;
   border-radius: $border_radius;
   line-height: 1;

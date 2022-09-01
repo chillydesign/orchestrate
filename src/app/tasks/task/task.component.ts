@@ -197,7 +197,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     })
     if (h > 0) {
       ts.forEach(t => {
-        t.style.height = (h + 10) + 'px';
+        t.style.height = (h + 2) + 'px';
       })
     }
   }

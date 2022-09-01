@@ -20,6 +20,7 @@
                     class="button button_white">Archived projects</a>
                 <a *ngIf="status !== 'active'" [routerLink]="['/clients',   client.slug, ]"
                     class="button button_white">Active projects</a>
+                <a (click)="toggleCollapse()" class="button button_white">Toggle</a>
             </div>
         </div>
     </div>
