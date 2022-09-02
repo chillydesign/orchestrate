@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.service';
 import { UsersService } from 'src/app/services/users.service';
+
+
 
 @Component({
   selector: 'app-client',
@@ -22,6 +24,8 @@ export class ClientComponent implements OnInit, OnDestroy {
   public getting_client = false;
   public project_id: number;
   public show_mode: ('incomplete' | 'unapproved' | 'all') = 'all';
+  public show_incomplete: boolean = false;
+  public show_unapproved: boolean = true;
   public client_id: number;
   public status = 'active';
   public client_slug: string;
@@ -129,6 +133,9 @@ export class ClientComponent implements OnInit, OnDestroy {
           this.projects = projects;
           this.projects.map(p => p.client = this.client);
 
+          this.loadViewOptionsFromLocalStorage();
+
+
           this.scrollToProject();
 
           this.getUsers();
@@ -187,19 +194,71 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   changeVisibleTasks(): void {
 
-    if (this.show_mode == 'incomplete') {
-      this.projects.forEach(project => {
-        project.visible_tasks = project.tasks.filter(t => t.completed === false)
-      });
-    } else if (this.show_mode == 'unapproved') {
-      this.projects.forEach(project => {
-        project.visible_tasks = project.tasks.filter(t => t.is_approved === false)
-      });
-    } else {
-      this.projects.forEach(project => {
-        project.visible_tasks = project.tasks;
-      });
+
+    const ac = (this.show_incomplete) ? [false] : [true, false, null];
+    const aa = (this.show_unapproved) ? [false] : [true, false, null];
+
+
+    this.projects.forEach(project => {
+      project.visible_tasks = project.tasks.filter(t => {
+        return ac.includes(t.completed) && aa.includes(t.is_approved);
+      })
+    });
+
+    // if (this.show_mode == 'incomplete') {
+    //   this.projects.forEach(project => {
+    //     project.visible_tasks = project.tasks.filter(t => t.completed === false)
+    //   });
+    // } else if (this.show_mode == 'unapproved') {
+    //   this.projects.forEach(project => {
+    //     project.visible_tasks = project.tasks.filter(t => t.is_approved === false)
+    //   });
+    // } else {
+    //   this.projects.forEach(project => {
+    //     project.visible_tasks = project.tasks;
+    //   });
+    // }
+  }
+
+
+
+
+
+  toggleStep(view_type: string): void {
+    if (view_type === 'incomplete') {
+      this.show_incomplete = !this.show_incomplete;
+    } else if (view_type === 'unapproved') {
+      this.show_unapproved = !this.show_unapproved;
     }
+    this.storeCurrentViewOptions();
+
+    this.changeVisibleTasks();
+
+  }
+
+
+  loadViewOptionsFromLocalStorage(): void {
+    const orch_show_incomplete: boolean = localStorage.getItem('orch_show_incomplete') === 'true';
+    const orch_show_unapproved: boolean = localStorage.getItem('orch_show_unapproved') !== 'false';
+
+
+    this.show_incomplete = orch_show_incomplete;
+    this.show_unapproved = orch_show_unapproved;
+
+
+    this.changeVisibleTasks();
+
+
+
+  }
+
+  storeCurrentViewOptions(): void {
+
+
+    localStorage.setItem('orch_show_incomplete', this.show_incomplete.toString());
+    localStorage.setItem('orch_show_unapproved', this.show_unapproved.toString());
+
+
   }
 
 

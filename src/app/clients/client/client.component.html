@@ -12,15 +12,17 @@
         <div class="column column_right">
             <div class="button_group">
                 <ng-container *ngIf="current_user">
-                    <a (click)="changeShowMode('incomplete')" class="button button_white">Show incomplete</a>
-                    <a (click)="changeShowMode('unapproved')" class="button button_white">Show unapproved</a>
-                    <a (click)="changeShowMode('all')" class="button button_white">Show all</a>
+                    <a (click)="toggleStep( 'incomplete')" [ngClass]="{button_green: show_incomplete === true}"
+                        class="button button_white"> Show incomplete </a>
+                    <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
+                        class="button button_white"> Show unapproved </a>
                 </ng-container>
                 <a *ngIf="status === 'active'" [routerLink]="['/clients',   client.slug,  'status', 'inactive']"
-                    class="button button_white">Archived projects</a>
+                    class="button button_white">Archive</a>
                 <a *ngIf="status !== 'active'" [routerLink]="['/clients',   client.slug, ]"
-                    class="button button_white">Active projects</a>
+                    class="button button_white">En cours</a>
                 <a (click)="toggleCollapse()" class="button button_white">Toggle</a>
+
             </div>
         </div>
     </div>

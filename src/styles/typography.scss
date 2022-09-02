@@ -73,6 +73,13 @@ a {
       color: $brand_color;
     }
 
+
+    &.button_green {
+      background-color: $green;
+      color: white;
+      border-color: darken($green, 7);
+    }
+
     &:hover {
       opacity: 1;
     }
@@ -84,7 +91,7 @@ a {
     border-radius: 0;
     padding-left: 8px;
     padding-right: 8px;
-    border-right-width: 0;
+    border-right-width: 0 !important;
 
     &:first-child {
       border-top-left-radius: $border_radius;
@@ -94,7 +101,8 @@ a {
     &:last-child {
       border-top-right-radius: $border_radius;
       border-bottom-right-radius: $border_radius;
-      border-right-width: 1px;
+      border-right-width: 1px !important;
+
     }
   }
 }

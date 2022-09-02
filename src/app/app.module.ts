@@ -39,6 +39,7 @@ import { ProjectWholeComponent } from './projects/project-whole/project-whole.co
 import { SearchComponent } from './search/search.component';
 import { ExportComponent } from './export/export.component';
 import { MoveTaskComponent } from './tasks/move-task/move-task.component';
+import { BooleanSelectorComponent } from './shared/boolean-selector/boolean-selector.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { MoveTaskComponent } from './tasks/move-task/move-task.component';
     ProjectWholeComponent,
     SearchComponent,
     ExportComponent,
-    MoveTaskComponent
+    MoveTaskComponent,
+    BooleanSelectorComponent
   ],
   imports: [
     BrowserModule,

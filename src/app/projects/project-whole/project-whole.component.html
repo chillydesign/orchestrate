@@ -9,12 +9,14 @@
 
 
 
-        <app-box-footer *ngIf="current_user">
-            <h2 (click)="collapseProject()"><span class="grey" *ngIf="project.nice_month">{{project.nice_month}}
-                    &nbsp;</span> {{project.name}} <div class="toggle_collapse"></div>
+        <app-box-footer>
+            <h2 (click)="collapseProject()"> {{project.name}} <span class="grey"
+                    *ngIf="project.nice_month">{{project.nice_month}}
+                    &nbsp;</span>
+                <div class="toggle_collapse"></div>
             </h2>
 
-            <p>
+            <p *ngIf="current_user">
                 <a *ngIf="project.status !== 'inactive' " (click)="archiveProject()">{{'Archive' | translate}}</a>
                 &nbsp;
                 <a [routerLink]="['/projects', project.id,  'edit']">{{'Edit' | translate}}</a>
