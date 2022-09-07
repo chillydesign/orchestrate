@@ -86,27 +86,36 @@
             <li><a (click)="togglePriority()" title="Priority" class="hide_on_mobile icon icon_priority">
                     {{ "Priority" | translate}}</a>
 
-                <ng-container *ngIf="canAdministrate">
-            <li><a (click)="toggleCurrent()" title="Working on" class="hide_on_mobile icon icon_current">
-                    {{ "Working on" | translate}}</a>
-            </li>
-
-            <li *ngFor="let user of users">
-                <a class="icon icon_person" [ngClass]="{assigned:  task.assignee_id === user.id }"
-                    title="Assign to {{user.name}}" (click)="assignTo(user)">
-                    {{ "Assign to" | translate}} {{user.name}}</a>
-            </li>
-            <li>
-                <a (click)="deleteTask()" title="Delete" class="icon icon_delete">
-                    {{ "Delete" | translate}}</a>
-            </li>
-            </ng-container>
             <li><a (click)="toggleIndentation()" title="Make subtask" class="hide_on_mobile icon icon_indent">
                     {{ "Indent" | translate}}</a>
             </li>
-            <li><a (click)="moveTask()" title="Move task" class=" icon icon_person">
-                    {{ "Move" | translate}}</a>
-            </li>
+
+            <ng-container *ngIf="canAdministrate">
+                <li><a (click)="toggleCurrent()" title="Working on" class="hide_on_mobile icon icon_current">
+                        {{ "Working on" | translate}}</a>
+                </li>
+
+
+                <li><a (click)="moveTask()" title="Move task" class=" icon icon_person">
+                        {{ "Move" | translate}}</a>
+                </li>
+
+                <!-- <li *ngFor="let user of users">
+                    <a class="icon icon_person" [ngClass]="{assigned:  task.assignee_id === user.id }"
+                        title="Assign to {{user.name}}" (click)="assignTo(user)">
+                        {{ "Assign to" | translate}} {{user.name}}</a>
+                </li> -->
+                <li>
+                    <a (click)="deleteTask()" title="Delete" class="icon icon_delete">
+                        {{ "Delete" | translate}}</a>
+                </li>
+                <li class="date">{{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}</li>
+                <li class="date" *ngIf="task.completed_at_date">Completed: {{task.completed_at_date | date}}</li>
+
+            </ng-container>
+
+
+
 
         </ul>
 

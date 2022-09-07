@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: Task;
   @Input() project: Project;
-  @Input() users: User[];
+  // @Input() users: User[];
   @Input() canAdministrate = true;
   @Input() showProjectLink = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);

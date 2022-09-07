@@ -20,7 +20,7 @@
 
         <ul>
             <li *ngFor="let task of visible_tasks">
-                <app-task [task]="task" [project]="task.project" [users]="users" [canAdministrate]="!!current_user">
+                <app-task [task]="task" [project]="task.project" [canAdministrate]="!!current_user">
                 </app-task>
             </li>
         </ul>

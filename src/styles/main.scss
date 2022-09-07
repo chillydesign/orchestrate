@@ -444,6 +444,11 @@ main {
         font-size: 1em;
         overflow: hidden;
 
+        &.date {
+          padding: 7px 4px 1px;
+          font-size: 0.9em;
+        }
+
         a {
           text-indent: 25px;
           display: block;
