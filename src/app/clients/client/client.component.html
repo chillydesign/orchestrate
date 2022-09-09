@@ -23,6 +23,10 @@
                     class="button button_white">En cours</a>
                 <a (click)="toggleCollapse()" class="button button_white">Toggle</a>
 
+                <a class="button button_primary" [routerLink]="['/projects', 'new', 'clients', client.id]">{{'New
+                    Project' |
+                    translate}}</a>
+
             </div>
         </div>
     </div>
@@ -38,10 +42,6 @@
         </div>
     </app-box>
 
-    <app-box>
-        <p> <a class="button button_primary" [routerLink]="['/projects', 'new', 'clients', client.id]">{{'New Project' |
-                translate}}</a></p>
-    </app-box>
 
 
 </ng-container>

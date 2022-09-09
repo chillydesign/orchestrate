@@ -202,7 +202,9 @@ main {
   }
 
   &.indentation_1 {
-    margin-left: 30px;
+    .content_container {
+      margin-left: 30px;
+    }
   }
 
   &.priority_1 {
