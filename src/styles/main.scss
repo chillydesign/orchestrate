@@ -926,19 +926,31 @@ a.load_translate {
 }
 
 .comments_container {
-  .comment_container {
-    margin: 0 0 40px;
 
+  background: darken($light_grey, 5);
+  padding: 20px;
+  border-radius: 3px;
+  margin: 2px 0;
+
+  .comment_container {
+
+    margin: 0 0 10px;
     position: relative;
 
     blockquote {
-      font-size: $font_size;
-      padding: 0 0 6px;
+      font-size: 1em;
+
+      display: inline-block;
+      background: $brand_color;
+      color: white;
+      border-radius: 10px;
+      padding: 10px;
     }
 
     .date {
-      color: $medium_grey;
-      font-size: #{$font_size * 0.8};
+      color: transparentize(white, 0.2);
+      font-size: #{$font_size * 0.5};
+      display: block;
     }
   }
 

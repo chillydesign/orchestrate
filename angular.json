@@ -36,7 +36,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [],
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "moment"
+            ],
             "outputPath": "dist/orchestrate",
             "index": "src/index.html",
             "main": "src/main.ts",

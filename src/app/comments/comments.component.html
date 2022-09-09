@@ -1,30 +1,31 @@
-<div class="lightbox_outer">
-    <div class="lightbox_inner ">
+<!-- <div class="lightbox_outer">
+    <div class="lightbox_inner "> -->
 
 
-        <a (click)="hideLightbox()" class="close_lightbox">Close</a>
-
+<!-- <a (click)="hideLightbox()" class="close_lightbox">Close</a> -->
+<!-- 
         <div class="task_container">
             <h3>
                 {{task.content}}
             </h3>
-        </div>
+        </div> -->
 
 
-        <div class="comments_container ">
+<div class="comments_container ">
 
-            <div class="comment_container" *ngFor="let comment of comments">
-                <blockquote class="">{{comment.message}} </blockquote>
-                <span class="date"> {{comment.created_at_date | date}}</span>
-            </div>
+    <div class="comment_container" *ngFor="let comment of comments">
+        <blockquote class="">{{comment.message}}
+            <span class="date"> {{comment.created_at_date | date}}</span>
+        </blockquote>
 
-
-
-            <div class="task_container">
-                <input class="task_input" placeholder="your comment" [(ngModel)]="newcomment.message" name="message"
-                    id="message" (keypress)="saveCommentOnEnter($event)" />
-            </div>
-
-        </div>
     </div>
+
+
+    <div>
+        <input class="task_input" placeholder="your comment" [(ngModel)]="newcomment.message" name="message"
+            id="message" (keypress)="saveCommentOnEnter($event)" />
+    </div>
+
 </div>
+<!-- </div>
+</div> -->

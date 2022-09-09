@@ -32,7 +32,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   public showMoveTask = false;
   public debounce_timer: any;
   public time_options: { amount: number, translation: string }[] = this.tasksService.timeOptions();
-
   @ViewChild('taskContainer') taskContainer: ElementRef;
   private update_task_sub: Subscription;
   private upload_sub: Subscription;
@@ -317,7 +316,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   showCommentPopup(): void {
     // this.showTaskComments.next(this.task);
-    this.showComments = true;
+    this.showComments = !this.showComments;
   }
 
   hideComments(hide: boolean): void {
