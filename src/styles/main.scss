@@ -295,7 +295,7 @@ main {
         }
 
         &:checked {
-          background-color: $green;
+          background-color: $green  !important;
         }
       }
 
@@ -422,7 +422,7 @@ main {
       height: $checkbox_size;
       cursor: pointer;
       opacity: 0.5;
-      border: 1px solid white;
+      border: 0;
       position: relative;
       top: 9px;
     }
@@ -803,6 +803,7 @@ h1 {
     background: $brand_gradient;
     transition: all 1s;
     height: 3px;
+    text-indent: -9999px;
   }
 }
 
@@ -841,6 +842,7 @@ h1 {
     line-height: $header_height;
     background: url("../assets/images/search.svg") no-repeat $padding 50% transparent;
     background-size: 13px;
+    border-radius: 0;
   }
 
   .search_buttons {

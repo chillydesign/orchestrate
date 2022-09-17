@@ -11,6 +11,7 @@ export class User {
     public role: string;
     public is_admin: boolean;
 
+    public dark_mode: boolean;
     public name: string;
 
 

@@ -1,0 +1,56 @@
+@media (prefers-color-scheme: dark) {}
+
+
+body.dark_mode {
+    background-color: darken($dark_grey, 5);
+    color: darken(white, 15);
+
+    .box {
+        background-color: lighten($dark_grey, 5);
+    }
+
+    .earnings {
+        background-color: lighten($dark_grey, 3)
+    }
+
+
+    .task_input,
+    input,
+    select,
+    textarea,
+    button {
+        background-color: lighten($dark_grey, 10);
+        color: darken(white, 10);
+    }
+
+
+    a.button.button_white {
+        border-color: lighten($dark_grey, 5);
+        background-color: lighten($dark_grey, 10);
+        color: white;
+    }
+
+
+    .task_container .completed_container input {
+        border-color: lighten($dark_grey, 5);
+        background-color: $dark_grey;
+
+        &:checked {
+            background-color: $brand_color;
+        }
+
+    }
+
+    .box_footer {
+        p {
+            a {
+                color: white;
+            }
+        }
+    }
+
+
+    table tr:nth-child(2n) td {
+        background-color: lighten($dark_grey, 2);
+    }
+}

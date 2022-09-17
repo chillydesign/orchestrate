@@ -75,7 +75,7 @@ a {
 
 
     &.button_green {
-      background-color: $green;
+      background-color: $green  !important;
       color: white;
       border-color: darken($green, 7);
     }
