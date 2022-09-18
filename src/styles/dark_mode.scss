@@ -18,6 +18,20 @@ body.dark_mode {
     }
 
 
+    .task_container .actions_container ul {
+        background-color: lighten($dark_grey, 20);
+
+        li {
+            a {
+                color: white;
+            }
+        }
+
+    }
+
+
+
+
     .task_input,
     input,
     select,
@@ -56,5 +70,20 @@ body.dark_mode {
 
     table tr:nth-child(2n) td {
         background-color: lighten($dark_grey, 2);
+    }
+
+
+    ngx-dropzone {
+        background-color: lighten($dark_grey, 2);
+    }
+
+    .upload_box {
+        background-color: darken($dark_grey, 3);
+
+    }
+
+    .task_container .actions_container.menu_open .actions_opener {
+        background-color: lighten($dark_grey, 15);
+
     }
 }
