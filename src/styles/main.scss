@@ -254,8 +254,12 @@ main {
   .completed_container {
     // width: 40px;
     // max-width: 40px;
-    padding: 0 10px 0 0;
-    flex-shrink: 0;
+
+    @media (min-width: $mobile_width) {
+      flex-shrink: 0;
+      padding: 0 10px 0 0;
+
+    }
 
     // big checkbox
     input {
@@ -498,17 +502,24 @@ main {
   }
 
   .inputs_container {
-    display: flex;
-    flex-wrap: wrap;
+
+
+    @media (min-width: $mobile_width) {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
     input,
     .task_input {
       flex: 1;
     }
 
-    input,
-    .task_input {
-      margin-left: 5px;
+    @media (min-width: $mobile_width) {
+
+      input,
+      .task_input {
+        margin-left: 5px;
+      }
     }
 
     input:first-child,
@@ -773,6 +784,11 @@ h1 {
   .box_footer p {
 
     opacity: 0.3;
+    display: none;
+
+    @media (min-width: $mobile_width) {
+      display: block;
+    }
   }
 
   &:hover {
