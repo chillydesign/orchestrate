@@ -13,6 +13,10 @@ body.dark_mode {
         background-color: lighten($dark_grey, 3)
     }
 
+    .comments_container {
+        background-color: lighten($dark_grey, 15)
+    }
+
 
     .task_input,
     input,

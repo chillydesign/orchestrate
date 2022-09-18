@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             label: '£',
             data: [],
             borderWidth: 1,
-            backgroundColor: '#2a75d0aa',
+            backgroundColor: '#4a85e0',
           },
           {
             type: 'line',
@@ -154,6 +154,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data: [],
             borderWidth: 1,
             pointRadius: 0,
+            backgroundColor: 'rgba(220,220,220,0.25)',
+
           },
           {
             type: 'line',
@@ -161,7 +163,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data: [],
             borderWidth: 1,
             pointRadius: 0,
-            borderColor: '#aaaaaa',
+            borderColor: '#666686',
             fill: false,
 
 

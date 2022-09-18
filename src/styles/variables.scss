@@ -3,10 +3,10 @@ $brand_color_adjust: adjust-hue($brand_color, -17);
 $red: #ca385e;
 $green: #38ca5e;
 
-$light_grey: #f9f9f9;
-$medium_grey: #ccc;
-$medium_dark_grey: #999;
-$dark_grey: #282828;
+$light_grey: scale-color($brand_color, $lightness: 92%, $saturation: -85%);
+$medium_grey: scale-color($brand_color, $lightness: 20%, $saturation: -85%);
+$medium_dark_grey: scale-color($brand_color, $lightness: -42%, $saturation: -85%);
+$dark_grey: scale-color($brand_color, $lightness: -82%, $saturation: -85%);
 
 $font_color: $dark_grey;
 $lighter_font_color: #888;
