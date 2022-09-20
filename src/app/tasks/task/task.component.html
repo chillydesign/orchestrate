@@ -38,7 +38,7 @@
 
             <div class="icon icon_tick" *ngIf="showTick">Updated</div>
         </div>
-        <div class="task_added" *ngIf="task.comments_count > 0 || task.uploads_count > 0">
+        <div class="task_added" *ngIf="task.comments_count > 0 || task.uploads_count > 0 || showProjectLink">
 
 
             <!-- <div *ngIf="task.priority === 1">
