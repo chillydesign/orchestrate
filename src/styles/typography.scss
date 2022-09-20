@@ -270,9 +270,9 @@ button {
   border-radius: $border_radius;
   line-height: 1;
 
-  &:focus {
-    border-color: $brand_color;
-    outline: 0;
+  &:focus,
+  &:active {
+    outline: 1px solid transparentize($brand_color, 0.5);
   }
 
   &.ng-invalid {

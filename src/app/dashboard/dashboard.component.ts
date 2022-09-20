@@ -10,6 +10,7 @@ import { ProjectsOptions } from '../services/projects.service';
 import { ChartConfiguration } from 'chart.js';
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public start_date = moment();
   public total_hours: string;
   public total_earned: string;
+  public search_term: string;
   public chart: Chart;
   public hourly_rate: number = 55;
   public daily_target = 123;
@@ -39,6 +41,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private projectsService: ProjectsService,
     private tasksService: TasksService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -259,6 +262,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
 
+
+  onSearch(): void {
+    if (this.search_term != undefined && this.search_term != '') {
+      this.router.navigate(['/search', this.search_term]);
+
+    }
+
+  }
 
 
   ngOnDestroy() {

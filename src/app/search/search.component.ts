@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
@@ -20,16 +21,19 @@ export class SearchComponent implements OnInit, OnDestroy {
   private current_user_subscription: Subscription;
   private tasks_sub: Subscription;
   private users_sub: Subscription;
+  private route_params_subscription: Subscription;
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
     private tasksService: TasksService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.getCurrentUser();
 
   }
+
 
   getCurrentUser(): void {
     this.current_user_subscription = this.authService.current_user.subscribe(
@@ -38,6 +42,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (user) {
           this.getUsers();
         }
+
+        this.subscribeToRoute();
       }
     );
   }
@@ -52,6 +58,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
   }
 
+  subscribeToRoute(): void {
+    this.route_params_subscription = this.route.params.subscribe(
+      (params: Params) => {
+        if (params.search_term) {
+          this.search_term = params.search_term;
+          this.onSearch();
+        }
+      }
+    ); // end of route_params_subscription
+
+  }
 
 
   onSearch(): void {
@@ -87,6 +104,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.current_user_subscription,
       this.tasks_sub,
       this.users_sub,
+      this.route_params_subscription,
     ];
 
     subs.forEach((sub) => {

@@ -51,5 +51,15 @@
 
         </app-box>
 
+        <app-box>
+            <form (ngSubmit)="onSearch()" novalidate>
+                <div class="search_field">
+
+                    <input [placeholder]="'Search' | translate" type="text" name="search_term" id="search_term"
+                        [(ngModel)]="search_term">
+                </div>
+            </form>
+        </app-box>
+
     </div>
 </div>

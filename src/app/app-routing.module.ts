@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
   { path: 'projects', component: ProjectsComponent, data: { title: 'Project' } },
+  { path: 'search/:search_term', component: SearchComponent, data: { title: 'Search' } },
   { path: 'search', component: SearchComponent, data: { title: 'Search' } },
 
   { path: 'tasks', component: TasksComponent, data: { title: 'Tasks' } },

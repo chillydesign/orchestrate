@@ -852,12 +852,12 @@ h1 {
   input {
     border: 0;
     appearance: none;
-    padding: 0 $double_padding;
+    padding-top: 0;
+    padding-bottom: 0;
     width: 100%;
     height: $header_height;
     line-height: $header_height;
-    background: url("../assets/images/search.svg") no-repeat $padding 50% transparent;
-    background-size: 13px;
+
     border-radius: 0;
   }
 
@@ -873,6 +873,17 @@ h1 {
       padding: 0 10px 0;
       line-height: #{($header_height - $hd_button_offset - $hd_button_offset)};
     }
+  }
+}
+
+
+
+.search_field {
+  input {
+    background: url("../assets/images/search.svg") no-repeat $padding 50% transparent;
+    background-size: 13px;
+    padding-left: $double_padding;
+    padding-right: $double_padding;
   }
 }
 
