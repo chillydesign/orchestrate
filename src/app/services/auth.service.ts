@@ -25,7 +25,7 @@ export class AuthService {
 
   // from an email and password get a token to use with the server
   login(email: string, password: string, remember_me?: boolean): Observable<boolean> {
-    const options = this.setAPIOptionsNoLogin();
+    const options = this.setAPIOptions();
     const data = { email, password, remember_me };
     const endpoint = `${this.api_url}/?route=user_token`;
     return this.http.post<{ jwt: string }>(endpoint, data, options).pipe(
@@ -162,24 +162,16 @@ export class AuthService {
 
 
 
-  setAPIOptionsNoLogin() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'application/json;',
-        'Content-Type': 'application/json'
-      })
-    };
-    return httpOptions;
-  }
-
   setAPIOptions() {
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json;',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
       })
     };
+    if (this.token) {
+      httpOptions.headers = httpOptions.headers.append('Authorization', `Bearer ${this.token}`)
+    }
     return httpOptions;
   }
 

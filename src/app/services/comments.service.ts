@@ -21,7 +21,7 @@ export class CommentsService {
   getComments(task_id: number): Observable<Comment[]> {
 
 
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=comments&task_id=${task_id}`;
 
     return this.http.get<Comment[]>(endpoint, options).pipe(
@@ -34,7 +34,7 @@ export class CommentsService {
 
 
   addComment(comment: Comment): Observable<Comment> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
         author: comment.author,
@@ -52,7 +52,7 @@ export class CommentsService {
 
 
   updateComment(comment: Comment): Observable<Comment> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=comments&id=${comment.id}`;
     const data = {
       attributes: {
@@ -69,7 +69,7 @@ export class CommentsService {
 
 
   deleteComment(comment: Comment): Observable<Comment> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=comments&id=${comment.id}`;
     return this.http.delete<Comment>(endpoint, options).pipe(
       catchError(this.authService.handleError)

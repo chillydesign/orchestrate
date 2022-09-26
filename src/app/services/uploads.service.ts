@@ -17,7 +17,7 @@ export class UploadsService {
 
   getUploads(project_id: number): Observable<Upload[]> {
 
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=uploads&project_id=${project_id}`;
     return this.http.get<Upload[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -29,7 +29,7 @@ export class UploadsService {
 
 
   addUpload(upload: Upload): Observable<Upload> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
         file_contents: upload.file_contents,
@@ -49,7 +49,7 @@ export class UploadsService {
 
 
   updateUpload(upload: Upload): Observable<Upload> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=uploads&id=${upload.id}`;
     const data = {
       attributes: {
@@ -65,7 +65,7 @@ export class UploadsService {
 
 
   deleteUpload(upload: Upload): Observable<Upload> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=uploads&id=${upload.id}`;
     return this.http.delete<Upload>(endpoint, options).pipe(
       catchError(this.authService.handleError)

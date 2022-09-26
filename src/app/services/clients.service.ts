@@ -15,7 +15,7 @@ export class ClientsService {
 
 
   getClients(): Observable<Client[]> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=clients`;
     return this.http.get<Client[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -24,7 +24,7 @@ export class ClientsService {
   }
 
   getClient(client_id: number): Observable<Client> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=clients&id=${client_id}`;
     return this.http.get<Client>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -33,7 +33,7 @@ export class ClientsService {
   }
 
   getClientFromSlug(slug: string): Observable<Client> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=clients&slug=${slug}`;
     return this.http.get<Client>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -45,7 +45,7 @@ export class ClientsService {
 
 
   addClient(client: Client): Observable<Client> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
         name: client.name,
@@ -62,7 +62,7 @@ export class ClientsService {
 
 
   updateClient(client: Client): Observable<Client> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=clients&id=${client.id}`;
     const data = {
       attributes: {
@@ -80,7 +80,7 @@ export class ClientsService {
 
 
   deleteClient(client: Client): Observable<Client> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=clients&id=${client.id}`;
     return this.http.delete<Client>(endpoint, options).pipe(
       catchError(this.authService.handleError)

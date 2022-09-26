@@ -712,6 +712,7 @@ h1 {
   h2 {
     cursor: pointer;
     display: inline-block;
+    text-align: left;
   }
 
   .toggle_collapse {
@@ -788,6 +789,7 @@ h1 {
 
     @media (min-width: $mobile_width) {
       display: block;
+      flex-shrink: 0;
     }
   }
 

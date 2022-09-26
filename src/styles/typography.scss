@@ -279,6 +279,11 @@ button {
     border-color: $red;
     background-color: lighten($red, 40);
   }
+
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .task_input {

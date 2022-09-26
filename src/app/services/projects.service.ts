@@ -48,7 +48,7 @@ export class ProjectsService {
   getProjects(opts?: ProjectsOptions): Observable<Project[]> {
 
 
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     let endpoint = `${this.api_url}/?route=projects`;
 
     if (opts) {
@@ -87,7 +87,7 @@ export class ProjectsService {
   }
 
   getProject(project_id: number): Observable<Project> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=projects&id=${project_id}`;
     return this.http.get<Project>(endpoint, options).pipe(
       catchError(this.authService.handleError),
@@ -96,7 +96,7 @@ export class ProjectsService {
   }
 
   getProjectsCSV(opts?: ExportOptions) {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     let endpoint = `${this.api_url}/?route=projects&format=csv`;
     if (opts) {
       if (opts.client_id) {
@@ -124,7 +124,7 @@ export class ProjectsService {
   }
 
   addProject(project: Project): Observable<Project> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
         name: project.name,
@@ -142,7 +142,7 @@ export class ProjectsService {
 
 
   updateProject(project: Project): Observable<Project> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=projects&id=${project.id}`;
     const data = {
       attributes: {
@@ -162,7 +162,7 @@ export class ProjectsService {
 
 
   deleteProject(project: Project): Observable<Project> {
-    const options = this.authService.setAPIOptionsNoLogin();
+    const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=projects&id=${project.id}`;
     return this.http.delete<Project>(endpoint, options).pipe(
       catchError(this.authService.handleError)
