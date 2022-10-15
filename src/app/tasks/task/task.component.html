@@ -2,15 +2,15 @@
     [ngClass]="{completed: task.completed, is_title: task.is_title, is_current: task.is_current  }">
 
     <div class="completed_container">
-        <input title="publically viewable" class="is_public_checkbox" *ngIf="current_user"
-            [disabled]="disabled || updating || !current_user" (click)="togglePublic()" type="checkbox" name="is_public"
+        <input title="publically viewable" class="is_public_checkbox" *ngIf="is_admin"
+            [disabled]="disabled || updating " (click)="togglePublic()" type="checkbox" name="is_public"
             [(ngModel)]="task.is_public">
-        <input title="approved by client" class="is_approved_checkbox" *ngIf="current_user"
-            [disabled]="disabled || updating || !current_user" (click)="toggleApproved()" type="checkbox"
-            name="is_approved" [(ngModel)]="task.is_approved">
-        <input title="completed" class="is_completed_checkbox" [disabled]="disabled || updating || !current_user"
+        <input title="approved by client" class="is_approved_checkbox" *ngIf="is_admin"
+            [disabled]="disabled || updating " (click)="toggleApproved()" type="checkbox" name="is_approved"
+            [(ngModel)]="task.is_approved">
+        <input title="completed" class="is_completed_checkbox" [disabled]="disabled || updating || !is_admin"
             (click)="toggleCompleted()" type="checkbox" name="completed" [(ngModel)]="task.completed"
-            [ngClass]="{cant_change:!current_user}">
+            [ngClass]="{cant_change:!is_admin}">
 
     </div>
 

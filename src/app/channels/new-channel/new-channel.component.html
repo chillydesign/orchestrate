@@ -1,0 +1,23 @@
+<h1> {{'New Channel' | translate}} </h1>
+
+<app-box>
+
+
+    <form (keyup)="onFormChange()" (change)="onFormChange()" (ngSubmit)="onSubmit()" novalidate>
+        <ul>
+
+            <app-form-field [errors]="errors" [field]="'name'">
+                <label for="name">{{'Name' | translate}} * </label>
+                <input appAutofocus autocomplete="off" type="text" name="name" id="name" [(ngModel)]="channel.name">
+            </app-form-field>
+
+
+
+            <app-form-field [errors]="errors">
+                <button [disabled]="formLoading">{{'Save' | translate}}</button>
+            </app-form-field>
+        </ul>
+    </form>
+
+
+</app-box>

@@ -1,7 +1,7 @@
 <h1>{{'Export' | translate}}</h1>
 
 
-<app-box *ngIf="current_user">
+<app-box *ngIf="current_user?.is_admin">
 
     <form (ngSubmit)="onSubmit()" novalidate>
         <ul>

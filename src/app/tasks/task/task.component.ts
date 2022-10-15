@@ -28,6 +28,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   public updating = false;
   public menu_open = false;
   public current_user: User;
+  public is_admin: boolean;
   public disabled = false;
   public showMoveTask = false;
   public debounce_timer: any;
@@ -65,6 +66,9 @@ export class TaskComponent implements OnInit, OnDestroy {
         this.current_user = user;
         this.setDisabled();
 
+        if (user) {
+          this.is_admin = this.current_user.is_admin;
+        }
       }
     );
   }
@@ -226,8 +230,13 @@ export class TaskComponent implements OnInit, OnDestroy {
   // }
 
   updateFieldWithDebounce(field: string): void {
-    clearTimeout(this.debounce_timer);
+
+
+    if (this.debounce_timer) {
+      clearTimeout(this.debounce_timer);
+    }
     this.debounce_timer = setTimeout(() => {
+      console.log('b');
       this.updateField(field);
 
     }, 5000);

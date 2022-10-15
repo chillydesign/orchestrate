@@ -40,6 +40,9 @@ import { SearchComponent } from './search/search.component';
 import { ExportComponent } from './export/export.component';
 import { MoveTaskComponent } from './tasks/move-task/move-task.component';
 import { BooleanSelectorComponent } from './shared/boolean-selector/boolean-selector.component';
+import { ChannelsComponent } from './channels/channels.component';
+import { ChannelComponent } from './channels/channel/channel.component';
+import { NewChannelComponent } from './channels/new-channel/new-channel.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,10 @@ import { BooleanSelectorComponent } from './shared/boolean-selector/boolean-sele
     SearchComponent,
     ExportComponent,
     MoveTaskComponent,
-    BooleanSelectorComponent
+    BooleanSelectorComponent,
+    ChannelsComponent,
+    ChannelComponent,
+    NewChannelComponent
   ],
   imports: [
     BrowserModule,

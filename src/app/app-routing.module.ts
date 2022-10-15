@@ -14,6 +14,9 @@ import { TasksComponent } from './tasks/tasks.component';
 import { ClientTasksComponent } from './client-tasks/client-tasks.component';
 import { SearchComponent } from './search/search.component';
 import { ExportComponent } from './export/export.component';
+import { ChannelsComponent } from './channels/channels.component';
+import { NewChannelComponent } from './channels/new-channel/new-channel.component';
+import { ChannelComponent } from './channels/channel/channel.component';
 
 
 
@@ -33,6 +36,12 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent, data: { title: 'Project' } },
   { path: 'search/:search_term', component: SearchComponent, data: { title: 'Search' } },
   { path: 'search', component: SearchComponent, data: { title: 'Search' } },
+
+  { path: 'channels/new', component: NewChannelComponent, data: { title: 'New Channel' } },
+  // { path: 'channels/:id', component: ChannelComponent, data: { title: 'Channel' } },
+  { path: 'channels', component: ChannelsComponent, data: { title: 'Channels' } },
+  { path: 'clients/:slug/channels', component: ChannelsComponent, data: { title: 'Channels' } },
+
 
   { path: 'tasks', component: TasksComponent, data: { title: 'Tasks' } },
 

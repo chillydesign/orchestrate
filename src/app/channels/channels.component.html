@@ -1,0 +1,25 @@
+<div class="columns">
+    <div class="column column_small ">
+
+        <app-box>
+
+            <div class="channels_link_container">
+
+                <a [routerLink]="['/channels', 'new']" class="button button_block">New channel</a>
+
+                . <div class="channel_link_container" *ngFor="let channel of channels">
+                    <a (click)="selectChannel(channel)"> {{channel.name}}</a>
+                </div>
+            </div>
+
+
+        </app-box>
+
+    </div>
+    <div class="column column_large">
+
+        <app-box>
+            <app-channel *ngIf="channel" [channel]="channel"></app-channel>
+        </app-box>
+    </div>
+</div>

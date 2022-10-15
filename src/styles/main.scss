@@ -119,9 +119,18 @@ main {
       text-align: right;
     }
   }
+
+
 }
 
 // end of column
+
+
+
+.sticky {
+  position: sticky;
+  top: 10px;
+}
 
 .alert {
   background: $brand_color;
@@ -1092,3 +1101,27 @@ $boolean_offset: 3px;
     background: $green;
   }
 }
+
+
+.channels_link_container {
+
+  .channel_link_container {
+    display: block;
+    margin: 0;
+    font-size: $font_size;
+    border-bottom: 1px solid $medium_grey;
+
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      display: block;
+      padding: 10px;
+    }
+  }
+
+}
+
+.channel_container {}
