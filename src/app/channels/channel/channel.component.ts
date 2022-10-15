@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Channel } from 'src/app/models/channel.model';
 import { Message } from 'src/app/models/message.model';
@@ -20,6 +20,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
   private messages_sub: Subscription;
   private current_user_subscription: Subscription;
   private add_sub: Subscription;
+
   constructor(
     private authService: AuthService,
     private messagesService: MessagesService,
@@ -35,17 +36,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
     }
   }
 
-  getMessages(): void {
-    this.messages_loading = true;
-    this.messages_sub = this.messagesService.getMessages(this.channel.id).subscribe(
-      (messages) => {
-        this.messages = messages;
-      },
-      (error) => console.log(error),
-      () => this.messages_loading = false
-    )
 
-  }
 
   getCurrentUser(): void {
     this.current_user_subscription = this.authService.current_user.subscribe(
@@ -59,6 +50,33 @@ export class ChannelComponent implements OnInit, OnDestroy {
   }
 
 
+  getMessages(): void {
+    this.messages_loading = true;
+    this.messages_sub = this.messagesService.getMessages(this.channel.id).subscribe(
+      (messages) => {
+        this.messages = messages;
+        this.scrollToBottom();
+      },
+      (error) => console.log(error),
+      () => this.messages_loading = false
+    )
+
+  }
+
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      const els = document.querySelectorAll('.message_container');
+      if (els.length > 0) {
+        const el = els[els.length - 1]
+        if (el) {
+          el.parentElement.scrollTop = 10000000000;
+        }
+      }
+    }, 20);
+
+  }
+
 
   onSubmit(): void {
 
@@ -68,6 +86,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
         if (message) {
           this.messages.push(message);
           this.resetNewMessage();
+          this.scrollToBottom();
         }
 
       },

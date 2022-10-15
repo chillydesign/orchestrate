@@ -1,4 +1,5 @@
 import { Channel } from "./channel.model";
+import { Upload } from "./upload.model";
 
 export class Message {
 
@@ -10,7 +11,7 @@ export class Message {
     public content: string;
     public created_at: string;
     public created_at_date: Date;
-
+    public uploads: Upload;
 
 
 
@@ -24,6 +25,9 @@ export class Message {
 
             if (obj.channel) {
                 this.channel = new Channel(obj.channel);
+            }
+            if (obj.uploads) {
+                this.uploads = obj.uploads.map((upload: Upload) => new Upload(upload));
             }
         }
 

@@ -43,6 +43,13 @@ export class UploadsComponent implements OnInit, OnDestroy {
   }
 
 
+  createdUpload(newupload: Upload): void {
+    if (this.project.uploads === undefined) {
+      this.project.uploads = [];
+    }
+    this.project.uploads.push(newupload);
+  }
+
 
 
   ngOnDestroy() {

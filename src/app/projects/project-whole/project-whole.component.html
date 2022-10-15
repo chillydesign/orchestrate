@@ -10,10 +10,10 @@
 
 
         <app-box-footer>
-            <h2 (click)="collapseProject()"> {{project.name}} <span class="grey"
-                    *ngIf="project.nice_month">{{project.nice_month}}
+            <h2> <a [routerLink]="['/projects', project.id]">{{project.name}}</a> <span class="grey"
+                    *ngIf="project.nice_month">&nbsp; {{project.nice_month}}
                     &nbsp;</span>
-                <div class="toggle_collapse"></div>
+                <div (click)="collapseProject()" class="toggle_collapse"></div>
             </h2>
 
             <p *ngIf="current_user?.is_admin">

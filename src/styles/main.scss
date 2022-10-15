@@ -719,7 +719,6 @@ h1 {
 
 
   h2 {
-    cursor: pointer;
     display: inline-block;
     text-align: left;
   }
@@ -1124,4 +1123,38 @@ $boolean_offset: 3px;
 
 }
 
-.channel_container {}
+.channel_container {
+  height: 80vh;
+  position: relative;
+
+  .messages_container {
+    height: calc(80vh - 60px);
+    overflow-y: scroll;
+    background-color: transparent;
+  }
+
+  .message_container {
+    padding: 0 0 20px;
+    margin: 0 0 20px;
+    border-bottom: 1px solid $light_grey;
+
+    p {
+      padding: 0;
+    }
+
+    .date {
+      font-weight: bold;
+      display: block;
+      padding: 0 0 5px;
+      font-size: #{$font_size * 0.8};
+    }
+  }
+
+  .task_input {
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}

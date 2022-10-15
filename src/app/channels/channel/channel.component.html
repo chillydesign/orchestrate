@@ -3,19 +3,30 @@
     <h3>{{channel.name}}</h3>
 
 
-    <app-spinner [show]="messages_loading"></app-spinner>
+    <!-- <app-spinner [show]="messages_loading"></app-spinner> -->
 
 
 
     <div class="channel_container">
-        <div class="comments_container ">
+        <div class="messages_container ">
 
-            <div class="comment_container" *ngFor="let message of messages">
+            <div class="message_container" *ngFor="let message of messages">
+                <span class="date"> {{message.created_at_date | date}}</span>
+
                 <blockquote class="">
                     <p>
                         {{message.content}}
                     </p>
-                    <span class="date"> {{message.created_at_date | date}}</span>
+
+                    <ul>
+                        <li>
+                            <span *ngIf="message.uploads">
+                                <a class="upload_box" *ngFor="let upload of message.uploads" target="_blank"
+                                    href="{{upload.full_url}}">
+                                    {{upload.filename}}</a>
+                            </span>
+                        </li>
+                    </ul>
                 </blockquote>
 
             </div>
@@ -25,17 +36,13 @@
         </div>
 
 
-        <div class="new_comment_container">
-            <div>
-                <input class="task_input" placeholder="your comment" [(ngModel)]="newmessage.content" name="content"
-                    id="content" (keypress)="saveCommentOnEnter($event)" />
-            </div>
-        </div>
+        <textarea class="task_input" placeholder="your comment" [(ngModel)]="newmessage.content" name="content"
+            id="content" (keypress)="saveCommentOnEnter($event)"></textarea>
+
+
+
+
     </div>
-
-
-
-
 
 
 </ng-container>
