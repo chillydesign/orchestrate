@@ -21,6 +21,36 @@ export class ChannelsService {
   public close_channel_menu: BehaviorSubject<number | null> = new BehaviorSubject(null);
   constructor(private http: HttpClient, private authService: AuthService) { }
 
+
+  getChannels(opts?: ChannelsOptions): Observable<Channel[]> {
+    const options = this.authService.setAPIOptions();
+    let endpoint = `${this.api_url}/?route=channels`;
+
+    if (opts) {
+      if (opts.client_id) {
+        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+      if (opts.project_id) {
+        endpoint = endpoint.concat(`&project_id=${opts.project_id}`);
+      }
+    }
+    return this.http.get<Channel[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => res.map((p: Channel) => new Channel(p)))
+    );
+  }
+
+  getChannel(channel_id: number): Observable<Channel> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=channels&id=${channel_id}`;
+    return this.http.get<Channel>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Channel(res))
+    );
+  }
+
+
+
   addChannel(channel: Channel): Observable<Channel> {
     const options = this.authService.setAPIOptions();
     const data = {
@@ -67,26 +97,6 @@ export class ChannelsService {
     );
   }
 
-
-
-
-  getChannels(opts?: ChannelsOptions): Observable<Channel[]> {
-    const options = this.authService.setAPIOptions();
-    let endpoint = `${this.api_url}/?route=channels`;
-
-    if (opts) {
-      if (opts.client_id) {
-        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
-      }
-      if (opts.project_id) {
-        endpoint = endpoint.concat(`&project_id=${opts.project_id}`);
-      }
-    }
-    return this.http.get<Channel[]>(endpoint, options).pipe(
-      catchError(this.authService.handleError),
-      map(res => res.map((p: Channel) => new Channel(p)))
-    );
-  }
 
 
 

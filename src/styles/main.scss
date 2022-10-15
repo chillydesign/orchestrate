@@ -79,6 +79,8 @@ main {
   justify-content: space-between;
   margin: 0 0 $padding;
 
+
+
   @media (min-width: $mobile_width) {
     margin-bottom: 0;
     flex-wrap: nowrap;
@@ -96,6 +98,11 @@ main {
   margin: 0 $half_padding;
   width: 100%;
 
+  .column {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   &.column_half {
     width: auto;
     max-width: 50%;
@@ -105,6 +112,12 @@ main {
   &.column_small {
     @media (min-width: $mobile_width) {
       width: 33.3%;
+    }
+  }
+
+  &.column_tiny {
+    @media (min-width: $mobile_width) {
+      width: 15%;
     }
   }
 
@@ -1124,11 +1137,11 @@ $boolean_offset: 3px;
 }
 
 .channel_container {
-  height: 80vh;
+  height: 75vh;
   position: relative;
 
   .messages_container {
-    height: calc(80vh - 60px);
+    height: calc(75vh - 60px);
     overflow-y: scroll;
     background-color: transparent;
   }

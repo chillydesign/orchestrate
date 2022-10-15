@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent, data: { title: 'Search' } },
 
   { path: 'channels/new', component: NewChannelComponent, data: { title: 'New Channel' } },
-  { path: 'channels/:id', component: ChannelsComponent, data: { title: 'Channel' } },
+  { path: 'channels/:id', component: ChannelComponent, data: { title: 'Channel' } },
   { path: 'channels', component: ChannelsComponent, data: { title: 'Channels' } },
   { path: 'clients/:slug/channels', component: ChannelsComponent, data: { title: 'Channels' } },
 

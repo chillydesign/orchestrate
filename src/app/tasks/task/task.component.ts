@@ -383,13 +383,15 @@ export class TaskComponent implements OnInit, OnDestroy {
     });
   }
 
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    if (this.menu_open) {
-      if (event.key === 'Escape') {
-        this.closeMenu();
-      }
-    }
-  }
+
+  // this is incredibly slow when theres lots of task components on page
+  // @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+  //   if (this.menu_open) {
+  //     if (event.key === 'Escape') {
+  //       this.closeMenu();
+  //     }
+  //   }
+  // }
   @HostListener('document:mouseup', ['$event']) onMouseUpHandler(event: any) {
     if (this.menu_open) {
       if (event.target) {

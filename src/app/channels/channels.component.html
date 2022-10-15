@@ -1,5 +1,5 @@
 <div class="columns">
-    <div class="column column_small ">
+    <div class="column column_tiny ">
 
         <app-box>
 
@@ -7,7 +7,7 @@
 
                 <a [routerLink]="['/channels', 'new']" class="button button_block">New channel</a>
 
-                . <div class="channel_link_container" *ngFor="let channel of channels">
+                <div class="channel_link_container" *ngFor="let channel of channels">
                     <a (click)="selectChannel(channel)"> {{channel.name}}</a>
                 </div>
             </div>
@@ -18,8 +18,6 @@
     </div>
     <div class="column column_large">
 
-        <app-box>
-            <app-channel *ngIf="channel" [channel]="channel"></app-channel>
-        </app-box>
+        <app-channel *ngIf="channel" [channel_id]="channel.id"></app-channel>
     </div>
 </div>

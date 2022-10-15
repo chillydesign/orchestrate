@@ -1,48 +1,72 @@
 <ng-container *ngIf="channel">
 
-    <h3>{{channel.name}}</h3>
-
-
-    <!-- <app-spinner [show]="messages_loading"></app-spinner> -->
+    <app-box>
 
 
 
-    <div class="channel_container">
-        <div class="messages_container ">
+        <div class="columns">
+            <div class="column">
+                <h3>
+                    {{channel.name}}
+                    <a [routerLink]="['/clients', channel.client.slug]" *ngIf="channel.client"> |
+                        {{channel.client.name}}</a>
+                    <span *ngIf="project"> |
+                        {{project.name}}</span>
+                </h3>
+            </div>
+            <div class="column column_right">
+                <a (click)="makeProject()" class="button" *ngIf="no_project">Make project</a>
 
-            <div class="message_container" *ngFor="let message of messages">
-                <span class="date"> {{message.created_at_date | date}}</span>
+            </div>
+        </div>
 
-                <blockquote class="">
-                    <p>
-                        {{message.content}}
-                    </p>
 
-                    <ul>
-                        <li>
-                            <span *ngIf="message.uploads">
-                                <a class="upload_box" *ngFor="let upload of message.uploads" target="_blank"
-                                    href="{{upload.full_url}}">
-                                    {{upload.filename}}</a>
-                            </span>
-                        </li>
-                    </ul>
-                </blockquote>
+        <!-- <app-spinner [show]="messages_loading"></app-spinner> -->
+
+
+
+        <div class="channel_container">
+            <div class="messages_container ">
+
+                <div class="message_container" *ngFor="let message of channel.messages">
+                    <span class="date"> {{message.created_at_date | date}}</span>
+
+                    <blockquote class="">
+                        <p>
+                            {{message.content}}
+                        </p>
+
+                        <ul>
+                            <li>
+                                <span *ngIf="message.uploads">
+                                    <a class="upload_box" *ngFor="let upload of message.uploads" target="_blank"
+                                        href="{{upload.full_url}}">
+                                        {{upload.filename}}</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </blockquote>
+
+                </div>
+
+
 
             </div>
 
 
+            <textarea class="task_input" placeholder="your comment" [(ngModel)]="newmessage.content" name="content"
+                id="content" (keypress)="saveCommentOnEnter($event)"></textarea>
+
+
+
 
         </div>
+    </app-box>
 
-
-        <textarea class="task_input" placeholder="your comment" [(ngModel)]="newmessage.content" name="content"
-            id="content" (keypress)="saveCommentOnEnter($event)"></textarea>
-
-
-
-
-    </div>
-
+    <app-box *ngIf="project">
+        <div class="project_whole">
+            <app-project-whole [project]="project"></app-project-whole>
+        </div>
+    </app-box>
 
 </ng-container>
