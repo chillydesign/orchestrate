@@ -49,7 +49,7 @@
 
         <ul>
             <li *ngFor="let task of project.visible_tasks">
-                <app-task [task]="task" [project]="project" [canAdministrate]="!!current_user"
+                <app-task [task]="task" [project]="project" [canAdministrate]="current_user?.is_admin"
                     (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)">
                 </app-task>
             </li>

@@ -12,6 +12,7 @@ export class Message {
     public created_at: string;
     public created_at_date: Date;
     public uploads: Upload;
+    public user_name: string;
 
 
 

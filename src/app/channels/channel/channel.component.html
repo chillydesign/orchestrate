@@ -10,12 +10,12 @@
                     {{channel.name}}
                     <a [routerLink]="['/clients', channel.client.slug]" *ngIf="channel.client"> |
                         {{channel.client.name}}</a>
-                    <span *ngIf="project"> |
-                        {{project.name}}</span>
+
                 </h3>
             </div>
             <div class="column column_right">
                 <a (click)="makeProject()" class="button" *ngIf="no_project">Make project</a>
+                <a (click)="scroll(tasks)" class="button" *ngIf="project">Tasks</a>
 
             </div>
         </div>
@@ -29,7 +29,10 @@
             <div class="messages_container ">
 
                 <div class="message_container" *ngFor="let message of channel.messages">
-                    <span class="date"> {{message.created_at_date | date}}</span>
+                    <span class="date"> {{message.created_at_date | date}}
+
+                        | {{message.user_name}}
+                    </span>
 
                     <blockquote class="">
                         <p>
@@ -63,10 +66,11 @@
         </div>
     </app-box>
 
-    <app-box *ngIf="project">
-        <div class="project_whole">
-            <app-project-whole [project]="project"></app-project-whole>
-        </div>
-    </app-box>
-
+    <div #tasks>
+        <app-box *ngIf="project">
+            <div class="project_whole">
+                <app-project-whole [project]="project"></app-project-whole>
+            </div>
+        </app-box>
+    </div>
 </ng-container>

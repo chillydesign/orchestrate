@@ -11,7 +11,13 @@
                 <input appAutofocus autocomplete="off" type="text" name="name" id="name" [(ngModel)]="channel.name">
             </app-form-field>
 
-
+            <app-form-field *ngIf="clients" [errors]="errors" [field]="'client_id'">
+                <label for="client_id">{{'Client' | translate}} </label>
+                <select name="client_id" id="client_id" [(ngModel)]="channel.client_id">
+                    <option [ngValue]="null"> - </option>
+                    <option *ngFor="let client of clients" [ngValue]="client.id">{{ client.name}}</option>
+                </select>
+            </app-form-field>
 
             <app-form-field [errors]="errors">
                 <button [disabled]="formLoading">{{'Save' | translate}}</button>

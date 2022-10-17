@@ -55,7 +55,9 @@ export class ChannelsService {
     const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
-        name: channel.name
+        name: channel.name,
+        project_id: channel.project_id,
+        client_id: channel.client_id,
       }
     };
     const endpoint = `${this.api_url}/?route=channels`;

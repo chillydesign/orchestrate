@@ -83,7 +83,12 @@ export class NewChannelComponent implements OnInit, OnDestroy {
           this.formSuccess = true;
           this.errors.next(null);
 
-          this.router.navigate(['/channels']);
+          if (channel.client) {
+            this.router.navigate(['/clients', channel.client.slug, 'channels']);
+          } else {
+            this.router.navigate(['/channels']);
+
+          }
 
         },
         (error) => {

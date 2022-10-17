@@ -42,6 +42,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
     if (this.channel_id) {
       this.getCurrentUser();
 
+
     }
 
 
@@ -53,8 +54,8 @@ export class ChannelComponent implements OnInit, OnDestroy {
     this.current_user_subscription = this.authService.current_user.subscribe(
       (user: User) => {
         this.current_user = user;
-        this.getChannel();
 
+        this.getChannel();
 
       }
     );
@@ -69,7 +70,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
         this.channel = channel;
         if (channel) {
           this.resetNewMessage();
-
+          this.scrollToBottom();
           if (this.channel.project_id) {
             this.getProject();
           } else {
@@ -155,7 +156,9 @@ export class ChannelComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
 
 
 
