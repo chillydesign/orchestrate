@@ -9,7 +9,10 @@ import { Upload } from '../models/upload.model';
 
 export interface TasksOptions {
   client_id?: number;
+  limit?: number;
   search_term?: string;
+  order?: string;
+  completed?: number;
 }
 
 
@@ -20,6 +23,36 @@ export class TasksService {
   private api_url = environment.api_url;
   public close_task_menu: BehaviorSubject<number | null> = new BehaviorSubject(null);
   constructor(private http: HttpClient, private authService: AuthService) { }
+
+
+
+  getTasks(opts: TasksOptions): Observable<Task[]> {
+    const options = this.authService.setAPIOptions();
+    let endpoint = `${this.api_url}/?route=tasks`;
+
+    if (opts) {
+      if (opts.client_id) {
+        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
+      }
+      if (opts.search_term) {
+        endpoint = endpoint.concat(`&search_term=${opts.search_term}`);
+      }
+      if (opts.limit) {
+        endpoint = endpoint.concat(`&limit=${opts.limit}`);
+      }
+      if (opts.order) {
+        endpoint = endpoint.concat(`&order=${opts.order}`);
+      }
+      if (opts.completed === 0 || opts.completed === 1) {
+        endpoint = endpoint.concat(`&completed=${opts.completed}`);
+      }
+    }
+    return this.http.get<Task[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => res.map((p: Task) => new Task(p)))
+    );
+  }
+
 
   addTask(task: Task): Observable<Task> {
     const options = this.authService.setAPIOptions();
@@ -129,23 +162,6 @@ export class TasksService {
 
 
 
-  getTasks(opts: TasksOptions): Observable<Task[]> {
-    const options = this.authService.setAPIOptions();
-    let endpoint = `${this.api_url}/?route=tasks`;
-
-    if (opts) {
-      if (opts.client_id) {
-        endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
-      }
-      if (opts.search_term) {
-        endpoint = endpoint.concat(`&search_term=${opts.search_term}`);
-      }
-    }
-    return this.http.get<Task[]>(endpoint, options).pipe(
-      catchError(this.authService.handleError),
-      map(res => res.map((p: Task) => new Task(p)))
-    );
-  }
 
   getCurrentTasks(): Observable<Task[]> {
     const options = this.authService.setAPIOptions();

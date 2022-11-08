@@ -1,6 +1,16 @@
-<h1>{{'Tasks' | translate}}
-</h1>
+<h1>{{'Recent Tasks' | translate}}</h1>
 
-<ng-container *ngFor="let project of projects">
+<!-- <ng-container *ngFor="let project of projects">
     <app-project-summary [project]="project" [show_tasks]="true"></app-project-summary>
-</ng-container>
+</ng-container> -->
+
+
+<app-box *ngIf="tasks">
+    <ul>
+        <li *ngFor="let task of tasks">
+            <app-task [task]="task" [showDate]="true" [showProjectLink]="true"
+                [canAdministrate]="current_user?.is_admin">
+            </app-task>
+        </li>
+    </ul>
+</app-box>

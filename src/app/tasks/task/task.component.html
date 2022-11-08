@@ -41,11 +41,12 @@
         <div class="task_added" *ngIf="task.comments_count > 0 || task.uploads_count > 0 || showProjectLink">
 
 
+            <div *ngIf="showDate">{{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}</div>
+
             <!-- <div *ngIf="task.priority === 1">
                 <a title="Priority" class="icon icon_priority">Priority</a>
             </div>
 
-            <div *ngIf="canAdministrate">{{'Added' | translate}}: {{task.created_at_date | date:'LLL d, H:mm' }}</div>
 
 
             <div *ngIf="canAdministrate && task.completed_at_date">Completed: {{task.completed_at_date | date}}</div>
