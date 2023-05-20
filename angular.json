@@ -40,7 +40,6 @@
               "chart.js",
               "moment"
             ],
-            "baseHref": "./",
             "outputPath": "dist/orchestrate",
             "index": "src/index.html",
             "main": "src/main.ts",
