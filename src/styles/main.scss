@@ -205,6 +205,7 @@ main {
     // .content_container {
     //   opacity: 0.5;
     // }
+
   }
 
   &.is_title {
@@ -242,6 +243,22 @@ main {
           color: white;
           background-image: url("../assets/images/priority_white.svg");
         }
+      }
+    }
+
+    textarea {
+      outline: 1px solid transparentize($red, 0.6);
+      box-shadow: 0 0 27px 10px transparentize($red, 0.85) inset;
+    }
+  }
+
+
+  &.completed {
+
+    &.priority_1 {
+      textarea {
+        box-shadow: none;
+        outline: none;
       }
     }
   }
@@ -321,7 +338,7 @@ main {
         }
 
         &:checked {
-          background-color: $green  !important;
+          background-color: $green !important;
         }
       }
 
@@ -349,7 +366,7 @@ main {
         background-color: white !important;
 
         &:checked {
-          background-color: $green  !important;
+          background-color: $green !important;
         }
       }
     }
