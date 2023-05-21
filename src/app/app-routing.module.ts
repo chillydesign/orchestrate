@@ -63,8 +63,7 @@ const routes: Routes = [
 
 // always scroll to top of page on route change
 const routingOptions: ExtraOptions = {
-  scrollPositionRestoration: 'enabled',
-  relativeLinkResolution: 'legacy'
+    scrollPositionRestoration: 'enabled'
 };
 
 
