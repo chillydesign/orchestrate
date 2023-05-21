@@ -5,7 +5,9 @@ echo $commitmessage;
 nvm use;
 
 # BUILD THE APP
-ng build --configuration=production --base-href='./';
+ng build --configuration=production ;
+
+# --base-href='/orchestrate'
 
 
 ##  CHECK IF BUILD WAS SUCCESSFULL, CHECK IF INDEX.HTML FILE EXISTS IN NEW
