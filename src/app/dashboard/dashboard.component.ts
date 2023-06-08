@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public projects: Project[];
   public current_user: User;
   public start_date = moment();
-  public total_hours: string;
+  public total_minutes: number;
   public total_earned: string;
   public search_term: string;
   public chart: Chart;
@@ -91,13 +91,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (tasks: Task[]) => {
         this.tasks_completed_today = tasks;
 
-        const total_minutes: number = this.tasks_completed_today.map(t => t.time_taken).reduce((a, b) => b + a, 0);
-        const hours = Math.floor(total_minutes / 60);
-        const minutes = total_minutes - (hours * 60);
-        this.total_hours = `${hours} hr ${minutes} mins`;
+        this.total_minutes = this.tasks_completed_today.map(t => t.time_taken).reduce((a, b) => b + a, 0);
+
 
         const formatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
-        const pounds = total_minutes * this.hourly_rate / 60;
+        const pounds = this.total_minutes * this.hourly_rate / 60;
         this.total_earned = formatter.format(pounds).concat(` @ £55/hr`);
       }
     );

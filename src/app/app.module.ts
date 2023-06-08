@@ -43,6 +43,7 @@ import { BooleanSelectorComponent } from './shared/boolean-selector/boolean-sele
 import { ChannelsComponent } from './channels/channels.component';
 import { ChannelComponent } from './channels/channel/channel.component';
 import { NewChannelComponent } from './channels/new-channel/new-channel.component';
+import { NiceminsPipe } from './pipes/nicemins.pipe';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { NewChannelComponent } from './channels/new-channel/new-channel.componen
     BooleanSelectorComponent,
     ChannelsComponent,
     ChannelComponent,
-    NewChannelComponent
+    NewChannelComponent,
+    NiceminsPipe
   ],
   imports: [
     BrowserModule,

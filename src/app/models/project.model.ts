@@ -19,7 +19,6 @@ export class Project {
     public tasks_count: number;
     public incomplete_tasks_count: number;
     public total_minutes: number;
-    public total_hours: string;
     public percentage = 0;
     public client_id: number;
     public client: any;
@@ -89,16 +88,7 @@ export class Project {
             }
         });
         this.total_minutes = tm;
-        if (tm < 60) {
-            this.total_hours = `${tm} mins`;
-        } else {
-            const h = Math.floor(tm / 60);
-            const m = tm % 60;
-            this.total_hours = `${h} hrs`;
-            if (m > 0) {
-                this.total_hours = this.total_hours.concat(` ${m} mins`);
-            }
-        }
+
 
     }
 

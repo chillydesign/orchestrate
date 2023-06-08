@@ -29,11 +29,11 @@
                 <ul>
                     <li *ngFor="let task of tasks_completed_today">
                         {{task.content}}
-                        <a [routerLink]="['/projects', task.project_id]">{{task.time_taken}} mins</a>
+                        <a [routerLink]="['/projects', task.project_id]">{{task.time_taken | nicemins}} </a>
                     </li>
                 </ul>
                 <div class="earnings">
-                    <p> Hours: {{total_hours}}</p>
+                    <p> Duration: {{total_minutes | nicemins}}</p>
                     <p> Earned: {{total_earned}}</p>
                 </div>
             </div>
