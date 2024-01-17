@@ -26,6 +26,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
   public project_id: number;
   public client: Client;
   public project: Project;
+  public show_incomplete: boolean = false;
+  public show_unapproved: boolean = true;
   private route_params_subscription: Subscription;
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
@@ -153,6 +155,34 @@ export class ProjectComponent implements OnInit, OnDestroy {
         this.csvService.downloadCSVFromString(csv_file, `project_${this.project.id}`);
       }
     );
+  }
+
+
+
+  toggleStep(view_type: string): void {
+    if (view_type === 'incomplete') {
+      this.show_incomplete = !this.show_incomplete;
+    } else if (view_type === 'unapproved') {
+      this.show_unapproved = !this.show_unapproved;
+    }
+
+    this.changeVisibleTasks();
+
+  }
+
+
+
+  changeVisibleTasks(): void {
+
+
+    const ac = (this.show_incomplete) ? [false] : [true, false, null];
+    const aa = (this.show_unapproved) ? [false] : [true, false, null];
+
+
+    this.project.visible_tasks = this.project.tasks.filter(t => {
+      return ac.includes(t.completed) && aa.includes(t.is_approved);
+    })
+
   }
 
 

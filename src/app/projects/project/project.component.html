@@ -1,13 +1,31 @@
 <app-spinner [show]="!project"></app-spinner>
 <ng-container *ngIf="project">
-    <h1>
-        <span *ngIf="client">
-            <a [routerLink]="['/clients', client.slug]">{{client.name}}</a> |
-        </span>
-        {{project.nice_name}}
-        &nbsp;
-        <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
-    </h1>
+
+    <div class="columns">
+        <div class="column">
+            <h1>
+                <span *ngIf="client">
+                    <a [routerLink]="['/clients', client.slug]">{{client.name}}</a> |
+                </span>
+                {{project.nice_name}}
+                &nbsp;
+                <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
+            </h1>
+        </div>
+        <div class="column column_right">
+            <div class="button_group">
+                <ng-container *ngIf="current_user?.is_admin">
+                    <a (click)="toggleStep( 'incomplete')" [ngClass]="{button_green: show_incomplete === true}"
+                        class="button button_white"> Show incomplete </a>
+                    <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
+                        class="button button_white"> Show unapproved </a>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <app-box>
         <div class="project_whole">
