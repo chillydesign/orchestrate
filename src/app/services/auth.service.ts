@@ -107,7 +107,7 @@ export class AuthService {
           // seconds left before they are logged out
           const timeleft = Math.max(1, decoded.exp - now);
           // settimeout has maximum value of milliseconds before it breaks
-          if (timeleft < 86400000) {
+          if ((timeleft * 1000) < 86400000) {
             setTimeout(() => {
               alert('You have been logged out now. Stuff probably wasnt saved.')
             }, timeleft * 1000);
