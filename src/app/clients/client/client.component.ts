@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.service';
 import { UsersService } from 'src/app/services/users.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -21,6 +22,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   public client: Client;
   public current_user: User;
   public users: User[];
+  public title = environment.site_name;
   public getting_client = false;
   public project_id: number;
   public show_mode: ('incomplete' | 'unapproved' | 'all') = 'all';
@@ -104,7 +106,7 @@ export class ClientComponent implements OnInit, OnDestroy {
           this.client = client;
           this.projectsService.current_project_client.next(client);
           this.getProjects();
-          this.titleService.setTitle(this.client.name);
+          this.titleService.setTitle(`${this.client.name} | ${this.title}`);
 
         }
       }
@@ -119,6 +121,8 @@ export class ClientComponent implements OnInit, OnDestroy {
           this.client = client;
           this.projectsService.current_project_client.next(client);
           this.getProjects();
+          this.titleService.setTitle(`${this.client.name}  | ${this.title}`);
+
 
         }
       }
