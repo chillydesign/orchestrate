@@ -12,6 +12,7 @@ interface EmailOpts {
   password: string;
   remember_me?: boolean;
   two_factor_code?: string;
+  session?: string;
 }
 
 
@@ -47,6 +48,15 @@ export class AuthService {
     return this.http.post<{ response: string, jwt: string }>(endpoint, opts, options).pipe(
       catchError(this.handleError)
 
+    );
+  }
+
+  confirmTwoFactor(session: string, two_factor_code: string): Observable<any> {
+    const opts = { session, two_factor_code }
+    const options = this.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=user_token`;
+    return this.http.post<{ response: string, jwt: string }>(endpoint, opts, options).pipe(
+      catchError(this.handleError)
     );
   }
 
