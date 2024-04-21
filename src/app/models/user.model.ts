@@ -13,6 +13,7 @@ export class User {
 
     public dark_mode: boolean;
     public name: string;
+    public verification_method: string;
 
 
     constructor(obj?: any) {

@@ -7,6 +7,15 @@ import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
 
+interface EmailOpts {
+  email: string;
+  password: string;
+  remember_me?: boolean;
+  two_factor_code?: string;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,25 +32,21 @@ export class AuthService {
 
 
 
+  signInWithJWT(jwt: string): void {
+    this.saveTokenAsCookie(jwt);
+    this.setCurrentUser();
+    this.logged_in = true;
+  }
+
+
+
   // from an email and password get a token to use with the server
-  login(email: string, password: string, remember_me?: boolean): Observable<boolean> {
+  login(opts: EmailOpts): Observable<any> {
     const options = this.setAPIOptions();
-    const data = { email, password, remember_me };
     const endpoint = `${this.api_url}/?route=user_token`;
-    return this.http.post<{ jwt: string }>(endpoint, data, options).pipe(
-      catchError(this.handleError),
-      map((response: { jwt: string }) => {
-        const token: string = response && response.jwt;
-        if (token) {
-          this.saveTokenAsCookie(token);
-          this.setCurrentUser();
-          this.logged_in = true;
-          return true;
-        } else {
-          return false;
-        }
-      }
-      )
+    return this.http.post<{ response: string, jwt: string }>(endpoint, opts, options).pipe(
+      catchError(this.handleError)
+
     );
   }
 

@@ -16,13 +16,29 @@
                 <label for="remember_me">Remember me?</label>
                 <input type="checkbox" id="remember_me" name="remember_me" [(ngModel)]="remember_me" />
             </app-form-field>
+
+            <ng-container *ngIf="show2fa">
+
+                <app-form-field>
+                    <label for="two_factor_code">2fa code</label>
+                    <input autocomplete="two_factor_code" type="password" id="two_factor_code" name="two_factor_code"
+                        [(ngModel)]="two_factor_code" />
+                </app-form-field>
+
+
+
+            </ng-container>
+
+
             <app-form-field [errors]="errors" [field]="'signin'">
                 <button>Connexion</button>
             </app-form-field>
+
+
+
         </ul>
 
     </form>
-
 
 
 </app-box>
