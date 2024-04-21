@@ -17,6 +17,7 @@ import { ExportComponent } from './export/export.component';
 import { ChannelsComponent } from './channels/channels.component';
 import { NewChannelComponent } from './channels/new-channel/new-channel.component';
 import { ChannelComponent } from './channels/channel/channel.component';
+import { AccountComponent } from './auth/account/account.component';
 
 
 
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'clients/:slug/projects/:project_id', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients/:slug', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients', component: ClientsComponent, data: { title: 'Clients' } },
+  { path: 'account', component: AccountComponent, data: { title: 'Account' } },
 
   { path: '401', component: NotFoundComponent, data: { title: 'Page not found' } },
   { path: '404', component: NotFoundComponent, data: { title: 'Page not found' } },
@@ -63,7 +65,7 @@ const routes: Routes = [
 
 // always scroll to top of page on route change
 const routingOptions: ExtraOptions = {
-    scrollPositionRestoration: 'enabled'
+  scrollPositionRestoration: 'enabled'
 };
 
 

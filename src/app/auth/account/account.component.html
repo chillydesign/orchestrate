@@ -1,0 +1,40 @@
+<h1>Account</h1>
+<app-box>
+
+    <ng-container *ngIf="current_user">
+
+
+        <p *ngIf="current_user.verification_method ===  'totp-2fa'">You have 2fa turned on</p>
+
+        <div *ngIf="!action" class="button_group">
+            <a (click)="setAction('remove2fa')" class="button"
+                *ngIf="current_user.verification_method ===  'totp-2fa'">Remove
+                2fa</a>
+            <a (click)="setAction('add2fa')" class="button" *ngIf="current_user.verification_method !==  'totp-2fa'">Add
+                2fa</a>
+        </div>
+
+        <div *ngIf="action == 'add2fa' || action === 'remove2fa' ">
+            <form (ngSubmit)="onSubmit()" novalidate>
+                <ul>
+                    <li *ngIf="qr_code">
+                        <label for="">Scan this QR code on an authenticator app, then add the code given in the app
+                            below</label>
+                        <img [src]="qr_code" alt="">
+
+                    </li>
+                    <app-form-field>
+                        <label for="two_factor_code">2fa code</label>
+                        <input autocomplete="two_factor_code" type="password" id="two_factor_code"
+                            name="two_factor_code" [(ngModel)]="two_factor_code" />
+                    </app-form-field>
+                    <app-form-field [errors]="errors" [field]="'signin'">
+                        <button>Verify</button>
+                    </app-form-field>
+                </ul>
+            </form>
+        </div>
+
+
+    </ng-container>
+</app-box>

@@ -186,6 +186,33 @@ export class AuthService {
 
 
 
+  get2faSecret(): Observable<any> {
+    const options = this.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=two_factor_token`;
+    return this.http.post<any>(endpoint, null, options).pipe(
+      catchError(this.handleError),
+    );
+  }
+
+  confirm2faSecret(two_factor_code: string): Observable<any> {
+    const options = this.setAPIOptions();
+    const data = { two_factor_code };
+    const endpoint = `${this.api_url}/?route=confirm_two_factor_token`;
+    return this.http.post<any>(endpoint, data, options).pipe(
+      catchError(this.handleError),
+    );
+  }
+  remove2faSecret(two_factor_code: string): Observable<any> {
+    const options = this.setAPIOptions();
+    const data = { two_factor_code };
+    const endpoint = `${this.api_url}/?route=remove_two_factor_token`;
+    return this.http.post<any>(endpoint, data, options).pipe(
+      catchError(this.handleError),
+    );
+  }
+
+
+
 
 
   public handleError(error: HttpErrorResponse) {
