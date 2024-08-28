@@ -38,8 +38,8 @@ if test -f "$INDEX_FILE"; then
     git push origin master;
 
 
-ssh webfactor << EOF
-cd ~/web/orchestrate;
+ssh webfactor@webfactor.ch << EOF
+cd ~/public_html/orchestrate;
 git pull origin master;
 
 echo "DONE!";
