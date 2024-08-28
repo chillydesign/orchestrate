@@ -32,6 +32,10 @@
                 (keyup)="updateFieldWithDebounce( 'translation')"></textarea>
 
 
+            <input *ngIf="canAdministrate && project?.client_id === 4" type="text" [(ngModel)]="task.task_code"
+                name="task_code" class="task_input task_input_time" (change)="updateField('task_code')"
+                placeholder="Code" />
+
             <input *ngIf="canAdministrate" type="text" inputmode="numeric" pattern="[0-9]*"
                 [(ngModel)]="task.time_taken" name="time_taken" min="0" step="1" class="task_input task_input_time"
                 (change)="updateField('time_taken')" placeholder="minutes taken" />

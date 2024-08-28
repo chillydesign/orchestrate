@@ -64,6 +64,7 @@ export class TasksService {
         ordering: task.ordering,
         time_taken: task.time_taken,
         is_public: task.is_public,
+        task_code: task.task_code,
       }
     };
     const endpoint = `${this.api_url}/?route=tasks`;
@@ -93,7 +94,8 @@ export class TasksService {
         is_public: task.is_public,
         is_approved: task.is_approved,
         assignee_id: task.assignee_id,
-        updated_at: task.updated_at
+        updated_at: task.updated_at,
+        task_code: task.task_code,
       }
 
     };

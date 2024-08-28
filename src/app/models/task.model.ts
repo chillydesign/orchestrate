@@ -26,6 +26,7 @@ export class Task {
     public assignee_id: number;
     public assignee: User;
     public uploads_count: number;
+    public task_code: string;
 
     public uploads: Upload[];
 

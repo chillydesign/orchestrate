@@ -50,6 +50,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.getCurrentUser();
     this.subscribeToTaskOpener();
 
+    console.log(this.project);
+
     setTimeout(() => {
       this.updateTextareaHeights();
 
