@@ -35,6 +35,7 @@
                 <div class="earnings">
                     <p> Duration: {{total_minutes | nicemins}}</p>
                     <p> Earned: {{total_earned}}</p>
+                    <p *ngIf="average_earned">Average earned: {{average_earned}}</p>
                 </div>
             </div>
         </app-box>

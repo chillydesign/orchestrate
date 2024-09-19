@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public chart: Chart;
   public hourly_rate: number = 55;
   public daily_target = 123;
+  public average_earned: string;
+  public currency_formatter: Intl.NumberFormat = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
   @ViewChild('chartContainer', { static: true }) public chartContainer: ElementRef;
 
   private current_user_subscription: Subscription;
@@ -92,15 +94,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.tasks_completed_today = tasks;
 
         this.total_minutes = this.tasks_completed_today.map(t => t.time_taken).reduce((a, b) => b + a, 0);
-
-
-        const formatter = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
-        const pounds = this.total_minutes * this.hourly_rate / 60;
-        this.total_earned = formatter.format(pounds).concat(` @ £55/hr`);
+        const pounds = this.minutesToPounds(this.total_minutes);
+        this.total_earned = this.currency_formatter.format(pounds).concat(` @ £55/hr`);
       }
     );
   }
 
+
+  minutesToPounds(mins: number): number {
+    return mins * this.hourly_rate / 60;
+  }
 
 
   getStats(): void {
@@ -219,6 +222,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const days = 7;
     const target = [];
     const rolling_average = [];
+
+    if (points.length > 0) {
+      const avear = this.minutesToPounds(points.reduce((a, b) => a + b, 0) / points.length);
+      this.average_earned = this.currency_formatter.format(avear);
+    } else {
+      this.average_earned = null;
+    }
+
+    let avear = 0;
     for (let p = 0; p < points.length; p++) {
       const start = Math.max(0, p - Math.floor((days / 2)));
       const end = Math.min(points.length, p + Math.ceil(days / 2));
