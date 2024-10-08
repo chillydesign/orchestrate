@@ -90,4 +90,13 @@ export class ClientsService {
 
 
 
+
+  getStats(client_id: number): Observable<{ month: string, data: number }[]> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=stats&id=${client_id}`;
+    return this.http.get<{ month: string, data: number }[]>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+    );
+  }
+
 }

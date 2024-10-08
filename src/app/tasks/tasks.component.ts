@@ -53,7 +53,6 @@ export class TasksComponent implements OnInit, OnDestroy {
       (tasks: Task[]) => {
         if (tasks) {
           this.tasks = tasks;
-          console.log(this.tasks);
         }
       }
     );

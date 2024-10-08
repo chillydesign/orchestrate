@@ -50,7 +50,6 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.getCurrentUser();
     this.subscribeToTaskOpener();
 
-    console.log(this.project);
 
     setTimeout(() => {
       this.updateTextareaHeights();
@@ -239,7 +238,6 @@ export class TaskComponent implements OnInit, OnDestroy {
       clearTimeout(this.debounce_timer);
     }
     this.debounce_timer = setTimeout(() => {
-      console.log('b');
       this.updateField(field);
 
     }, 5000);

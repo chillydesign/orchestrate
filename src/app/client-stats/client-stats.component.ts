@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
-import { Project } from 'src/app/models/project.model';
 import { ClientsService } from 'src/app/services/clients.service';
-import { ProjectsOptions, ProjectsService } from 'src/app/services/projects.service';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
+import { ChartConfiguration, ChartData } from 'chart.js';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-client-stats',
@@ -18,13 +18,16 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   public current_user: User;
   public client_id: number;
   public client_slug: string;
+  public chart_config: ChartConfiguration;
+  public chart_data: ChartData;
   private client_sub: Subscription;
+  private stats_sub: Subscription;
   private route_params_subscription: Subscription;
   private current_user_subscription: Subscription;
   constructor(
+    private projectsService: ProjectsService,
     private clientsService: ClientsService,
     private authService: AuthService,
-    private projectsService: ProjectsService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -99,13 +102,78 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
   getStats(): void {
 
+    this.stats_sub = this.clientsService.getStats(this.client.id).subscribe({
+      next: (data) => {
+        this.chart_config = this.chart_configuration();
+        this.chart_data = {
+          labels: data.map((d) => d.month),
+          datasets: [{ data: data.map(d => d.data) }]
+        };
+      }
+    });
+
+
   }
 
+  chart_configuration(): ChartConfiguration {
+    return {
+
+      data: {
+        labels: [],
+        datasets: [
+          {
+            type: 'bar',
+            label: 'mins',
+            data: [],
+            borderWidth: 1,
+            backgroundColor: '#4a85e0',
+          }
+        ]
+      },
+      options: {
+        animation: {
+          duration: 500,
+        },
+        legend: {
+          display: false
+        },
+        title: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              min: 0,
+            }
+          }],
+
+          xAxes: [{
+            offset: true,
+            type: 'time',
+            time: {
+              unit: 'month',
+              displayFormats: {
+                day: 'MM',
+              },
+              tooltipFormat: 'll'
+            },
+            ticks: {
+              fontSize: 8,
+              autoSkip: false,
+              maxRotation: 90,
+
+            }
+          }]
+        }
+      }
+    };
+  }
 
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.current_user_subscription,
       this.client_sub,
+      this.stats_sub,
       this.route_params_subscription,
 
     ];
