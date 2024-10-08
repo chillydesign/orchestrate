@@ -43,7 +43,7 @@
 
         <app-box>
             <div class="chart_container">
-                <canvas #chartContainer></canvas>
+                <app-bar-chart [chart_config]="chart_config" [chart_data]="chart_data"></app-bar-chart>
                 <div class="button_group">
                     <a (click)="goBackwards()" class="button button_white">&larr;</a><a (click)="goForwards()"
                         class="button button_white">&rarr;</a>

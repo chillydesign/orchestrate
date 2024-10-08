@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Project } from '../models/project.model';
 import { Task } from '../models/task.model';
@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 import { ProjectsService } from '../services/projects.service';
 import { TasksService } from '../services/tasks.service';
 import { ProjectsOptions } from '../services/projects.service';
-import { ChartConfiguration } from 'chart.js';
+import { ChartConfiguration, ChartData } from 'chart.js';
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
@@ -32,8 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public daily_target = 123;
   public average_earned: string;
   public currency_formatter: Intl.NumberFormat = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
-  @ViewChild('chartContainer', { static: true }) public chartContainer: ElementRef;
-
+  public chart_config: ChartConfiguration;
+  public chart_data: ChartData;
   private current_user_subscription: Subscription;
   private tasks_sub: Subscription;
   private stats_sub: Subscription;
@@ -123,21 +123,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   initialiseChart(): void {
-    if (this.chartContainer) {
+    this.chart_config = this.chart_configuration();
 
-      // setTimeout(() => { }, 450);
-      const canvas = this.chartContainer.nativeElement;
-      const config = this.chart_config();
-      this.chart = new Chart(canvas, config);
-    }
   }
 
 
 
-  chart_config(): ChartConfiguration {
-
-
-
+  chart_configuration(): ChartConfiguration {
 
     return {
 
@@ -243,13 +235,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
 
-    setTimeout(() => {
-      this.chart.data.datasets[0].data = points;
-      this.chart.data.datasets[1].data = rolling_average;
-      this.chart.data.datasets[2].data = target;
-      this.chart.data.labels = labels;
-      this.chart.update();
-    }, 360);
+
+    this.chart_data = {
+      labels: labels,
+      datasets: [
+        { data: points }, { data: rolling_average }, { data: target }
+      ]
+    };
+
 
   }
 

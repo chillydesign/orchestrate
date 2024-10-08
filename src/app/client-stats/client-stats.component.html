@@ -1,0 +1,25 @@
+<app-spinner [show]="!client"></app-spinner>
+<ng-container *ngIf="client">
+
+    <div class="columns">
+        <div class="column">
+            <h1>
+                <a [routerLink]="['/clients', client.slug]">{{client.name}}</a> | Stats
+            </h1>
+
+        </div>
+        <div class="column column_right">
+            <div class="button_group">
+            </div>
+        </div>
+    </div>
+
+    <app-box>
+
+
+
+    </app-box>
+
+
+
+</ng-container>

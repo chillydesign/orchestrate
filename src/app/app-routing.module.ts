@@ -18,6 +18,7 @@ import { ChannelsComponent } from './channels/channels.component';
 import { NewChannelComponent } from './channels/new-channel/new-channel.component';
 import { ChannelComponent } from './channels/channel/channel.component';
 import { AccountComponent } from './auth/account/account.component';
+import { ClientStatsComponent } from './client-stats/client-stats.component';
 
 
 
@@ -50,6 +51,7 @@ const routes: Routes = [
 
   { path: 'clients/new', component: NewClientComponent, data: { title: 'New Client' } },
   { path: 'clients/id/:id', component: ClientComponent, data: { title: 'Client' } },
+  { path: 'clients/:slug/stats', component: ClientStatsComponent, data: { title: 'Stats' } },
   { path: 'clients/:slug/tasks', component: ClientTasksComponent, data: { title: 'Tasks' } },
   { path: 'clients/:slug/status/:status', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients/:slug/projects/:project_id', component: ClientComponent, data: { title: 'Client' } },

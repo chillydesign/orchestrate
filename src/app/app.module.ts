@@ -45,6 +45,8 @@ import { ChannelComponent } from './channels/channel/channel.component';
 import { NewChannelComponent } from './channels/new-channel/new-channel.component';
 import { NiceminsPipe } from './pipes/nicemins.pipe';
 import { AccountComponent } from './auth/account/account.component';
+import { ClientStatsComponent } from './client-stats/client-stats.component';
+import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { AccountComponent } from './auth/account/account.component';
     ChannelComponent,
     NewChannelComponent,
     NiceminsPipe,
-    AccountComponent
+    AccountComponent,
+    ClientStatsComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
