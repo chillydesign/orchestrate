@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Project } from '../models/project.model';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public total_earned: string;
   public search_term: string;
   public chart: Chart;
+  public chart_data_sub: Subject<ChartData> = new Subject();
   public hourly_rate: number = 55;
   public daily_target = 123;
   public average_earned: string;
@@ -132,7 +133,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   chart_configuration(): ChartConfiguration {
 
     return {
-
+      type: 'bar',
       data: {
         labels: [],
         datasets: [
@@ -235,13 +236,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
 
-
     this.chart_data = {
       labels: labels,
       datasets: [
         { data: points }, { data: rolling_average }, { data: target }
       ]
     };
+    this.chart_data_sub.next(this.chart_data);
+
 
 
   }

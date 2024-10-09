@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { ClientsService, StatStruct } from 'src/app/services/clients.service';
 import { User } from '../models/user.model';
@@ -20,7 +20,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   public client_id: number;
   public client_slug: string;
   public chart_config: ChartConfiguration;
-  public chart_data: ChartData;
+  public chart_data_sub: Subject<ChartData> = new Subject();
   private client_sub: Subscription;
   private stats_sub: Subscription;
   private route_params_subscription: Subscription;
@@ -113,13 +113,16 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
     this.stats_sub = this.clientsService.getStats(client_id).subscribe({
       next: (data: StatStruct[]) => {
-        const sets = data.map(datum => { return { backgroundColor: datum.color, client_name: datum.name, data: datum.data.map(d => d.data) } });
-        this.chart_config = this.chart_configuration();
-        this.chart_data = {
+        const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
+
+        const chart_data = {
           labels: data[0].data.map((d) => d.month),
           // datasets: [{ data: data[0].map(d => d.data) }]
           datasets: sets,
         };
+        const config = this.chart_configuration();
+        config.data = chart_data;
+        this.chart_config = config;
       }
     });
   }
@@ -132,7 +135,6 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         datasets: []
       },
       options: {
-
         tooltips: {
           callbacks: {
             label: function (context, data: any) {

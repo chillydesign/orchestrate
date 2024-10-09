@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 
 export interface StatStruct {
   name: string;
+  client_slug: string;
   id: number;
   data: { month: string, data: number }[]
   color: string;
