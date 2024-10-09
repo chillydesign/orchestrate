@@ -113,16 +113,18 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
     this.stats_sub = this.clientsService.getStats(client_id).subscribe({
       next: (data: StatStruct[]) => {
-        const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
+        if (data.length > 0) {
+          const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
 
-        const chart_data = {
-          labels: data[0].data.map((d) => d.month),
-          // datasets: [{ data: data[0].map(d => d.data) }]
-          datasets: sets,
-        };
-        const config = this.chart_configuration();
-        config.data = chart_data;
-        this.chart_config = config;
+          const chart_data = {
+            labels: data[0].data.map((d) => d.month),
+            // datasets: [{ data: data[0].map(d => d.data) }]
+            datasets: sets,
+          };
+          const config = this.chart_configuration();
+          config.data = chart_data;
+          this.chart_config = config;
+        }
       }
     });
   }

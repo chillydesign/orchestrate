@@ -39,7 +39,6 @@ export class BarChartComponent implements OnInit {
   initChart(): void {
     const canvas = this.chartContainer.nativeElement;
     this.chart = new Chart(canvas, this.chart_config);
-    console.log(this.chart_config);
     this.chart.options.onClick = (e, i) => {
       if (i.length > 0) {
         const activePoint: any = this.chart.getElementAtEvent(e)[0];
