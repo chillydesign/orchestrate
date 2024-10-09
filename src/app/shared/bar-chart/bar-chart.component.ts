@@ -46,7 +46,7 @@ export class BarChartComponent implements OnInit {
           const datasetIndex = activePoint._datasetIndex;
           const set: any = this.chart.data.datasets[datasetIndex];
           if (set) {
-            if (set.client_name) {
+            if (set.client_slug) {
               this.router.navigate(['/clients', set.client_slug, 'stats']);
             }
           }
