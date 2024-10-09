@@ -1,33 +1,26 @@
-<app-spinner [show]="!client"></app-spinner>
-<ng-container *ngIf="client">
+<div class="columns">
+    <div class="column">
+        <h1>
+            <a *ngIf="client" [routerLink]="['/clients', client.slug]">{{client.name}} | </a> Stats
+        </h1>
 
-    <div class="columns">
-        <div class="column">
-            <h1>
-                <a [routerLink]="['/clients', client.slug]">{{client.name}}</a> | Stats
-            </h1>
-
-        </div>
-        <div class="column column_right">
-            <div class="button_group">
-            </div>
+    </div>
+    <div class="column column_right">
+        <div class="button_group">
         </div>
     </div>
+</div>
 
-    <app-box>
+<app-box>
 
-        <app-bar-chart [chart_config]="chart_config" [chart_data]="chart_data"></app-bar-chart>
+    <app-bar-chart [chart_config]="chart_config" [chart_data]="chart_data"></app-bar-chart>
 
 
-    </app-box>
+</app-box>
 
-    <app-box>
-        <!-- Hours worked: hrs
+<app-box>
+    <!-- Hours worked: hrs
         Total earned: £ 
         Average / day: £
         Average / month: £ -->
-    </app-box>
-
-
-
-</ng-container>
+</app-box>

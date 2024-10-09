@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
-import { ClientsService } from 'src/app/services/clients.service';
+import { ClientsService, StatStruct } from 'src/app/services/clients.service';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { ChartConfiguration, ChartData } from 'chart.js';
@@ -40,7 +40,9 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       (user: User) => {
         this.current_user = user;
 
-        this.subscribeToRoute();
+        if (user) {
+          this.subscribeToRoute();
+        }
       }
     );
   }
@@ -56,6 +58,8 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         } else if (params.slug) {
           this.client_slug = params.slug;
           this.getClientFromSlug();
+        } else {
+          this.getStatsOfAllClients();
         }
 
 
@@ -71,7 +75,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         if (client) {
           this.client = client;
           this.projectsService.current_project_client.next(client);
-          this.getStats();
+          this.getStats(client.id);
 
         }
       }
@@ -89,7 +93,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         if (client) {
           this.client = client;
           this.projectsService.current_project_client.next(client);
-          this.getStats();
+          this.getStats(client.id);
 
 
         }
@@ -98,37 +102,33 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   }
 
 
+  getStatsOfAllClients(): void {
+    this.getStats();
+  }
 
 
-  getStats(): void {
 
-    this.stats_sub = this.clientsService.getStats(this.client.id).subscribe({
-      next: (data) => {
+  getStats(client_id?: number): void {
+
+    this.stats_sub = this.clientsService.getStats(client_id).subscribe({
+      next: (data: StatStruct[]) => {
+        const sets = data.map(datum => { return { backgroundColor: datum.color, data: datum.data.map(d => d.data) } });
         this.chart_config = this.chart_configuration();
         this.chart_data = {
-          labels: data.map((d) => d.month),
-          datasets: [{ data: data.map(d => d.data) }]
+          labels: data[0].data.map((d) => d.month),
+          // datasets: [{ data: data[0].map(d => d.data) }]
+          datasets: sets,
         };
       }
     });
-
-
   }
 
   chart_configuration(): ChartConfiguration {
     return {
-
+      type: 'bar',
       data: {
         labels: [],
-        datasets: [
-          {
-            type: 'bar',
-            label: 'mins',
-            data: [],
-            borderWidth: 1,
-            backgroundColor: '#4a85e0',
-          }
-        ]
+        datasets: []
       },
       options: {
         animation: {
@@ -141,13 +141,16 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
           display: false
         },
         scales: {
+
           yAxes: [{
+            stacked: true,
             ticks: {
               min: 0,
             }
           }],
 
           xAxes: [{
+            stacked: true,
             offset: true,
             type: 'time',
             time: {

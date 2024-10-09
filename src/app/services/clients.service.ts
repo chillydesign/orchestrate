@@ -6,6 +6,15 @@ import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
+export interface StatStruct {
+  name: string;
+  id: number;
+  data: { month: string, data: number }[]
+  color: string;
+
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -91,12 +100,17 @@ export class ClientsService {
 
 
 
-  getStats(client_id: number): Observable<{ month: string, data: number }[]> {
+  getStats(client_id?: number): Observable<StatStruct[]> {
     const options = this.authService.setAPIOptions();
-    const endpoint = `${this.api_url}/?route=stats&id=${client_id}`;
-    return this.http.get<{ month: string, data: number }[]>(endpoint, options).pipe(
+    let endpoint = `${this.api_url}/?route=stats`;
+    if (client_id) {
+      endpoint = endpoint.concat(`&id=${client_id}`);
+    }
+    return this.http.get<StatStruct[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
     );
   }
 
 }
+
+
