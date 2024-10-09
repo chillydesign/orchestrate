@@ -32,7 +32,6 @@ export class BarChartComponent implements OnInit, OnChanges {
     }
 
     setTimeout(() => {
-      console.log(this.chart_data.datasets);
       this.chart_data.datasets.forEach((set, i) => {
         this.chart.data = this.chart_data;
       })

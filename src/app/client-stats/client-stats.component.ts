@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { ProjectsService } from '../services/projects.service';
 
+
 @Component({
   selector: 'app-client-stats',
   templateUrl: './client-stats.component.html',
@@ -112,7 +113,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
     this.stats_sub = this.clientsService.getStats(client_id).subscribe({
       next: (data: StatStruct[]) => {
-        const sets = data.map(datum => { return { backgroundColor: datum.color, data: datum.data.map(d => d.data) } });
+        const sets = data.map(datum => { return { backgroundColor: datum.color, client_name: datum.name, data: datum.data.map(d => d.data) } });
         this.chart_config = this.chart_configuration();
         this.chart_data = {
           labels: data[0].data.map((d) => d.month),
@@ -131,6 +132,20 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         datasets: []
       },
       options: {
+
+        tooltips: {
+          callbacks: {
+            label: function (context, data: any) {
+              const ind = context.datasetIndex;
+              let label = data.datasets[ind].label;
+              if (!label) {
+                label = `${data.datasets[ind].client_name}: ${context.yLabel}`
+                return label;
+              }
+            }
+          }
+        },
+
         animation: {
           duration: 500,
         },
@@ -158,7 +173,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
               displayFormats: {
                 day: 'MM',
               },
-              tooltipFormat: 'll'
+
             },
             ticks: {
               fontSize: 8,
