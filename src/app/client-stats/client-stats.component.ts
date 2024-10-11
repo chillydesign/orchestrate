@@ -7,6 +7,8 @@ import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { ProjectsService } from '../services/projects.service';
+import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 
 @Component({
@@ -21,6 +23,10 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   public client_slug: string;
   public chart_config: ChartConfiguration;
   public chart_data_sub: Subject<ChartData> = new Subject();
+  public hours_worked: number;
+  public total_earned: number;
+  public average_per_day: number;
+  public average_per_month: number;
   private client_sub: Subscription;
   private stats_sub: Subscription;
   private route_params_subscription: Subscription;
@@ -114,19 +120,39 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
     this.stats_sub = this.clientsService.getStats(client_id).subscribe({
       next: (data: StatStruct[]) => {
         if (data.length > 0) {
-          const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
 
-          const chart_data = {
-            labels: data[0].data.map((d) => d.month),
-            // datasets: [{ data: data[0].map(d => d.data) }]
-            datasets: sets,
-          };
-          const config = this.chart_configuration();
-          config.data = chart_data;
-          this.chart_config = config;
+          this.processStats(data);
+
         }
       }
     });
+  }
+
+
+  processStats(data: StatStruct[]): void {
+    const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
+
+    const chart_data = {
+      labels: data[0].data.map((d) => d.month),
+      // datasets: [{ data: data[0].map(d => d.data) }]
+      datasets: sets,
+    };
+    const config = this.chart_configuration();
+    config.data = chart_data;
+    this.chart_config = config;
+
+    const hours: number[] = data.map(d => d.data.map(c => c.data)).flat();
+    const months: string[] = data.map(d => d.data.map(c => c.month)).flat().sort();
+    const first_month = moment(months[0]);
+    const last_month = moment(months[months.length - 1]);
+    const days_worked = last_month.diff(first_month, 'days');
+    const months_worked = last_month.diff(first_month, 'months');
+
+    this.hours_worked = Math.round(hours.reduce((a, b) => a + b, 0) * 10) / 10;
+    this.total_earned = this.hours_worked * environment.hourly_wage;
+    this.average_per_day = this.total_earned / days_worked;
+    this.average_per_month = this.total_earned / months_worked;
+
   }
 
   chart_configuration(): ChartConfiguration {

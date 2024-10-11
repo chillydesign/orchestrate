@@ -11,6 +11,7 @@ import { ChartConfiguration, ChartData } from 'chart.js';
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,14 +26,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public current_user: User;
   public start_date = moment();
   public total_minutes: number;
-  public total_earned: string;
+  public total_earned: number;
   public search_term: string;
+  public hourly_wage = environment.hourly_wage;
   public chart: Chart;
   public chart_data_sub: Subject<ChartData> = new Subject();
-  public hourly_rate: number = 55;
   public daily_target = 123;
-  public average_earned: string;
-  public currency_formatter: Intl.NumberFormat = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' });
+  public average_earned: number;
   public chart_config: ChartConfiguration;
   public chart_data: ChartData;
   private current_user_subscription: Subscription;
@@ -95,15 +95,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.tasks_completed_today = tasks;
 
         this.total_minutes = this.tasks_completed_today.map(t => t.time_taken).reduce((a, b) => b + a, 0);
-        const pounds = this.minutesToPounds(this.total_minutes);
-        this.total_earned = this.currency_formatter.format(pounds).concat(` @ £55/hr`);
+        this.total_earned = this.minutesToPounds(this.total_minutes);
+
       }
     );
   }
 
 
   minutesToPounds(mins: number): number {
-    return mins * this.hourly_rate / 60;
+    return mins * environment.hourly_wage / 60;
   }
 
 
@@ -209,7 +209,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   loadChartData(): void {
 
-    const points: number[] = this.monthly_stats.map(s => Math.round(s.hours * 55 / 60));
+    const points: number[] = this.monthly_stats.map(s => Math.round(s.hours * environment.hourly_wage / 60));
     const labels = this.monthly_stats.map(s => s.date);
 
     const days = 7;
@@ -217,8 +217,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const rolling_average = [];
 
     if (points.length > 0) {
-      const avear = this.minutesToPounds(points.reduce((a, b) => a + b, 0) / points.length);
-      this.average_earned = this.currency_formatter.format(avear);
+      this.average_earned = this.minutesToPounds(points.reduce((a, b) => a + b, 0) / points.length);
     } else {
       this.average_earned = null;
     }

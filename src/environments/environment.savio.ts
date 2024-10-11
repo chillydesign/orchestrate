@@ -11,5 +11,7 @@ export const environment = {
     cookie_domains: ['webfactor.ch'],
     cookie_length_hours: 8760,
     cache_duration: 60000, // time to hold resources from API in cache in milliseconds
-    translations: LANG_FR_TRANS
+    translations: LANG_FR_TRANS,
+    hourly_wage: 55,
+
 };

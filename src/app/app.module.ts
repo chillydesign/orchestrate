@@ -47,6 +47,7 @@ import { NiceminsPipe } from './pipes/nicemins.pipe';
 import { AccountComponent } from './auth/account/account.component';
 import { ClientStatsComponent } from './client-stats/client-stats.component';
 import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
+import { CurrencyPipe } from './pipes/currency.pipe';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
     NiceminsPipe,
     AccountComponent,
     ClientStatsComponent,
-    BarChartComponent
+    BarChartComponent,
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,
