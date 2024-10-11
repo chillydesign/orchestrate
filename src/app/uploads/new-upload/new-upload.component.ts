@@ -20,7 +20,6 @@ export class NewUploadComponent implements OnInit, OnDestroy {
   public failedUploads: File[] = [];
   public uploadingFiles: File[] = [];
   public maxFileSize: number = 1024 * 1024 * 30; // 30 mb
-
   private new_upl_sub: Subscription;
   constructor(private uploadsService: UploadsService) { }
 
@@ -32,14 +31,13 @@ export class NewUploadComponent implements OnInit, OnDestroy {
 
   onSelect(event) {
 
-    const newfiles = event.addedFiles;
-    this.files.push(...newfiles);
 
+    const newfiles = event.target.files;
+    this.files.push(...newfiles);
 
     this.showFailedUploadsPopup(event.rejectedFiles);
 
-
-    newfiles.forEach((file: File) => {
+    this.files.forEach((file: File) => {
       this.readFile(file).then(fileContents => {
 
         this.uploadingFiles.push(file);

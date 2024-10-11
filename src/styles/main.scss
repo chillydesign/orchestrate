@@ -1198,3 +1198,19 @@ $boolean_offset: 3px;
     width: 100%;
   }
 }
+
+.nice_file_upload {
+  display: flex;
+  align-items: center;
+  padding: 50px 0;
+  background: #fff;
+  cursor: pointer;
+  color: #717386;
+  border: 2px dashed #717386;
+  border-radius: 5px;
+  font-size: 16px;
+  overflow-x: auto;
+  text-align: center;
+  appearance: none;
+
+}

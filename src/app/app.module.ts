@@ -2,9 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { DragulaModule } from 'ng2-dragula';
-import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +18,6 @@ import { EditProjectComponent } from './projects/edit-project/edit-project.compo
 import { TaskComponent } from './tasks/task/task.component';
 import { NewTaskComponent } from './tasks/new-task/new-task.component';
 import { BoxFooterComponent } from './shared/box-footer/box-footer.component';
-import { AutofocusDirective } from './directives/autofocus.directive';
 import { UploadsComponent } from './uploads/uploads.component';
 import { UploadComponent } from './uploads/upload/upload.component';
 import { TranslatePipe } from './pipes/translate.pipe';
@@ -63,7 +61,6 @@ import { CurrencyPipe } from './pipes/currency.pipe';
     TaskComponent,
     NewTaskComponent,
     BoxFooterComponent,
-    AutofocusDirective,
     UploadsComponent,
     UploadComponent,
     TranslatePipe,
@@ -99,7 +96,6 @@ import { CurrencyPipe } from './pipes/currency.pipe';
     HttpClientModule,
     FormsModule,
     // DragulaModule.forRoot(),
-    NgxDropzoneModule,
     AppRoutingModule
   ],
   providers: [],

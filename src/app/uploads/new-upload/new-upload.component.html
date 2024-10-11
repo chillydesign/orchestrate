@@ -1,10 +1,14 @@
-<ngx-dropzone [maxFileSize]="maxFileSize" (change)="onSelect($event)">
+<!-- <ngx-dropzone [maxFileSize]="maxFileSize" (change)="onSelect($event)">
     <ngx-dropzone-label>{{'Drop it, baby!' | translate}}</ngx-dropzone-label>
     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
         <ngx-dropzone-label>{{ f.name }} ({{ f.type }}) <br> Loading ... </ngx-dropzone-label>
 
     </ngx-dropzone-preview>
-</ngx-dropzone>
+</ngx-dropzone> -->
+
+<input type="file" multiple class="nice_file_upload" (change)="onSelect($event)" />
+
+
 
 
 <div class="alert alert_danger" *ngFor="let failedUpload of failedUploads">
