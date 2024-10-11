@@ -25,8 +25,10 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   public chart_data_sub: Subject<ChartData> = new Subject();
   public hours_worked: number;
   public total_earned: number;
-  public average_per_day: number;
-  public average_per_month: number;
+  public average_hours_per_day: number;
+  public average_hours_per_month: number;
+  public average_earned_per_day: number;
+  public average_earned_per_month: number;
   private client_sub: Subscription;
   private stats_sub: Subscription;
   private route_params_subscription: Subscription;
@@ -148,11 +150,17 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
     const days_worked = last_month.diff(first_month, 'days');
     const months_worked = last_month.diff(first_month, 'months');
 
-    this.hours_worked = Math.round(hours.reduce((a, b) => a + b, 0) * 10) / 10;
+    this.hours_worked = this.niceRound(hours.reduce((a, b) => a + b, 0));
+    this.average_hours_per_day = this.niceRound(this.hours_worked / days_worked);
+    this.average_hours_per_month = this.niceRound(this.hours_worked / months_worked);
     this.total_earned = this.hours_worked * environment.hourly_wage;
-    this.average_per_day = this.total_earned / days_worked;
-    this.average_per_month = this.total_earned / months_worked;
+    this.average_earned_per_day = this.total_earned / days_worked;
+    this.average_earned_per_month = this.total_earned / months_worked;
 
+  }
+
+  niceRound(number): number {
+    return Math.round(number * 10) / 10;
   }
 
   chart_configuration(): ChartConfiguration {

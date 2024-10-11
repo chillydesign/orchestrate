@@ -21,9 +21,17 @@
 <app-box>
     <ul>
         <li> Hours worked: {{hours_worked}} hrs</li>
+        <li> Average hours / day: {{average_hours_per_day}} hrs</li>
+        <li> Average hours / month: {{average_hours_per_month}} hrs</li>
         <li> Total earned: {{total_earned | currency}}</li>
-        <li> Average / day: {{average_per_day | currency}}</li>
-        <li> Average / month: {{average_per_month | currency}}</li>
+        <li> Average / day: {{average_earned_per_day | currency}}</li>
+        <li> Average / month: {{average_earned_per_month | currency}}</li>
+
+
+
+
+
+
     </ul>
 
 </app-box>
