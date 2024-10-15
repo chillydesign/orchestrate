@@ -15,6 +15,11 @@ export interface StatStruct {
 
 }
 
+export interface StatOptions {
+  client_id?: number;
+  start_date?: string;
+  end_date?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -101,11 +106,19 @@ export class ClientsService {
 
 
 
-  getStats(client_id?: number): Observable<StatStruct[]> {
+  getStats(opts?: StatOptions): Observable<StatStruct[]> {
     const options = this.authService.setAPIOptions();
     let endpoint = `${this.api_url}/?route=stats`;
-    if (client_id) {
-      endpoint = endpoint.concat(`&id=${client_id}`);
+    if (opts) {
+      if (opts.client_id) {
+        endpoint = endpoint.concat(`&id=${opts.client_id}`);
+      }
+      if (opts.start_date) {
+        endpoint = endpoint.concat(`&start_date=${opts.start_date}`);
+      }
+      if (opts.end_date) {
+        endpoint = endpoint.concat(`&end_date=${opts.end_date}`);
+      }
     }
     return this.http.get<StatStruct[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),

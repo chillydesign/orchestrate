@@ -12,13 +12,27 @@
 </div>
 
 <app-box>
+    <form class="month_search">
+        <div class="columns">
+            <div class="column">
+                <input type="date" (change)="dateChanged()" name="start_date" id="start_date" placeholder="Start date"
+                    [(ngModel)]="start_date">
 
-    <app-bar-chart *ngIf="chart_config" [chart_config]="chart_config"></app-bar-chart>
+            </div>
+            <div class="column">
+                <input type="date" (change)="dateChanged()" name="end_date" id="end_date" placeholder="End date"
+                    [(ngModel)]="end_date">
+            </div>
+        </div>
+
+    </form>
+
+    <app-bar-chart *ngIf="chart_config" [chart_config]="chart_config" [chart_data_sub]="chart_data_sub"></app-bar-chart>
 
 
 </app-box>
 
-<app-box>
+<app-box *ngIf="hours_worked">
     <ul>
         <li> Hours worked: {{hours_worked}} hrs</li>
         <li> Average hours / day: {{average_hours_per_day}} hrs</li>
@@ -26,12 +40,6 @@
         <li> Total earned: {{total_earned | currency}}</li>
         <li> Average / day: {{average_earned_per_day | currency}}</li>
         <li> Average / month: {{average_earned_per_month | currency}}</li>
-
-
-
-
-
-
     </ul>
 
 </app-box>

@@ -29,6 +29,8 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   public average_hours_per_month: number;
   public average_earned_per_day: number;
   public average_earned_per_month: number;
+  public start_date: string;
+  public end_date: string;
   private client_sub: Subscription;
   private stats_sub: Subscription;
   private route_params_subscription: Subscription;
@@ -83,8 +85,9 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       (client: Client) => {
         if (client) {
           this.client = client;
+          this.client_id = client.id;
           this.projectsService.current_project_client.next(client);
-          this.getStats(client.id);
+          this.getStats();
 
         }
       }
@@ -101,8 +104,9 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       (client: Client) => {
         if (client) {
           this.client = client;
+          this.client_id = client.id;
           this.projectsService.current_project_client.next(client);
-          this.getStats(client.id);
+          this.getStats();
 
 
         }
@@ -117,46 +121,63 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
 
 
-  getStats(client_id?: number): void {
+  dateChanged(): void {
 
-    this.stats_sub = this.clientsService.getStats(client_id).subscribe({
+    this.getStats()
+
+  }
+
+  getStats(): void {
+    const opts = {
+      start_date: this.start_date,
+      end_date: this.end_date,
+      client_id: this.client_id,
+    }
+    this.stats_sub = this.clientsService.getStats(opts).subscribe({
       next: (data: StatStruct[]) => {
-        if (data.length > 0) {
 
-          this.processStats(data);
+        this.processStats(data);
 
-        }
       }
     });
   }
 
 
   processStats(data: StatStruct[]): void {
-    const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
+    if (data.length > 0) {
+      const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
 
-    const chart_data = {
-      labels: data[0].data.map((d) => d.month),
-      // datasets: [{ data: data[0].map(d => d.data) }]
-      datasets: sets,
-    };
-    const config = this.chart_configuration();
-    config.data = chart_data;
-    this.chart_config = config;
+      const chart_data = {
+        labels: data[0].data.map((d) => d.month),
+        // datasets: [{ data: data[0].map(d => d.data) }]
+        datasets: sets,
+      };
 
-    const hours: number[] = data.map(d => d.data.map(c => c.data)).flat();
-    const months: string[] = data.map(d => d.data.map(c => c.month)).flat().sort();
-    const first_month = moment(months[0]);
-    const last_month = moment(months[months.length - 1]);
-    const days_worked = last_month.diff(first_month, 'days');
-    const months_worked = last_month.diff(first_month, 'months');
+      if (!this.chart_config) {
+        const config = this.chart_configuration();
+        config.data = chart_data;
+        this.chart_config = config;
+      }
 
-    this.hours_worked = this.niceRound(hours.reduce((a, b) => a + b, 0));
-    this.average_hours_per_day = this.niceRound(this.hours_worked / days_worked);
-    this.average_hours_per_month = this.niceRound(this.hours_worked / months_worked);
-    this.total_earned = this.hours_worked * environment.hourly_wage;
-    this.average_earned_per_day = this.total_earned / days_worked;
-    this.average_earned_per_month = this.total_earned / months_worked;
 
+      const hours: number[] = data.map(d => d.data.map(c => c.data)).flat();
+      const months: string[] = data.map(d => d.data.map(c => c.month)).flat().sort();
+      const first_month = moment(months[0]).startOf('month');
+      const last_month = moment(months[months.length - 1]).endOf('month');
+      const days_worked = Math.max(1, last_month.diff(first_month, 'days'));
+      const months_worked = Math.max(1, last_month.diff(first_month, 'months'));
+
+      this.hours_worked = this.niceRound(hours.reduce((a, b) => a + b, 0));
+      this.average_hours_per_day = this.niceRound(this.hours_worked / days_worked);
+      this.average_hours_per_month = this.niceRound(this.hours_worked / months_worked);
+      this.total_earned = this.hours_worked * environment.hourly_wage;
+      this.average_earned_per_day = this.total_earned / days_worked;
+      this.average_earned_per_month = this.total_earned / months_worked;
+      this.chart_data_sub.next(chart_data);
+    } else {
+      this.hours_worked = 0;
+      this.chart_data_sub.next({ labels: [], datasets: [] })
+    }
   }
 
   niceRound(number): number {

@@ -1214,3 +1214,18 @@ $boolean_offset: 3px;
   appearance: none;
 
 }
+
+.month_search {
+  margin: 0 0 $padding;
+  font-size: 90%;
+
+  .columns {
+    justify-content: flex-end;
+
+    .column {
+      max-width: 150px;
+    }
+  }
+
+
+}
