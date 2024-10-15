@@ -61,11 +61,6 @@ export class BarChartComponent implements OnInit {
 
 
 
-    const dl = data.datasets.length;
-
-
-    console.log(data);
-
     setTimeout(() => {
       // this.chart.data.datasets = data.datasets;
       data.datasets.forEach((set, di) => {
