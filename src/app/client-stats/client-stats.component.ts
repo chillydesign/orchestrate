@@ -145,7 +145,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
   processStats(data: StatStruct[]): void {
     if (data.length > 0) {
-      const sets = data.map(datum => { return { type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
+      const sets = data.map(datum => { return { label: datum.name, type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
 
       const chart_data = {
         labels: data[0].data.map((d) => d.month),
@@ -193,23 +193,24 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       },
       options: {
         tooltips: {
-          callbacks: {
-            label: function (context, data: any) {
-              const ind = context.datasetIndex;
-              let label = data.datasets[ind].label;
-              if (!label) {
-                label = `${data.datasets[ind].client_name}: ${context.yLabel}`
-                return label;
-              }
-            }
-          }
+          // callbacks: {
+          //   label: function (context, data: any) {
+          //     const ind = context.datasetIndex;
+          //     let label = data.datasets[ind].label;
+          //     if (!label) {
+          //       label = `${data.datasets[ind].client_name}: ${context.yLabel}`
+          //       return label;
+          //     }
+          //   }
+          // }
         },
+
 
         animation: {
           duration: 500,
         },
         legend: {
-          display: false
+          display: (this.client_id === undefined)
         },
         title: {
           display: false
