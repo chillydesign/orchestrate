@@ -1044,9 +1044,23 @@ a.load_translate {
   border-bottom-right-radius: $border_radius;
   border-bottom-left-radius: $border_radius;
   margin: $padding $negative_padding $negative_padding;
+  display: flex;
 
-  p {
-    padding: 0;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  ul {
+    li {
+      padding: 0;
+    }
+  }
+
+  a {
+    display: inline-block;
+    font-size: $font_size;
+    text-align: right;
+    opacity: 0.5;
+    padding-bottom: 5px;
   }
 }
 
