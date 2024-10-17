@@ -44,6 +44,9 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUser();
 
+    this.start_date = moment().subtract('1', 'year').format('YYYY-MM-DD');
+    this.end_date = moment().format('YYYY-MM-DD');
+
   }
 
   getCurrentUser(): void {
