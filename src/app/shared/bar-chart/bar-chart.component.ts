@@ -63,6 +63,7 @@ export class BarChartComponent implements OnInit {
         if (this.chart.data.datasets[di]) {
           this.chart.data.datasets[di].data = set.data;
           this.chart.data.datasets[di].label = set.label;
+          this.chart.data.datasets[di].backgroundColor = set.backgroundColor;
         }
       });
       this.chart.data.labels = data.labels;
