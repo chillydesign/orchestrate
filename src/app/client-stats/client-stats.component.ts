@@ -44,7 +44,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUser();
 
-    this.start_date = moment().subtract('1', 'year').format('YYYY-MM-DD');
+    this.start_date = moment().subtract('4', 'months').format('YYYY-MM-DD');
     this.end_date = moment().format('YYYY-MM-DD');
 
   }
@@ -195,25 +195,12 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         datasets: []
       },
       options: {
-        tooltips: {
-          // callbacks: {
-          //   label: function (context, data: any) {
-          //     const ind = context.datasetIndex;
-          //     let label = data.datasets[ind].label;
-          //     if (!label) {
-          //       label = `${data.datasets[ind].client_name}: ${context.yLabel}`
-          //       return label;
-          //     }
-          //   }
-          // }
-        },
-
-
         animation: {
           duration: 500,
         },
         legend: {
-          display: (this.client_id === undefined)
+          display: (this.client_id === undefined),
+          position: 'bottom'
         },
         title: {
           display: false
