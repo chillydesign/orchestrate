@@ -5,7 +5,7 @@ import { Client } from 'src/app/models/client.model';
 import { ClientsService, StatStruct } from 'src/app/services/clients.service';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
-import { ChartConfiguration, ChartData } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartDataSets } from 'chart.js';
 import { ProjectsService } from '../services/projects.service';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
@@ -55,12 +55,20 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
         this.current_user = user;
 
         if (user) {
-          this.subscribeToRoute();
+          this.setupChart();
         }
       }
     );
   }
 
+
+  setupChart(): void {
+    const config = this.chart_configuration();
+    // config.data = chart_data;
+    this.chart_config = config;
+
+    this.subscribeToRoute();
+  }
 
 
   subscribeToRoute(): void {
@@ -148,19 +156,14 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
   processStats(data: StatStruct[]): void {
     if (data.length > 0) {
-      const sets = data.map(datum => { return { label: datum.name, type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, client_name: datum.name, data: datum.data.map(d => d.data) } });
+      const sets: ChartDataSets[] = data.map(datum => { return { label: datum.name, type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, data: datum.data.map(d => d.data) } });
 
-      const chart_data = {
+      const chart_data: ChartData = {
         labels: data[0].data.map((d) => d.month),
         // datasets: [{ data: data[0].map(d => d.data) }]
         datasets: sets,
       };
 
-      if (!this.chart_config) {
-        const config = this.chart_configuration();
-        config.data = chart_data;
-        this.chart_config = config;
-      }
 
 
       const hours: number[] = data.map(d => d.data.map(c => c.data)).flat();
@@ -176,7 +179,10 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       this.total_earned = this.hours_worked * environment.hourly_wage;
       this.average_earned_per_day = this.total_earned / days_worked;
       this.average_earned_per_month = this.total_earned / months_worked;
-      this.chart_data_sub.next(chart_data);
+      console.log(chart_data);
+      setTimeout(() => {
+        this.chart_data_sub.next(chart_data);
+      }, 50);
     } else {
       this.hours_worked = 0;
       this.chart_data_sub.next({ labels: [], datasets: [] })

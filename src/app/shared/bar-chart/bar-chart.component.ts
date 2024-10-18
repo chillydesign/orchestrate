@@ -57,18 +57,53 @@ export class BarChartComponent implements OnInit {
 
 
   updateData(data: ChartData): void {
-    setTimeout(() => {
-      // this.chart.data.datasets = data.datasets;
+    //
+
+
+
+
+    const dl = data.datasets.length;
+    const cl = this.chart.data.datasets.length;
+
+
+
+    if (dl > cl) {
+      data.datasets.forEach((set, dl) => {
+        this.chart.data.datasets[dl] = {};
+      })
+    }
+
+
+
+    if (cl > dl) {
+      this.chart.data = data;
+
+    } else {
+
       data.datasets.forEach((set, di) => {
-        if (this.chart.data.datasets[di]) {
-          this.chart.data.datasets[di].data = set.data;
-          this.chart.data.datasets[di].label = set.label;
-          this.chart.data.datasets[di].backgroundColor = set.backgroundColor;
+
+
+        let exset = this.chart.data.datasets[di];
+        if (exset) {
+          exset.data = set.data;
+          if (set.label) {
+            exset.label = set.label;
+          }
+          if (set.backgroundColor) {
+            exset.backgroundColor = set.backgroundColor;
+          }
+        } else {
+          this.chart.data.datasets.push(set);
         }
+
       });
-      this.chart.data.labels = data.labels;
-      this.chart.update();
-    }, 200);
+    }
+
+
+
+
+    this.chart.data.labels = data.labels;
+    this.chart.update();
   }
 
 
