@@ -44,8 +44,8 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUser();
 
-    this.start_date = moment().subtract('1', 'year').format('YYYY-MM-DD');
-    this.end_date = moment().format('YYYY-MM-DD');
+    this.start_date = moment().subtract('1', 'year').startOf('month').format('YYYY-MM-DD');
+    this.end_date = moment().add(1, 'month').startOf('month').format('YYYY-MM-DD');
 
   }
 
@@ -156,14 +156,19 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
   processStats(data: StatStruct[]): void {
     if (data.length > 0) {
-      const sets: ChartDataSets[] = data.map(datum => { return { label: datum.name, type: 'bar', backgroundColor: datum.color, client_slug: datum.client_slug, data: datum.data.map(d => d.data) } });
+      const sets: ChartDataSets[] = data.map(datum => {
+        return {
+          label: datum.name,
+          backgroundColor: datum.color,
+          client_slug: datum.client_slug,
+          data: datum.data.map(d => d.data)
+        };
+      });
 
       const chart_data: ChartData = {
         labels: data[0].data.map((d) => d.month),
-        // datasets: [{ data: data[0].map(d => d.data) }]
         datasets: sets,
       };
-
 
 
       const hours: number[] = data.map(d => d.data.map(c => c.data)).flat();
@@ -179,7 +184,6 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       this.total_earned = this.hours_worked * environment.hourly_wage;
       this.average_earned_per_day = this.total_earned / days_worked;
       this.average_earned_per_month = this.total_earned / months_worked;
-      console.log(chart_data);
       setTimeout(() => {
         this.chart_data_sub.next(chart_data);
       }, 50);
@@ -189,7 +193,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
     }
   }
 
-  niceRound(number): number {
+  niceRound(number: number): number {
     return Math.round(number * 10) / 10;
   }
 

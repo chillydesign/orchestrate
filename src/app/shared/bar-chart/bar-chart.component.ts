@@ -80,10 +80,10 @@ export class BarChartComponent implements OnInit {
 
     } else {
 
-      data.datasets.forEach((set, di) => {
+      data.datasets.forEach((set: any, di) => {
 
 
-        let exset = this.chart.data.datasets[di];
+        let exset: any = this.chart.data.datasets[di];
         if (exset) {
           exset.data = set.data;
           if (set.label) {
@@ -92,6 +92,9 @@ export class BarChartComponent implements OnInit {
           if (set.backgroundColor) {
             exset.backgroundColor = set.backgroundColor;
           }
+          if (set.client_slug) {
+            exset.client_slug = set.client_slug;
+          }
         } else {
           this.chart.data.datasets.push(set);
         }
@@ -99,6 +102,9 @@ export class BarChartComponent implements OnInit {
       });
     }
 
+
+    console.log(data.datasets);
+    console.log(this.chart.data.datasets);
 
 
 
