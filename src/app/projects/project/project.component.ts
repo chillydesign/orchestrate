@@ -23,6 +23,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class ProjectComponent implements OnInit, OnDestroy {
   public current_user: User;
   public users: User[];
+  public project_slug: string;
   public project_id: number;
   public client: Client;
   public project: Project;
@@ -74,13 +75,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe(
-      (user: User) => {
+    this.current_user_subscription = this.authService.current_user.subscribe({
+      next: (user: User) => {
         this.current_user = user;
-
         this.subscribeToRoute();
-      }
-    );
+      },
+    });
   }
 
 
@@ -90,14 +90,29 @@ export class ProjectComponent implements OnInit, OnDestroy {
         if (params.id) {
           this.project_id = params.id;
           this.getProject();
+        } else if (params.project_slug) {
+          this.project_slug = params.project_slug;
+          this.getProjectFromSlug();
         }
-
       }
-    ); // end of route_params_subscription
+    );
 
   }
 
 
+
+
+  getProjectFromSlug(): void {
+    this.project_sub = this.projectsService.getProjectFromSlug(this.project_slug).subscribe(
+      (project: Project) => {
+        if (project) {
+          this.project = project;
+          this.processProject();
+
+        }
+      }
+    );
+  }
 
 
   getProject(): void {
@@ -105,20 +120,19 @@ export class ProjectComponent implements OnInit, OnDestroy {
       (project: Project) => {
         if (project) {
           this.project = project;
-          this.client = this.project.client;
-          this.projectsService.current_project_client.next(this.client);
-
-          this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
-          // this.setupDragSubscription();
-
-          this.getUsers();
-
-
+          this.processProject();
         }
       }
     );
   }
 
+
+  processProject(): void {
+    this.client = this.project.client;
+    this.projectsService.current_project_client.next(this.client);
+    this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
+    this.getUsers();
+  }
 
   getUsers(): void {
     this.users_sub = this.usersService.getUsers().subscribe(

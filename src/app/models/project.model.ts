@@ -29,6 +29,8 @@ export class Project {
     public nice_name_with_client: string;
     public search_string: string;
     public client_slug: string;
+    public slug: string;
+    public project_url: string[];
 
     public collapsed: boolean = false;
 
@@ -43,6 +45,15 @@ export class Project {
         }
         return 1;
 
+    }
+
+
+    setProjectURL(): void {
+        if (this.slug) {
+            this.project_url = ['/projects', 'slug', this.slug];
+        } else {
+            this.project_url = ['/projects', `${this.id}`];
+        }
     }
 
     public setTasksCount(): void {
@@ -147,7 +158,7 @@ export class Project {
             this.setMonthAndNiceName();
             this.setPercentage();
 
-
+            this.setProjectURL();
 
 
         }

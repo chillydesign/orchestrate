@@ -94,6 +94,14 @@ export class ProjectsService {
       map(res => new Project(res))
     );
   }
+  getProjectFromSlug(project_slug: string): Observable<Project> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=projects&slug=${project_slug}`;
+    return this.http.get<Project>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Project(res))
+    );
+  }
 
   getProjectsCSV(opts?: ExportOptions) {
     const options = this.authService.setAPIOptions();

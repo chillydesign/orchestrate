@@ -83,9 +83,9 @@ export class NewProjectComponent implements OnInit, OnDestroy {
           this.formSuccess = true;
           this.errors.next(null);
           if (project.client) {
-            this.router.navigate(['/clients', project.client.slug]);
+            this.router.navigate(['/clients', project.client.slug, 'projects', project.slug]);
           } else {
-            this.router.navigate(['/projects', project.id]);
+            this.router.navigate(project.project_url);
 
           }
         },

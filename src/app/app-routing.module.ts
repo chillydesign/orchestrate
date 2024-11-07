@@ -30,6 +30,8 @@ const routes: Routes = [
   { path: 'projects/status/:status', component: ProjectsComponent, data: { title: 'Projects' } },
   { path: 'projects/new/clients/:client_id', component: NewProjectComponent, data: { title: 'New Project' } },
   { path: 'projects/new', component: NewProjectComponent, data: { title: 'New Project' } },
+  { path: 'clients/:slug/projects/slug/:project_slug', component: ProjectComponent, data: { title: 'Project' } },
+  { path: 'projects/slug/:project_slug', component: ProjectComponent },
   { path: 'projects/:id', component: ProjectComponent },
   { path: 'projects/:id/translate', component: ProjectComponent },
   { path: 'projects/:id/translation', component: ProjectComponent },
