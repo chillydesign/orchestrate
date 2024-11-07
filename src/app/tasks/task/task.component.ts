@@ -99,17 +99,20 @@ export class TaskComponent implements OnInit, OnDestroy {
     if (this.updating === false) {
       this.updating = true;
       const upl = this.task.uploads;
-      this.update_task_sub = this.tasksService.updateTask(this.task).subscribe(
-        (task: Task) => {
+      this.update_task_sub = this.tasksService.updateTask(this.task).subscribe({
+        next: (task: Task) => {
           this.task = task;
           this.task.uploads = upl;
           this.taskUpdated.next(this.task);
           this.updating = false;
           this.showTickIcon();
         },
-        (error) => {
+        error: (error) => {
           this.showOtherEditedError(error);
-        }
+          this.updating = false;
+        },
+      }
+
       );
     }
   }
@@ -119,12 +122,13 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   updateField(field: string): void {
     this.showTick = false;
+    console.log('1283890');
     if (this.updating === false) {
       this.updating = true;
       const upl = this.task.uploads;
 
-      this.update_task_sub = this.tasksService.updateTaskField(this.task, field).subscribe(
-        (task: Task) => {
+      this.update_task_sub = this.tasksService.updateTaskField(this.task, field).subscribe({
+        next: (task: Task) => {
           this.task = task;
           this.task.uploads = upl;
           // console.log(this.task.translation, task.translation);
@@ -136,11 +140,11 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.updateTextareaHeights();
 
         },
-        (error) => {
+        error: (error) => {
           this.showOtherEditedError(error);
-
-        }
-      );
+          this.updating = false;
+        },
+      });
     }
   }
 
@@ -149,6 +153,8 @@ export class TaskComponent implements OnInit, OnDestroy {
       alert(`The task was updated by someone else while you were viewing it. Your change was not saved. Please refresh the page and make the edit again.`)
     } else if (error === `Error - must be logged in to update`) {
       alert(`You must be logged in to update a completed task`);
+    } else {
+      alert('A general error occured. Please try again.');
     }
   }
 

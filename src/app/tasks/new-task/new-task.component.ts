@@ -62,7 +62,10 @@ export class NewTaskComponent implements OnInit, OnDestroy {
         }
 
       },
-      (error) => console.log(error)
+      (error) => {
+        console.log(error);
+        alert('An error occured when adding. Please try again.');
+      }
     );
 
   }
