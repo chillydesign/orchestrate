@@ -176,7 +176,8 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
       const first_month = moment(months[0]).startOf('month');
       const last_month = moment(months[months.length - 1]).endOf('month');
       const days_worked = Math.max(1, last_month.diff(first_month, 'days'));
-      const months_worked = Math.max(1, last_month.diff(first_month, 'months'));
+      const months_worked = Math.max(1, last_month.diff(first_month, 'months') + 1);
+
 
       this.hours_worked = this.niceRound(hours.reduce((a, b) => a + b, 0));
       this.average_hours_per_day = this.niceRound(this.hours_worked / days_worked);
