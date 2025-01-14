@@ -46,6 +46,7 @@ import { AccountComponent } from './auth/account/account.component';
 import { ClientStatsComponent } from './client-stats/client-stats.component';
 import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { CurrencyPipe } from './pipes/currency.pipe';
     AccountComponent,
     ClientStatsComponent,
     BarChartComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -1243,3 +1243,33 @@ $boolean_offset: 3px;
 
 
 }
+
+#footer {
+  position: relative;
+  min-height: 30px;
+}
+
+.show_draft {
+  text-indent: -9999px;
+  background: url('../assets/images/saved.svg') no-repeat center center;
+  background-size: 22px;
+  opacity: 0.5;
+  display: inline-block;
+  padding: 5px;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+
+.draft_task {
+  background-color: white;
+  padding: 10px;
+  font-family: monospace;
+  border-radius: $border_radius;
+
+  p {
+    padding: 0;
+  }
+}

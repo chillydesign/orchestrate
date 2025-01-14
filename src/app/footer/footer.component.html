@@ -1,0 +1,9 @@
+<footer id="footer" *ngIf="current_user">
+
+    <a (click)="showDraft()" class="show_draft">Show draft</a>
+    <div *ngIf="show" class="draft_task">
+        <p>{{draft_task}}</p>
+    </div>
+
+
+</footer>

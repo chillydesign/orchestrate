@@ -70,6 +70,14 @@ export class NewTaskComponent implements OnInit, OnDestroy {
 
   }
 
+
+  saveDraft(): void {
+    this.tasksService.saveDraftLastTask(this.task);
+
+  }
+
+
+
   ngOnDestroy() {
 
     const subs: Subscription[] = [

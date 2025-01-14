@@ -8,7 +8,7 @@
 
 
             <input [placeholder]="'add task here' | translate" autocomplete="off" type="text" name="content"
-                id="content" [(ngModel)]="task.content">
+                id="content" (keyup)="saveDraft()" [(ngModel)]="task.content">
 
             <!-- appAutofocus -->
 

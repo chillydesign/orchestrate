@@ -22,6 +22,7 @@ export interface TasksOptions {
 export class TasksService {
   private api_url = environment.api_url;
   public close_task_menu: BehaviorSubject<number | null> = new BehaviorSubject(null);
+  public taskDraftChanged: BehaviorSubject<boolean> = new BehaviorSubject(false);
   constructor(private http: HttpClient, private authService: AuthService) { }
 
 
@@ -228,6 +229,25 @@ export class TasksService {
 
     return options;
 
+  }
+
+
+
+  toDraft(task: Task): string {
+    const d = { id: task.id, project_id: task.project_id, content: task.content, translaion: task.translation, task_code: task.task_code, time_taken: task.time_taken };
+    return JSON.stringify(d);
+  }
+
+  saveDraftLastTask(task: Task): void {
+
+    localStorage.setItem('orch_last_task_draft', this.toDraft(task));
+    this.taskDraftChanged.next(true);
+
+  }
+
+  getDraftTask(): string {
+    const g = localStorage.getItem('orch_last_task_draft');
+    return g;
   }
 
 

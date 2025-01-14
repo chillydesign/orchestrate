@@ -237,7 +237,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   //   }
   // }
 
+
+
   updateFieldWithDebounce(field: string): void {
+
+    this.tasksService.saveDraftLastTask(this.task);
 
 
     if (this.debounce_timer) {
