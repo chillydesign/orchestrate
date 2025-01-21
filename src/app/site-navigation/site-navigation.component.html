@@ -5,7 +5,7 @@
 
             <ng-container *ngIf="current_user.is_admin">
                 <li routerLinkActive="active"><a [routerLink]="['/clients']">{{'Clients' |translate}}</a></li>
-                <li routerLinkActive="active"><a [routerLink]="['/clients', 'new']">{{'New Client' |translate}}</a></li>
+                <li routerLinkActive="active"><a [routerLink]="['/clients', 'new']">{{'new_client' |translate}}</a></li>
                 <li><a [routerLink]="['/projects']">{{'Projects' | translate}}</a></li>
                 <li routerLinkActive="active"><a [routerLink]="['/projects', 'new']">{{'New Project' | translate}}</a>
                 </li>
@@ -17,7 +17,7 @@
 
             </ng-container>
 
-            <li *ngIf="current_user"><a (click)="logout()">{{'Sign out' | translate}}</a></li>
+            <li *ngIf="current_user"><a (click)="logout()">{{'sign_out' | translate}}</a></li>
         </ul>
         <ul *ngIf="!current_user">
             <li routerLinkActive="active"><a [routerLink]="['/sign_in']">{{'Sign in' |

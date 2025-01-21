@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
+import { LANG_FR_TRANS } from '../translate/lang-fr';
+import { TranslateService } from './translate.service';
 
 interface EmailOpts {
   email: string;
@@ -27,7 +29,7 @@ export class AuthService {
   private api_url = environment.api_url;
   private token?: string;
   public logged_in = false;
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private translateService: TranslateService) {
     this.setCurrentUser();
   }
 
@@ -67,6 +69,7 @@ export class AuthService {
     this.removeCookie(environment.cookie_name);
     this.current_user.next(null);
     this.logged_in = false;
+
     // go back to the homepage
     this.router.navigate(['/']);
   }
@@ -83,6 +86,11 @@ export class AuthService {
           if (user) {
             this.logged_in = true;
             this.current_user.next(user);
+
+            if (user.name === 'charles') {
+              this.translateService.setLanguage('en')
+            }
+
             this.tokenTimeRemaining();
 
           }

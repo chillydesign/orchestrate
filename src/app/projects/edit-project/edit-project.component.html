@@ -33,7 +33,7 @@
 
                 <hr>
                 <app-form-field *ngIf="projects" [errors]="errors" [field]="'move_incomplete_to_project_id'">
-                    <label for="move_incomplete_to_project_id">{{'Move incomplete tasks to other project' | translate}}
+                    <label for="move_incomplete_to_project_id">Move incomplete tasks to other project
                     </label>
                     <select name="move_incomplete_to_project_id" id="move_incomplete_to_project_id"
                         [(ngModel)]="project.move_incomplete_to_project_id">

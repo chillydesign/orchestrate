@@ -1,21 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { TranslateService } from '../services/translate.service';
 @Pipe({
-  name: 'translate'
+  name: 'translate',
+  pure: false
+
 })
 export class TranslatePipe implements PipeTransform {
 
   private t = environment.translations;
 
+  constructor(private translateService: TranslateService) { }
 
 
   transform(value: any): any {
 
-    if (this.t[value]) {
-      return this.t[value];
-    } else {
-      return value;
-    }
+    return this.translateService.translate(value);
+
 
   }
 
