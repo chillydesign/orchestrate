@@ -296,7 +296,12 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   refreshProject(): void {
     this.project = null;
-    this.getProject();
+    if (this.project_slug) {
+      this.getProjectFromSlug()
+    } else {
+      this.getProject();
+
+    }
   }
 
 
