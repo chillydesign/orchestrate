@@ -1188,9 +1188,38 @@ $boolean_offset: 3px;
   }
 
   .message_container {
-    padding: 0 0 20px;
-    margin: 0 0 20px;
-    border-bottom: 1px solid $light_grey;
+
+    // border-bottom: 1px solid $light_grey;
+
+    display: flex;
+
+
+    .message_inner {
+      width: 75%;
+      max-width: 75%;
+      padding: 15px;
+      margin: 0 0 15px;
+
+      background-color: $light_grey;
+      border-radius: $border_radius;
+
+
+    }
+
+
+
+    &.my_message {
+      justify-content: flex-end;
+
+      .message_inner {
+        background-color: $brand_color;
+        color: white;
+
+      }
+    }
+
+
+    blockquote {}
 
     p {
       padding: 0;
@@ -1210,6 +1239,7 @@ $boolean_offset: 3px;
     bottom: 0;
     left: 0;
     width: 100%;
+    border-top: 4px solid white;
   }
 }
 

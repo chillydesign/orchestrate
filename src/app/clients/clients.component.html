@@ -10,7 +10,7 @@
                 <tr>
                     <th>Client</th>
                     <th>Updated</th>
-                    <th>Channels</th>
+                    <!-- <th>Channels</th> -->
                     <th>Tasks</th>
                     <th>Stats</th>
                 </tr>
@@ -19,7 +19,7 @@
                 <tr *ngFor="let client of clients">
                     <td><a [routerLink]="['/clients', client.slug]">{{client.name}}</a></td>
                     <td>{{client.updated_at | date}}</td>
-                    <td><a [routerLink]="['/clients', client.slug, 'channels']">Channels</a></td>
+                    <!-- <td><a [routerLink]="['/clients', client.slug, 'channels']">Channels</a></td> -->
                     <td><a [routerLink]="['/clients', client.slug, 'tasks']">All tasks</a></td>
                     <td><a [routerLink]="['/clients', client.slug, 'stats']">Stats</a></td>
                 </tr>

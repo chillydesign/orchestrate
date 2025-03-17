@@ -55,7 +55,11 @@ export class ChannelComponent implements OnInit, OnDestroy {
       (user: User) => {
         this.current_user = user;
 
-        this.getChannel();
+        if (user) {
+          this.getChannel();
+
+        }
+
 
       }
     );
@@ -160,6 +164,10 @@ export class ChannelComponent implements OnInit, OnDestroy {
     el.scrollIntoView();
   }
 
+
+  randTrue(): boolean {
+    return Math.random() > 0.5;
+  }
 
 
   ngOnDestroy() {

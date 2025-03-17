@@ -28,27 +28,30 @@
         <div class="channel_container">
             <div class="messages_container ">
 
-                <div class="message_container" *ngFor="let message of channel.messages">
-                    <span class="date"> {{message.created_at_date | date}}
+                <div class="message_container" *ngFor="let message of channel.messages"
+                    [ngClass]="{my_message:  message.user_id === current_user.id }">
+                    <div class="message_inner">
+                        <span class="date"> {{message.created_at_date | date}}
 
-                        | {{message.user_name}}
-                    </span>
+                            | {{message.user_name}}
+                        </span>
 
-                    <blockquote class="">
-                        <p>
-                            {{message.content}}
-                        </p>
+                        <blockquote class="">
+                            <p>
+                                {{message.content}}
+                            </p>
 
-                        <ul>
-                            <li>
-                                <span *ngIf="message.uploads">
-                                    <a class="upload_box" *ngFor="let upload of message.uploads" target="_blank"
-                                        href="{{upload.full_url}}">
-                                        {{upload.filename}}</a>
-                                </span>
-                            </li>
-                        </ul>
-                    </blockquote>
+                            <ul>
+                                <li>
+                                    <span *ngIf="message.uploads">
+                                        <a class="upload_box" *ngFor="let upload of message.uploads" target="_blank"
+                                            href="{{upload.full_url}}">
+                                            {{upload.filename}}</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </blockquote>
+                    </div>
 
                 </div>
 
