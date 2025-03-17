@@ -1312,20 +1312,22 @@ $boolean_offset: 3px;
   }
 
   .day_number {
-    display: block;
+    display: inline-block;
     text-align: center;
-    margin: 0 0 10px;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 50%; //$border_radius;
+    // background-color: $grey_95;
   }
 
   td,
   th {
     text-align: center;
+    padding: 0;
   }
 
 
-  th {
-    padding-bottom: 0;
-  }
+  th {}
 
   td {
     color: $grey_60;
@@ -1336,6 +1338,7 @@ $boolean_offset: 3px;
       min-height: 80px;
 
     }
+
 
     .calendar_event {
       a {
@@ -1384,6 +1387,7 @@ $boolean_offset: 3px;
     &.current_day {
       .day_number {
         font-weight: bold;
+        background-color: $grey_90;
       }
     }
   }
