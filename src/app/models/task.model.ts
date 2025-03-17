@@ -29,7 +29,7 @@ export class Task {
     public task_code: string;
 
     public uploads: Upload[];
-
+    public summary: string;
     is_url(): boolean {
 
         const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
@@ -37,6 +37,13 @@ export class Task {
 
     }
 
+
+    makeSummary(): void {
+        this.summary = this.content.split(' ').slice(0, 10).join(' ')
+        if (this.summary !== this.content) {
+            this.summary = this.summary.concat('...');
+        }
+    }
 
 
 
@@ -52,6 +59,8 @@ export class Task {
             if (obj.assignee) {
                 this.assignee = new User(obj.assignee);
             }
+
+            this.makeSummary();
         }
 
     }

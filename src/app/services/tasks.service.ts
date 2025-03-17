@@ -13,6 +13,8 @@ export interface TasksOptions {
   search_term?: string;
   order?: string;
   completed?: number;
+  start_date?: string;
+  end_date?: string;
 }
 
 
@@ -27,7 +29,7 @@ export class TasksService {
 
 
 
-  getTasks(opts: TasksOptions): Observable<Task[]> {
+  getTasks(opts?: TasksOptions): Observable<Task[]> {
     const options = this.authService.setAPIOptions();
     let endpoint = `${this.api_url}/?route=tasks`;
 
@@ -44,9 +46,20 @@ export class TasksService {
       if (opts.order) {
         endpoint = endpoint.concat(`&order=${opts.order}`);
       }
+      if (opts.start_date) {
+        endpoint = endpoint.concat(`&start_date=${opts.start_date}`);
+      }
+      if (opts.end_date) {
+        endpoint = endpoint.concat(`&end_date=${opts.end_date}`);
+      }
+      if (opts.order) {
+        endpoint = endpoint.concat(`&order=${opts.order}`);
+      }
       if (opts.completed === 0 || opts.completed === 1) {
         endpoint = endpoint.concat(`&completed=${opts.completed}`);
       }
+
+
     }
     return this.http.get<Task[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),

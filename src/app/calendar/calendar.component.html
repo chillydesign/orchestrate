@@ -29,9 +29,12 @@
                         [ngClass]="{current_day: day.current_day, current_month: day.current, has_events: !!day.events}">
                         <span class="day_number">{{day.number}}</span>
 
-                        <div class="calendar_events" *ngIf="day.events">
-                            <div class="calendar_event" *ngFor="let event of day.events">
-                                {{event.title}}
+                        <div class="calendar_events" *ngIf="day.tasks">
+                            <div class="calendar_event" *ngFor="let task of day.tasks">
+                                <a [routerLink]="['/projects', task.project_id]"
+                                    [ngClass]="{completed: task.completed}">
+                                    {{task.summary}}
+                                </a>
                             </div>
                         </div>
 

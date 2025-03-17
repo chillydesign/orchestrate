@@ -1307,6 +1307,9 @@ $boolean_offset: 3px;
 
 
 .calendar_table_container {
+  table {
+    table-layout: fixed;
+  }
 
   .day_number {
     display: block;
@@ -1317,7 +1320,6 @@ $boolean_offset: 3px;
   td,
   th {
     text-align: center;
-
   }
 
 
@@ -1328,15 +1330,27 @@ $boolean_offset: 3px;
   td {
     color: $grey_60;
     opacity: 0.5;
+    border: 1px solid $grey_95;
+
+    .calendar_events {
+      min-height: 80px;
+
+    }
 
     .calendar_event {
-      padding: 5px;
-      color: white;
-      border-radius: $border_radius;
-      margin: 2px;
-      background-color: $grey_40;
-      text-align: left;
-      font-size: 75%;
+      a {
+        display: block;
+        padding: 5px;
+        color: white;
+        border-radius: $border_radius;
+        margin: 2px;
+        background-color: $grey_40;
+        text-align: left;
+        font-size: 75%;
+
+
+      }
+
     }
 
     &.current_month {
@@ -1344,7 +1358,23 @@ $boolean_offset: 3px;
       opacity: 1;
 
       .calendar_event {
-        background-color: $brand_color;
+        a {
+          background-color: $brand_color;
+
+          &:hover {
+            background-color: darken($brand_color, 5);
+          }
+
+          &.completed {
+            background-color: $green;
+
+            &:hover {
+              background-color: darken($green, 5);
+            }
+          }
+
+
+        }
 
       }
 
@@ -1368,6 +1398,7 @@ $boolean_offset: 3px;
 
   h3 {
     display: inline-block;
+    margin-left: 5px;
 
   }
 
