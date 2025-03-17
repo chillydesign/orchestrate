@@ -77,13 +77,13 @@ a {
   &.button_white {
     background: none;
     background-color: transparent;
-    border: 1px solid $medium_grey;
+    border: 1px solid $grey_40;
     color: $brand_color;
   }
 
 
   &.button_green {
-    background-color: $green  !important;
+    background-color: $green !important;
     color: white;
     border-color: darken($green, 7);
   }
@@ -145,7 +145,7 @@ table {
   tr {
     &:nth-child(2n) {
       td {
-        background-color: $light_grey;
+        background-color: $grey_97;
       }
     }
   }
@@ -163,7 +163,7 @@ table {
 }
 
 .grey {
-  color: $medium_dark_grey;
+  color: $grey_30;
 }
 
 form {
@@ -233,7 +233,7 @@ form {
     top: 33px;
     right: 10px;
     font-size: $font_size;
-    color: $medium_grey;
+    color: $grey_40;
     text-transform: uppercase;
   }
 
@@ -275,7 +275,7 @@ button {
   width: 100%;
   padding: 7px;
   font-size: $font_size;
-  // border: 1px solid $medium_grey;
+  // border: 1px solid $grey_40;
   border: 0;
   background-color: #f7f7f7;
   font-family: $font_stack;
@@ -330,5 +330,5 @@ label {
 
 hr {
   margin: $double_padding 0;
-  border: 1px solid $medium_grey;
+  border: 1px solid $grey_40;
 }

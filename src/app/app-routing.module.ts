@@ -19,6 +19,7 @@ import { NewChannelComponent } from './channels/new-channel/new-channel.componen
 import { ChannelComponent } from './channels/channel/channel.component';
 import { AccountComponent } from './auth/account/account.component';
 import { ClientStatsComponent } from './client-stats/client-stats.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'clients/:slug', component: ClientComponent, data: { title: 'Client' } },
   { path: 'clients', component: ClientsComponent, data: { title: 'Clients' } },
   { path: 'account', component: AccountComponent, data: { title: 'Account' } },
+  { path: 'calendar', component: CalendarComponent, data: { title: 'Calendar' } },
 
   { path: '401', component: NotFoundComponent, data: { title: 'Page not found' } },
   { path: '404', component: NotFoundComponent, data: { title: 'Page not found' } },

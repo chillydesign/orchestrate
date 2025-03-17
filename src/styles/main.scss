@@ -316,7 +316,7 @@ main {
       transform: scale(1);
       padding: 0;
       background-color: white;
-      border: 1px solid $medium_grey;
+      border: 1px solid $grey_40;
       cursor: pointer;
       transition: all 0.3s;
       background-image: url("../assets/images/tick.svg");
@@ -477,7 +477,7 @@ main {
       right: 25px;
       z-index: 1000;
       width: 205px;
-      background-color: $light_grey;
+      background-color: $grey_95;
       border-radius: 5px;
       box-shadow: $box_shadow;
       padding: 5px;
@@ -509,7 +509,7 @@ main {
     // &:hover,
     &.menu_open {
       .actions_opener {
-        background-color: darken($light_grey, 10);
+        background-color: darken($grey_95, 10);
       }
 
       ul {
@@ -603,7 +603,7 @@ main {
 }
 
 .upload_container {
-  border-bottom: 1px dotted $medium_grey;
+  border-bottom: 1px dotted $grey_40;
   padding: $half_padding;
 
   .file_name {
@@ -622,7 +622,7 @@ main {
 
   .file_date {
     width: 100px;
-    color: $medium_grey;
+    color: $grey_40;
     font-style: italic;
   }
 
@@ -654,7 +654,7 @@ main {
 
   // &.icon_comment {
   //
-  //     background-color: $dark_grey;
+  //     background-color: $grey_20;
   //     border-radius: 5px;
   //     position: relative;
   //     height: 17px;
@@ -672,7 +672,7 @@ main {
   //     }
 
   //     &:hover {
-  //         background-color: $dark_grey;
+  //         background-color: $grey_20;
   //     }
 
   //     &.has_comments {
@@ -688,7 +688,7 @@ main {
 
   //     &:after {
   //         content: '';
-  //         border: 5px solid $dark_grey;
+  //         border: 5px solid $grey_20;
   //         border-bottom-color: transparent;
   //         border-right-color: transparent;
   //         position: absolute;
@@ -743,7 +743,7 @@ main {
   }
 
   &:hover {
-    background-color: $medium_grey;
+    background-color: $grey_40;
   }
 }
 
@@ -777,7 +777,7 @@ h1 {
       width: 1px;
       height: 1px;
       display: inline-block;
-      border: 5px solid $medium_grey;
+      border: 5px solid $grey_40;
       border-bottom-color: transparent;
       border-right-color: transparent;
 
@@ -812,7 +812,7 @@ h1 {
 .project_whole {
   // padding: 0 0 $padding;
   position: relative;
-  // border-top: 3px solid $light_grey;
+  // border-top: 3px solid $grey_95;
 
 
   &.project_summary {
@@ -824,7 +824,7 @@ h1 {
   }
 
   .progression_outer {
-    background-color: $medium_grey;
+    background-color: $grey_40;
     // background-color: red;
     // top: $negative_padding;
     // position: relative;
@@ -860,7 +860,7 @@ h1 {
 .progression_outer {
   // margin: #{$padding * -1} #{$padding * -1} $padding;
   margin: 0 $negative_padding 0;
-  background-color: $light_grey;
+  background-color: $grey_95;
   border-radius: $border_radius $border_radius 0 0;
   opacity: 0.4;
   overflow: hidden;
@@ -1006,7 +1006,7 @@ a.load_translate {
 
 .comments_container {
 
-  background: darken($light_grey, 5);
+  background: darken($grey_95, 5);
   padding: 20px;
   border-radius: 3px;
   margin: 2px 0;
@@ -1039,7 +1039,7 @@ a.load_translate {
 }
 
 .earnings {
-  background-color: darken($light_grey, 5);
+  background-color: darken($grey_95, 5);
   padding: $half_padding $padding;
   border-bottom-right-radius: $border_radius;
   border-bottom-left-radius: $border_radius;
@@ -1067,12 +1067,12 @@ a.load_translate {
 .upload_box {
   display: inline-block;
   padding: 0px 5px;
-  background: darken($light_grey, 3);
+  background: darken($grey_95, 3);
   border-radius: 5px;
   margin-left: 3px;
 
   &:hover {
-    background-color: darken($light_grey, 5);
+    background-color: darken($grey_95, 5);
   }
 }
 
@@ -1104,7 +1104,7 @@ $boolean_offset: 3px;
   display: inline-block;
   border-radius: $boolean_height;
   width: $boolean_width;
-  background: $medium_grey;
+  background: $grey_40;
   margin: 7px 0 0;
   position: relative;
   cursor: pointer;
@@ -1162,7 +1162,7 @@ $boolean_offset: 3px;
     display: block;
     margin: 0;
     font-size: $font_size;
-    border-bottom: 1px solid $medium_grey;
+    border-bottom: 1px solid $grey_40;
 
 
     &:last-child {
@@ -1189,7 +1189,7 @@ $boolean_offset: 3px;
 
   .message_container {
 
-    // border-bottom: 1px solid $light_grey;
+    // border-bottom: 1px solid $grey_95;
 
     display: flex;
 
@@ -1200,7 +1200,7 @@ $boolean_offset: 3px;
       padding: 15px;
       margin: 0 0 15px;
 
-      background-color: $light_grey;
+      background-color: $grey_95;
       border-radius: $border_radius;
 
 
@@ -1301,5 +1301,91 @@ $boolean_offset: 3px;
 
   p {
     padding: 0;
+  }
+}
+
+
+
+.calendar_table_container {
+
+  .day_number {
+    display: block;
+    text-align: center;
+    margin: 0 0 10px;
+  }
+
+  td,
+  th {
+    text-align: center;
+
+  }
+
+
+  th {
+    padding-bottom: 0;
+  }
+
+  td {
+    color: $grey_60;
+    opacity: 0.5;
+
+    .calendar_event {
+      padding: 5px;
+      color: white;
+      border-radius: $border_radius;
+      margin: 2px;
+      background-color: $grey_40;
+      text-align: left;
+      font-size: 75%;
+    }
+
+    &.current_month {
+      color: $font_color;
+      opacity: 1;
+
+      .calendar_event {
+        background-color: $brand_color;
+
+      }
+
+
+    }
+
+    &.current_day {
+      .day_number {
+        font-weight: bold;
+      }
+    }
+  }
+
+
+
+}
+
+
+.calendar_month_container {
+  position: relative;
+
+  h3 {
+    display: inline-block;
+
+  }
+
+  a {
+
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: $font_size;
+    padding: 10px;
+    background-color: lighten($grey_95, 2);
+    border-radius: $border_radius;
+    margin: 0 8px 0 0;
+
+    top: -3px;
+
+    &.prev_month {}
+
+    &.next_month {}
   }
 }

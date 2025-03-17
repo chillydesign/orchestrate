@@ -3,13 +3,31 @@ $brand_color_adjust: adjust-hue($brand_color, -17);
 $red: #ca385e;
 $green: #38ca5e;
 
-$light_grey: scale-color($brand_color, $lightness: 92%, $saturation: -85%);
-$medium_grey: scale-color($brand_color, $lightness: 20%, $saturation: -85%);
-$medium_dark_grey: scale-color($brand_color, $lightness: -42%, $saturation: -85%);
-$dark_grey: scale-color($brand_color, $lightness: -82%, $saturation: -85%);
+// $grey_95: scale-color($brand_color, $lightness: 92%, $saturation: -85%);
+// $grey_40: scale-color($brand_color, $lightness: 20%, $saturation: -85%);
+// $grey_30: scale-color($brand_color, $lightness: -42%, $saturation: -85%);
+// $grey_20: scale-color($brand_color, $lightness: -82%, $saturation: -85%);
 
-$font_color: $dark_grey;
-$lighter_font_color: #888;
+
+
+$grey_saturation: 18%;
+$grey_0: change-color($brand_color, $lightness: 0%, $saturation: $grey_saturation);
+$grey_10: change-color($brand_color, $lightness: 10%, $saturation: $grey_saturation);
+$grey_20: change-color($brand_color, $lightness: 20%, $saturation: $grey_saturation);
+$grey_30: change-color($brand_color, $lightness: 30%, $saturation: $grey_saturation);
+$grey_40: change-color($brand_color, $lightness: 40%, $saturation: $grey_saturation);
+$grey_50: change-color($brand_color, $lightness: 50%, $saturation: $grey_saturation);
+$grey_60: change-color($brand_color, $lightness: 60%, $saturation: $grey_saturation);
+$grey_70: change-color($brand_color, $lightness: 70%, $saturation: $grey_saturation);
+$grey_80: change-color($brand_color, $lightness: 80%, $saturation: $grey_saturation);
+$grey_85: change-color($brand_color, $lightness: 85%, $saturation: $grey_saturation);
+$grey_90: change-color($brand_color, $lightness: 90%, $saturation: $grey_saturation);
+$grey_95: change-color($brand_color, $lightness: 95%, $saturation: $grey_saturation);
+$grey_97: change-color($brand_color, $lightness: 97%, $saturation: $grey_saturation);
+$grey_100: change-color($brand_color, $lightness: 98.2%, $saturation: $grey_saturation);
+
+
+$font_color: $grey_20;
 
 $brand_gradient: linear-gradient(70deg, $brand_color, $brand_color_adjust);
 
@@ -19,7 +37,7 @@ $font_stack: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
 $font_size: 1.5em;
 $line_height: 145%;
 
-$background_color: $light_grey;
+$background_color: $grey_95;
 
 $padding: 20px;
 $double_padding: #{$padding * 2};
@@ -29,8 +47,8 @@ $negative_half_padding: #{$padding * -0.5};
 $negative_double_padding: #{$padding * -2};
 
 $border_radius: 6px;
-$box_shadow: 0 $half_padding $padding transparentize($dark_grey, 0.9),
-  0 2px 5px transparentize($dark_grey, 0.85);
+$box_shadow: 0 $half_padding $padding transparentize($grey_20, 0.9),
+  0 2px 5px transparentize($grey_20, 0.85);
 
 $aside_width: 220px;
 

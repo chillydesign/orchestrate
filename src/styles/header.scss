@@ -5,7 +5,7 @@ aside {
     top: 0;
     height: 100vh;
     box-shadow: $box_shadow;
-    background: $dark_grey;
+    background: $grey_10;
     transform: translate(-110%);
     transition: all 0.3s;
     z-index: 10;
@@ -35,16 +35,16 @@ aside {
         width: 100%;
         border-radius: 0;
         text-align: left;
-        color: $light_grey;
-        border-bottom: 1px solid darken($dark_grey, 5);
-        border-top: 1px solid lighten($dark_grey, 5);
+        color: $grey_95;
+        border-bottom: 1px solid darken($grey_10, 5);
+        border-top: 1px solid lighten($grey_10, 5);
         font-size: #{$font_size };
         margin: 0;
 
 
         &:link,
         &:visited {
-            color: $light_grey;
+            color: $grey_95;
         }
 
 
@@ -62,8 +62,8 @@ aside {
 
         &:hover {
 
-            color: $light_grey;
-            background: darken($dark_grey, 10);
+            color: $grey_95;
+            background: darken($grey_10, 10);
 
             &:after {
                 width: 5px;
@@ -71,7 +71,7 @@ aside {
         }
 
         &:active {
-            background: darken($dark_grey, 20);
+            background: darken($grey_10, 20);
         }
 
 
@@ -99,7 +99,7 @@ aside {
 
     nav {
 
-        background: $dark_grey;
+        background: $grey_10;
 
         ul {
             padding: 0;
@@ -113,7 +113,7 @@ aside {
 
                 &.active {
                     a {
-                        background: darken($dark_grey, 10);
+                        background: darken($grey_10, 10);
                     }
                 }
 

@@ -1,0 +1,43 @@
+<h1>{{'Calendar' | translate}}</h1>
+
+
+<app-box>
+
+    <div class="calendar_month_container">
+        <a class="prev_month" (click)="prevMonth()" title="Prev month">←</a>
+        <a class="next_month" (click)="nextMonth()" title="Next month">→</a>
+        <h3 class="align_center">{{current_month_string}}</h3>
+
+    </div>
+
+    <div class="table_container calendar_table_container">
+        <table>
+            <thead>
+                <tr>
+                    <th>mon</th>
+                    <th>tue</th>
+                    <th>wed</th>
+                    <th>thu</th>
+                    <th>fri</th>
+                    <th>sat</th>
+                    <th>sun</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let week of weeks">
+                    <td *ngFor="let day of week"
+                        [ngClass]="{current_day: day.current_day, current_month: day.current, has_events: !!day.events}">
+                        <span class="day_number">{{day.number}}</span>
+
+                        <div class="calendar_events" *ngIf="day.events">
+                            <div class="calendar_event" *ngFor="let event of day.events">
+                                {{event.title}}
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</app-box>
