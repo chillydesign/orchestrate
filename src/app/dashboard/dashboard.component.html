@@ -36,7 +36,7 @@
                 <div class="earnings">
                     <ul>
                         <li> Duration: {{total_minutes | nicemins}}</li>
-                        <li> Earned: {{total_earned | currency}} @ {{hourly_wage | currency}}/hr</li>
+                        <li> Earned: {{total_earned | currency}} &#64; {{hourly_wage | currency}}/hr</li>
                         <li *ngIf="average_earned">Average earned: {{average_earned | currency}}</li>
                     </ul>
                     <a [routerLink]="['/stats']">Stats</a>

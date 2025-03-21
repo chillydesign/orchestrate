@@ -103,8 +103,8 @@ export class BarChartComponent implements OnInit {
     }
 
 
-    console.log(data.datasets);
-    console.log(this.chart.data.datasets);
+    // console.log(data.datasets);
+    // console.log(this.chart.data.datasets);
 
 
 
