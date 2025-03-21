@@ -107,7 +107,10 @@ export class CalendarComponent implements OnInit {
     if (this.tasks) {
       this.weeks.forEach(week => {
         week.forEach(day => {
-          day.tasks = this.tasks.filter(t => moment(t.created_at).isSame(day.m, 'day'))
+          day.tasks = this.tasks.filter(t => {
+            return (t.completed && moment(t.completed_at).isSame(day.m, 'day')) ||
+              (!t.completed && moment(t.created_at).isSame(day.m, 'day'))
+          });
         });
       })
 
