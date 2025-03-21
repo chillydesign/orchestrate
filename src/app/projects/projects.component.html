@@ -8,8 +8,22 @@
 </div>
 
 
-<h1>{{'Projects' | translate}} <a (click)="refreshProjects()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
-</h1>
+
+
+<div class="columns">
+    <div class="column">
+
+        <h1>{{'Projects' | translate}} <a (click)="refreshProjects()" class="icon icon_refresh">{{'Refresh' |
+                translate}}</a></h1>
+
+    </div>
+    <div class="column column_right" *ngIf="current_user?.is_admin">
+        <div class="button_group">
+            <a class="button" [routerLink]="['/projects', 'new']">{{'New Project' | translate}}</a>
+        </div>
+    </div>
+</div>
+
 
 
 
