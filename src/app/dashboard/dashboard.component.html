@@ -28,7 +28,7 @@
                 <h3>Tasks completed today</h3>
                 <ul>
                     <li *ngFor="let task of tasks_completed_today">
-                        {{task.content}}
+                        {{task.summary}}
                         <a [routerLink]="['/projects', task.project_id]">{{task.time_taken | nicemins}} </a>
                     </li>
                 </ul>
