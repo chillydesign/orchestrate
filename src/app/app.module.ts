@@ -48,6 +48,7 @@ import { BarChartComponent } from './shared/bar-chart/bar-chart.component';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { FooterComponent } from './footer/footer.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     BarChartComponent,
     CurrencyPipe,
     FooterComponent,
-    CalendarComponent
+    CalendarComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
