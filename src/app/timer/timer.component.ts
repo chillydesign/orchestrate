@@ -8,12 +8,14 @@ import { Component } from '@angular/core';
 export class TimerComponent {
   public status: string = 'stopped';
   public time_elapsed = 0;
+  public time_elapsed_nice: string;
   // public start_time: number;
   // public end_time: number;
   public timInt: any;
   startTimer(): void {
     // this.start_time = Date.now();
     this.time_elapsed = 0;
+    this.calculateElapsed();
     this.startCounting();
 
   }
@@ -22,18 +24,27 @@ export class TimerComponent {
     this.status = 'started';
 
     this.timInt = setInterval(() => {
+      this.time_elapsed++;
       this.calculateElapsed();
     }, 1000);
 
-    console.log(this.timInt);
   }
 
   stopTimer(): void {
     this.status = 'stopped';
     // this.start_time = null;
     this.time_elapsed = 0;
+    this.calculateElapsed();
+
     this.clearTimer();
 
+  }
+
+  minutesElapsed(): number {
+    return Math.floor(this.time_elapsed / 60);
+  }
+  secondsElapsed(): number {
+    return (this.time_elapsed % 60);
   }
 
   pauseTimer(): void {
@@ -59,6 +70,17 @@ export class TimerComponent {
   calculateElapsed(): void {
     // const now = Date.now();
     // this.time_elapsed = Math.floor((now - this.start_time) / 1000);
-    this.time_elapsed++;
+
+
+    if (this.time_elapsed > 60) {
+      this.time_elapsed_nice = `${this.minutesElapsed()}m`;
+    } else {
+      this.time_elapsed_nice = `${this.secondsElapsed()}s`;
+    }
+
+
   }
+
+
+
 }

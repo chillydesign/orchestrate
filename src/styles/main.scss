@@ -1424,3 +1424,52 @@ $boolean_offset: 3px;
     &.next_month {}
   }
 }
+
+
+.timer {
+  padding: 5px;
+  background-color: $grey_95;
+  border-radius: 3px;
+  text-align: left;
+  color: $grey_40;
+
+  div {
+    display: inline-block;
+  }
+
+  span {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 3px;
+  }
+
+  a {
+    background: 1px 2px no-repeat;
+    background-size: 10px;
+    height: 14px;
+    width: 14px;
+    display: inline-block;
+    text-indent: -9999px;
+
+
+
+    &.play_button {
+      background-image: url('../assets/images/play.svg');
+    }
+
+    &.pause_button {
+      background-image: url('../assets/images/pause.svg');
+    }
+
+    &.stop_button {
+      background-image: url('../assets/images/stop.svg');
+    }
+  }
+}
+
+.box_footer {
+  .timer {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}

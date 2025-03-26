@@ -17,6 +17,9 @@
             </h2>
 
             <p *ngIf="current_user?.is_admin">
+                <app-timer></app-timer>
+
+
                 <a *ngIf="project.status !== 'inactive' " (click)="archiveProject()">{{'Archive' | translate}}</a>
                 &nbsp;
                 <a [routerLink]="['/projects', project.id,  'edit']">{{'Edit' | translate}}</a>
@@ -35,6 +38,10 @@
 
 
                 | {{project.total_minutes | nicemins}}
+
+
+
+
 
             </p>
 

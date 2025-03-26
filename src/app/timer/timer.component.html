@@ -1,14 +1,11 @@
 <div class="timer">
 
     <div *ngIf="status === 'stopped'">
-        <a (click)="startTimer()" class="button start_timer">Start</a>
+        <a (click)="startTimer()" class="play_button start_timer">Start</a>
     </div>
 
     <div *ngIf="status !== 'stopped'">
-
-        <a (click)="toggleTimer()" class="button toggle_timer">Toggle</a>
-        <a (click)="stopTimer()" class="button toggle_timer">Stop</a>
-        {{time_elapsed}} s
-
+        <span (click)="toggleTimer()">{{time_elapsed_nice}}</span>
+        <a (click)="stopTimer()" class="stop_button toggle_timer">Stop</a>
     </div>
 </div>
