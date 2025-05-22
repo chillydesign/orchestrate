@@ -3,9 +3,9 @@ import { Subscription, Subject } from 'rxjs';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Project } from 'src/app/models/project.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Task } from 'src/app/models/task.model';
 import { Client } from 'src/app/models/client.model';
 import { ClientsService } from 'src/app/services/clients.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-new-project',
@@ -33,6 +33,8 @@ export class NewProjectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeToRoute();
+
+    this.project.name = `${moment().subtract(2, 'months').format('MMMM YYYY')}`;
 
   }
 
