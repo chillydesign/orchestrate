@@ -44,8 +44,6 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUser();
 
-    this.start_date = moment().subtract(11, 'month').startOf('month').format('YYYY-MM-DD');
-    this.end_date = moment().add(1, 'month').startOf('month').format('YYYY-MM-DD');
 
   }
 
@@ -139,6 +137,13 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   }
 
   getStats(): void {
+
+
+    if (!this.start_date) {
+      this.start_date = moment().subtract(11, 'month').startOf('month').format('YYYY-MM-DD');
+      this.end_date = moment().add(1, 'month').startOf('month').format('YYYY-MM-DD');
+    }
+
     const opts = {
       start_date: this.start_date,
       end_date: this.end_date,

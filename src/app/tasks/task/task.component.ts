@@ -122,7 +122,6 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   updateField(field: string): void {
     this.showTick = false;
-    console.log('1283890');
     if (this.updating === false) {
       this.updating = true;
       const upl = this.task.uploads;
