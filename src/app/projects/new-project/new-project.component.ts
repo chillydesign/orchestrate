@@ -34,7 +34,7 @@ export class NewProjectComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscribeToRoute();
 
-    this.project.name = `${moment().subtract(2, 'months').format('MMMM YYYY')}`;
+    this.project.name = `${moment().format('MMMM YYYY')}`;
 
   }
 
