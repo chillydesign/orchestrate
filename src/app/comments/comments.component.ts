@@ -24,7 +24,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
 
     if (this.task) {
-      console.log(this.task.comments)
       // this.getComments();
       this.comments = this.task.comments || new Array<Commentt>()
       this.resetNewComment();

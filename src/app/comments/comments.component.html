@@ -15,7 +15,7 @@
 
     <div class="comment_container comment_author_{{comment.author}}" *ngFor="let comment of comments">
         <blockquote class="">{{comment.message}}
-            <span class="date"> {{comment.created_at_date | date}}
+            <span class="date" *ngIf="comment.created_at"> {{comment.created_at_date | date}}
                 <span *ngIf="comment.author" class="author">
                     | {{comment.author}}</span>
             </span>

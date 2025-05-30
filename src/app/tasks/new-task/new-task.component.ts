@@ -56,6 +56,7 @@ export class NewTaskComponent implements OnInit, OnDestroy {
       (task: Task) => {
         // emit completed task to parent
         if (task) {
+          task.just_created = true;
           this.taskCreated.next(task);
           // set this task to a new one to add a new one
           this.resetNewTask();

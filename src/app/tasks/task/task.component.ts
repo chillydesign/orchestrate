@@ -18,7 +18,8 @@ export class TaskComponent implements OnInit, OnDestroy {
   // @Input() users: User[];
   @Input() canAdministrate = true;
   @Input() showProjectLink = false;
-  @Input() showComments = true;
+  @Input() neverShowComments = false;
+  public showComments = true;
   @Input() showDate = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -71,10 +72,27 @@ export class TaskComponent implements OnInit, OnDestroy {
         if (user) {
           this.is_admin = this.current_user.is_admin;
         }
+        this.setShowComments();
       }
     );
   }
 
+  setShowComments(): void {
+    this.showComments = false;
+
+    if (this.neverShowComments === false) {
+
+      if (this.is_admin) {
+        if (this.task.just_created) {
+          this.showComments = true;
+        } else if (this.task.comments) {
+          if (this.task.comments.length > 0) {
+            this.showComments = true;
+          }
+        }
+      }
+    }
+  }
 
   setDisabled(): void {
     if (this.task?.completed === false && this.current_user === null) {

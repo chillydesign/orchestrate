@@ -31,6 +31,7 @@ export class Task {
     public comments: Commentt[];
     public uploads: Upload[];
     public summary: string;
+    public just_created = false;
     is_url(): boolean {
 
         const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
