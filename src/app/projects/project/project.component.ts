@@ -70,7 +70,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   //       ],
 
   ngOnInit() {
-    this.getCurrentUser();
+    this.subscribeToRoute();
 
   }
 
@@ -78,8 +78,10 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.current_user_subscription = this.authService.current_user.subscribe({
       next: (user: User) => {
         this.current_user = user;
-        this.subscribeToRoute();
       },
+      complete: () => {
+        this.subscribeToRoute();
+      }
     });
   }
 
