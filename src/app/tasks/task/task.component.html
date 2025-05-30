@@ -19,17 +19,11 @@
         <div class="inputs_container">
 
 
-            <!-- <div class="task_input" contenteditable="true" (keyup)="updateFieldWithDebounce($event,'content')"
-                (blur)="updateFieldFromEvent( $event, 'content')" [textContent]="task.content"> </div>
-            <div *ngIf="canAdministrate" class="task_input" contenteditable="true"
-                (keyup)="updateFieldWithDebounce( $event,  'translation')"
-                (blur)="updateFieldFromEvent($event, 'translation')" [textContent]="task.translation"> </div> -->
-
             <textarea type="text" [(ngModel)]="task.content" name="content" class="task_input"
                 (change)="updateField('content')" (keyup)="updateFieldWithDebounce( 'content')"></textarea>
-            <textarea *ngIf="canAdministrate" type="text" [(ngModel)]="task.translation" name="translation"
+            <!-- <textarea *ngIf="canAdministrate" type="text" [(ngModel)]="task.translation" name="translation"
                 class="task_input" (change)="updateField('translation')"
-                (keyup)="updateFieldWithDebounce( 'translation')"></textarea>
+                (keyup)="updateFieldWithDebounce( 'translation')"></textarea> -->
 
 
             <input *ngIf="canAdministrate && project?.client_id === 4" type="text" [(ngModel)]="task.task_code"
@@ -57,10 +51,12 @@
 
             <div *ngIf="canAdministrate && task.assignee">Assigned to: {{task.assignee.name}}</div> -->
 
-            <div *ngIf="task.comments_count > 0">
+            <!-- <div *ngIf="task.comments_count > 0 && !showComments">
                 <a (click)="showCommentPopup()" title="Comments"
                     class="comments_link has_comments">{{task.comments_count}} comments</a>
-            </div>
+            </div> -->
+
+
             <div *ngIf="task.uploads_count > 0">
                 <a (click)="getUploads()" title="Uploads" class="comments_link has_comments">{{task.uploads_count}}
                     uploads</a>
@@ -75,19 +71,18 @@
 
         </div>
 
-        <app-comments *ngIf="showComments" [task]="task">
-        </app-comments>
-
-
+        <app-comments *ngIf="showComments" [task]="task"></app-comments>
 
 
 
 
     </div>
-    <div class="actions_container" [ngClass]="{menu_open: menu_open}">
-
+    <div *ngIf="canAdministrate" class="actions_container" [ngClass]="{menu_open: menu_open}">
+        <!-- <a *ngIf="project" (click)="showCommentPopup()" title="Comment"
+            class="hide_on_mobile icon icon_comment icon_comment_top">{{
+            "Comment" | translate}}</a> -->
         <a (click)="toggleMenu()" class="actions_opener">Actions</a>
-        <ul>
+        <ul class="actions_menu">
             <li><a *ngIf="project" (click)="showCommentPopup()" title="Comment"
                     class="hide_on_mobile icon icon_comment">{{
                     "Comment" | translate}}</a></li>

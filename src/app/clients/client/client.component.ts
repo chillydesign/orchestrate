@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models/client.model';
 import { Project } from 'src/app/models/project.model';
 import { User } from 'src/app/models/user.model';
@@ -130,7 +130,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   getProjects(): void {
-    const options: ProjectsOptions = { status: this.status, client_id: this.client.id, include_tasks: true };
+    const options: ProjectsOptions = { status: this.status, client_id: this.client.id, include_tasks: true, include_comments: true };
     this.projects_sub = this.projectsService.getProjects(options).subscribe(
       (projects: Project[]) => {
         if (projects) {

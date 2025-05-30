@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { Comment } from '../models/comment.model';
+import { Commentt } from '../models/comment.model';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -18,22 +18,22 @@ export class CommentsService {
 
 
 
-  getComments(task_id: number): Observable<Comment[]> {
+  getComments(task_id: number): Observable<Commentt[]> {
 
 
     const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=comments&task_id=${task_id}`;
 
-    return this.http.get<Comment[]>(endpoint, options).pipe(
+    return this.http.get<Commentt[]>(endpoint, options).pipe(
       catchError(this.authService.handleError),
-      map(res => res.map((p: Comment) => new Comment(p)))
+      map(res => res.map((p: Commentt) => new Commentt(p)))
     );
 
   }
 
 
 
-  addComment(comment: Comment): Observable<Comment> {
+  addComment(comment: Commentt): Observable<Commentt> {
     const options = this.authService.setAPIOptions();
     const data = {
       attributes: {
@@ -43,15 +43,15 @@ export class CommentsService {
       }
     };
     const endpoint = `${this.api_url}/?route=comments`;
-    return this.http.post<Comment>(endpoint, data, options).pipe(
+    return this.http.post<Commentt>(endpoint, data, options).pipe(
       catchError(this.authService.handleError),
-      map(res => new Comment(res))
+      map(res => new Commentt(res))
     );
   }
 
 
 
-  updateComment(comment: Comment): Observable<Comment> {
+  updateComment(comment: Commentt): Observable<Commentt> {
     const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=comments&id=${comment.id}`;
     const data = {
@@ -60,18 +60,18 @@ export class CommentsService {
       }
 
     };
-    return this.http.patch<Comment>(endpoint, data, options).pipe(
+    return this.http.patch<Commentt>(endpoint, data, options).pipe(
       catchError(this.authService.handleError),
-      map(res => new Comment(res))
+      map(res => new Commentt(res))
     );
   }
 
 
 
-  deleteComment(comment: Comment): Observable<Comment> {
+  deleteComment(comment: Commentt): Observable<Commentt> {
     const options = this.authService.setAPIOptions();
     const endpoint = `${this.api_url}/?route=comments&id=${comment.id}`;
-    return this.http.delete<Comment>(endpoint, options).pipe(
+    return this.http.delete<Commentt>(endpoint, options).pipe(
       catchError(this.authService.handleError)
       // ,
       // tap(() => console.log('deleted comment'))

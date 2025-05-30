@@ -1,3 +1,4 @@
+import { Commentt } from './comment.model';
 import { Upload } from './upload.model';
 import { User } from './user.model';
 
@@ -27,7 +28,7 @@ export class Task {
     public assignee: User;
     public uploads_count: number;
     public task_code: string;
-
+    public comments: Commentt[];
     public uploads: Upload[];
     public summary: string;
     is_url(): boolean {
@@ -58,6 +59,10 @@ export class Task {
             }
             if (obj.assignee) {
                 this.assignee = new User(obj.assignee);
+            }
+
+            if (obj.comments) {
+                this.comments = obj.comments.map((c: Commentt) => new Commentt(c));
             }
 
             this.makeSummary();

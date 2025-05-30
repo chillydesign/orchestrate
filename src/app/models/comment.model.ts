@@ -1,6 +1,6 @@
 import { Task } from './task.model';
 
-export class Comment {
+export class Commentt {
 
 
     public id: number;

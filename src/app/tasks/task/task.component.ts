@@ -18,6 +18,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   // @Input() users: User[];
   @Input() canAdministrate = true;
   @Input() showProjectLink = false;
+  @Input() showComments = true;
   @Input() showDate = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
@@ -25,7 +26,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public showUpload = false;
   public showTick = false;
-  public showComments = false;
   public updating = false;
   public menu_open = false;
   public current_user: User;

@@ -11,11 +11,14 @@
         </div> -->
 
 
-<div class="comments_container ">
+<div class="comments_container " *ngIf="comments">
 
-    <div class="comment_container" *ngFor="let comment of comments">
+    <div class="comment_container comment_author_{{comment.author}}" *ngFor="let comment of comments">
         <blockquote class="">{{comment.message}}
-            <span class="date"> {{comment.created_at_date | date}}</span>
+            <span class="date"> {{comment.created_at_date | date}}
+                <span *ngIf="comment.author" class="author">
+                    | {{comment.author}}</span>
+            </span>
         </blockquote>
 
     </div>

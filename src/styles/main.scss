@@ -455,8 +455,9 @@ main {
     position: relative;
     height: 30px;
 
-    .actions_opener {
-      background: url("../assets/images/menu.svg") no-repeat center center;
+    .actions_opener,
+    a.icon_comment_top {
+
       border-radius: $border_radius;
       font-size: 0;
       display: inline-block;
@@ -468,6 +469,16 @@ main {
       border: 0;
       position: relative;
       top: 9px;
+
+
+    }
+
+    a.icon_comment_top {
+      background-size: 17px;
+    }
+
+    .actions_opener {
+      background: url("../assets/images/menu.svg") no-repeat center center;
     }
 
     ul {
@@ -1005,38 +1016,69 @@ a.load_translate {
 }
 
 .comments_container {
-
-  background: darken($grey_95, 5);
-  padding: 20px;
-  border-radius: 3px;
-  margin: 2px 0;
+  margin: 5px 0 30px 20px;
 
   .comment_container {
-
-    margin: 0 0 10px;
+    background-color: $grey_90;
+    border-radius: $border_radius;
     position: relative;
+    padding: 7px 56px 7px 7px;
+    margin: 0 0 5px;
+
+    &.comment_author_charles {
+      background-color: $grey_80;
+    }
 
     blockquote {
-      font-size: 1em;
-
-      display: inline-block;
-      background: $brand_color;
-      color: white;
-      border-radius: 10px;
-      padding: 10px;
+      font-size: 0.9em;
     }
 
     .date {
-      color: transparentize(white, 0.2);
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
       font-size: #{$font_size * 0.5};
-      display: block;
     }
   }
-
-  .task_container {
-    font-size: $font_size;
-  }
 }
+
+// .comments_container {
+
+//   background: darken($grey_95, 5);
+//   padding: 20px;
+//   border-radius: 3px;
+//   margin: 2px 0;
+
+//   .comment_container {
+
+//     margin: 0 0 10px;
+//     position: relative;
+
+//     blockquote {
+//       font-size: 1em;
+
+//       display: inline-block;
+//       background: $brand_color;
+//       color: white;
+//       border-radius: 10px;
+//       padding: 10px;
+//     }
+
+//     .date {
+//       color: transparentize(white, 0.2);
+//       font-size: #{$font_size * 0.5};
+//       display: block;
+//     }
+//   }
+
+//   .task_container {
+//     font-size: $font_size;
+//   }
+
+
+
+
+// }
 
 .earnings {
   background-color: darken($grey_95, 5);

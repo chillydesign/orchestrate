@@ -20,6 +20,7 @@ export interface ProjectsOptions {
   current?: boolean;
   /** include tasks in fetch of projects */
   include_tasks?: boolean;
+  include_comments?: boolean;
   assignee?: User;
   search_term?: string;
 }
@@ -70,6 +71,9 @@ export class ProjectsService {
       if (opts.include_tasks) {
         endpoint = endpoint.concat(`&include_tasks=true`);
       }
+      if (opts.include_comments) {
+        endpoint = endpoint.concat(`&include_comments=true`);
+      }
       if (opts.assignee) {
         endpoint = endpoint.concat(`&assignee_id=${opts.assignee.id}`);
       }
@@ -105,7 +109,7 @@ export class ProjectsService {
 
   getProjectsCSV(opts?: ExportOptions) {
     const options = this.authService.setAPIOptions();
-    let endpoint = `${this.api_url}/?route=projects&format=csv`;
+    let endpoint = `${this.api_url}/?route=projects&format=csv&include_comments=true`;
     if (opts) {
       if (opts.client_id) {
         endpoint = endpoint.concat(`&client_id=${opts.client_id}`);
