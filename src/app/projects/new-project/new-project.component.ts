@@ -92,7 +92,8 @@ export class NewProjectComponent implements OnInit, OnDestroy {
           }
         },
         (error) => {
-          this.errors.next(error.error);
+          console.log(error);
+          this.errors.next(error);
           this.formLoading = false;
           this.formSuccess = false;
         }
