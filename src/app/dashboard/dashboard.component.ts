@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             data: [],
             borderWidth: 1,
             pointRadius: 0,
-            backgroundColor: 'rgba(170,170,190,0.21)',
+            backgroundColor: 'rgba(170,170,190,0.31)',
 
           },
           {
