@@ -1,0 +1,29 @@
+<ng-container *ngIf="comment">
+
+    <h1>{{'Edit' | translate}} Comment </h1>
+
+    <app-box>
+        <div class="alert alert_success" *ngIf="formSuccess">
+            Comment updated!
+        </div>
+
+
+        <form (keyup)="onFormChange()" (change)="onFormChange()" (ngSubmit)="onSubmit()" novalidate>
+            <ul>
+
+                <app-form-field [errors]="errors" [field]="'message'">
+                    <label for="name">{{'Message' | translate}} * </label>
+                    <input autocomplete="off" type="text" name="message" id="message" [(ngModel)]="comment.message">
+                </app-form-field>
+
+
+
+                <app-form-field [errors]="errors">
+                    <button [disabled]="formLoading">{{'Save' | translate}}</button>
+                </app-form-field>
+            </ul>
+        </form>
+
+
+    </app-box>
+</ng-container>

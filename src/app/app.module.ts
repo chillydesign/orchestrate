@@ -49,6 +49,7 @@ import { CurrencyPipe } from './pipes/currency.pipe';
 import { FooterComponent } from './footer/footer.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TimerComponent } from './timer/timer.component';
+import { CommentComponent } from './comments/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { TimerComponent } from './timer/timer.component';
     CurrencyPipe,
     FooterComponent,
     CalendarComponent,
-    TimerComponent
+    TimerComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

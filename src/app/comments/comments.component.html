@@ -14,10 +14,11 @@
 <div class="comments_container " *ngIf="comments">
 
     <div class="comment_container comment_author_{{comment.author}}" *ngFor="let comment of comments">
-        <blockquote class="">{{comment.message}}
+        <blockquote>{{comment.message}}
             <span class="date" *ngIf="comment.created_at"> {{comment.created_at_date | date}}
                 <span *ngIf="comment.author" class="author">
                     | {{comment.author}}</span>
+                <a class="icon icon_edit" [routerLink]="['/comments', comment.id]">{{'Edit' | translate}}</a>
             </span>
         </blockquote>
 

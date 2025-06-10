@@ -33,6 +33,15 @@ export class CommentsService {
 
 
 
+  getComment(comment_id: number): Observable<Commentt> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=comments&id=${comment_id}`;
+    return this.http.get<Commentt>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Commentt(res))
+    );
+  }
+
   addComment(comment: Commentt): Observable<Commentt> {
     const options = this.authService.setAPIOptions();
     const data = {

@@ -20,6 +20,7 @@ import { ChannelComponent } from './channels/channel/channel.component';
 import { AccountComponent } from './auth/account/account.component';
 import { ClientStatsComponent } from './client-stats/client-stats.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CommentComponent } from './comments/comment/comment.component';
 
 
 
@@ -41,6 +42,9 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent, data: { title: 'Project' } },
   { path: 'search/:search_term', component: SearchComponent, data: { title: 'Search' } },
   { path: 'search', component: SearchComponent, data: { title: 'Search' } },
+
+  { path: 'comments/:id', component: CommentComponent, data: { title: 'Comment' } },
+
 
   { path: 'channels/new', component: NewChannelComponent, data: { title: 'New Channel' } },
   { path: 'channels/:id', component: ChannelComponent, data: { title: 'Channel' } },
