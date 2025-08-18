@@ -25,6 +25,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   // @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  public image_upload: Upload;
   public showUpload = false;
   public showTick = false;
   public updating = false;
@@ -110,6 +111,14 @@ export class TaskComponent implements OnInit, OnDestroy {
     );
   }
 
+
+  openImage(upload: Upload): void {
+    if (upload !== this.image_upload) {
+      this.image_upload = upload;
+    } else {
+      this.image_upload = null;
+    }
+  }
 
   onSubmit(): void {
     this.showTick = false;

@@ -648,15 +648,24 @@ main {
   }
 
 
-  .image_container {
-    a {
-      display: block;
-    }
 
-    img {
-      width: 100%;
-      height: auto;
-    }
+}
+
+.image_container {
+  a {
+    display: block;
+    max-width: 700px;
+    padding: 5px;
+    background-color: $grey_95;
+    border-radius: $border_radius;
+    margin: 5px 0 10px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $border_radius;
+
   }
 }
 

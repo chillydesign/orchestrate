@@ -61,15 +61,30 @@
                 <a (click)="getUploads()" title="Uploads" class="comments_link has_comments">{{task.uploads_count}}
                     uploads</a>
                 <span *ngIf="task.uploads">
-                    <a class="upload_box" *ngFor="let upload of task.uploads" target="_blank"
-                        href="{{upload.full_url}}">
-                        {{upload.filename}}</a>
+
+                    <span class="upload_box" *ngFor="let upload of task.uploads">
+                        <a target="_blank" *ngIf="!upload.is_image" href="{{upload.full_url}}"> {{upload.filename}}</a>
+                        <a (click)="openImage(upload)" *ngIf="upload.is_image"> {{upload.filename}}</a>
+
+                    </span>
+
+
+
+
+
                 </span>
             </div>
             <div *ngIf="showProjectLink"><a [routerLink]="['/projects', task.project_id ]">Go to project</a> </div>
 
 
         </div>
+
+        <div *ngIf="image_upload" class="image_container">
+            <a target="_blank" href="{{image_upload.full_url}}">
+                <img [src]="image_upload.full_url" alt="">
+            </a>
+        </div>
+
 
         <app-comments *ngIf="showComments" [task]="task"></app-comments>
 
