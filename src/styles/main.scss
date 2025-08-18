@@ -646,6 +646,18 @@ main {
       opacity: 1;
     }
   }
+
+
+  .image_container {
+    a {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .icon {

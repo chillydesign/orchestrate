@@ -13,18 +13,14 @@ export class Upload {
     public url: string;
     public full_url: string;
     public nice_created_at: string;
+    public is_image: boolean;
 
-    public setNiceDates(): void {
-        if (this.created_at) {
-            this.nice_created_at = this.created_at.split(' ')[0];
-        }
-    }
+
 
     constructor(obj?: any) {
         if (obj) {
             Object.assign(this, obj);
             this.full_url = environment.api_url + obj.url;
-            this.setNiceDates();
         }
     }
 

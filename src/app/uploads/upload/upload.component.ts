@@ -14,6 +14,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   @Input() tasks: Task[];
   public updating = false;
   public showSelect = false;
+  public show_image = false;
   @Output() uploadDeleted: EventEmitter<Upload | null | undefined> = new EventEmitter(undefined);
   private update_upload_sub: Subscription;
   private delete_upload_sub: Subscription;
@@ -39,6 +40,10 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   taskChanged(): void {
     this.onSubmit();
+  }
+
+  openImage(): void {
+    this.show_image = !this.show_image;
   }
 
   onSubmit(): void {
