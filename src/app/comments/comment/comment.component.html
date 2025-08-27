@@ -13,7 +13,8 @@
 
                 <app-form-field [errors]="errors" [field]="'message'">
                     <label for="name">{{'Message' | translate}} * </label>
-                    <input autocomplete="off" type="text" name="message" id="message" [(ngModel)]="comment.message">
+                    <textarea autocomplete="off" type="text" name="message" id="message"
+                        [(ngModel)]="comment.message"></textarea>
                 </app-form-field>
 
 

@@ -1043,6 +1043,10 @@ a.load_translate {
 .comments_container {
   margin: 5px 0 3px 20px;
 
+  .quote_message {
+    white-space: pre-wrap;
+  }
+
   .comment_container {
     background-color: $grey_90;
     border-radius: $border_radius;

@@ -14,7 +14,8 @@
 <div class="comments_container " *ngIf="comments">
 
     <div class="comment_container comment_author_{{comment.author}}" *ngFor="let comment of comments">
-        <blockquote>{{comment.message}}
+        <blockquote>
+            <div class="quote_message" [innerHtml]="comment.message  "></div>
             <span class="date" *ngIf="comment.created_at"> {{comment.created_at_date | date}}
                 <span *ngIf="comment.author" class="author">
                     | {{comment.author}}</span>
@@ -26,8 +27,8 @@
 
 
     <div>
-        <input class="task_input" placeholder="your comment" [(ngModel)]="newcomment.message" name="message"
-            id="message" (keypress)="saveCommentOnEnter($event)" />
+        <textarea class="task_input" placeholder="your comment" [(ngModel)]="newcomment.message" name="message"
+            id="message" (keypress)="saveCommentOnEnter($event)"></textarea>
     </div>
 
 </div>

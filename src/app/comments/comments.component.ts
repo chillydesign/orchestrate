@@ -71,8 +71,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
 
   saveCommentOnEnter(event): boolean {
-    if (event.key === 'Enter') {
-
+    if (event.key === 'Enter' && !event.shiftKey) {
       this.onSubmit();
       return false;
     }
