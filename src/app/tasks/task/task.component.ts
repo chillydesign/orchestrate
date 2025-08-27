@@ -224,7 +224,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
   updateTextareaHeights(): void {
-    const ts = this.taskContainer.nativeElement.querySelectorAll('textarea');
+    const ts = this.taskContainer.nativeElement.querySelectorAll('textarea.task_input');
     let h: number = -9999;
     ts.forEach(t => {
       t.style.height = null;
