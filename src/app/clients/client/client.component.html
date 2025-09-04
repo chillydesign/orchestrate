@@ -14,8 +14,8 @@
                 <ng-container *ngIf="current_user?.is_admin">
                     <a (click)="toggleStep( 'incomplete')" [ngClass]="{button_green: show_incomplete === true}"
                         class="button button_white"> Show incomplete </a>
-                    <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
-                        class="button button_white"> Show unapproved </a>
+                    <!-- <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
+                        class="button button_white"> Show unapproved </a> -->
                 </ng-container>
                 <a *ngIf="status === 'active'" [routerLink]="['/clients',   client.slug,  'status', 'inactive']"
                     class="button button_white">Archive</a>

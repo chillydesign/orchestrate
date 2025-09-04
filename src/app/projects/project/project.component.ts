@@ -78,17 +78,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.current_user_subscription = this.authService.current_user.subscribe({
       next: (user: User) => {
         this.current_user = user;
-      },
-      complete: () => {
-        this.subscribeToRoute();
       }
     });
   }
 
 
   subscribeToRoute(): void {
-    this.route_params_subscription = this.route.params.subscribe(
-      (params: Params) => {
+    this.route_params_subscription = this.route.params.subscribe({
+      next: (params: Params) => {
         if (params.id) {
           this.project_id = params.id;
           this.getProject();
@@ -97,7 +94,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
           this.getProjectFromSlug();
         }
       }
-    );
+    });
 
   }
 
@@ -137,14 +134,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   getUsers(): void {
-    this.users_sub = this.usersService.getUsers().subscribe(
-      (users: User[]) => {
+    this.users_sub = this.usersService.getUsers().subscribe({
+      next: (users: User[]) => {
         if (users) {
           this.users = users;
         }
-        // this.processTasks();
+
       }
-    );
+    });
   }
 
 

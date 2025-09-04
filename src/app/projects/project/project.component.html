@@ -14,12 +14,10 @@
         </div>
         <div class="column column_right">
             <div class="button_group">
-                <ng-container *ngIf="current_user?.is_admin">
-                    <a (click)="toggleStep( 'incomplete')" [ngClass]="{button_green: show_incomplete === true}"
-                        class="button button_white"> Show incomplete </a>
-                    <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
-                        class="button button_white"> Show unapproved </a>
-                </ng-container>
+                <a (click)="toggleStep( 'incomplete')" [ngClass]="{button_green: show_incomplete === true}"
+                    class="button button_white"> Show incomplete </a>
+                <!-- <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
+                        class="button button_white"> Show unapproved </a> -->
             </div>
         </div>
     </div>
