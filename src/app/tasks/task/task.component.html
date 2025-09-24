@@ -82,6 +82,7 @@
         <div *ngIf="image_upload" class="image_container">
             <a target="_blank" href="{{image_upload.full_url}}">
                 <img [src]="image_upload.full_url" alt="">
+                <!-- (mousemove)="onDrag($event)" -->
             </a>
         </div>
 

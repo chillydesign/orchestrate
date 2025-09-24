@@ -240,6 +240,13 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
+  onDrag(e: any): void {
+    if (e.buttons === 1) {
+      console.log(e);
+
+    }
+  }
+
   // updateContent(event) {
   //   this.task.content = event.target.textContent;
   //   this.onSubmit();
