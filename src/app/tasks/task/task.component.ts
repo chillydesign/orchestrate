@@ -23,6 +23,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() showDate = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
+  public resizing = false;
   // @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public image_upload: Upload;
@@ -240,12 +241,25 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
 
-  onDrag(e: any): void {
-    if (e.buttons === 1) {
-      console.log(e);
 
-    }
-  }
+  // onMouseDown(e: MouseEvent): void {
+  //   this.resizing = true;
+  //   e.preventDefault()
+  // }
+  // onMouseMove(e: any): void {
+  //   if (!this.resizing) return;
+  //   const container = e.target;
+  //   const rect = container.getBoundingClientRect();
+  //   const x = e.clientX - rect.left;
+  //   const y = e.clientY - rect.top;
+  //   console.log(x, y)
+
+
+  // }
+  // onMouseUp(e: MouseEvent): void {
+  //   this.resizing = false;
+  // }
+
 
   // updateContent(event) {
   //   this.task.content = event.target.textContent;

@@ -652,9 +652,14 @@ main {
 }
 
 .image_container {
+  position: relative;
+  display: block;
+  max-width: 700px;
+  border-radius: $border_radius;
+
   a {
     display: block;
-    max-width: 700px;
+
     padding: 5px;
     background-color: $grey_95;
     border-radius: $border_radius;
@@ -666,6 +671,16 @@ main {
     height: auto;
     border-radius: $border_radius;
 
+  }
+
+  .resize_handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    z-index: 34;
+    background-color: transparentize($color: red, $amount: 0.5);
   }
 }
 
