@@ -246,7 +246,7 @@ main {
       }
     }
 
-    textarea {
+    textarea.task_input {
       outline: 1px solid transparentize($red, 0.6);
       box-shadow: 0 0 27px 10px transparentize($red, 0.85) inset;
     }
@@ -682,6 +682,10 @@ main {
     z-index: 34;
     background-color: transparentize($color: red, $amount: 0.5);
   }
+}
+
+.resizable {
+  cursor: nwse-resize;
 }
 
 .icon {

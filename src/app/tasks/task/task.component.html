@@ -80,11 +80,13 @@
         </div>
 
         <div *ngIf="image_upload" class="image_container">
-            <a target="_blank" href="{{image_upload.full_url}}">
-                <img [src]="image_upload.full_url" alt="">
-            </a>
-            <!-- <div (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)"
-                class="resize_handle"></div> -->
+            <!-- <a target="_blank" href="{{image_upload.full_url}}">         </a> -->
+
+            <img class="resizable" (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
+                (mouseup)="onMouseUp($event)" [src]="image_upload.full_url" alt="">
+
+
+
         </div>
 
 

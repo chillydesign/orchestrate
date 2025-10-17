@@ -23,10 +23,10 @@ export class TaskComponent implements OnInit, OnDestroy {
   @Input() showDate = false;
   @Output() taskDeleted: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   @Output() taskUpdated: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
-  public resizing = false;
   // @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public image_upload: Upload;
+  public resize_data: { x: number, y: number, target: HTMLElement, width: number, height: number; } = { x: null, y: null, target: null, width: null, height: null };
   public showUpload = false;
   public showTick = false;
   public updating = false;
@@ -242,23 +242,28 @@ export class TaskComponent implements OnInit, OnDestroy {
 
 
 
-  // onMouseDown(e: MouseEvent): void {
-  //   this.resizing = true;
-  //   e.preventDefault()
-  // }
-  // onMouseMove(e: any): void {
-  //   if (!this.resizing) return;
-  //   const container = e.target;
-  //   const rect = container.getBoundingClientRect();
-  //   const x = e.clientX - rect.left;
-  //   const y = e.clientY - rect.top;
-  //   console.log(x, y)
+  onMouseDown(e: any): void {
+    e.preventDefault();
+    const rect = e.target.getBoundingClientRect();
+    this.resize_data = {
+      x: e.clientX,
+      y: e.clientY,
+      target: e.target,
+      width: rect.width,
+      height: rect.height
+    }
 
+  }
 
-  // }
-  // onMouseUp(e: MouseEvent): void {
-  //   this.resizing = false;
-  // }
+  onMouseMove(e: any): void {
+    if (!this.resize_data) return;
+    const w = e.clientX - this.resize_data.x + this.resize_data.width;
+    this.resize_data.target.style.width = `${w}px`;
+  }
+
+  onMouseUp(e: MouseEvent): void {
+    this.resize_data = null;
+  }
 
 
   // updateContent(event) {
