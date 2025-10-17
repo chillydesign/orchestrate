@@ -26,7 +26,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   // @Output() addTaskBelowme: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   // @Output() showTaskComments: EventEmitter<Task | null | undefined> = new EventEmitter(undefined);
   public image_upload: Upload;
-  public resize_data: { x: number, y: number, target: HTMLElement, width: number, height: number; } = { x: null, y: null, target: null, width: null, height: null };
+  public resize_data: { x: number, y: number, target: HTMLElement, width: number, height: number; } = null;
   public showUpload = false;
   public showTick = false;
   public updating = false;
