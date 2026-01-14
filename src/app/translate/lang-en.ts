@@ -34,7 +34,7 @@ export const LANG_EN_TRANS = {
     'add task here': `Add task here`,
     'Drop it, baby!': `Upload a file here`,
     'Load more': `Load more`,
-    Added: 'Added on',
+    Added: 'Added',
     Upload: `Upload a file`,
     Priority: `Priority`,
     "Assign to": `Assign to`,
