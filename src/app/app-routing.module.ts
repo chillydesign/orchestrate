@@ -21,6 +21,7 @@ import { AccountComponent } from './auth/account/account.component';
 import { ClientStatsComponent } from './client-stats/client-stats.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CommentComponent } from './comments/comment/comment.component';
+import { ProjectWithCardsComponent } from './projects/project-with-cards/project-with-cards.component';
 
 
 
@@ -33,11 +34,17 @@ const routes: Routes = [
   { path: 'projects/new/clients/:client_id', component: NewProjectComponent, data: { title: 'New Project' } },
   { path: 'projects/new', component: NewProjectComponent, data: { title: 'New Project' } },
   { path: 'clients/:slug/projects/slug/:project_slug', component: ProjectComponent, data: { title: 'Project' } },
-  { path: 'projects/slug/:project_slug', component: ProjectComponent },
+  { path: 'projects/slug/:project_slug', component: ProjectComponent, data: { title: 'Project' } },
   { path: 'projects/:id', component: ProjectComponent },
-  { path: 'projects/:id/translate', component: ProjectComponent },
-  { path: 'projects/:id/translation', component: ProjectComponent },
-  { path: 'projects/:id/admin', component: ProjectComponent },
+
+  { path: 'clients/:slug/projects/slug/:project_slug/cards', component: ProjectWithCardsComponent, data: { title: 'Project' } },
+  { path: 'projects/slug/:project_slug/cards', component: ProjectWithCardsComponent, data: { title: 'Project' } },
+  { path: 'projects/:id/cards', component: ProjectWithCardsComponent },
+
+
+  // { path: 'projects/:id/translate', component: ProjectComponent },
+  // { path: 'projects/:id/translation', component: ProjectComponent },
+  // { path: 'projects/:id/admin', component: ProjectComponent },
   { path: 'projects/:id/edit', component: EditProjectComponent, data: { title: 'Edit Project' } },
   { path: 'projects', component: ProjectsComponent, data: { title: 'Project' } },
   { path: 'search/:search_term', component: SearchComponent, data: { title: 'Search' } },

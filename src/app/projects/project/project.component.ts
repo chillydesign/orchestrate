@@ -148,14 +148,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   deleteProject(): void {
     if (confirm(`Are you sure you want to delete this project?`)) {
-      this.delete_project_sub = this.projectsService.deleteProject(this.project).subscribe(
-        () => {
+      this.delete_project_sub = this.projectsService.deleteProject(this.project).subscribe({
+        next: () => {
           this.router.navigate(['/']);
         },
-        (error) => {
+        error: (error) => {
 
         }
-      );
+      });
     }
 
   }

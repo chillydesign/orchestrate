@@ -1,0 +1,39 @@
+<app-spinner [show]="!project"></app-spinner>
+<ng-container *ngIf="project">
+
+    <div class="columns">
+        <div class="column">
+            <h1>
+                <span *ngIf="client">
+                    <a [routerLink]="['/clients', client.slug]">{{client.name}}</a> |
+                </span>
+                {{project.nice_name}}
+                &nbsp;
+                <a (click)="refreshProject()" class="icon icon_refresh">{{'Refresh' | translate}}</a>
+            </h1>
+        </div>
+    </div>
+
+
+
+
+    <div class="cards">
+        <app-card *ngFor="let task of project.visible_tasks" [task]="task" [project]="project"
+            [canAdministrate]="current_user?.is_admin" (taskUpdated)="taskUpdated($event)"
+            (taskDeleted)="removeOldTask($event)">
+        </app-card>
+
+    </div>
+
+
+
+
+
+    <app-uploads [project]="project"></app-uploads>
+
+
+
+
+
+
+</ng-container>

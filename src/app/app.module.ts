@@ -50,6 +50,8 @@ import { FooterComponent } from './footer/footer.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { TimerComponent } from './timer/timer.component';
 import { CommentComponent } from './comments/comment/comment.component';
+import { ProjectWithCardsComponent } from './projects/project-with-cards/project-with-cards.component';
+import { CardComponent } from './cards/card/card.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { CommentComponent } from './comments/comment/comment.component';
     CalendarComponent,
     TimerComponent,
     CommentComponent,
+    ProjectWithCardsComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
