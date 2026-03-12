@@ -60,7 +60,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         }
         this.refreshProjects();
       }
-    ); // end of route_params_subscription
+    );
   }
 
 

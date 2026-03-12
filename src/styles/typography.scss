@@ -83,9 +83,15 @@ a {
 
 
   &.button_green {
-    background-color: $green !important;
+    background: $green !important;
     color: white;
     border-color: darken($green, 7);
+  }
+
+  &.button_red {
+    background: $red !important;
+    color: white;
+    border-color: darken($red, 7);
   }
 
   &:hover {

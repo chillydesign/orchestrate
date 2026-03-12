@@ -48,14 +48,16 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
   }
 
   getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe(
-      (user: User) => {
+    this.current_user_subscription = this.authService.current_user.subscribe({
+      next: (user: User) => {
         this.current_user = user;
 
         if (user) {
           this.setupChart();
         }
       }
+    }
+
     );
   }
 
@@ -70,8 +72,8 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
 
   subscribeToRoute(): void {
-    this.route_params_subscription = this.route.params.subscribe(
-      (params: Params) => {
+    this.route_params_subscription = this.route.params.subscribe({
+      next: (params: Params) => {
         if (params.id) {
           this.client_id = params.id;
           this.getClient();
@@ -85,13 +87,13 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
 
       }
-    ); // end of route_params_subscription
+    });
 
   }
 
   getClient(): void {
-    this.client_sub = this.clientsService.getClient(this.client_id).subscribe(
-      (client: Client) => {
+    this.client_sub = this.clientsService.getClient(this.client_id).subscribe({
+      next: (client: Client) => {
         if (client) {
           this.client = client;
           this.client_id = client.id;
@@ -100,7 +102,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
         }
       }
-    );
+    });
   }
 
 
@@ -109,8 +111,8 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
 
   getClientFromSlug(): void {
-    this.client_sub = this.clientsService.getClientFromSlug(this.client_slug).subscribe(
-      (client: Client) => {
+    this.client_sub = this.clientsService.getClientFromSlug(this.client_slug).subscribe({
+      next: (client: Client) => {
         if (client) {
           this.client = client;
           this.client_id = client.id;
@@ -120,7 +122,7 @@ export class ClientStatsComponent implements OnInit, OnDestroy {
 
         }
       }
-    );
+    });
   }
 
 

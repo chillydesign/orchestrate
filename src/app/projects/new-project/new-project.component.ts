@@ -48,7 +48,7 @@ export class NewProjectComponent implements OnInit, OnDestroy {
           this.getClients();
         }
       }
-    ); // end of route_params_subscription
+    );
 
   }
 

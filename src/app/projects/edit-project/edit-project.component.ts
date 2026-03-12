@@ -39,7 +39,7 @@ export class EditProjectComponent implements OnInit, OnDestroy {
       (params: Params) => {
         this.getProject(params.id);
       }
-    ); // end of route_params_subscription
+    );
 
 
   }

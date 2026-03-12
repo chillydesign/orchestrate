@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { Commentt } from 'src/app/models/comment.model';
 import { CommentsService } from 'src/app/services/comments.service';
@@ -23,6 +23,7 @@ export class CommentComponent implements OnInit {
   constructor(
     private commentsService: CommentsService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
 
   }
@@ -77,6 +78,21 @@ export class CommentComponent implements OnInit {
         this.formSuccess = false;
       }
     })
+
+  }
+
+
+  deleteComment(): void {
+    if (confirm(`Are you sure you want to delete this comment?`)) {
+      this.del_sub = this.commentsService.deleteComment(this.comment).subscribe({
+        next: () => {
+          this.router.navigate(['/projects', this.comment.project_id]);
+        },
+        error: (error) => {
+
+        }
+      });
+    }
 
   }
 

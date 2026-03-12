@@ -66,7 +66,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.onSearch();
         }
       }
-    ); // end of route_params_subscription
+    );
 
   }
 

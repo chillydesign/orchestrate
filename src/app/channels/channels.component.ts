@@ -67,7 +67,7 @@ export class ChannelsComponent implements OnInit, OnDestroy {
       }
 
 
-    ); // end of route_params_subscription
+    );
   }
 
 

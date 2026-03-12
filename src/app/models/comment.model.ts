@@ -12,6 +12,7 @@ export class Commentt {
 
     public task: Task;
     public task_id: number;
+    public project_id: number;
 
 
 
