@@ -53,18 +53,30 @@ export class ClientComponent implements OnInit, OnDestroy {
     this.current_user_subscription = this.authService.current_user.subscribe(
       (user: User) => {
         this.current_user = user;
-        this.subscribeToRoute();
+
+        this.getUsers();
 
       }
     );
   }
 
 
-  reshowTasks(e: boolean): void {
-    if (e === true) {
-      this.changeVisibleTasks();
-    }
+
+  getUsers(): void {
+    this.users_sub = this.usersService.getUsers().subscribe({
+      next: (users: User[]) => {
+        if (users) {
+          this.users = users;
+        }
+      },
+      complete: () => {
+        this.subscribeToRoute();
+      }
+    });
   }
+
+
+
 
 
 
@@ -142,7 +154,6 @@ export class ClientComponent implements OnInit, OnDestroy {
 
           this.scrollToProject();
 
-          this.getUsers();
         }
       }
     );
@@ -162,16 +173,10 @@ export class ClientComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  getUsers(): void {
-    this.users_sub = this.usersService.getUsers().subscribe(
-      (users: User[]) => {
-        if (users) {
-          this.users = users;
-        }
-        // this.processTasks();
-      }
-    );
+  reshowTasks(e: boolean): void {
+    if (e === true) {
+      this.changeVisibleTasks();
+    }
   }
 
 

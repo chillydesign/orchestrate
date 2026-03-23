@@ -70,17 +70,24 @@ export class ProjectComponent implements OnInit, OnDestroy {
   //       ],
 
   ngOnInit() {
-    this.subscribeToRoute();
-
+    this.getUsers();
   }
 
-  getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe({
-      next: (user: User) => {
-        this.current_user = user;
+  getUsers(): void {
+    this.users_sub = this.usersService.getUsers().subscribe({
+      next: (users: User[]) => {
+        if (users) {
+          this.users = users;
+        }
+
+      },
+      complete: () => {
+        this.subscribeToRoute();
+
       }
     });
   }
+
 
 
   subscribeToRoute(): void {
@@ -97,6 +104,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
     });
 
   }
+
+
+
+  // getCurrentUser(): void {
+  //   this.current_user_subscription = this.authService.current_user.subscribe({
+  //     next: (user: User) => {
+  //       this.current_user = user;
+  //     }
+  //   });
+  // }
+
+
 
 
 
@@ -130,19 +149,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.client = this.project.client;
     this.projectsService.current_project_client.next(this.client);
     this.titleService.setTitle(`${this.project.nice_name} | ${this.title} `);
-    this.getUsers();
   }
 
-  getUsers(): void {
-    this.users_sub = this.usersService.getUsers().subscribe({
-      next: (users: User[]) => {
-        if (users) {
-          this.users = users;
-        }
-
-      }
-    });
-  }
 
 
 
