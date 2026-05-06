@@ -11,6 +11,7 @@ export class Task {
     public translation: string;
     public created_at: string;
     public updated_at: string;
+    public deadline_at: string;
     public completed: boolean;
     public ordering: number;
     public priority = 0;
@@ -61,6 +62,11 @@ export class Task {
             if (obj.assignee) {
                 this.assignee = new User(obj.assignee);
             }
+
+
+
+
+
 
             if (obj.comments) {
                 this.comments = obj.comments.map((c: Commentt) => new Commentt(c));

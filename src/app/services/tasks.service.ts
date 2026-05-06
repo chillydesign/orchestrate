@@ -79,6 +79,7 @@ export class TasksService {
         time_taken: task.time_taken,
         is_public: task.is_public,
         task_code: task.task_code,
+        deadline_at: task.deadline_at,
       }
     };
     const endpoint = `${this.api_url}/?route=tasks`;
@@ -110,6 +111,7 @@ export class TasksService {
         assignee_id: task.assignee_id,
         updated_at: task.updated_at,
         task_code: task.task_code,
+        deadline_at: task.deadline_at,
       }
 
     };
