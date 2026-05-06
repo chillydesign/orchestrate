@@ -15,6 +15,7 @@ export interface TasksOptions {
   completed?: number;
   start_date?: string;
   end_date?: string;
+  for_calendar?: boolean;
 }
 
 
@@ -39,6 +40,9 @@ export class TasksService {
       }
       if (opts.search_term) {
         endpoint = endpoint.concat(`&search_term=${opts.search_term}`);
+      }
+      if (opts.for_calendar) {
+        endpoint = endpoint.concat(`&for_calendar=for_calendar`);
       }
       if (opts.limit) {
         endpoint = endpoint.concat(`&limit=${opts.limit}`);

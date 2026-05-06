@@ -32,7 +32,7 @@
                         <div class="calendar_events" *ngIf="day.tasks">
                             <div class="calendar_event" *ngFor="let task of day.tasks">
                                 <a [routerLink]="['/projects', task.project_id]"
-                                    [ngClass]="{completed: task.completed}">
+                                    [ngClass]="{completed: task.completed, deadline_today: deadlineToday(task, day)}">
                                     {{task.summary}}
                                 </a>
                             </div>

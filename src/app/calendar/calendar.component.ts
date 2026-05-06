@@ -93,7 +93,7 @@ export class CalendarComponent implements OnInit {
 
 
   getTasks(): void {
-    this.tasks_sub = this.tasksService.getTasks({ start_date: this.start_date, end_date: this.end_date }).subscribe({
+    this.tasks_sub = this.tasksService.getTasks({ start_date: this.start_date, end_date: this.end_date, for_calendar: true }).subscribe({
       next: (tasks: Task[]) => {
         this.tasks = tasks;
       },
@@ -108,13 +108,24 @@ export class CalendarComponent implements OnInit {
       this.weeks.forEach(week => {
         week.forEach(day => {
           day.tasks = this.tasks.filter(t => {
-            return (t.completed && moment(t.completed_at).isSame(day.m, 'day')) ||
-              (!t.completed && moment(t.created_at).isSame(day.m, 'day'))
+            const is_on_day =
+              (t.completed && moment(t.completed_at).isSame(day.m, 'day')) ||
+              (!t.completed && moment(t.created_at).isSame(day.m, 'day')) ||
+              (moment(t.deadline_at).isSame(day.m, 'day'))
+            return is_on_day;
+
           });
         });
       })
 
     }
+  }
+
+  deadlineToday(task: Task, day): boolean {
+    if (task.deadline_at) {
+      return (moment(task.deadline_at).isSame(day.m, 'day'))
+    }
+    return false;
   }
 
   ngOnDestroy() {

@@ -1483,6 +1483,10 @@ $boolean_offset: 3px;
           }
 
 
+          &.deadline_today {
+            background-color: $red;
+          }
+
         }
 
       }
