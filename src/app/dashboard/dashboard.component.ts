@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, fromEvent } from 'rxjs';
 import { Project } from '../models/project.model';
 import { Task } from '../models/task.model';
 import { User } from '../models/user.model';
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private tasks_sub: Subscription;
   private stats_sub: Subscription;
   private comple_today_sub: Subscription;
+  private keypress_sub: Subscription;
   private projects_sub: Subscription;
   constructor(
     private authService: AuthService,
@@ -59,6 +60,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (user) {
           this.current_user = user;
           this.initialiseChart();
+          this.handleKeypress();
 
           this.getTasks();
         }
@@ -276,12 +278,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
 
+  handleKeypress(): void {
+    this.keypress_sub = fromEvent(document, 'keydown').subscribe((event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight') {
+        this.goForwards();
+      } else if (event.key === 'ArrowLeft') {
+        this.goBackwards();
+      }
+    })
+  }
+
+
+
   ngOnDestroy() {
     const subs: Subscription[] = [
       this.current_user_subscription,
       this.projects_sub,
       this.tasks_sub,
       this.comple_today_sub,
+      this.keypress_sub,
       this.stats_sub,
     ];
     subs.forEach((sub) => {

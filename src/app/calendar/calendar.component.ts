@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Task } from '../models/task.model';
 import { TasksService } from '../services/tasks.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 
 interface CalendarWeek {
   m: moment.Moment;
@@ -26,6 +26,7 @@ export class CalendarComponent implements OnInit {
   public start_date: string;
   public end_date: string;
   public tasks: Task[];
+  private keypress_sub: Subscription;
   private tasks_sub: Subscription;
 
   constructor(private tasksService: TasksService) { }
@@ -33,6 +34,8 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.current_month = moment().startOf('month');
     this.setWeeks();
+
+    this.handleKeypress();
   }
 
   setWeeks(): void {
@@ -128,10 +131,26 @@ export class CalendarComponent implements OnInit {
     return false;
   }
 
+
+
+  handleKeypress(): void {
+    this.keypress_sub = fromEvent(document, 'keydown').subscribe((event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight') {
+        this.nextMonth();
+      } else if (event.key === 'ArrowLeft') {
+        this.prevMonth();
+      }
+    })
+  }
+
+
+
+
   ngOnDestroy() {
 
     const subs: Subscription[] = [
       this.tasks_sub,
+      this.keypress_sub,
     ];
 
     subs.forEach((sub) => {
