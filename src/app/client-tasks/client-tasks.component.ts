@@ -46,41 +46,54 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getCurrentUser();
 
+    this.subscribeToRoute();
+
   }
-
-  getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe(
-      (user: User) => {
-        this.current_user = user;
-
-        this.subscribeToRoute();
-      }
-    );
-  }
-
 
 
   subscribeToRoute(): void {
-    this.route_params_subscription = this.route.params.subscribe(
-      (params: Params) => {
+    this.route_params_subscription = this.route.params.subscribe({
+      next: (params: Params) => {
         if (params.id) {
           this.client_id = params.id;
-          this.getClient();
+
         } else if (params.slug) {
           this.client_slug = params.slug;
-          this.getClientFromSlug();
+
         }
 
-
+        this.getClientFromURL();
 
       }
-    );
+    });
 
   }
 
+  getCurrentUser(): void {
+    this.current_user_subscription = this.authService.current_user.subscribe({
+      next: (user: User) => {
+        this.current_user = user;
+
+      }
+    });
+  }
+
+
+  getClientFromURL(): void {
+    if (this.client_slug) {
+      this.getClientFromSlug();
+    } else {
+      this.getClient();
+    }
+  }
+
+
+
+
+
   getClient(): void {
-    this.client_sub = this.clientsService.getClient(this.client_id).subscribe(
-      (client: Client) => {
+    this.client_sub = this.clientsService.getClient(this.client_id).subscribe({
+      next: (client: Client) => {
         if (client) {
           this.client = client;
           this.projectsService.current_project_client.next(client);
@@ -88,7 +101,7 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
 
         }
       }
-    );
+    });
   }
 
 
@@ -106,8 +119,8 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
 
 
   getClientFromSlug(): void {
-    this.client_sub = this.clientsService.getClientFromSlug(this.client_slug).subscribe(
-      (client: Client) => {
+    this.client_sub = this.clientsService.getClientFromSlug(this.client_slug).subscribe({
+      next: (client: Client) => {
         if (client) {
           this.client = client;
           this.projectsService.current_project_client.next(client);
@@ -115,21 +128,23 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
 
         }
       }
-    );
+
+    });
   }
 
 
   getTasks(): void {
 
-    const opts: TasksOptions = { client_id: this.client.id, };
-    this.tasks_sub = this.tasksService.getTasks(opts).subscribe(
-      (tasks: Task[]) => {
+    const opts: TasksOptions = { client_id: this.client.id, completed: 0 };
+    this.tasks_sub = this.tasksService.getTasks(opts).subscribe({
+      next: (tasks: Task[]) => {
         if (tasks) {
           this.tasks = tasks;
           this.visible_tasks = tasks;
         }
       }
-    );
+
+    });
   }
 
 
@@ -149,6 +164,16 @@ export class ClientTasksComponent implements OnInit, OnDestroy {
   sortByProperty(column: string): Task[] {
     const sorted = this.tasks.sort(
       (a, b) => {
+
+        if (!a[column]) {
+          return 1
+        }
+
+        if (!b[column]) {
+          return -1
+        }
+
+
         if (a[column] > b[column]) {
           return this.direction;
         } else {

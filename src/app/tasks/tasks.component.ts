@@ -31,8 +31,8 @@ export class TasksComponent implements OnInit, OnDestroy {
   }
 
   getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe(
-      (user: User) => {
+    this.current_user_subscription = this.authService.current_user.subscribe({
+      next: (user: User) => {
         this.current_user = user;
 
         if (user) {
@@ -41,7 +41,7 @@ export class TasksComponent implements OnInit, OnDestroy {
         }
 
       }
-    );
+    });
   }
 
 
@@ -49,13 +49,13 @@ export class TasksComponent implements OnInit, OnDestroy {
   getTasks(): void {
 
     const opts: TasksOptions = { limit: 30, order: 'created_at', completed: 0 };
-    this.tasks_sub = this.tasksService.getTasks(opts).subscribe(
-      (tasks: Task[]) => {
+    this.tasks_sub = this.tasksService.getTasks(opts).subscribe({
+      next: (tasks: Task[]) => {
         if (tasks) {
           this.tasks = tasks;
         }
       }
-    );
+    });
   }
 
 
