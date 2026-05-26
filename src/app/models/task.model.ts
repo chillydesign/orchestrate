@@ -17,6 +17,7 @@ export class Task {
     public priority = 0;
     public indentation = 0;
     public created_at_date: Date;
+    public updated_at_date: Date;
     public completed_at: string;
     public completed_at_date: Date;
     public comments_count: number;
@@ -58,6 +59,9 @@ export class Task {
 
             if (this.completed_at) {
                 this.completed_at_date = new Date(this.completed_at);
+            }
+            if (this.updated_at) {
+                this.updated_at_date = new Date(this.updated_at);
             }
             if (obj.assignee) {
                 this.assignee = new User(obj.assignee);

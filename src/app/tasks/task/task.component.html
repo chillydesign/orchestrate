@@ -138,6 +138,7 @@
                         {{ "Delete" | translate}}</a>
                 </li>
                 <li class="date">{{'Added' | translate}}: {{task.created_at_date | date:'LLL d YYYY, H:mm' }}</li>
+                <li class="date">{{'Updated' | translate}}: {{task.updated_at_date | date:'LLL d YYYY, H:mm' }}</li>
                 <li class="date" *ngIf="task.completed_at_date">Completed: {{task.completed_at_date | date}}</li>
 
             </ng-container>

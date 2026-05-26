@@ -342,7 +342,10 @@ main {
         }
       }
 
+      // Hide is_approved checkbox
       &.is_approved_checkbox {
+        display: none !important;
+
         background-image: url("../assets/images/thumb.svg");
         background-size: 15px;
 
