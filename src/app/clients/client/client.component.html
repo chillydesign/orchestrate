@@ -17,11 +17,14 @@
                     <!-- <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
                         class="button button_white"> Show unapproved </a> -->
                 </ng-container>
+
+
+
                 <a *ngIf="status === 'active'" [routerLink]="['/clients',   client.slug,  'status', 'inactive']"
                     class="button button_white">Archive</a>
                 <a *ngIf="status !== 'active'" [routerLink]="['/clients',   client.slug, ]"
                     class="button button_white">En cours</a>
-                <a (click)="toggleCollapse()" class="button button_white">Toggle</a>
+                <!-- <a (click)="toggleCollapse()" class="button button_white">Toggle</a> -->
 
                 <a class="button button_primary" [routerLink]="['/projects', 'new', 'clients', client.id]">{{'New
                     Project' |

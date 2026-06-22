@@ -123,7 +123,40 @@ a {
 
     }
   }
+
+
+  .select_container select {
+    // border-right: 0;
+    border-top-right-radius: $border_radius;
+    border-bottom-right-radius: $border_radius;
+  }
+
+
 }
+
+
+.select_container {
+  display: inline-block;
+
+  select {
+    background: transparent url('../assets/images/down_triangle.svg') no-repeat right 7px;
+    background-size: 16px;
+    border: 1px solid $grey_40;
+    outline: none;
+    appearance: none;
+    border-radius: 0;
+    font-size: 1.1em;
+    color: $grey_20;
+    padding: 10px 18px 9px 9px;
+    position: relative;
+    top: 1px;
+    cursor: pointer;
+
+  }
+
+}
+
+
 
 .line_through {
   text-decoration: line-through;

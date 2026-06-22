@@ -29,6 +29,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
   public project: Project;
   public show_incomplete: boolean = false;
   public show_unapproved: boolean = true;
+  public title = environment.site_name;
+  public sorting_options = this.projectsService.sortingOptions();
+  public sorting_option: 'created' | 'deadline' = 'created';
   private route_params_subscription: Subscription;
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
@@ -38,8 +41,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private users_sub: Subscription;
   private url_sub: Subscription;
   private update_task_sub: Subscription;
-  public title = environment.site_name;
-
 
   constructor(
     private titleService: Title,
@@ -204,6 +205,32 @@ export class ProjectComponent implements OnInit, OnDestroy {
       return ac.includes(t.completed) && aa.includes(t.is_approved);
     })
 
+    if (this.sorting_option === 'created') {
+      this.sortVisibleTasksBy('created_at')
+    } else if (this.sorting_option === 'deadline') {
+      this.sortVisibleTasksBy('deadline_at')
+    }
+
+  }
+
+  isNullOrUndefined(val: any): boolean {
+    return (val === null || typeof val === 'undefined' || val === '');
+  };
+
+
+  sortVisibleTasksBy(column: 'created_at' | 'deadline_at'): void {
+
+    const x = this.isNullOrUndefined;
+    this.project.visible_tasks.sort((a, b) => {
+      if (x(a[column])) {
+        return 1;
+      }
+      if (x(b[column])) {
+        return -1;
+      }
+      return a[column].localeCompare(b[column], 'fr', { ignorePunctuation: true, numeric: true });
+
+    })
   }
 
 
@@ -267,6 +294,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
     });
 
   }
+
+
+  sortingOptionChanged(): void {
+    // console.log(this.sorting_option);
+
+    this.changeVisibleTasks();
+  }
+
 
   // setupDragSubscription(): void {
   //   this.drag_sub = this.dragulaService.dropModel('TASKS').subscribe(({ sourceModel, targetModel, item }) => {

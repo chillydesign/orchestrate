@@ -18,6 +18,12 @@
                     class="button button_white"> Show incomplete </a>
                 <!-- <a (click)="toggleStep( 'unapproved')" [ngClass]="{button_green: show_unapproved === true}"
                         class="button button_white"> Show unapproved </a> -->
+
+                <div class="select_container">
+                    <select name="sorting_option" [(ngModel)]="sorting_option" (change)="sortingOptionChanged()">
+                        <option *ngFor="let so of sorting_options" [ngValue]="so">{{so}}</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
