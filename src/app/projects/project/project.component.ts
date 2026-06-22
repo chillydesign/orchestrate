@@ -31,7 +31,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   public show_unapproved: boolean = true;
   public title = environment.site_name;
   public sorting_options = this.projectsService.sortingOptions();
-  public sorting_option: 'created' | 'deadline' = 'created';
+  public sorting_option: 'created' | 'deadline' | 'updated' = 'created';
   private route_params_subscription: Subscription;
   private delete_project_sub: Subscription;
   private project_sub: Subscription;
@@ -209,6 +209,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
       this.sortVisibleTasksBy('created_at')
     } else if (this.sorting_option === 'deadline') {
       this.sortVisibleTasksBy('deadline_at')
+    } else if (this.sorting_option === 'updated') {
+      this.sortVisibleTasksBy('updated_at')
     }
 
   }
@@ -218,7 +220,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   };
 
 
-  sortVisibleTasksBy(column: 'created_at' | 'deadline_at'): void {
+  sortVisibleTasksBy(column: 'created_at' | 'deadline_at' | 'updated_at'): void {
 
     const x = this.isNullOrUndefined;
     this.project.visible_tasks.sort((a, b) => {

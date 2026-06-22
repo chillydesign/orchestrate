@@ -188,7 +188,8 @@ export class ProjectsService {
   sortingOptions(): string[] {
     return [
       'created',
-      'deadline'
+      'deadline',
+      'updated',
     ]
   }
 
