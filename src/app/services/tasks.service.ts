@@ -71,6 +71,14 @@ export class TasksService {
     );
   }
 
+  getTask(task_id: number): Observable<Task> {
+    const options = this.authService.setAPIOptions();
+    const endpoint = `${this.api_url}/?route=tasks&id=${task_id}`;
+    return this.http.get<Task>(endpoint, options).pipe(
+      catchError(this.authService.handleError),
+      map(res => new Task(res))
+    );
+  }
 
   addTask(task: Task): Observable<Task> {
     const options = this.authService.setAPIOptions();

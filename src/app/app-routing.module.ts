@@ -22,6 +22,8 @@ import { ClientStatsComponent } from './client-stats/client-stats.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CommentComponent } from './comments/comment/comment.component';
 import { ProjectWithCardsComponent } from './projects/project-with-cards/project-with-cards.component';
+import { TaskComponent } from './tasks/task/task.component';
+import { SingleTaskComponent } from './tasks/single-task/single-task.component';
 
 
 
@@ -58,7 +60,7 @@ const routes: Routes = [
   { path: 'channels', component: ChannelsComponent, data: { title: 'Channels' } },
   { path: 'clients/:slug/channels', component: ChannelsComponent, data: { title: 'Channels' } },
 
-
+  { path: 'tasks/:id', component: SingleTaskComponent, data: { title: 'Tasks' } },
   { path: 'tasks', component: TasksComponent, data: { title: 'Tasks' } },
 
   { path: 'export', component: ExportComponent, data: { title: 'Export' } },

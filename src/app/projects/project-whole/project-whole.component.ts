@@ -45,13 +45,13 @@ export class ProjectWholeComponent implements OnInit, OnDestroy {
 
 
   getCurrentUser(): void {
-    this.current_user_subscription = this.authService.current_user.subscribe(
-      (user: User) => {
+    this.current_user_subscription = this.authService.current_user.subscribe({
+      next: (user: User) => {
         this.current_user = user;
 
         this.processTasks();
       }
-    );
+    });
   }
 
 

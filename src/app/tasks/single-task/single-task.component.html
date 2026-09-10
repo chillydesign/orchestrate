@@ -1,0 +1,14 @@
+<app-box>
+
+
+    <ul>
+        <li *ngIf="task">
+            <app-task [task]="task" [showProjectLink]="true" [canAdministrate]="current_user?.is_admin"
+                (taskUpdated)="taskUpdated($event)" (taskDeleted)="removeOldTask($event)">
+            </app-task>
+        </li>
+
+    </ul>
+
+
+</app-box>

@@ -52,6 +52,7 @@ import { TimerComponent } from './timer/timer.component';
 import { CommentComponent } from './comments/comment/comment.component';
 import { ProjectWithCardsComponent } from './projects/project-with-cards/project-with-cards.component';
 import { CardComponent } from './cards/card/card.component';
+import { SingleTaskComponent } from './tasks/single-task/single-task.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { CardComponent } from './cards/card/card.component';
     TimerComponent,
     CommentComponent,
     ProjectWithCardsComponent,
-    CardComponent
+    CardComponent,
+    SingleTaskComponent
   ],
   imports: [
     BrowserModule,

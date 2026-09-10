@@ -135,14 +135,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
 
   getProject(): void {
-    this.project_sub = this.projectsService.getProject(this.project_id).subscribe(
-      (project: Project) => {
+    this.project_sub = this.projectsService.getProject(this.project_id).subscribe({
+      next: (project: Project) => {
         if (project) {
           this.project = project;
           this.processProject();
         }
       }
-    );
+    });
   }
 
 
