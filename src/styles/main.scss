@@ -1477,17 +1477,20 @@ $boolean_offset: 3px;
             background-color: darken($brand_color, 5);
           }
 
-          &.completed {
+
+
+
+          &.deadline_today {
+            background-color: $red;
+          }
+
+          &.completed,
+          &.deadline_today.completed {
             background-color: $green;
 
             &:hover {
               background-color: darken($green, 5);
             }
-          }
-
-
-          &.deadline_today {
-            background-color: $red;
           }
 
         }
