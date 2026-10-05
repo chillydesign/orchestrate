@@ -1442,6 +1442,7 @@ $boolean_offset: 3px;
     color: $grey_60;
     opacity: 0.5;
     border: 1px solid $grey_95;
+    padding: 2px;
 
     .calendar_events {
       min-height: 80px;
@@ -1501,9 +1502,11 @@ $boolean_offset: 3px;
     }
 
     &.current_day {
+      background-color: adjust-color($brand_color, $lightness: +35%) !important;
+
       .day_number {
         font-weight: bold;
-        background-color: $grey_90;
+        // background-color: $grey_90;
       }
     }
   }
